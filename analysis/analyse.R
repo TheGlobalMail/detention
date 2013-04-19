@@ -1,10 +1,15 @@
 library(ggplot2)
-p <- read.csv("~/git/detention/data/processed.csv")
-
 library(plyr)
 library(lubridate)
 
-graphPath <- '~/git/detention/app/graphs/'
+# Files
+gitRoot <- "~/git/detention"
+processedCSV <- paste(gitRoot, "data/processed.csv", sep="/")
+graphPath <- paste(gitRoot, "app/graphs", sep="/")
+summariesCompiledLocationsCSV <- paste(gitRoot, "data/summaries-compiled-locations.csv", sep="/")
+
+
+p <- read.csv(processedCSV)
 
 p$occurred_on <- as.Date(p$occurred_on, format='%Y-%m-%d')
 p$week <- floor_date(p$occurred_on, "week")
@@ -13,7 +18,7 @@ p <- p[!is.na(p$location),]
 p <- p[p$location != "",]
 facility_types <- unique(p$facility_type)
 
-pop <- read.csv("~/git/detention/data/summaries-compiled-locations.csv")
+pop <- read.csv(summariesCompiledLocationsCSV)
 #pop$week <- floor_date(as.Date(pop$date), "week")
 pop$date <- as.Date(pop$date, format='%Y-%m-%d')
 pop$men[is.na(pop$men)] <- 0 
@@ -21,7 +26,6 @@ pop$women[is.na(pop$women)] <- 0
 pop$children[is.na(pop$children)] <- 0 
 pop$ourlocation <- gsub("(^ +)|( +$)", "", tolower(pop$ourlocation))
 pop$total <- pop$men + pop$women + pop$children
-
 
 # overall facility narrative
 idc <- p[p$facility_type == 'idc',]
@@ -39,6 +43,7 @@ for (location in locations) {
   imageFile <- paste(gsub(" ", "-", location), '-incident-categories.png', sep = "")
   ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
   locPop <- pop[pop$ourlocation == location,]
+
   if (dim(locPop)[1] == 0){
     print('empty data!')
   }else{
