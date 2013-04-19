@@ -89,6 +89,42 @@ incidentCategoriesVsPopulationForIdc <- function(inc, pop){
       imageFile <- paste(gsub(" ", "-", location), '-population.png', sep = "")
       ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
     }
+
+    contraband <- d[!is.na(d$contraband_category),]
+    contraband <- contraband[d$contraband_category != 'other',]
+    if (dim(contraband)[1] == 0){
+      print(paste('Could not find matching contabands in population data for ', location, sep = ''))
+    }else{
+      gContra <- ggplot(contraband, aes(contraband_category, fill=contraband_category)) +
+        geom_bar() +
+        ggtitle(paste(location, ' contraband ', sep='')) +
+        ylab('Events')
+      print(gContra)
+      imageFile <- paste(gsub(" ", "-", location), '-contraband-incident-categories.png', sep = "")
+      ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
+    }
+  }
+}
+
+incidentCategoriesVsPopulationForOffshore <- function(inc, pop){
+  locations <- unique(inc$offshore)
+  for (location in locations) {
+    if (location == 'true'){
+      title <- 'offshore'
+    }else{
+      title <- 'domestic'
+    }
+
+    d <- inc[p$offshore == location,]
+    gLoc <- ggplot(d, aes(week, fill=incident_category, group=incident_category)) +
+      geom_area(stat='bin', binwidth=7) +
+      ggtitle(title) +
+      ylab('Event per week') +
+      #xlim(min(pop$date, na.rm = TRUE), max(pop$date, na.rm = TRUE))
+      xlim(min(inc$week, na.rm = TRUE), max(inc$week, na.rm = TRUE))
+    print(gLoc)
+    imageFile <- paste(title, '-incident-categories.png', sep = "")
+    ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
   }
 }
 
@@ -97,5 +133,6 @@ incidents <- loadIncidentData()
 population <- loadPopulationData()
 
 # Generate analysis graphs
-incidentCategoriesVsPopulation(incidents, population)
+#incidentCategoriesVsPopulation(incidents, population)
 incidentCategoriesVsPopulationForIdc(incidents, population)
+#incidentCategoriesVsPopulationForOffshore(incidents, population)
