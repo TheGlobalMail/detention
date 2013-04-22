@@ -40,15 +40,19 @@ loadNationalityData <- function (){
   return (p)
 }
 
-nationalities <- loadNationalityData()
+renderNationalityChart <- function (nationalities){
+  plt = 
+    ggplot(
+      nationalities,
+      aes(x=Date, y=Total.People, colour=Nationality)
+    )
+    + geom_line()
+    + ggtitle('Overall population by nationality')
+    + ylab('Population')
+  print(plt)
+  imageFile <- paste('total-population-by-nationality.png', sep = "")
+  ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
+}
 
-plt = ggplot(
-    nationalities,
-    aes(x=Date, y=Total.People, colour=Nationality)
-  ) +
-  geom_line() +
-  ggtitle('Overall population by nationality') +
-  ylab('Population')
-print(plt)
-imageFile <- paste('total-population-by-nationality.png', sep = "")
-ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
+nationalities <- loadNationalityData()
+renderNationalityChart(nationalities)
