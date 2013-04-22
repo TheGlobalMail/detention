@@ -8,7 +8,8 @@
       'maribyrnong-idc', 'northern-idc'].sort();
     var facilities = ['overall'].concat(idcs).concat(['domestic', 'offshore']);
 
-    $('#incident-category-graphs').html(_.map(facilities, function(graph){
+    var graphs = $('#incident-category-graphs');
+    graphs.html(_.map(facilities, function(graph){
       var html = ''; //'<h3>' + idc + '</h3>';
       html += '<img src="graphs/' + graph + '-incident-categories.png" />';
       if (!graph.match(/domestic|offshore/)){
@@ -19,6 +20,7 @@
       }
       return html;
     }).join('\n'));
+    graphs.append($('<img src="graphs/total-population-by-nationality.png">'));
   }
 
 }());
