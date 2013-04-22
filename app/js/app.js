@@ -14,12 +14,14 @@
       html += '<img src="graphs/' + graph + '-incident-categories.png" />';
       if (!graph.match(/domestic|offshore/)){
         html += '<img class="incident-population" src="graphs/' + graph + '-population.png" />';
+        html += '<img class="incidents-vs-population" src="graphs/' + graph + '-population-vs-incidents.png" />';
       }
       if (graph.match(/villawood|curtin|nothern|north-west/i)){
         html += '<img class="incident-contraband" src="graphs/' + graph + '-contraband-incident-categories.png" />';
       }
       return html;
     }).join('\n'));
+    
     graphs.append($('<img src="graphs/total-population-by-nationality.png">'));
   }
 
