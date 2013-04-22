@@ -43,7 +43,6 @@ incidentCategoriesVsPopulation <- function(inc, pop){
   imageFile <- paste('overall-incident-categories.png', sep = "")
   ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
 
-  overallIncidentsPerWeek <- ddply(inc,~week,summarise, freq=length(week))
   overallPop <- ddply(pop,~date,summarise, men=sum(men), women=sum(women), children=sum(children))
   overallPopMelt <- melt(overallPop, id="date")
   gPop <- ggplot(overallPopMelt, aes(date, value, fill=variable)) +
@@ -54,6 +53,20 @@ incidentCategoriesVsPopulation <- function(inc, pop){
     xlim(min(p$week, na.rm = TRUE), max(p$week, na.rm = TRUE))
   print(gPop)
   imageFile <- paste('overall-population.png', sep = "")
+  ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
+
+  overallIncidentsPerWeek <- ddply(inc,~week,summarise, freq=length(week))
+  names(overallIncidentsPerWeek) <- c('date', 'count')
+  totalPop <- ddply(pop,~date,summarise, total=sum(men) + sum(women) + sum(children))
+  names(totalPop) <- c('date', 'count')
+  mylist <- list(incidents = overallIncidentsPerWeek, population = totalPop)
+  combined <- do.call("rbind", mylist)
+  combined$stat <- rep(names(mylist), sapply(mylist, nrow))
+  compare <- ggplot(combined, aes(x=date, y=count, group=stat, colour=stat)) +
+    geom_line() +
+    xlim(min(p$week, na.rm = TRUE), max(p$week, na.rm = TRUE))
+  print(compare)
+  imageFile <- 'overall-population-vs-incidents.png'
   ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
 }
 
@@ -87,6 +100,21 @@ incidentCategoriesVsPopulationForIdc <- function(inc, pop){
         xlim(min(inc$week, na.rm = TRUE), max(inc$week, na.rm = TRUE))
       print(gPop)
       imageFile <- paste(gsub(" ", "-", location), '-population.png', sep = "")
+      ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
+
+      overallIncidentsPerWeek <- ddply(d,~week,summarise, freq=length(week))
+      names(overallIncidentsPerWeek) <- c('date', 'count')
+      totalPop <- ddply(locPop,~date,summarise, total=sum(men) + sum(women) + sum(children))
+      names(totalPop) <- c('date', 'count')
+      mylist <- list(incidents = overallIncidentsPerWeek, population = totalPop)
+      combined <- do.call("rbind", mylist)
+      combined$stat <- rep(names(mylist), sapply(mylist, nrow))
+      compare <- ggplot(combined, aes(x=date, y=count, group=stat, colour=stat)) +
+        geom_line() +
+        ggtitle(paste('Total incidents per week compare to population: ', location, sep='')) +
+        xlim(min(p$week, na.rm = TRUE), max(p$week, na.rm = TRUE))
+      print(compare)
+      imageFile <- paste(gsub(" ", "-", location), '-population-vs-incidents.png', sep = "")
       ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
     }
 
@@ -133,6 +161,6 @@ incidents <- loadIncidentData()
 population <- loadPopulationData()
 
 # Generate analysis graphs
-#incidentCategoriesVsPopulation(incidents, population)
+incidentCategoriesVsPopulation(incidents, population)
 incidentCategoriesVsPopulationForIdc(incidents, population)
-#incidentCategoriesVsPopulationForOffshore(incidents, population)
+incidentCategoriesVsPopulationForOffshore(incidents, population)
