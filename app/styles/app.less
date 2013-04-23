@@ -1,3 +1,27 @@
 .incident-population {
   width: 93.2%;
 }
+
+.incident-grid {
+  .date {
+    @gridCellSize: 20px;
+    min-height: @gridCellSize;
+    margin: 2px 0;
+    .cell {
+      width: @gridCellSize;
+      height: @gridCellSize;
+      margin: 0 2px;
+      border-radius: 50%;
+      background: red;
+      float: left;
+      .opacity(10);
+      &.active {
+        .opacity(100);
+      }
+    }
+  }
+}
+
+.clear {
+  clear: both;
+}
