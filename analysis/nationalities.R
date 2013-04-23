@@ -3,7 +3,7 @@ library(plyr)
 library(lubridate)
 
 # Files
-gitRoot <- "~/Projects/detention"
+gitRoot <- "~/git/detention"
 graphPath <- paste(gitRoot, "app/graphs", sep="/")
 
 loadNationalityData <- function (){  
@@ -33,21 +33,14 @@ renderNationalityChart <- function (nationalities){
     geom_line() + 
     ggtitle('Overall population by nationality') + 
     ylab('Population')
+  print(plt)
   imageFile <- paste('total-population-by-nationality.png', sep = "")
-  #ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
+  ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
   return (plt)
 }
 
 n <- loadNationalityData()
 
-# TODO: find the max for each country
-nations <- c()
-nations$list <- unique(n$Nationality)
-nations$max <- c()
-#for (i in 1:length(nations$list)) { 
-#  print(nations$max[[i]]) 
-#}
-# TODO: filter out the lowest ones
+mainCountries <- n[!is.element(n$Nationality, c('Vietnam', 'Peoples Republic Of China', 'New Zealand', 'Indonesia', 'South Korea', 'Palestinian Authority', 'Burma', 'Myanmar', 'India', 'Kuwait', 'Malaysia')), ]
 
-
-plt <- renderNationalityChart(n)
+plt <- renderNationalityChart(mainCountries)
