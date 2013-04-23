@@ -5,6 +5,8 @@
     "lodash": "~1.2.0",
     "backbone": "~1.0.0",
     "tgm-bootstrap": "git@github.com:TheGlobalMail/tgm-bootstrap.git#0.3.1",
-    "bootstrap": "2.3.0"
+    "bootstrap": "2.3.0",
+    "requirejs": "~2.1.5",
+    "requirejs-plugins": "~1.0.0"
   }
 }

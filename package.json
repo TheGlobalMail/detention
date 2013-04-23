@@ -1,5 +1,5 @@
 {
-  "author": "The Global Mail",
+  "author": "The Global Mail <info@theglobalmail.org>",
   "name": "detention-incidents",
   "version": "0.0.0",
   "main": "server.js",
@@ -15,6 +15,7 @@
     "grunt-contrib-livereload": "~0.1.2",
     "grunt-contrib-uglify": "~0.1.1",
     "grunt-contrib-watch": "~0.2.0",
+    "grunt-contrib-requirejs": "~0.4.0",
     "grunt-usemin": "~0.1.9",
     "matchdep": "~0.1.1",
     "grunt-regarde": "~0.1.1",
@@ -35,7 +36,6 @@
     "test": "grunt test"
   },
   "repository": "",
-  "author": "The Global Mail <info@theglobalmail.org>",
   "dependencies": {
     "express": "~3.1.0"
   },
