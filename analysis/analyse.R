@@ -33,15 +33,22 @@ loadPopulationData <- function(){
   return (pop)
 }
 
-incidentCategoriesVsPopulation <- function(inc, pop){
-  gInc <- ggplot(inc, aes(week, fill=incident_category, group=incident_category)) +
+loadDetaineeType <- function(){
+  detaineeTypeCSV <- paste(gitRoot, "data/type-of-immigrant.csv", sep="/")
+  data <- read.csv(detaineeTypeCSV)
+  data$Date <- as.Date(data$Date)
+  return (data)
+}
+
+incidentCategoriesVsPopulation <- function(inc, pop, types){
+  gInc <- ggplot(inc, aes(occurred_on, fill=incident_category, group=incident_category)) +
     geom_area(stat='bin', binwidth = 7) +
     ggtitle('Overall') +
     ylab('Event per week') +
-    xlim(min(p$week, na.rm = TRUE), max(p$week, na.rm = TRUE))
+    xlim(min(inc$week, na.rm = TRUE), max(inc$week, na.rm = TRUE))
   print(gInc)
-  imageFile <- paste('overall-incident-categories.png', sep = "")
-  ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
+  imageFile <- 'overall-incident-categories.png'
+  ggsave(imageFile, width=14, height=6, dpi=200, path=graphPath)
 
   overallPop <- ddply(pop,~date,summarise, men=sum(men), women=sum(women), children=sum(children))
   overallPopMelt <- melt(overallPop, id="date")
@@ -56,10 +63,15 @@ incidentCategoriesVsPopulation <- function(inc, pop){
   ggsave(imageFile, width=14, height=6, dpi=100, path=graphPath)
 
   overallIncidentsPerWeek <- ddply(inc,~week,summarise, freq=length(week))
+  assign("overallIncidentsPerWeek", overallIncidentsPerWeek, envir = .GlobalEnv)
   names(overallIncidentsPerWeek) <- c('date', 'count')
   totalPop <- ddply(pop,~date,summarise, total=sum(men) + sum(women) + sum(children))
+  assign("totalPop", totalPop, envir = .GlobalEnv)
   names(totalPop) <- c('date', 'count')
-  mylist <- list(incidents = overallIncidentsPerWeek, population = totalPop)
+  boats <- types[c('Date', 'Irregular.Maritime.Arrivals')]
+  names(boats) <- c('date', 'count')
+
+  mylist <- list(incidents = overallIncidentsPerWeek, population = totalPop, 'boat people' = boats)
   combined <- do.call("rbind", mylist)
   combined$stat <- rep(names(mylist), sapply(mylist, nrow))
   compare <- ggplot(combined, aes(x=date, y=count, group=stat, colour=stat)) +
@@ -158,9 +170,10 @@ incidentCategoriesVsPopulationForOffshore <- function(inc, pop){
 
 # Import incident and population data
 incidents <- loadIncidentData()
+types <- loadDetaineeType()
 population <- loadPopulationData()
 
 # Generate analysis graphs
-incidentCategoriesVsPopulation(incidents, population)
+incidentCategoriesVsPopulation(incidents, population, types)
 incidentCategoriesVsPopulationForIdc(incidents, population)
 incidentCategoriesVsPopulationForOffshore(incidents, population)
