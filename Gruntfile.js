@@ -255,6 +255,7 @@ module.exports = function(grunt) {
           dest: '<%= project.dist %>',
           src: [
             'index.html',
+            'analytics.html',
             '*.{ico,txt}',
             '.htaccess',
             'graphs/*',
