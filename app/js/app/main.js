@@ -1,9 +1,13 @@
 define([
   'jquery',
   'lodash',
-  'data/incidents'
-], function($, _, incidents) {
+  'data/incidents',
+  'kinetic',
+  'jquery_inwindow'
+], function($, _, incidents, Kinetic) {
   'use strict';
+
+  window.tgm = window.tgm || {};
 
   var gridContainer = $('.incident-grid');
   var data;
@@ -19,13 +23,15 @@ define([
         var unix = (new Date(normal.split('/'))).getTime();
         var dateClass = normal.replace(/\//g, '-'); // Replace slashes with dashes
         var month = normal.split('/').slice(0,2).join('/');
+        var monthClass = month.replace(/\//g, '-'); // Replace slashes with dashes
 
         return {
           original: date,
           normal: normal,
           unix: unix,
           dateClass: dateClass,
-          month: month
+          month: month,
+          monthClass: monthClass
         }
       }
     )
@@ -38,6 +44,7 @@ define([
       .unique('original')
       .sortBy('unix')
       .value();
+
     var dateCounts = _.countBy(occurredOn, 'original');
 
     var months = _.unique(dates, 'month');
@@ -49,27 +56,6 @@ define([
       months: months,
       monthCounts: monthCounts
     };
-  }
-
-  function buildIncidentDayGrid() {
-    resetGridContainer();
-
-    _.each(
-      data.dates,
-      getAddDateToGrid(
-        data.dateCounts,
-        'original'
-      )
-    );
-
-    // Set some random ones as active
-    setTimeout(function() {
-      var cells = gridContainer.find('.cell');
-      for(var i = 0; i < Math.floor(cells.length / 20); i++) {
-        var cell = cells[Math.floor(Math.random() * cells.length)];
-        $(cell).addClass('active');
-      }
-    }, 1000);
   }
 
   function buildIncidentMonthGrid() {
@@ -90,45 +76,144 @@ define([
         var cell = cells[Math.floor(Math.random() * cells.length)];
         $(cell).addClass('active');
       }
-    }, 1000);
+    }, 500);
   }
 
-  function getAddDateToGrid(countData, dateKey) {
-    var i = 0;
-    return function addDateToGrid(date) {
-      // Delay for an increasingly larger time period so that
-      // we don't halt the browser
-      setTimeout(function() {
-        gridContainer.append('<div class="date ' + date.dateClass +'">');
-        var rowElement = gridContainer.find('.' + date.dateClass);
-        _(countData[date[dateKey]])
-          .times(function(i) {
-            rowElement.append('<div class="cell">');
-          }).tap(function() {
-            rowElement.append('<div class="clear">');
-          });
-      }, i++);
+  function buildIncidentCanvas(container, toCreate) {
+
+    var squareOpts = {
+      width: 20,
+      height: 20,
+      xSpacing: 4,
+      ySpacing: 4,
+      initialFill: "grey",
+      onHoverFill: "pink"
+    };
+
+    var stage = new Kinetic.Stage({
+      container: container.get(0),
+      width: container.width(),
+      height: 200
+    });
+
+    var layer = new Kinetic.Layer();
+
+    var canvasWidth = container.width();
+    var squares = [];
+    var column = 0;
+    var row = 0;
+    var w = squareOpts.width;
+    var h = squareOpts.height;
+    var perRow = Math.floor(canvasWidth / (w + squareOpts.xSpacing));
+    var columnsNeeded = Math.round(toCreate / perRow);
+    var columnHeight = h + squareOpts.ySpacing;
+    var heightNeeded = columnsNeeded * columnHeight;
+    stage.setHeight(heightNeeded);
+
+    function squareOnMouseOver() {
+      this.setFill(squareOpts.onHoverFill);
+      this.getLayer().draw();
     }
+
+    function squareOnMouseOut() {
+      this.setFill(squareOpts.initialFill);
+      this.getLayer().draw();
+    }
+
+    for (var i = 0; i < toCreate; i++) {
+      var x = column * (w + squareOpts.xSpacing);
+      var y = row * (h + squareOpts.ySpacing);
+
+      var square = new Kinetic.Rect({
+        x: x,
+        y: y,
+        width: w,
+        height: h,
+        fill: squareOpts.initialFill,
+        strokeWidth: 0
+      });
+
+      square.on("mouseover", squareOnMouseOver);
+      square.on("mouseout", squareOnMouseOut);
+
+      // add the shape to the layer
+      layer.add(square);
+
+      if (x + (w * 2) > canvasWidth) {
+        row++;
+        column = 0;
+      } else {
+        column++;
+      }
+
+      squares.push(square);
+    }
+
+    stage.add(layer);
+
+    function checkSquareVisibility(square) {
+      _.each(squares, function(square) {
+        if (!square.isVisible()) {
+          square.setListening(false);
+        } else if (!square.isListening()) {
+          square.setListening(true);
+        }
+      })
+    }
+
+    checkSquareVisibility();
+    $(window).scroll(checkSquareVisibility);
+
+    return {
+      container: container,
+      stage: stage,
+      squares: squares
+    }
+  }
+
+  function testAnimation() {
+    var canvasInWindow = $('canvas').inWindow();
+    _(tgm.canvas)
+      .filter(function(canvas) {
+        return
+      })
+    _.each(tgm.canvas, function(obj) {
+      var stage = obj.stage;
+      var squares = obj.squares;
+      _.each(squares, function(square) {
+        square.stopListening();
+        square.transitionTo({
+          width: 0,
+          duration: 100
+        });
+      });
+    });
+  }
+  tgm.testAnimation = testAnimation;
+
+  function buildIncidentCanvases() {
+    tgm.canvas = _.map(
+      data.months,
+      function(month) {
+        var canvasContainer = $('<div class="canvas-container ' + month.monthClass + '">');
+        gridContainer.append(canvasContainer);
+        return buildIncidentCanvas(
+          canvasContainer,
+          data.monthCounts[month.month]
+        )
+      }
+    );
   }
 
   function resetGridContainer() {
     gridContainer.children().remove();
   }
 
-  function bindControls() {
-    var controls = $('.controls');
-
-    controls.find('.day')
-      .on('click', buildIncidentDayGrid);
-    controls.find('.month')
-      .on('click', buildIncidentMonthGrid);
-  }
-
   function init() {
     processDateStrings();
     processIncidentData();
-    buildIncidentDayGrid();
-    bindControls();
+//    buildIncidentMonthGrid();
+    buildIncidentCanvases();
   }
 
   return {
