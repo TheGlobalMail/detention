@@ -12,7 +12,7 @@ define([
   var gridContainer = $('.incident-grid');
   var data;
 
-  function processDateStrings() {
+  function processOccurredOn() {
     incidents["Occurred On"] = _.map(
       incidents["Occurred On"],
       function(date) {
@@ -56,27 +56,6 @@ define([
       months: months,
       monthCounts: monthCounts
     };
-  }
-
-  function buildIncidentMonthGrid() {
-    resetGridContainer();
-
-    _.each(
-      data.months,
-      getAddDateToGrid(
-        data.monthCounts,
-        'month'
-      )
-    );
-
-    // Set some random ones as active
-    setTimeout(function() {
-      var cells = gridContainer.find('.cell');
-      for(var i = 0; i < Math.floor(cells.length / 50); i++) {
-        var cell = cells[Math.floor(Math.random() * cells.length)];
-        $(cell).addClass('active');
-      }
-    }, 500);
   }
 
   function buildIncidentCanvas(container, toCreate) {
@@ -151,45 +130,39 @@ define([
 
     stage.add(layer);
 
-    function checkSquareVisibility(square) {
-      _.each(squares, function(square) {
-        if (!square.isVisible()) {
-          square.setListening(false);
-        } else if (!square.isListening()) {
-          square.setListening(true);
-        }
-      })
+    function checkCanvasVisibility() {
+      var containerIsVisible = container.inWindow().length;
+      stage.setListening(containerIsVisible);
     }
 
-    checkSquareVisibility();
-    $(window).scroll(checkSquareVisibility);
+    checkCanvasVisibility();
+    $(window).scroll(checkCanvasVisibility);
 
     return {
       container: container,
+      canvas: container.find('canvas'),
       stage: stage,
       squares: squares
     }
   }
 
-  function testAnimation() {
+  tgm.testAnimation = function() {
     var canvasInWindow = $('canvas').inWindow();
     _(tgm.canvas)
       .filter(function(canvas) {
-        return
-      })
-    _.each(tgm.canvas, function(obj) {
-      var stage = obj.stage;
-      var squares = obj.squares;
-      _.each(squares, function(square) {
-        square.stopListening();
-        square.transitionTo({
-          width: 0,
-          duration: 100
+        return _.contains(canvasInWindow, canvas.canvas.get(0));
+      }).each(function(obj) {
+        var squares = obj.squares;
+        _.each(squares, function(square) {
+          square.setListening(false);
+          square.transitionTo({
+            width: 0,
+            duration: 0.5
+          });
         });
       });
-    });
-  }
-  tgm.testAnimation = testAnimation;
+  };
+  $('.controls a').on('click', tgm.testAnimation);
 
   function buildIncidentCanvases() {
     tgm.canvas = _.map(
@@ -205,14 +178,9 @@ define([
     );
   }
 
-  function resetGridContainer() {
-    gridContainer.children().remove();
-  }
-
   function init() {
-    processDateStrings();
+    processOccurredOn();
     processIncidentData();
-//    buildIncidentMonthGrid();
     buildIncidentCanvases();
   }
 
