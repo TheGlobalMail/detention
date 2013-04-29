@@ -24,19 +24,19 @@ define([
         return rowElement;
       })
       .each(function(element, i) {
-        setTimeout(function() {
+        requestAnimationFrame(function() {
           gridContainer.append(element)
-        }, i * 100);
+        });
       });
 
     // Set some random ones as active
-    setTimeout(function() {
+    requestAnimationFrame(function() {
       var cells = gridContainer.find('.cell');
       for (var i = 0; i < Math.floor(cells.length / 50); i++) {
         var cell = cells[Math.floor(Math.random() * cells.length)];
         $(cell).addClass('active');
       }
-    }, rowElements.length * 100);
+    });
   }
 
   function resetGridContainer() {

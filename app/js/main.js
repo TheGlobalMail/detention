@@ -8,8 +8,9 @@ requirejs.config({
 
 requirejs([
   'jquery',
+  'utils/requestAnimationFrame',
   'app/main'
 ],
-function ($, app) {
+function ($, utils, app) {
   $(app.init);
 });
