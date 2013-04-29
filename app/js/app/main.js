@@ -133,6 +133,7 @@ define([
 
       square.on("mouseover", squareOnMouseOver);
       square.on("mouseout", squareOnMouseOut);
+      square.on("touchstart", squareOnMouseOver);
 
       // add the shape to the layer
       layer.add(square);
