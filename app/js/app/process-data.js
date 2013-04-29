@@ -1,6 +1,6 @@
 define([
   'lodash',
-  '../data/incidents'
+  './../data/incidents'
 ], function(_, incidents) {
   "use strict";
 
@@ -12,7 +12,7 @@ define([
 
         var split = date.split('/');
         var normal = [split[2], split[0], split[1]].join('/');
-        var unix = (new Date(normal.split('/'))).getTime();
+        var unix = (new Date(split[2], split[0], split[1])).getTime();
         var dateClass = normal.replace(/\//g, '-'); // Replace slashes with dashes
         var month = normal.split('/').slice(0,2).join('/');
 

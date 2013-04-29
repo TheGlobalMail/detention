@@ -1,7 +1,7 @@
 define([
   'jquery',
   'lodash',
-  './processed-data'
+  './process-data'
 ], function($, _, data) {
   'use strict';
 
@@ -12,9 +12,8 @@ define([
 
     var countData = data.monthCounts;
     var dateKey = 'month';
-    var rowElements = _.map(
-      data.months,
-      function(date) {
+    var rowElements = _(data.months)
+      .map(function(date) {
         var rowElement = $('<div class="date ' + date.dateClass +'">');
         _(countData[date[dateKey]])
           .times(function(i) {
@@ -23,14 +22,12 @@ define([
             rowElement.append('<div class="clear">');
           });
         return rowElement;
-      }
-    );
-
-    _.each(rowElements, function(element, i) {
-      setTimeout(function() {
-        gridContainer.append(element)
-      }, i * 100);
-    });
+      })
+      .each(function(element, i) {
+        setTimeout(function() {
+          gridContainer.append(element)
+        }, i * 100);
+      });
 
     // Set some random ones as active
     setTimeout(function() {
