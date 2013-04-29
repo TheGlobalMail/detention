@@ -65,8 +65,11 @@ define([
       height: 20,
       xSpacing: 4,
       ySpacing: 4,
-      initialFill: "grey",
-      onHoverFill: "pink"
+      fill: {
+        initial: "grey",
+        hover: "white",
+        highlighted: "orange"
+      }
     };
 
     var stage = new Kinetic.Stage({
@@ -90,27 +93,43 @@ define([
     stage.setHeight(heightNeeded);
 
     function squareOnMouseOver() {
-      this.setFill(squareOpts.onHoverFill);
+      this.setFill(squareOpts.fill.hover);
       this.getLayer().draw();
     }
 
     function squareOnMouseOut() {
-      this.setFill(squareOpts.initialFill);
+      var fill = this.data.options.fill.initial;
+      if (this.data.highlighted) {
+        fill = this.data.options.fill.highlighted;
+      }
+      this.setFill(fill);
       this.getLayer().draw();
     }
 
     for (var i = 0; i < toCreate; i++) {
       var x = column * (w + squareOpts.xSpacing);
       var y = row * (h + squareOpts.ySpacing);
+      var fill = squareOpts.fill.initial;
+      var data = {
+        highlighted: false,
+        options: squareOpts
+      };
+
+      // Paint a few random highlights
+      if (Math.random() < 0.005) {
+        data.highlighted = true;
+        fill = squareOpts.fill.highlighted;
+      }
 
       var square = new Kinetic.Rect({
         x: x,
         y: y,
         width: w,
         height: h,
-        fill: squareOpts.initialFill,
-        strokeWidth: 0
+        fill: fill
       });
+
+      square.data = data;
 
       square.on("mouseover", squareOnMouseOver);
       square.on("mouseout", squareOnMouseOut);
