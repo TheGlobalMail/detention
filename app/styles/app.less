@@ -4,15 +4,15 @@ body {
 }
 
 // Make modal visible for testing
-.modal {
-  &.hide {
-    display:block;
-  }
-  &.fade {
-    .opacity(100);
-    top:10%;
-  }
-}
+// .modal {
+//   &.hide {
+//     display:block;
+//   }
+//   &.fade {
+//     .opacity(100);
+//     top:10%;
+//   }
+// }
 
 // Overwrite TGM Bootstrap nav styles
 .navbar {
@@ -84,7 +84,7 @@ body {
       letter-spacing: .05em;
     }
     .arrow {
-      background: url(../images/arrow.svg) center center no-repeat transparent;
+      background: url(../images/arrow.svg) center top no-repeat transparent;
       background-size: 100% auto;
       display: block;
       width: 40px;
@@ -136,6 +136,8 @@ body {
         margin: 2px;
         background: white;
         float: left;
+        .transition(opacity 150ms ease-in);
+        .border-radius(2px);
         &.critical-incident {
           .opacity(25);
         }
@@ -146,7 +148,9 @@ body {
           .opacity(5);
         }
         &:hover {
-          .opacity(60);
+          .opacity(100);
+          .box-shadow(0 0 15px 5px black);
+          .transition(opacity 50ms ease-out);
         }
       }
     }
