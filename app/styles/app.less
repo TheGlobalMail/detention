@@ -84,7 +84,7 @@ body {
       letter-spacing: .05em;
     }
     .arrow {
-      background: url(../images/arrow.svg) center center no-repeat transparent;
+      background: url(../images/arrow.svg) center top no-repeat transparent;
       background-size: 100% auto;
       display: block;
       width: 40px;
@@ -136,6 +136,8 @@ body {
         margin: 2px;
         background: white;
         float: left;
+        .transition(opacity 150ms ease-in);
+        .border-radius(2px);
         &.critical-incident {
           .opacity(25);
         }
@@ -146,7 +148,13 @@ body {
           .opacity(5);
         }
         &:hover {
-          .opacity(60);
+          width:@gridCellSize + 4px;
+          height:@gridCellSize + 4px;
+          .border-radius(4px);
+          margin: 0;
+          .opacity(100);
+          .box-shadow(0 0 15px 5px black);
+          .transition(opacity 50ms ease-out);
         }
       }
     }
@@ -257,6 +265,36 @@ body {
       .opacity(60);
       margin-top: 15px;
     }
+  }
+  a.prev, a.next {
+    position: absolute;
+    width:65px;
+    padding:15px;
+   .font-size(12);
+   line-height: 1;
+   text-transform: uppercase;
+   font-weight: 600;
+   top:40%;
+   color:white;
+   .border-radius(6px);
+   .opacity(30);
+   background: url('/images/arrow.svg') no-repeat 10px -115px transparent;
+   .transition(all 100ms ease-out);
+   &:hover, &:active {
+    background-color: rgba(255,255,255,0.2);
+    text-decoration: none;
+    .opacity(100);
+   }
+  }
+  a.prev {
+    left:-160px;
+    padding-left: 60px;
+  }
+  a.next {
+    right: -160px;
+    text-align: right;
+    padding-right: 60px;
+    background-position: 90px -54px;
   }
 }
 
