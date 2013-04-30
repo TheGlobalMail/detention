@@ -1,62 +1,87 @@
 body {
-  background-color: #1c1f1f;
+  background: url('/images/noise.png') repeat 0 0 #1c1f1f;
   padding-bottom: 40px;
+}
+.navbar {
+  margin: 0;
+  .box-shadow(0 1px 0 rgba(255,255,255,0.1));
 }
 
 .container {
   width: 90%;
+  color: white;
 }
-
-.incident-population {
-  width: 93.2%;
-}
-
-.controls {
-  ul {
-    margin: 0 auto;
-    width: 160px;
-    li {
-      list-style: none;
-      float: left;
-      .font-size(18);
-      font-weight: bold;
-      text-transform: uppercase;
-      margin: 0 0 20px 0;
-      padding: 10px;
-      border: 1px solid rgba(255,255,255,0.2);
-      .border-radius(5px);
-      a {
-        color: white;
-      }
-      &:first-child {
-        .border-right-radius(0);
-      }
-      &:nth-child(2) {
-        .border-left-radius(0);
-        border-left: none;
-      }
+#intro-container {
+  position: relative;
+  background: url('/images/title-bg.png') no-repeat center top transparent;
+  background-size: 100% auto;
+  background-attachment: fixed;
+  &:after {
+    content:'';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height:232px;
+    background: url('/images/noise-fade.png') repeat-x center top transparent;
+    bottom:0;
+    left: 0;
+  }
+  .title {
+    text-align: center;
+    text-transform: uppercase;
+    padding:28% 0 30%;
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+    .box-shadow(0 1px 0 rgba(255,255,255,.1));
+    h1 {
+      font-family: @sansFontFamily;
+      .font-size(90);
+      font-weight: 800;
+      letter-spacing: -.045em;
+    }
+    h2 {
+      .font-size(20);
+      font-weight: 100;
+      letter-spacing: .05em;
     }
   }
+
+  .intro {
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,0.5);
+      .box-shadow(0 1px 0 rgba(255,255,255,.1));
+      padding: 10% 15%;
+      font-weight: 100;
+      p {
+        .font-size(26);
+        line-height: 1.8;
+        &:first-child{
+          font-weight: 600;
+        }
+      }
+    }
 }
 
-.incident-grid {
-  clear: both;
-  .date {
-    @gridCellSize: 20px;
-    min-height: @gridCellSize;
-    margin: 0 0 54px;
-    .cell {
-      width: @gridCellSize;
-      height: @gridCellSize;
-      margin: 2px;
-      background: white;
-      float: left;
-      .opacity(5);
-      &:hover {
-        .opacity(20);
-      }
-      &.active {
-        .opacity(60);
+#incidents-container {
+  margin-top: 5%;
+  .incident-grid {
+    clear: both;
+    .date {
+      @gridCellSize: 20px;
+      min-height: @gridCellSize;
+      margin: 0 0 54px;
+      .cell {
+        width: @gridCellSize;
+        height: @gridCellSize;
+        margin: 2px;
+        background: white;
+        float: left;
+        .opacity(5);
+        &:hover {
+          .opacity(20);
+        }
+        &.active {
+          .opacity(60);
+        }
       }
     }
   }
