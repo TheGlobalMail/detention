@@ -97,7 +97,7 @@ body {
     }
 }
 
-#incidents-container {
+#incidents {
   margin: 0 auto 0;
   max-width: 1400px;
   padding: 5% 0 10%;
@@ -115,11 +115,16 @@ body {
         margin: 2px;
         background: white;
         float: left;
-        .opacity(5);
-        &:hover {
-          .opacity(20);
+        &.critical-incident {
+          .opacity(25);
         }
-        &.active {
+        &.major-incident {
+          .opacity(15);
+        }
+        &.minor-incident {
+          .opacity(5);
+        }
+        &:hover {
           .opacity(60);
         }
       }
