@@ -116,13 +116,13 @@ body {
   .incident-grid {
     clear: both;
     .date {
-      @gridCellSize: 20px;
+      @gridCellSize: 30px;
       min-height: @gridCellSize;
       margin: 0 0 54px;
       .cell {
         width: @gridCellSize;
         height: @gridCellSize;
-        margin: 2px;
+        margin: 4px;
         background: white;
         float: left;
         .transition(opacity 150ms ease-in);
@@ -137,8 +137,8 @@ body {
           .opacity(5);
         }
         &:hover {
-          width:@gridCellSize + 4px;
-          height:@gridCellSize + 4px;
+          width:@gridCellSize + 8px;
+          height:@gridCellSize + 8px;
           .border-radius(4px);
           margin: 0;
           .opacity(100);
@@ -162,11 +162,12 @@ body {
   .close {
     color: white;
     text-shadow:none;
-    .font-size(40);
+    .font-size(50);
     margin-top: 0;
     position: absolute;
     right: 20px;
     top: 20px;
+    height:26px;
   }
   h3 {
     font-family: @serifFontFamily;
