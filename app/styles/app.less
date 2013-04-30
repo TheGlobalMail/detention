@@ -109,7 +109,7 @@ body {
 }
 
 #incidents {
-  margin: 0 auto 0;
+  margin: 0 auto;
   max-width: 1400px;
   padding: 5% 0 10%;
   border-top: 1px solid rgba(255,255,255,.1);
@@ -180,6 +180,7 @@ body {
     text-transform: uppercase;
     font-weight: normal;
     border-top: 1px solid #ecebe2;
+    z-index: 10;
   }
   &.fade.in {
     top:20%;
@@ -197,6 +198,7 @@ body {
     padding:25px 25px 30px;
     color:#333;
     border-top: 1px solid #ecebe2;
+    z-index: 99;
     li {
       list-style: none;
       display:inline-block;
@@ -249,6 +251,7 @@ body {
   .flag {
     margin-top: 20px;
     text-align: center;
+    clear:both;
     h4 {
       .font-size(14);
       .btn {
@@ -274,7 +277,7 @@ body {
   }
   a.prev, a.next {
     position: absolute;
-    width:65px;
+    width:70px;
     padding:15px;
    .font-size(12);
    line-height: 1;
@@ -294,11 +297,11 @@ body {
    }
   }
   a.prev {
-    left:-160px;
+    left:-180px;
     padding-left: 60px;
   }
   a.next {
-    right: -160px;
+    right: -180px;
     text-align: right;
     padding-right: 60px;
     background-position: 90px -54px;
