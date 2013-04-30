@@ -29,18 +29,22 @@ body {
     z-index: 0;
   }
   .title {
+    position:relative;
     text-align: center;
     text-transform: uppercase;
-    padding:28% 0 30%;
+    padding:0 0 25%;
     border-bottom: 1px solid rgba(0,0,0,0.5);
     .box-shadow(0 1px 0 rgba(255,255,255,.1));
+    height: 100%;
+    max-height: 700px;
     h1 {
       position:relative;
       font-family: @sansFontFamily;
       .font-size(160);
       font-weight: 800;
       letter-spacing: -.045em;
-      &:before {
+      margin-top: 340px;
+      &:after {
         content:'';
         display: block;
         position: absolute;
@@ -54,31 +58,51 @@ body {
       }
     }
     h2 {
-      .font-size(20);
+      .font-size(30);
       font-weight: 100;
       letter-spacing: .05em;
     }
+    .arrow {
+      background: url(../images/arrow.svg) center center no-repeat transparent;
+      background-size: 100% auto;
+      display: block;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      left: 50%;
+      bottom: 10%;
+      margin-left: -20px;
+      .transition(all 150ms ease-out);
+      .border-radius(50%);
+      &:hover {
+        bottom: 9%;
+        .transition(all 150ms ease-in);
+        background-color: rgba(255,255,255,0.2);
+      }
+    }
   }
-
   .intro {
       text-align: center;
-      border-bottom: 1px solid rgba(0,0,0,0.5);
-      .box-shadow(0 1px 0 rgba(255,255,255,.1));
       padding: 10% 15%;
       font-weight: 100;
       z-index: 9999;
       p {
-        .font-size(26);
+        .font-size(32);
         line-height: 1.8;
         &:first-child{
           font-weight: 600;
+          margin-bottom: 3%;
         }
       }
     }
 }
 
 #incidents-container {
-  margin-top: 5%;
+  margin: 0 auto 0;
+  max-width: 1400px;
+  padding: 5% 0 10%;
+  border-top: 1px solid rgba(255,255,255,.1);
+  .box-shadow(0 -1px 0 rgba(0,0,0,0.5));
   .incident-grid {
     clear: both;
     .date {
