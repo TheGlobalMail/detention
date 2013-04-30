@@ -15,18 +15,13 @@ define([
 
     _(data.months)
       // Build the grid in rows of months
-      .map(function(month, i) {
-        var monthClass = month.replace(/\//g, '-');
-        var rowElement = $('<div class="date ' + monthClass +'">');
-        var incidents = data.incidentsByMonth[month];
-        _(incidents.length)
-          .times(function(i) {
-            rowElement.append(
-              new models.Cell(incidents[i])
-            );
-          }).tap(function() {
-            rowElement.append('<div class="clear">');
-          });
+      .map(function(obj) {
+        var rowElement = $('<div class="date ' + obj.month +'">');
+        _.each(obj.incidents, function(ID) {
+          rowElement.append(
+            new models.Cell(data.incidents[ID])
+          );
+        });
         return rowElement;
       })
       // Progressively append each of the rows

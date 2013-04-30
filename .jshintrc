@@ -1,6 +1,7 @@
 {
   "globals": {
-    "console": false
+    "console": false,
+    "define": false
   },
   "trailing": true,
   "strict": false,
