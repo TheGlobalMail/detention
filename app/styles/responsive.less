@@ -1,0 +1,108 @@
+// NORMAL SCREENS
+
+@media only screen and (max-height: 900px) {
+  #intro-container {
+    .title {
+      height: 180px;
+      h1 {
+        margin-top: 220px;
+      }
+    }
+  }
+}
+
+// iPAD LANDSCAPE
+
+@media only screen and (max-width: 1400px) {
+  #intro-container {
+    .title {
+      h1 {
+        .font-size(110);
+      }
+      h2 {
+        .font-size(24);
+      }
+    }
+  }
+}
+
+// SMALLER SCREENS AND PORTRAIT
+
+@media only screen and (max-width: 980px) {
+  .navbar.special-feature {
+    padding: 8px 20px;
+    .brand.brand-center {
+      background-position: left center;
+      float: left;
+      margin: 0;
+    }
+  }
+  #intro-container {
+    .title {
+      h1 {
+        .font-size(80);
+      }
+      h2 {
+        .font-size(18);
+      }
+    }
+    .intro {
+      p {
+        .font-size(24);
+      }
+    }
+  }
+}
+
+// BIG PHONES AND SMALL TABLETS
+@media only screen and (max-width: 750px) {
+  .navbar.special-feature {
+    .brand.brand-center {
+      float: none;
+      margin: 0 auto;
+      width: 190px;
+    }
+  }
+  #intro-container {
+    .title {
+      h1 {
+        .font-size(60);
+      }
+      h2 {
+        .font-size(16);
+      }
+    }
+    .intro {
+      p {
+        .font-size(20);
+      }
+    }
+  }
+}
+
+// PHONES
+@media only screen and (max-width: 680px) {
+  .navbar {
+    &.special-feature {
+      padding: 2px 0;
+      .special-feature-misc {
+        display: none;
+      }
+    }
+  }
+  #intro-container {
+    .title {
+      h1 {
+        .font-size(40);
+      }
+      h2 {
+        .font-size(12);
+      }
+    }
+    .intro {
+      p {
+        .font-size(16);
+      }
+    }
+  }
+}

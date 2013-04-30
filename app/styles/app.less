@@ -2,15 +2,25 @@ body {
   background: url('/images/noise.png') repeat 0 0 #1c1f1f;
   padding-bottom: 40px;
 }
+
+// Overwrite TGM Bootstrap nav styles
 .navbar {
   margin: 0;
   .box-shadow(0 1px 0 rgba(255,255,255,0.1));
+  &.special-feature .brand {
+    background-size: auto;
+    .transition(all 200ms linear);
+  }
 }
 
 .container {
   width: 90%;
   color: white;
+  h1,h2,h3,h4,h5,p,strong,em {
+    .transition(all 200ms linear);
+  }
 }
+
 #intro-container {
   position: relative;
   background: url('/images/title-bg.png') no-repeat center top transparent;
@@ -82,19 +92,19 @@ body {
     }
   }
   .intro {
-      text-align: center;
-      padding: 10% 15%;
-      font-weight: 100;
-      z-index: 9999;
-      p {
-        .font-size(32);
-        line-height: 1.8;
-        &:first-child{
-          font-weight: 600;
-          margin-bottom: 3%;
-        }
+    text-align: center;
+    padding: 10% 15%;
+    font-weight: 100;
+    z-index: 9999;
+    p {
+      .font-size(32);
+      line-height: 1.8;
+      &:first-child{
+        font-weight: 600;
+        margin-bottom: 3%;
       }
     }
+  }
 }
 
 #incidents-container {
