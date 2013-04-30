@@ -2,7 +2,7 @@ define([
   'jquery',
   'lodash',
   './process-data'
-], function($, _, data) {
+], function($, _, incidents) {
   'use strict';
 
   var gridContainer = $('.incident-grid');
@@ -12,14 +12,12 @@ define([
       gridContainer.children().remove();
     }
 
-    _(data.months)
-      .map(function(month, i) {
-        var monthClass = month.replace(/\//g, '-');
-        var rowElement = $('<div class="date ' + monthClass +'">');
-        var incidents = data.incidentsByMonth[month];
-        _(incidents.length)
-          .times(function(i) {
-            rowElement.append('<div class="cell">');
+    var rowElements = _(incidents.months)
+      .map(function(month) {
+        var rowElement = $('<div class="date">');
+        _(month.incidents)
+          .each(function(id) {
+            rowElement.append('<div class="cell" data-incident-number="' + id + '">');
           }).tap(function() {
             rowElement.append('<div class="clear">');
           });
