@@ -1,5 +1,6 @@
 var fs = require('fs');
 var csv = require('csv');
+var _ = require('lodash');
 
 if (process.argv.length < 4) {
   console.log(
@@ -12,6 +13,28 @@ if (process.argv.length < 4) {
   var infile = process.argv[2];
   var outfile = process.argv[3];
   var rows = [];
+
+  function toRowLayout(colLayout) {
+
+    var rowLayout = [];
+    var keys = _.map(colLayout, function(v, k) {
+      if (colLayout.hasOwnProperty(k)) {
+        return k;
+      }
+    });
+    var colLength = colLayout[keys[0]].length;
+    console.log(colLength)
+
+    _.times(colLength, function(i) {
+      var point = {};
+      _.each(rowLayout, function(value, key) {
+        point[key] = value[i];
+      });
+      rowLayout.push(point);
+    });
+
+    return rowLayout;
+  }
 
   csv()
     .from.stream(fs.createReadStream(
@@ -35,6 +58,8 @@ if (process.argv.length < 4) {
         });
         json[header] = column;
       });
+
+      json = toRowLayout(json);
 
       fs.writeFile(
         __dirname + '/' + outfile,

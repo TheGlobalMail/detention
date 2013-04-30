@@ -27,6 +27,23 @@ define([
     )
   }
 
+  function toRowLayout() {
+    // Convert
+
+    var data = [];
+    var incidentLength = incidents["Occurred On"].length;
+
+    _.times(incidentLength, function(i) {
+      var point = {};
+      _.each(incidents, function(value, key) {
+        point[key] = value[i];
+      });
+      data.push(point);
+    });
+
+    return data;
+  }
+
   function processIncidentData() {
     processDateStrings();
 
@@ -38,8 +55,12 @@ define([
       .value();
     var dateCounts = _.countBy(occurredOn, 'original');
 
+    // Ordered list of months
     var months = _.unique(dates, 'month');
+    // Number of incidents per month
     var monthCounts = _.countBy(occurredOn, 'month');
+    // Data for each incident, grouped by month
+    var monthData = {};
 
     return {
       dates: dates,

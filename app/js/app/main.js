@@ -15,7 +15,8 @@ define([
     var rowElements = _(data.months)
       .map(function(date) {
         var rowElement = $('<div class="date ' + date.dateClass +'">');
-        _(countData[date[dateKey]])
+        var count = countData[date[dateKey]];
+        _(count)
           .times(function(i) {
             rowElement.append('<div class="cell">');
           }).tap(function() {
@@ -25,7 +26,7 @@ define([
       })
       .each(function(element, i) {
         requestAnimationFrame(function() {
-          gridContainer.append(element)
+          gridContainer.append(element);
         });
       });
 
