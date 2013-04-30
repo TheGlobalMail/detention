@@ -1,7 +1,7 @@
 define([
   'jquery',
   'lodash',
-  './../../components/tgm-bootstrap/components/bootstrap/js/bootstrap-modal'
+  '../../components/tgm-bootstrap/js/bootstrap-modal'
 ], function($, _, modal) {
   "use strict";
 
