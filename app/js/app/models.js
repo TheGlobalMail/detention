@@ -19,11 +19,12 @@ define([
     }
 
     function cellOnMouseOver() {
-      console.log(_this.data);
+      // TODO: display a small detail..?
     }
 
     function cellOnClick() { // click/touch
-      $(this).toggleClass('active');
+      // TODO: update modal's content with _this' data
+      // TODO: display modal
     }
 
     function setBindings() {

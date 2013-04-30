@@ -3,7 +3,7 @@ define([
   'lodash',
   './process-data',
   './models'
-], function($, _, data, models) {
+], function($, _, incidents, models) {
   'use strict';
 
   var gridContainer = $('.incident-grid');
@@ -13,16 +13,18 @@ define([
       gridContainer.children().remove();
     }
 
-    _(data.months)
+    _(incidents.months)
       // Build the grid in rows of months
       .map(function(obj) {
         var rowElement = $('<div class="date ' + obj.month +'">');
         _.each(obj.incidents, function(ID) {
           rowElement.append(
-            new models.Cell(data.incidents[ID])
+            new models.Cell(incidents.data[ID])
           );
         });
         return rowElement;
+      }).each(function(rowElement) {
+        rowElement.append('<div class="clear">')
       })
       // Progressively append each of the rows
       .each(function(rowElement) {
