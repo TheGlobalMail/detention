@@ -1,7 +1,8 @@
 define([
   'jquery',
-  'lodash'
-], function($, _) {
+  'lodash',
+  './../../components/tgm-bootstrap/components/bootstrap/js/bootstrap-modal'
+], function($, _, modal) {
   "use strict";
 
   function Cell() {
@@ -23,8 +24,16 @@ define([
     }
 
     function cellOnClick() { // click/touch
-      // TODO: update modal's content with _this' data
-      // TODO: display modal
+      // Update the modal dialog's content before displaying it
+
+      var modal = $('.modal');
+      modal.find('.incident-number').text(_this.data["Incident Number"]);
+      modal.find('.date').text(_this.data["Occurred On"]);
+      modal.find('.facility').text(_this.data["Location"]);
+      modal.find('.incident-type').text(_this.data["Type"]);
+      modal.find('.level').text(_this.data["Level"]);
+      modal.find('.summary').text(_this.data["Summary"]);
+      modal.modal();
     }
 
     function setBindings() {

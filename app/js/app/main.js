@@ -23,6 +23,7 @@ define([
           );
         });
         return rowElement;
+      // Insert a clearing div
       }).each(function(rowElement) {
         rowElement.append('<div class="clear">')
       })
