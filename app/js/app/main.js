@@ -8,15 +8,16 @@ define([
   var gridContainer = $('.incident-grid');
 
   function buildIncidentMonthGrid() {
-    resetGridContainer();
+    if (gridContainer.children().length) {
+      gridContainer.children().remove();
+    }
 
-    var countData = data.monthCounts;
-    var dateKey = 'month';
-    var rowElements = _(data.months)
-      .map(function(date) {
-        var rowElement = $('<div class="date ' + date.dateClass +'">');
-        var count = countData[date[dateKey]];
-        _(count)
+    _(data.months)
+      .map(function(month, i) {
+        var monthClass = month.replace(/\//g, '-');
+        var rowElement = $('<div class="date ' + monthClass +'">');
+        var incidents = data.incidentsByMonth[month];
+        _(incidents.length)
           .times(function(i) {
             rowElement.append('<div class="cell">');
           }).tap(function() {
@@ -24,9 +25,9 @@ define([
           });
         return rowElement;
       })
-      .each(function(element, i) {
+      .each(function(rowElement) {
         requestAnimationFrame(function() {
-          gridContainer.append(element);
+          gridContainer.append(rowElement);
         });
       });
 
@@ -40,14 +41,10 @@ define([
     });
   }
 
-  function resetGridContainer() {
-    gridContainer.children().remove();
-  }
-
   function bindControls() {
     var controls = $('.controls');
 
-    controls.find('.month')
+    controls.find('a')
       .on('click', buildIncidentMonthGrid);
 
     gridContainer.on('click touch', '.date .cell', function() {

@@ -4,31 +4,8 @@ define([
 ], function(_, incidents) {
   "use strict";
 
-  function processDateStrings() {
-    incidents["Occurred On"] = _.map(
-      incidents["Occurred On"],
-      function(date) {
-        // `date` takes the format MM/DD/YYYY
-
-        var split = date.split('/');
-        var normal = [split[2], split[0], split[1]].join('/');
-        var unix = (new Date(split[2], split[0], split[1])).getTime();
-        var dateClass = normal.replace(/\//g, '-'); // Replace slashes with dashes
-        var month = normal.split('/').slice(0,2).join('/');
-
-        return {
-          original: date,
-          normal: normal,
-          unix: unix,
-          dateClass: dateClass,
-          month: month
-        }
-      }
-    )
-  }
-
-  function toRowLayout() {
-    // Convert
+  // Remove this when we have the processed JSON
+  incidents = (function() {
 
     var data = [];
     var incidentLength = incidents["Occurred On"].length;
@@ -42,33 +19,60 @@ define([
     });
 
     return data;
+  })();
+
+  function processDateStrings() {
+    // Adds a `date` prop to each obj in incidents
+    incidents =  _.map(incidents, function(obj) {
+
+        // Takes the format MM/DD/YYYY
+        var date = obj["Occurred On"];
+
+        var split = date.split('/');
+        var normal = [split[2], split[0], split[1]].join('/');
+        var unix = (new Date(split[2], split[0], split[1])).getTime();
+        var month = normal.split('/').slice(0,2).join('/');
+
+        obj.date = {
+          original: date,
+          normal: normal,
+          unix: unix,
+          month: month
+        };
+
+        return obj;
+      }
+    );
   }
 
-  function processIncidentData() {
+  function processIncidentsPerMonth() {
     processDateStrings();
 
-    var occurredOn = incidents["Occurred On"];
-
-    var dates = _(occurredOn)
-      .unique('original')
-      .sortBy('unix')
-      .value();
-    var dateCounts = _.countBy(occurredOn, 'original');
-
     // Ordered list of months
-    var months = _.unique(dates, 'month');
-    // Number of incidents per month
-    var monthCounts = _.countBy(occurredOn, 'month');
-    // Data for each incident, grouped by month
-    var monthData = {};
+    var months = [];
+    var incidentsByMonth = {};
+
+    _.each(incidents, function(incident) {
+      var month = incident.date.month;
+      if (!_.contains(months, month)) {
+        months.push(month)
+      }
+      if (incidentsByMonth[month] === undefined) {
+        incidentsByMonth[month] = [];
+      }
+      incidentsByMonth[month].push(incident);
+    });
+
+    months = _.sortBy(months, function(month) {
+      var split = month.split('/');
+      return +(new Date(split[0], split[1]));
+    });
 
     return {
-      dates: dates,
-      dateCounts: dateCounts,
       months: months,
-      monthCounts: monthCounts
+      incidentsByMonth: incidentsByMonth
     };
   }
 
-  return processIncidentData();
+  return processIncidentsPerMonth();
 });
