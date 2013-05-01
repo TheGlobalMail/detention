@@ -88,10 +88,7 @@ define([
     _this.flag = function() {
       var $cell = _this.cells[_this.cellIndex].element;
       $cell.toggleClass('flagged');
-      $(this).text(
-        ($cell.hasClass('flagged') ? 'Unflag' : 'Flag') +
-        ' this incident'
-      );
+      _this.currentModal.setFlagText();
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
@@ -133,6 +130,8 @@ define([
 
     _this.setCell = function(cell) {
 
+      _this.cell = cell;
+
       var $incidentDetails = _this.element.find('.incident-details');
       var $eventDetails = _this.element.find('.event-details');
 
@@ -158,6 +157,8 @@ define([
         $eventDetails.show();
       }
 
+      _this.setFlagText();
+
       return _this;
     };
 
@@ -168,6 +169,13 @@ define([
     _this.display = function() {
       _this.element.show().addClass("in");
       return _this;
+    };
+
+    _this.setFlagText = function() {
+      _this.element.find('.flag-btn').text(
+        (_this.cell.element.hasClass('flagged') ? 'Unflag' : 'Flag') +
+        ' this incident'
+      );
     };
 
     function getLeftOffScreenPosition() {
