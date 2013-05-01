@@ -13,14 +13,16 @@ define([
       gridContainer.children().remove();
     }
 
+    var grid = new models.GridController;
+
     _(incidents.months)
       // Build the grid in rows of months
       .map(function(obj) {
         var rowElement = $('<div class="date ' + obj.month +'">');
         _.each(obj.incidents, function(ID) {
-          rowElement.append(
-            new models.Cell(incidents.data[ID])
-          );
+          var cell = new models.Cell(incidents.data[ID])
+          grid.add(cell);
+          rowElement.append(cell.element);
         });
         return rowElement;
       // Insert a clearing div

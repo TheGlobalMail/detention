@@ -78,16 +78,20 @@
       </div>
     </div>
 
-    <div id="summary" class="modal hide fade offset3" tabindex="-1">
+    <div id="modal-container"></div>
+    <div class="modal hide fade offset3" tabindex="-1">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3>
+        <h3 class='incident-details'>
           Incident
           <span class="incident-number"></span>
         </h3>
+        <h3 class='event-details'>
+          Event
+        </h3>
       </div>
       <div class="modal-body">
-        <ul>
+        <ul class='incident-details'>
           <li>
             <span class="subtitle">Date</span>
             <span class="date"></span>
@@ -110,6 +114,22 @@
             <a class="ext-link" href="/">View complete summary and any related data at detentionlogs.org</a>
           </li>
         </ul>
+        <ul class='event-details'>
+          <li>
+            <span class="subtitle">Date</span>
+            <span class="occurred_on"></span>
+          </li>
+          <li>
+            <span class="subtitle">Facility</span>
+            <span class="facility"></span>
+          </li>
+          <li>
+            <span class="subtitle">Incident type</span>
+            <span class="type"></span>
+          </li>
+          <li>
+            <p class="summary"></p>
+          </li>
       </div>
         <a class="prev">Prev Incident</a>
         <a class="next">Next Incident</a>
@@ -120,7 +140,6 @@
           </p>
         </div>
     </div>
-
   </div>
 
 
