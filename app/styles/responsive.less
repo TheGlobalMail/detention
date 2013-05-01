@@ -153,7 +153,6 @@
     .incident-grid {
       .date {
         @gridCellSize: 27px;
-
         .cell {
           width: @gridCellSize;
           height: @gridCellSize;
@@ -163,6 +162,18 @@
             height:@gridCellSize + 4px;
             margin: 1px;
           }
+          &.event {
+          .border-radius(50%);
+          width:@gridCellSize + 4px;
+          height:@gridCellSize + 4px;
+          margin: 1px;
+          &:hover {
+            .border-radius(50%);
+            width:@gridCellSize + 6px;
+            height:@gridCellSize + 6px;
+            margin: 0;
+          }
+        }
         }
       }
     }

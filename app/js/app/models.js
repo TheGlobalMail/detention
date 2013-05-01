@@ -23,7 +23,7 @@ define([
         _this.nextModal.element.hide();
         _this.prevModal.element.hide();
       });
-      
+
       return _this;
     }
 
@@ -216,7 +216,7 @@ define([
       if (data.event_type === 'incident'){
         highlight_class = data['Level'].toLowerCase() + '-incident';
       }else{
-        highlight_class = data['type'] + '-event';
+        highlight_class = data['type'] + '-event event';
       }
 
       element.addClass(highlight_class);
