@@ -292,11 +292,7 @@ body {
         color:#747368;
         text-shadow: none;
       }
-      &:nth-child(4) {
-        border-right: none;
-        margin-right: 0;
-        padding-right: 0;
-      }
+
       &:last-child {
         margin: 0;
         width: 100%;
@@ -326,16 +322,22 @@ body {
       color:#333;
       li {
         margin: 0 10px 0 0;
-        padding: 0 10px 15px 0;
+        padding: 0 10px 10px 0;
         border-right: 1px solid #c2c1af;
         text-shadow: 0 1px 0 #ecebe2;
         p {
           text-shadow: 0 1px 0 #ecebe2;
         }
+        &:nth-child(4) {
+          border-right: none;
+          margin-right: 0;
+          padding-right: 0;
+        }
         &:last-child {
           padding: 20px 0 0;
-           border-top: 1px solid #c2c1af;
+          border-top: 1px solid #c2c1af;
           border-right: none;
+          margin: 0;
         }
       }
     }
@@ -361,6 +363,9 @@ body {
         margin-left: 10px;
         background: url('/images/flag.svg') no-repeat 15px 11px @blue;
         &:hover {
+          background-color: #084975;
+        }
+        &.unflag {
           background-color: #084975;
         }
       }
