@@ -10,6 +10,7 @@ body {
   .box-shadow(0 1px 0 rgba(255,255,255,0.1));
   &.special-feature {
     position: fixed;
+    top:0;
     display: block;
     width: 100%;
     padding: 8px 0;
@@ -23,10 +24,15 @@ body {
 
 .container {
   width: 90%;
+  max-width: 1500px;
   color: white;
   h1,h2,h3,h4,h5,p,strong,em {
     .transition(all 200ms linear);
   }
+}
+
+#main {
+  margin-top: 48px;
 }
 
 #intro-container {
@@ -55,24 +61,24 @@ body {
     border-bottom: 1px solid rgba(0,0,0,0.5);
     .box-shadow(0 1px 0 rgba(255,255,255,.1));
     height: 100%;
-    max-height: 700px;
+    max-height: 150px;
     h1 {
       position:relative;
       font-family: @sansFontFamily;
       .font-size(160);
       font-weight: 800;
       letter-spacing: -.045em;
-      margin-top: 340px;
+      margin-top: 20%;
       &:after {
         content:'';
         display: block;
         position: absolute;
-        width: 120%;
+        width: 170%;
         height:100px;
         background: url('/images/wire.svg') no-repeat center center transparent;
         background-size: 100% auto;
         top:15%;
-        left: -10%;
+        left: -35%;
         z-index: 0;
       }
     }
@@ -119,7 +125,7 @@ body {
 #incidents {
   margin: 0 auto;
   width: 90%;
-  padding: 5% 0 10%;
+  padding: 5% 0;
   border-top: 1px solid rgba(255,255,255,.1);
   .box-shadow(0 -1px 0 rgba(0,0,0,0.5));
   .incident-grid {
@@ -128,7 +134,7 @@ body {
     .date {
       @gridCellSize: 30px;
       min-height: @gridCellSize;
-      margin: 0 0 54px;
+      margin: 54px 0 0 ;
       .cell {
         width: @gridCellSize;
         height: @gridCellSize;
@@ -163,7 +169,7 @@ body {
           .opacity(100);
           background: url('/images/flag.svg') no-repeat center -27px #ffffff;
           background-size: 40% auto;
-          .box-shadow(0 0 25px 0 rgba(255,255,255,0.25));
+          .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
           .transition(all 100ms ease-in);
           &:hover {
             .transition(all 200ms ease-out);
@@ -203,6 +209,18 @@ body {
     }
   }
 }
+
+#links {
+  border-top: 1px solid rgba(255,255,255,.1);
+  .box-shadow(0 -1px 0 rgba(0,0,0,0.5));
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  .font-size(30);
+  padding: 9% 0 10%;
+}
+
+
 
 // Modal styles
 .modal-backdrop, .modal-backdrop.fade.in {
