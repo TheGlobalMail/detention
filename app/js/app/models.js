@@ -122,13 +122,31 @@ define([
     }
 
     _this.setCell = function(cell) {
-      // Set the text
-      _this.incidentNumber.text(cell.data["Incident Number"]);
-      _this.date.text(cell.data["Occurred On"]);
-      _this.facility.text(cell.data["Location"]);
-      _this.incidentType.text(cell.data["Type"]);
-      _this.level.text(cell.data["Level"]);
-      _this.summary.text(cell.data["Summary"]);
+
+      var $incidentDetails = _this.element.find('.incident-details');
+      var $eventDetails = _this.element.find('.event-details');
+
+      if (cell.data.event_type === 'incident'){
+        // Set the text
+        _this.incidentNumber.text(cell.data["Incident Number"]);
+        _this.date.text(cell.data["Occurred On"]);
+        _this.facility.text(cell.data["Location"]);
+        _this.incidentType.text(cell.data["Type"]);
+        _this.level.text(cell.data["Level"]);
+        _this.summary.text(cell.data["Summary"]);
+        $incidentDetails.show();
+        $eventDetails.hide();
+      }else{
+        if (cell.data.element_id){
+          // insert this html into  modal
+        }
+        _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
+          _this[field] = _this.element.find('.' + field)
+          _this[field].text(cell.data[field] || '-');
+        });
+        $incidentDetails.hide();
+        $eventDetails.show();
+      }
 
       return _this;
     };
@@ -189,12 +207,19 @@ define([
     var _this = this;
 
     function constructor(data) {
+      var highlight_class;
+
       var element = _this.element = $('<div class="cell">');
       _this.data = data;
       _this.grid = null;
 
-      var levelClass = data['Level'].toLowerCase() + '-incident';
-      element.addClass(levelClass);
+      if (data.event_type === 'incident'){
+        highlight_class = data['Level'].toLowerCase() + '-incident';
+      }else{
+        highlight_class = data['type'] + '-event';
+      }
+
+      element.addClass(highlight_class);
 
       setBindings();
       return _this;
