@@ -47,6 +47,8 @@ define([
     }
 
     _this.showCellModal = function(cell) {
+      // Called when a cell is clicked on
+
       _this.cellIndex = _this.cells.indexOf(cell);
 
       _this.currentModal
@@ -60,28 +62,60 @@ define([
         _this.nextModal.setCell(
           _this.cells[_this.cellIndex + 1]
         );
+        _this.currentModal.element.addClass('has-next');
+      } else {
+        _this.currentModal.element.removeClass('has-next');
       }
 
       if (hasPrevCell()) {
         _this.prevModal.setCell(
           _this.cells[_this.cellIndex - 1]
         );
+        _this.currentModal.element.addClass('has-prev');
+      } else {
+        _this.currentModal.element.removeClass('has-prev');
       }
+
+      _this.addIdentifierClasses();
     };
 
+    _this.checkNextPrev = function(modal) {
+      if (hasNextCell()) {
+        modal.element.addClass('has-next');
+      } else {
+        modal.element.removeClass('has-next');
+      }
+      if (hasPrevCell()) {
+        modal.element.addClass('has-prev');
+      } else {
+        modal.element.removeClass('has-prev');
+      }
+    }
+
     _this.displayNextModal = function() {
+      // Called when the next button is clicked on
+
+      _this.cellIndex++;
       _this.currentModal.slideLeft();
+      _this.checkNextPrev(_this.nextModal);
       _this.nextModal.slideIn();
+
       // Swap the variables around
       var current = _this.currentModal;
       _this.currentModal = _this.nextModal;
       _this.nextModal = _this.prevModal;
       _this.nextModal.positionOffScreenRight();
       _this.prevModal = current;
+
+      _this.addIdentifierClasses();
     };
 
     _this.displayPrevModal = function() {
+      // Called when the prev button is clicked on
+
+      _this.cellIndex--;
       _this.currentModal.slideRight();
+      _this.checkNextPrev(_this.prevModal);
       _this.prevModal.slideIn();
       // Swap the variables around
       var current = _this.currentModal;
@@ -89,6 +123,29 @@ define([
       _this.prevModal = _this.nextModal;
       _this.prevModal.positionOffScreenLeft();
       _this.nextModal = current;
+
+      _this.addIdentifierClasses();
+    };
+
+    _this.addIdentifierClasses = function() {
+      // Add `current-modal`, `next-modal` and `prev-modal` classes
+
+      var map = {
+        'current': _this.currentModal,
+        'next': _this.nextModal,
+        'prev': _this.prevModal
+      };
+      var suffix = '-modal';
+
+      _.each(map, function(modal, className) {
+        var element = modal.element;
+        _(map).keys().each(function(key) {
+          if (className !== key) {
+            element.removeClass(key + suffix);
+          }
+        });
+        element.addClass(className + suffix)
+      });
     };
 
     _this.flag = function() {
@@ -141,7 +198,7 @@ define([
       var $incidentDetails = _this.element.find('.incident-details');
       var $eventDetails = _this.element.find('.event-details');
 
-      if (cell.data.event_type === 'incident'){
+      if (cell.data.event_type === 'incident') {
         // Set the text
         _this.incidentNumber.text(cell.data["Incident Number"]);
         _this.date.text(cell.data["Occurred On"]);
@@ -151,8 +208,8 @@ define([
         _this.summary.text(cell.data["Summary"]);
         $incidentDetails.show();
         $eventDetails.hide();
-      }else{
-        if (cell.data.element_id){
+      } else {
+        if (cell.data.element_id) {
           // insert this html into  modal
         }
         _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
@@ -192,11 +249,6 @@ define([
       return $(window).width() + _this.element.outerWidth();
     }
 
-    _this.positionCenter = function() {
-      _this.element.css("left", getLeftOffScreenPosition());
-      return _this;
-    };
-
     _this.positionOffScreenLeft = function() {
       _this.element.css("left", getLeftOffScreenPosition());
       return _this;
@@ -218,6 +270,7 @@ define([
     };
 
     _this.slideIn = function() {
+      // TODO: replace this with horiz centering and a resize listener, kill the listener in slide{Left|Right}
       _this.element.animate({
         "left": "50%"
       });
@@ -237,15 +290,16 @@ define([
       _this.data = data;
       _this.grid = null;
 
-      if (data.event_type === 'incident'){
+      if (data.event_type === 'incident') {
         highlight_class = data['Level'].toLowerCase() + '-incident';
-      }else{
+      } else {
         highlight_class = data['type'] + '-event event';
       }
 
       element.addClass(highlight_class);
 
       setBindings();
+
       return _this;
     }
 
