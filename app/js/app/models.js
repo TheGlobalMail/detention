@@ -172,10 +172,10 @@ define([
     };
 
     _this.setFlagText = function() {
-      _this.element.find('.flag-btn').text(
-        (_this.cell.element.hasClass('flagged') ? 'Unflag' : 'Flag') +
-        ' this incident'
-      );
+      var flagged = _this.cell.element.hasClass('flagged');
+      _this.element.find('.flag-btn')
+        .toggleClass('unflag', flagged)
+        .text((flagged ? 'Unflag' : 'Flag') + ' this incident');
     };
 
     function getLeftOffScreenPosition() {
