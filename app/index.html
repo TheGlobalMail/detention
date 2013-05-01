@@ -72,53 +72,73 @@
         </section>
       </div>
     </div>
-    <div id="incidents">
-      <div class="container">
+    <div id="incidents" class="container">
         <section class="incident-grid"></section>
-      </div>
     </div>
+    <section id="links" class="container">
+        Links to twitter conversations and detention logs go here
+    </section>
 
     <div id="modal-container"></div>
     <div class="modal hide fade offset3" tabindex="-1">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3>
+        <h3 class='incident-details'>
           Incident
           <span class="incident-number"></span>
         </h3>
+        <h3 class='event-details'>
+          Event
+        </h3>
       </div>
       <div class="modal-body">
-        <ul>
-          <li>
-            <span class="subtitle">Date</span>
-            <span class="date"></span>
-          </li>
-          <li>
-            <span class="subtitle">Facility</span>
-            <span class="facility"></span>
-          </li>
-          <li>
-            <span class="subtitle">Incident type</span>
-            <span class="incident-type"></span>
-          </li>
-          <li>
-            <span class="subtitle">Level</span>
-            <span class="level"></span>
-          </li>
-          <li>
-            <span class="subtitle">Summary</span>
-            <p class="summary"></p>
-            <a class="ext-link" href="/">View complete summary and any related data at detentionlogs.org</a>
-          </li>
-        </ul>
-      </div>
-        <a class="prev">Prev Incident</a>
-        <a class="next">Next Incident</a>
-        <div class="flag">
-          <h4>Help shape the story others see:<div class="btn">Flag this incident</div></h4>
-          <p>
-            Flagging an incident makes it’s square appear brighter. The most flagged incidents are the brightest and will be featured as part of the introductory sequence that others will see.
-          </p>
+        <div class="incident-details">
+          <ul>
+            <li>
+              <span class="subtitle">Date</span>
+              <span class="date"></span>
+            </li>
+            <li>
+              <span class="subtitle">Facility</span>
+              <span class="facility"></span>
+            </li>
+            <li>
+              <span class="subtitle">Incident type</span>
+              <span class="incident-type"></span>
+            </li>
+            <li>
+              <span class="subtitle">Level</span>
+              <span class="level"></span>
+            </li>
+            <li>
+              <span class="subtitle">Summary</span>
+              <p class="summary"></p>
+              <a class="ext-link" href="/">View complete summary and any related data at detentionlogs.org</a>
+            </li>
+          </ul>
+          <a class="prev">Prev Incident</a>
+          <a class="next">Next Incident</a>
+          <div class="flag">
+            <h4>Help shape the story others see:<div class="btn flag-btn">Flag this incident</div></h4>
+            <p>
+              Flagging an incident makes it’s square appear brighter. The most flagged incidents are the brightest and will be featured as part of the introductory sequence that others will see.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="event-details">
+          <ul>
+            <li>
+              <span class="subtitle">Date</span>
+              <span class="occurred_on"></span>
+            </li>
+            <li>
+              <p class="summary"></p>
+            </li>
+          </ul>
+          <a class="prev">Prev Incident</a>
+          <a class="next">Next Incident</a>
         </div>
     </div>
   </div>

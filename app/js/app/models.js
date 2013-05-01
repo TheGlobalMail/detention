@@ -91,6 +91,12 @@ define([
       _this.nextModal = current;
     };
 
+    _this.flag = function() {
+      var $cell = _this.cells[_this.cellIndex].element;
+      $cell.toggleClass('flagged');
+      _this.currentModal.setFlagText();
+    };
+
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
   }
 
@@ -125,16 +131,39 @@ define([
     function setBindings() {
       _this.element.on('click', '.next', _this.grid.displayNextModal);
       _this.element.on('click', '.prev', _this.grid.displayPrevModal);
+      _this.element.on('click', '.flag-btn', _this.grid.flag);
     }
 
     _this.setCell = function(cell) {
-      // Set the text
-      _this.incidentNumber.text(cell.data["Incident Number"]);
-      _this.date.text(cell.data["Occurred On"]);
-      _this.facility.text(cell.data["Location"]);
-      _this.incidentType.text(cell.data["Type"]);
-      _this.level.text(cell.data["Level"]);
-      _this.summary.text(cell.data["Summary"]);
+
+      _this.cell = cell;
+
+      var $incidentDetails = _this.element.find('.incident-details');
+      var $eventDetails = _this.element.find('.event-details');
+
+      if (cell.data.event_type === 'incident'){
+        // Set the text
+        _this.incidentNumber.text(cell.data["Incident Number"]);
+        _this.date.text(cell.data["Occurred On"]);
+        _this.facility.text(cell.data["Location"]);
+        _this.incidentType.text(cell.data["Type"]);
+        _this.level.text(cell.data["Level"]);
+        _this.summary.text(cell.data["Summary"]);
+        $incidentDetails.show();
+        $eventDetails.hide();
+      }else{
+        if (cell.data.element_id){
+          // insert this html into  modal
+        }
+        _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
+          _this[field] = _this.element.find('.' + field)
+          _this[field].text(cell.data[field] || '-');
+        });
+        $incidentDetails.hide();
+        $eventDetails.show();
+      }
+
+      _this.setFlagText();
 
       return _this;
     };
@@ -146,6 +175,13 @@ define([
     _this.display = function() {
       _this.element.show().addClass("in");
       return _this;
+    };
+
+    _this.setFlagText = function() {
+      var flagged = _this.cell.element.hasClass('flagged');
+      _this.element.find('.flag-btn')
+        .toggleClass('unflag', flagged)
+        .text((flagged ? 'Unflag' : 'Flag') + ' this incident');
     };
 
     function getLeftOffScreenPosition() {
@@ -195,12 +231,19 @@ define([
     var _this = this;
 
     function constructor(data) {
+      var highlight_class;
+
       var element = _this.element = $('<div class="cell">');
       _this.data = data;
       _this.grid = null;
 
-      var levelClass = data['Level'].toLowerCase() + '-incident';
-      element.addClass(levelClass);
+      if (data.event_type === 'incident'){
+        highlight_class = data['Level'].toLowerCase() + '-incident';
+      }else{
+        highlight_class = data['type'] + '-event event';
+      }
+
+      element.addClass(highlight_class);
 
       setBindings();
       return _this;
