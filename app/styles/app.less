@@ -5,11 +5,19 @@ body {
 
 // Overwrite TGM Bootstrap nav styles
 .navbar {
+
   margin: 0;
   .box-shadow(0 1px 0 rgba(255,255,255,0.1));
-  &.special-feature .brand {
-    background-size: auto;
-    .transition(all 200ms linear);
+  &.special-feature {
+    position: fixed;
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    z-index: 999;
+    .brand {
+      background-size: auto;
+      .transition(all 200ms linear);
+    }
   }
 }
 
@@ -110,11 +118,12 @@ body {
 
 #incidents {
   margin: 0 auto;
-  max-width: 1400px;
+  width: 90%;
   padding: 5% 0 10%;
   border-top: 1px solid rgba(255,255,255,.1);
   .box-shadow(0 -1px 0 rgba(0,0,0,0.5));
   .incident-grid {
+    margin: 0 auto;
     clear: both;
     .date {
       @gridCellSize: 30px;
@@ -143,8 +152,24 @@ body {
           .border-radius(4px);
           margin: 3px;
           .opacity(100);
-          .box-shadow(0 0 15px 5px black);
+          .box-shadow(0 0 15px 5px rgba(0,0,0,0.6));
           .transition(opacity 50ms ease-out);
+        }
+        &.flagged {
+          width:@gridCellSize + 6px;
+          height:@gridCellSize + 6px;
+          .border-radius(5px);
+          margin: 1px;
+          .opacity(100);
+          background: url('/images/flags.svg') no-repeat center -29px #ffffff;
+          background-size: 40% auto;
+          .box-shadow(0 0 25px 0 rgba(255,255,255,0.25));
+          .transition(all 150ms ease-out);
+          &:hover {
+            .transition(all 150ms ease-out);
+            background-color: @blue;
+            background-position: center 10px;
+          }
         }
         &.event {
           .border-radius(50%);
@@ -315,7 +340,7 @@ body {
         text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
         padding: 10px 20px 10px 40px;
         margin-left: 10px;
-        background: url('/images/flag.svg') no-repeat 15px 11px @blue;
+        background: url('/images/flags.svg') no-repeat 15px 11px @blue;
         &:hover {
           background-color: #084975;
         }
@@ -336,7 +361,7 @@ body {
    line-height: 1;
    text-transform: uppercase;
    font-weight: 600;
-   top:40%;
+   top:30%;
    color:white;
    .border-radius(6px);
    .opacity(50);
