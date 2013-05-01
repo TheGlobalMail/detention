@@ -6,7 +6,7 @@
 
   <title>Title goes here | The Global Mail</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.5">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/png">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,800,700" rel="stylesheet">
@@ -64,7 +64,6 @@
         </section>
         <section class="intro">
           <p>
-            <a href="#summary" data-toggle="modal" data-bypass="">Read more</a>
             Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
           <p>
@@ -79,49 +78,48 @@
       </div>
     </div>
 
-    <div id="modal-container">
-      <div class="modal hide fade offset3 root-modal" tabindex="-1">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3>
-            Incident
-            <span class="incident-number"></span>
-          </h3>
-        </div>
-        <div class="modal-body">
-          <ul>
-            <li>
-              <span class="subtitle">Date</span>
-              <span class="date"></span>
-            </li>
-            <li>
-              <span class="subtitle">Facility</span>
-              <span class="facility"></span>
-            </li>
-            <li>
-              <span class="subtitle">Incident type</span>
-              <span class="incident-type"></span>
-            </li>
-            <li>
-              <span class="subtitle">Level</span>
-              <span class="level"></span>
-            </li>
-            <li>
-              <span class="subtitle">Summary</span>
-              <p class="summary"></p>
-              <a href="/">View complete summary and any related data at detentionlogs.org</a>
-            </li>
-          </ul>
-          <div class="flag">
-            <h4>Help shape the story others see:<div class="btn">Flag this incident</div></h4>
-            <p>
-              Flagging an incident makes it’s square appear brighter. The most flagged incidents are the brightest and will be featured as part of the introductory sequence that others will see.
-            </p>
-          </div>
-        </div>
-        <a class="prev">Previous Incident</a>
-        <a class="next">View Next Incident</a>
+    <div id="modal-container"></div>
+    <div class="modal hide fade offset3" tabindex="-1">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>
+          Incident
+          <span class="incident-number"></span>
+        </h3>
       </div>
+      <div class="modal-body">
+        <ul>
+          <li>
+            <span class="subtitle">Date</span>
+            <span class="date"></span>
+          </li>
+          <li>
+            <span class="subtitle">Facility</span>
+            <span class="facility"></span>
+          </li>
+          <li>
+            <span class="subtitle">Incident type</span>
+            <span class="incident-type"></span>
+          </li>
+          <li>
+            <span class="subtitle">Level</span>
+            <span class="level"></span>
+          </li>
+          <li>
+            <span class="subtitle">Summary</span>
+            <p class="summary"></p>
+            <a class="ext-link" href="/">View complete summary and any related data at detentionlogs.org</a>
+          </li>
+        </ul>
+      </div>
+        <a class="prev">Prev Incident</a>
+        <a class="next">Next Incident</a>
+        <div class="flag">
+          <h4>Help shape the story others see:<div class="btn">Flag this incident</div></h4>
+          <p>
+            Flagging an incident makes it’s square appear brighter. The most flagged incidents are the brightest and will be featured as part of the introductory sequence that others will see.
+          </p>
+        </div>
     </div>
   </div>
 
