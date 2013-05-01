@@ -15,16 +15,22 @@ define([
       _this.cells = [];
 
       _this.currentModal = new Modal(_this);
-      _this.currentModal.element.on("show", function() {
-        _this.nextModal = new Modal(_this, true);
-        _this.prevModal = new Modal(_this, true);
-      });
-      _this.currentModal.element.on("hide", function() {
-        _this.nextModal.element.hide();
-        _this.prevModal.element.hide();
-      });
+
+      _this.currentModal.element.on("show", modalOnShow);
+      _this.currentModal.element.on("hide", modalOnHide);
       
       return _this;
+    }
+
+    function modalOnShow() {
+      _this.nextModal = new Modal(_this, true);
+      _this.prevModal = new Modal(_this, true);
+    }
+
+    function modalOnHide() {
+      _this.currentModal.element.hide();
+      _this.nextModal.element.hide();
+      _this.prevModal.element.hide();
     }
 
     _this.add = function(cell) {
@@ -51,8 +57,8 @@ define([
       _this.prevModal.positionOffScreenLeft().display();
 
       if (hasNextCell()) {
-        _this.prevModal.setCell(
-          _this.cells[_this.cellIndex - 1]
+        _this.nextModal.setCell(
+          _this.cells[_this.cellIndex + 1]
         );
       }
 
