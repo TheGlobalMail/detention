@@ -24,7 +24,7 @@ body {
 
 .container {
   width: 90%;
-  max-width: 1500px;
+  max-width: 1300px;
   color: white;
   h1,h2,h3,h4,h5,p,strong,em {
     .transition(all 200ms linear);
@@ -373,7 +373,10 @@ body {
           background-color: #084975;
         }
         &.unflag {
-          background-color: @gray;
+          background-color: @grayDark;
+          &:hover {
+            background-color: @gray;
+          }
         }
       }
     }
