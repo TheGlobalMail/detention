@@ -1,9 +1,10 @@
 define([
   'jquery',
   'lodash',
+  'moment',
   './process-data',
   './models'
-], function($, _, incidents, models) {
+], function($, _, moment, incidents, models) {
   'use strict';
 
   var gridContainer = $('.incident-grid');
@@ -18,7 +19,13 @@ define([
     _(incidents.months)
       // Build the grid in rows of months
       .map(function(obj) {
-        var rowElement = $('<div class="date ' + obj.month +'">');
+        var rowElement = $(
+          '<div class="date ' + obj.month +'">' +
+          '<div class="month">' +
+          moment(Date.parse(obj.month)).format('MMMM YYYY') +
+          '</div>' +
+          '</div>'
+        );
         _.each(obj.incidents, function(ID) {
           var cell = new models.Cell(incidents.data[ID])
           grid.add(cell);
