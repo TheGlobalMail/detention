@@ -85,6 +85,15 @@ define([
       _this.nextModal = current;
     };
 
+    _this.flag = function() {
+      var $cell = _this.cells[_this.cellIndex].element;
+      $cell.toggleClass('flagged');
+      $(this).text(
+        ($cell.hasClass('flagged') ? 'Unflag' : 'Flag') +
+        ' this incident'
+      );
+    };
+
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
   }
 
@@ -119,6 +128,7 @@ define([
     function setBindings() {
       _this.element.on('click', '.next', _this.grid.displayNextModal);
       _this.element.on('click', '.prev', _this.grid.displayPrevModal);
+      _this.element.on('click', '.flag-btn', _this.grid.flag);
     }
 
     _this.setCell = function(cell) {
