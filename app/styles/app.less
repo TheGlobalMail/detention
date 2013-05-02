@@ -499,11 +499,19 @@ footer {
   a.prev {
     left:-180px;
     padding-left: 60px;
+    display: none;
+  }
+  &.has-prev .prev {
+    display: block;
   }
   a.next {
     right: -180px;
     text-align: right;
     padding-right: 60px;
     background-position: 90px -54px;
+    display: none;
+  }
+  &.has-next .next {
+    display: block;
   }
 }
