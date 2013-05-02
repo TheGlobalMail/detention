@@ -203,6 +203,7 @@ define([
       // Clone and insert the template
       var element = rootModal;
       _this.clonedElement = false;
+
       // If we've cloned the root already
       if (className !== undefined && element.siblings(className).length) {
         element = rootModal.siblings(className).first();
@@ -220,13 +221,6 @@ define([
       _this.element = element;
       modalContainer.append(element);
 
-      _this.incidentNumber = element.find('.incident-number');
-      _this.date = element.find('.date');
-      _this.facility = element.find('.facility');
-      _this.incidentType = element.find('.incident-type');
-      _this.level = element.find('.level');
-      _this.summary = element.find('.summary');
-
       return _this;
     }
 
@@ -237,32 +231,50 @@ define([
     }
 
     _this.setCell = function(cell) {
-
       _this.cell = cell;
 
-      var $incidentDetails = _this.element.find('.incident-details');
-      var $eventDetails = _this.element.find('.event-details');
+      var incidentDetails = _this.element.find('.incident-details');
+      var eventDetails = _this.element.find('.event-details');
+      var eventModalClass = 'event-modal';
 
+      // Generic incidents
       if (cell.data.event_type === 'incident') {
-        // Set the text
-        _this.incidentNumber.text(cell.data["Incident Number"]);
-        _this.date.text(cell.data["Occurred On"]);
-        _this.facility.text(cell.data["Location"]);
-        _this.incidentType.text(cell.data["Type"]);
-        _this.level.text(cell.data["Level"]);
-        _this.summary.text(cell.data["Summary"]);
-        $incidentDetails.show();
-        $eventDetails.hide();
-      } else {
-        if (cell.data.element_id) {
-          // insert this html into  modal
-        }
+
+        var map = { // modal element class -> cell.data property
+          '.incident-number': 'Incident Number',
+          '.date': 'Occurred On',
+          '.facility': 'Location',
+          '.incident-type': 'Type',
+          '.level': 'Level',
+          '.summary': 'Summary'
+        };
+
+        // Update the modal's text
+        _.each(map, function(property, className) {
+          _this.element.find(className).text(cell.data[property]);
+        });
+
+        incidentDetails.show();
+        eventDetails.hide();
+
+        var classList = _this.element.attr('class').split(' ');
+        _.each(classList, function(className) {
+          if (className.indexOf(eventModalClass) == 0) {
+            _this.element.removeClass(className);
+          }
+        });
+      } else { // Events
         _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
           _this[field] = _this.element.find('.' + field)
           _this[field].text(cell.data[field] || '-');
         });
-        $incidentDetails.hide();
-        $eventDetails.show();
+        
+        incidentDetails.hide();
+        eventDetails.show();
+        
+        _this.element
+          .addClass(eventModalClass)
+          .addClass(eventModalClass + '-' + cell.data.type);
       }
 
       _this.setFlagText();
