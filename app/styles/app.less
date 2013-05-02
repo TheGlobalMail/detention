@@ -9,7 +9,6 @@ body {
 // Overwrite TGM Bootstrap nav styles
 .navbar {
   margin: 0;
-  // .box-shadow(0 1px 0 rgba(255,255,255,0.1));
   &.special-feature {
     position: fixed;
     top:0;
@@ -111,6 +110,7 @@ body {
       margin-left: -20px;
       .transition(all 150ms ease-out);
       .border-radius(50%);
+      behavior: url(../js/libs//PIE.htc);
       &:hover {
         bottom: 9%;
         .transition(all 150ms ease-in);
@@ -157,6 +157,7 @@ body {
         float: left;
         .transition(opacity 150ms ease-in);
         .border-radius(2px);
+        behavior: url(../js/libs//PIE.htc);
         &.critical-incident {
           .opacity(25);
         }
@@ -170,6 +171,7 @@ body {
           width:@gridCellSize + 2px;
           height:@gridCellSize + 2px;
           .border-radius(4px);
+          behavior: url(../js/libs//PIE.htc);
           margin: 3px;
           .opacity(100);
           .box-shadow(0 0 15px 5px rgba(0,0,0,0.6));
@@ -179,6 +181,7 @@ body {
           width:@gridCellSize + 4px;
           height:@gridCellSize + 4px;
           .border-radius(4px);
+          behavior: url(../js/libs//PIE.htc);
           margin: 2px;
           .opacity(100);
           background: url('/images/flag.svg') no-repeat center -27px #ffffff;
@@ -194,6 +197,7 @@ body {
         }
         &.event {
           .border-radius(50%);
+          behavior: url(../js/libs//PIE.htc);
           width:@gridCellSize + 6px;
           height:@gridCellSize + 6px;
           margin: 1px;
@@ -201,6 +205,7 @@ body {
           background-size: 80% auto;
           &:hover {
             .border-radius(50%);
+            behavior: url(../js/libs//PIE.htc);
             width:@gridCellSize + 12px;
             height:@gridCellSize + 12px;
             margin: -2px;
@@ -305,6 +310,7 @@ body {
         height:60px;
         margin-right: 16px;
         .border-radius(8px);
+        behavior: url(../js/libs//PIE.htc);
         background: url('/images/flag.svg') no-repeat center -52px #ffffff;
         background-size: 40% auto;
         .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
@@ -336,6 +342,7 @@ body {
       padding:15px 20px;
       background: rgba(255,255,255,.05);
       .border-radius(8px);
+      behavior: url(../js/libs//PIE.htc);
       h4 {
         font-weight: normal;
         .font-size(11);
@@ -401,6 +408,7 @@ footer {
     background-color: #000;
     padding: 10px 14px 6px;
     .border-top-radius(6px);
+    behavior: url(../js/libs//PIE.htc);
     .transition(all 150ms ease-out);
     &:hover {
       text-decoration: none;
@@ -462,12 +470,6 @@ footer {
     }
   }
 }
-
-
-
-
-
-
 
 
 
@@ -641,6 +643,7 @@ footer {
     .transition(top 0ms ease-out);
     color:white;
     .border-radius(6px);
+    behavior: url(../js/libs//PIE.htc);
     .opacity(50);
     background: url('/images/arrow.svg') no-repeat 10px -115px transparent;
     .transition(all 50ms ease-in);
