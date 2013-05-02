@@ -15,6 +15,9 @@
 
 @media only screen and (max-width: 1400px) {
   #intro-container {
+    &:before {
+      top:15%;
+    }
     .title {
       h1 {
         margin-top: 220px;
@@ -31,7 +34,7 @@
 
 @media only screen and (max-width: 980px) {
   .navbar.special-feature {
-    padding: 8px 20px;
+    padding: 8px 0  8px 20px;
     .brand.brand-center {
       background-position: left center;
       float: left;
@@ -39,6 +42,9 @@
     }
   }
   #intro-container {
+    &:before {
+      top:18%;
+    }
     .title {
       h1 {
         .font-size(80);
@@ -56,9 +62,22 @@
       }
     }
   }
-  footer .offset3 {
-    margin: initial;
-    margin-left: 0;
+  .pinned {
+    &.share {
+      .flags {
+        width:57%;
+        .flag-icon {
+          width:40px;
+          height: 40px;
+          margin: 4px 15px 40px 0;
+          background-position: center -35px;
+        }
+        h3 {
+          .font-size(18);
+          line-height: 1.4;
+        }
+      }
+    }
   }
   .modal {
     width:80%;
@@ -76,7 +95,7 @@
     h3 {
       padding: 10px 15px;
     }
-    ul {
+    .incident-details ul {
       padding: 15px 15px 20px;
       li {
         display:block;
@@ -122,7 +141,7 @@
 }
 
 // BIG PHONES AND SMALL TABLETS
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 810px) {
   .navbar.special-feature {
     .brand.brand-center {
       float: none;
@@ -198,10 +217,58 @@
       }
     }
   }
+  .pinned {
+    &.share {
+      padding: 10px 0 20px;
+      .flags {
+        float:none;
+        width:auto;
+        max-width: none;
+        margin-bottom: 20px;
+        h3 {
+          .font-size(16);
+          line-height: 1.2;
+          display:block;
+        }
+        p {
+          display:none;
+        }
+        .flag-icon {
+          margin-bottom: 0;
+        }
+        .btn {
+          margin: 4px 0 0;
+        }
+      }
+      .share-tools {
+        float: none;
+        width:auto;
+        padding:10px 5px;
+        text-align: center;
+        h4 {
+          width:auto;
+          float:none;
+          margin: 0 0 10px;
+        }
+        ul {
+          li.icon a {
+            width:40px;
+            height:36px;
+          }
+          li.icon.facebook a {
+            background-position: 0 -67px;
+          }
+          li.icon.email a {
+            background-position: 0 -141px;
+          }
+        }
+      }
+    }
+  }
 }
 
 // PHONES
-@media only screen and (max-width: 680px) {
+@media only screen and (max-width: 700px) {
   .navbar {
     &.special-feature {
       position:relative;
@@ -215,6 +282,9 @@
     margin-top: 0;
   }
   #intro-container {
+    &:before {
+      top:11%;
+    }
     .title {
       height:140px;
       h1 {
@@ -259,10 +329,25 @@
       width: 102px;
       right: 50%;
       margin-right: -65px;
-
     }
-    ul li {
-      float: none;
+    ul {
+      padding:0;
+      li {
+        float: none;
+      }
+    }
+  }
+  .pinned {
+    &.filter-menu {
+      margin-top:0;
+      height:26px;
+      padding-top: 10px;
+      .month {
+        .font-size(16);
+      }
+      .filters {
+        display:none;
+      }
     }
   }
   .modal {
