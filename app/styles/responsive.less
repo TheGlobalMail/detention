@@ -65,6 +65,7 @@
   .pinned {
     &.share {
       .flags {
+        width:57%;
         .flag-icon {
           width:40px;
           height: 40px;
@@ -75,12 +76,6 @@
           .font-size(18);
           line-height: 1.4;
         }
-        .btn {
-          left:360px;
-        }
-      }
-      .share-tools {
-
       }
     }
   }
@@ -233,10 +228,7 @@
         h3 {
           .font-size(16);
           line-height: 1.2;
-        }
-        .btn {
-          left:auto;
-          position:relative;
+          display:block;
         }
         p {
           display:none;
@@ -244,12 +236,29 @@
         .flag-icon {
           margin-bottom: 0;
         }
+        .btn {
+          margin: 4px 0 0;
+        }
       }
       .share-tools {
         float: none;
         width:auto;
+        padding:10px 20px;
         h4 {
           width:auto;
+          margin: 12px 10px 0 0;
+        }
+        ul {
+          li.icon a {
+            width:40px;
+            height:36px;
+          }
+          li.icon.facebook a {
+            background-position: 0 -67px;
+          }
+          li.icon.email a {
+            background-position: 0 -141px;
+          }
         }
       }
     }
@@ -334,6 +343,17 @@
       }
       .filters {
         display:none;
+      }
+    }
+    &.share {
+
+      .share-tools {
+        padding:10px 5px;
+        text-align: center;
+        h4 {
+          float:none;
+          margin: 0 0 10px;
+        }
       }
     }
   }
