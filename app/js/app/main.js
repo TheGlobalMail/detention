@@ -21,14 +21,14 @@ define([
       .map(function(obj) {
         var rowElement = $(
           '<div class="date ' + obj.month +'">' +
-          '<div class="month">' +
-          moment(Date.parse(obj.month)).format('MMMM YYYY') +
-          '</div>' +
+            '<div class="month">' +
+            moment(Date.parse(obj.month)).format('MMMM YYYY') +
+            '</div>' +
           '</div>'
         );
         _.each(obj.incidents, function(ID) {
-          var cell = new models.Cell(incidents.data[ID])
-          grid.add(cell);
+          var cell = new models.Cell(incidents.data[ID]);
+          grid.addCell(cell);
           rowElement.append(cell.element);
         });
         return rowElement;

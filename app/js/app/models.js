@@ -14,37 +14,47 @@ define([
     function constructor() {
       _this.cells = [];
 
-      _this.currentModal = new Modal(_this);
+      _this.currentModal = new Modal(_this, false, '.current-modal');
 
       _this.currentModal.element.on("show", modalOnShow);
       _this.currentModal.element.on("hide", modalOnHide);
-      
+
+      _this.setBindings();
+
       return _this;
     }
 
     function modalOnShow() {
-      _this.nextModal = new Modal(_this, true);
-      _this.prevModal = new Modal(_this, true);
+      // Called when bootstrap has shown the modal
+
+      _this.currentModal.positionInCenter().display();
+
+      _this.nextModal = new Modal(_this, true, '.next-modal');
+      _this.nextModal.positionOffScreenRight();
+
+      _this.prevModal = new Modal(_this, true, '.prev-modal');
+      _this.prevModal.positionOffScreenLeft();
     }
 
     function modalOnHide() {
+      // Called when bootstrap has hidden the modal
       _this.currentModal.element.hide();
       _this.nextModal.element.hide();
       _this.prevModal.element.hide();
     }
 
-    _this.add = function(cell) {
+    _this.addCell = function(cell) {
       cell.grid = _this;
       _this.cells.push(cell)
     };
 
-    function hasNextCell() {
+    _this.hasNextCell = function() {
       return _this.cellIndex < _this.cells.length - 1;
-    }
+    };
 
-    function hasPrevCell() {
+    _this.hasPrevCell = function() {
       return _this.cellIndex > 0;
-    }
+    };
 
     _this.showCellModal = function(cell) {
       // Called when a cell is clicked on
@@ -58,19 +68,15 @@ define([
       _this.nextModal.positionOffScreenRight().display();
       _this.prevModal.positionOffScreenLeft().display();
 
-      if (hasNextCell()) {
-        _this.nextModal.setCell(
-          _this.cells[_this.cellIndex + 1]
-        );
+      if (_this.hasNextCell()) {
+        _this.nextModal.setCell(_this.getNextCell());
         _this.currentModal.element.addClass('has-next');
       } else {
         _this.currentModal.element.removeClass('has-next');
       }
 
-      if (hasPrevCell()) {
-        _this.prevModal.setCell(
-          _this.cells[_this.cellIndex - 1]
-        );
+      if (_this.hasPrevCell()) {
+        _this.prevModal.setCell(_this.getPrevCell());
         _this.currentModal.element.addClass('has-prev');
       } else {
         _this.currentModal.element.removeClass('has-prev');
@@ -79,25 +85,34 @@ define([
       _this.addIdentifierClasses();
     };
 
-    _this.checkNextPrev = function(modal) {
-      if (hasNextCell()) {
+    _this.getNextCell = function() {
+      return _this.cells[_this.cellIndex + 1];
+    };
+
+    _this.getPrevCell = function() {
+      return _this.cells[_this.cellIndex - 1];
+    };
+
+    _this.addHasNextPrev = function(modal) {
+      if (_this.hasNextCell()) {
         modal.element.addClass('has-next');
       } else {
         modal.element.removeClass('has-next');
       }
-      if (hasPrevCell()) {
+      if (_this.hasPrevCell()) {
         modal.element.addClass('has-prev');
       } else {
         modal.element.removeClass('has-prev');
       }
-    }
+    };
 
     _this.displayNextModal = function() {
       // Called when the next button is clicked on
 
       _this.cellIndex++;
+
       _this.currentModal.slideLeft();
-      _this.checkNextPrev(_this.nextModal);
+      _this.addHasNextPrev(_this.nextModal);
       _this.nextModal.slideIn();
 
       // Swap the variables around
@@ -107,6 +122,11 @@ define([
       _this.nextModal.positionOffScreenRight();
       _this.prevModal = current;
 
+      // Update nextModal's content
+      if (_this.hasNextCell()) {
+        _this.nextModal.setCell(_this.getNextCell());
+      }
+
       _this.addIdentifierClasses();
     };
 
@@ -114,9 +134,11 @@ define([
       // Called when the prev button is clicked on
 
       _this.cellIndex--;
+
       _this.currentModal.slideRight();
-      _this.checkNextPrev(_this.prevModal);
+      _this.addHasNextPrev(_this.prevModal);
       _this.prevModal.slideIn();
+
       // Swap the variables around
       var current = _this.currentModal;
       _this.currentModal = _this.prevModal;
@@ -124,27 +146,31 @@ define([
       _this.prevModal.positionOffScreenLeft();
       _this.nextModal = current;
 
+      // Update prevModal's content
+      if (_this.hasPrevCell()) {
+        _this.prevModal.setCell(_this.getPrevCell());
+      }
+
       _this.addIdentifierClasses();
     };
 
     _this.addIdentifierClasses = function() {
-      // Add `current-modal`, `next-modal` and `prev-modal` classes
+      // Add state classes to the modals
 
       var map = {
-        'current': _this.currentModal,
-        'next': _this.nextModal,
-        'prev': _this.prevModal
+        'current-modal': _this.currentModal,
+        'next-modal': _this.nextModal,
+        'prev-modal': _this.prevModal
       };
-      var suffix = '-modal';
 
       _.each(map, function(modal, className) {
         var element = modal.element;
         _(map).keys().each(function(key) {
           if (className !== key) {
-            element.removeClass(key + suffix);
+            element.removeClass(key);
           }
         });
-        element.addClass(className + suffix)
+        element.addClass(className)
       });
     };
 
@@ -154,21 +180,41 @@ define([
       _this.currentModal.setFlagText();
     };
 
+    _this.windowOnResize = _.debounce(function() {
+      _this.currentModal.positionInCenter();
+      _this.nextModal.positionOffScreenRight();
+      _this.prevModal.positionOffScreenLeft();
+    }, 50);
+
+    _this.setBindings = function() {
+      $(window).resize(_this.windowOnResize);
+    };
+
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
   }
 
   function Modal() {
     var _this = this;
 
-    function constructor(grid, cloneModal) {
+    function constructor(grid, cloneModal, className) {
       _this.grid = grid;
 
       // Clone and insert the template
       var element = rootModal;
-      if (cloneModal) {
+      _this.clonedElement = false;
+      // If we've cloned the root already
+      if (className !== undefined && element.siblings(className).length) {
+        element = rootModal.siblings(className).first();
+        _this.clonedElement = true;
+      // If we're cloning the rootModal
+      } else if (cloneModal) {
         element = rootModal
           .clone(true) // clone handlers as well
           .insertAfter(rootModal);
+        _this.clonedElement = true;
+      // If we're using the rootModal
+      } else {
+        setBindings()
       }
       _this.element = element;
       modalContainer.append(element);
@@ -180,15 +226,13 @@ define([
       _this.level = element.find('.level');
       _this.summary = element.find('.summary');
 
-      setBindings();
-
       return _this;
     }
 
     function setBindings() {
-      _this.element.on('click', '.next', _this.grid.displayNextModal);
-      _this.element.on('click', '.prev', _this.grid.displayPrevModal);
-      _this.element.on('click', '.flag-btn', _this.grid.flag);
+      rootModal.on('click.modal', '.next', _this.grid.displayNextModal);
+      rootModal.on('click.modal', '.prev', _this.grid.displayPrevModal);
+      rootModal.on('click.modal', '.flag-btn', _this.grid.flag);
     }
 
     _this.setCell = function(cell) {
@@ -241,13 +285,24 @@ define([
         .text((flagged ? 'Unflag' : 'Flag') + ' this incident');
     };
 
+    function getCenterPosition() {
+      return ($(window).width() - _this.element.width()) / 2;
+    }
+
     function getLeftOffScreenPosition() {
-      return -_this.element.outerWidth();
+      return -_this.element.outerWidth() - 200;
     }
 
     function getRightOffScreenPosition() {
       return $(window).width() + _this.element.outerWidth();
     }
+
+    _this.positionInCenter = function() {
+      _this.element.css({
+        "left": getCenterPosition() + 'px'
+      });
+      return _this;
+    };
 
     _this.positionOffScreenLeft = function() {
       _this.element.css("left", getLeftOffScreenPosition());
@@ -260,19 +315,20 @@ define([
     };
 
     _this.slideLeft = function() {
-      _this.positionOffScreenLeft();
-//      _this.element.animate("left", getLeftOffScreenPosition() + 'px');
+      _this.element.animate({
+        "left": getLeftOffScreenPosition() + 'px'
+      });
     };
 
     _this.slideRight = function() {
-      _this.positionOffScreenRight();
-//      _this.element.animate("left", getRightOffScreenPosition()  + 'px');
+      _this.element.animate({
+        "left": getRightOffScreenPosition()  + 'px'
+      });
     };
 
     _this.slideIn = function() {
-      // TODO: replace this with horiz centering and a resize listener, kill the listener in slide{Left|Right}
       _this.element.animate({
-        "left": "50%"
+        "left": getCenterPosition() + 'px'
       });
     };
 

@@ -437,7 +437,7 @@ footer {
   background: #1f2222;
   color: white;
   padding:30px;
-  margin-left: -311px;
+  margin-left: 0;
   .close {
     color: white;
     text-shadow:none;
@@ -590,22 +590,23 @@ footer {
     position: absolute;
     width:65px;
     padding:15px;
-   .font-size(12);
-   line-height: 1;
-   text-transform: uppercase;
-   font-weight: 600;
-   top:30%;
-   color:white;
-   .border-radius(6px);
-   .opacity(50);
-   background: url('/images/arrow.svg') no-repeat 10px -115px transparent;
-   .transition(all 50ms ease-in);
-     &:hover, &:active {
+    .font-size(12);
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: 600;
+    top: 100px;
+    .transition(top 0ms ease-out);
+    color:white;
+    .border-radius(6px);
+    .opacity(50);
+    background: url('/images/arrow.svg') no-repeat 10px -115px transparent;
+    .transition(all 50ms ease-in);
+    &:hover, &:active {
       background-color: rgba(255,255,255,0.1);
       text-decoration: none;
       .opacity(100);
       .transition(all 50ms ease-out);
-     }
+    }
   }
   a.prev {
     left:-180px;
