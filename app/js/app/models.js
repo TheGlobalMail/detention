@@ -29,6 +29,7 @@ define([
 
       _this.currentModal.positionInCenter().display();
 
+      _this.currentModal.positionInCenter().display();
       _this.nextModal = new Modal(_this, true, '.next-modal');
       _this.nextModal.positionOffScreenRight();
 
@@ -286,7 +287,7 @@ define([
     };
 
     function getCenterPosition() {
-      return ($(window).width() - _this.element.width()) / 2;
+      return ($(window).width() - _this.element.outerWidth()) / 2;
     }
 
     function getLeftOffScreenPosition() {
