@@ -6,6 +6,8 @@ body {
   clear: both;
 }
 
+@event-yellow:#fff69f;
+
 // Overwrite TGM Bootstrap nav styles
 .navbar {
   margin: 0;
@@ -218,7 +220,7 @@ body {
           }
         }
         &.riot-event {
-          background-color: #fff69f;
+          background-color: @event-yellow;
           background-position: center -18px;
           &:hover {
             background-position: center -22px;
@@ -298,6 +300,7 @@ body {
     border-top: 1px solid rgba(255,255,255,.1);
     .box-shadow(0 0 25px black);
     bottom:0;
+    z-index: 2000;
     .flags {
       position:relative;
       width:65%;
@@ -567,6 +570,55 @@ footer {
       }
     }
   }
+
+  &.event-modal {
+    min-height: 380px;
+    border:none;
+    border-top: 1px solid rgba(255,255,255,.2);
+    .modal-header {
+      padding:0 0 10px;
+      border-bottom: 1px solid rgba(255,255,255,.2);
+      h3 {
+        padding:0;
+        .font-size(22);
+        font-family: @sansFontFamily;
+        font-weight: 800;
+      }
+    }
+    .event-details {
+      .media {
+        min-height: 200px;
+        margin-top: 10px;
+        padding:10px;
+        background-color: rgba(0,0,0,0.2);
+      }
+      ul {
+        margin-top: 10px;
+        padding:0;
+        background-color: none;
+        li {
+          height:auto;
+        }
+      }
+    }
+  }
+
+  &.event-modal-boat {
+    background: @blue;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.4);
+  }
+  &.event-modal-riot {
+    color:#333;
+    background: @event-yellow;
+    text-shadow: 0 1px 0 rgba(255,255,255,.6);
+    .modal-header {
+      border-color: rgba(0,0,0,.1);
+    }
+    .close {
+      color:#333;
+    }
+  }
+
   .incident-details {
     ul {
       background-color: #d5d3bf;
@@ -591,11 +643,6 @@ footer {
           margin: 0;
         }
       }
-    }
-  }
-  .event-details {
-    ul {
-      background-color: none;
     }
   }
   .flag {
@@ -632,6 +679,7 @@ footer {
     }
   }
   a.prev, a.next {
+    text-shadow: none;
     position: absolute;
     width:65px;
     padding:15px;
