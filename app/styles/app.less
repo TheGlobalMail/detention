@@ -244,13 +244,20 @@ body {
   left:0;
   text-shadow:0 -1px 0 black;
   &.filter-menu {
-    background: transparent;
+    background: none;
     position:absolute;
     padding: 22px 0 10px;
-    // border-bottom: 1px solid black;
-    // .box-shadow(0 1px 0 rgba(255,255,255,.1));
     .transition(all 150ms ease-in);
-
+    &.affix {
+      position:fixed;
+      margin-top: 48px;
+      top:0;
+      background-color: #1c1f1f;
+      background: url('/images/noise.png') repeat 0 0 rgba(28,31,31,.9);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      .box-shadow(0 0 25px black);
+      z-index: 99;
+    }
     .month {
       float: left;
       margin:8px 0 0;
