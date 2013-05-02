@@ -3,8 +3,9 @@ define([
   'lodash',
   'moment',
   './process-data',
-  './models'
-], function($, _, moment, incidents, models) {
+  './models',
+  './flags'
+], function($, _, moment, incidents, models, flags) {
   'use strict';
 
   var gridContainer = $('.incident-grid');
@@ -45,7 +46,9 @@ define([
   }
 
   function init() {
-    buildIncidentMonthGrid();
+    flags
+      .load()
+      .always(buildIncidentMonthGrid);
   }
 
   return {

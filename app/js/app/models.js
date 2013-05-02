@@ -1,8 +1,9 @@
 define([
   'jquery',
   'lodash',
-  './../../components/tgm-bootstrap/js/bootstrap-modal'
-], function($, _, modal) {
+  './../../components/tgm-bootstrap/js/bootstrap-modal',
+  './flags'
+], function($, _, modal, flags) {
   "use strict";
 
   var modalContainer = $('#modal-container');
@@ -176,7 +177,13 @@ define([
     };
 
     _this.flag = function() {
-      var $cell = _this.cells[_this.cellIndex].element;
+      var cell = _this.cells[_this.cellIndex];
+      var $cell = cell.element;
+      if (!$cell.hasClass('flagged')){
+        flags.flag(cell.data.id);
+      }else{
+        flags.unflag(cell.data.id);
+      }
       $cell.toggleClass('flagged');
       _this.currentModal.setFlagText();
     };
@@ -353,23 +360,28 @@ define([
     var _this = this;
 
     function constructor(data) {
-      var highlight_class;
-
       var element = _this.element = $('<div class="cell">');
       _this.data = data;
       _this.grid = null;
 
       if (data.event_type === 'incident') {
-        highlight_class = data['Level'].toLowerCase() + '-incident';
+        flags.vent.on('reload', updateHighlight);
       } else {
-        highlight_class = data['type'] + '-event event';
+        element.addClass(data['type'] + '-event event');
       }
-
-      element.addClass(highlight_class);
 
       setBindings();
 
+      updateHighlight(flags.data);
+
       return _this;
+    }
+
+    function updateHighlight(flagData) {
+      var flagged = flagData[_this.data.id] || 0;
+      var opacity = flagged;
+      if (opacity < 0.15) opacity = 0.15;
+      _this.element.css('opacity', opacity);
     }
 
     function cellOnMouseOver() {

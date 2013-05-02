@@ -152,6 +152,7 @@ body {
       min-height: @gridCellSize;
       margin: 30px 0 0 ;
       .cell {
+        .opacity(5);
         width: @gridCellSize;
         height: @gridCellSize;
         margin: 4px;
@@ -160,22 +161,13 @@ body {
         .transition(opacity 150ms ease-in);
         .border-radius(2px);
         behavior: url(../js/libs//PIE.htc);
-        &.critical-incident {
-          .opacity(25);
-        }
-        &.major-incident {
-          .opacity(15);
-        }
-        &.minor-incident {
-          .opacity(5);
-        }
         &:hover {
           width:@gridCellSize + 2px;
           height:@gridCellSize + 2px;
           .border-radius(4px);
           behavior: url(../js/libs//PIE.htc);
           margin: 3px;
-          .opacity(100);
+          .opacity(100) !important;
           .box-shadow(0 0 15px 5px rgba(0,0,0,0.6));
           .transition(opacity 50ms ease-out);
         }
@@ -185,7 +177,7 @@ body {
           .border-radius(4px);
           behavior: url(../js/libs//PIE.htc);
           margin: 2px;
-          .opacity(100);
+          .opacity(100) !important;
           background: url('/images/flag.svg') no-repeat center -27px #ffffff;
           background-size: 40% auto;
           .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
