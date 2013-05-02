@@ -395,6 +395,18 @@ footer {
   text-shadow: 0 -1px 0 black;
   position: relative;
   z-index: 9999;
+  &:before {
+    content:'';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height:232px;
+    background: url('/images/noise-fader.png') repeat-x center bottom transparent;
+    background-size: auto 232px;
+    top: -232px;
+    left: 0;
+    z-index: 0;
+  }
   h4 {
     color: white;
     text-transform: uppercase;
