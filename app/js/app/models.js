@@ -18,7 +18,9 @@ define([
 
       _this.currentModal.element.on("show", modalOnShow);
       _this.currentModal.element.on("hide", modalOnHide);
-      
+
+      _this.setBindings();
+
       return _this;
     }
 
@@ -41,7 +43,7 @@ define([
       _this.prevModal.element.hide();
     }
 
-    _this.add = function(cell) {
+    _this.addCell = function(cell) {
       cell.grid = _this;
       _this.cells.push(cell)
     };
@@ -84,17 +86,15 @@ define([
     };
 
     _this.getNextCell = function() {
-      console.log('next', _this.cellIndex);
       return _this.cells[_this.cellIndex + 1];
     };
 
     _this.getPrevCell = function() {
-      console.log('prev', _this.cellIndex);
       return _this.cells[_this.cellIndex - 1];
     };
 
     _this.addHasNextPrev = function(modal) {
-      if (_this.hasPrevCell()) {
+      if (_this.hasNextCell()) {
         modal.element.addClass('has-next');
       } else {
         modal.element.removeClass('has-next');
@@ -110,7 +110,6 @@ define([
       // Called when the next button is clicked on
 
       _this.cellIndex++;
-      // TODO: update each modal's content
 
       _this.currentModal.slideLeft();
       _this.addHasNextPrev(_this.nextModal);
@@ -179,6 +178,16 @@ define([
       var $cell = _this.cells[_this.cellIndex].element;
       $cell.toggleClass('flagged');
       _this.currentModal.setFlagText();
+    };
+
+    _this.windowOnResize = _.debounce(function() {
+      _this.currentModal.positionInCenter();
+      _this.nextModal.positionOffScreenRight();
+      _this.prevModal.positionOffScreenLeft();
+    }, 50);
+
+    _this.setBindings = function() {
+      $(window).resize(_this.windowOnResize);
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
@@ -276,8 +285,12 @@ define([
         .text((flagged ? 'Unflag' : 'Flag') + ' this incident');
     };
 
+    function getCenterPosition() {
+      return ($(window).width() - _this.element.width()) / 2;
+    }
+
     function getLeftOffScreenPosition() {
-      return -_this.element.outerWidth();
+      return -_this.element.outerWidth() - 200;
     }
 
     function getRightOffScreenPosition() {
@@ -286,7 +299,7 @@ define([
 
     _this.positionInCenter = function() {
       _this.element.css({
-        "left": "50%"
+        "left": getCenterPosition() + 'px'
       });
       return _this;
     };
@@ -302,19 +315,20 @@ define([
     };
 
     _this.slideLeft = function() {
-      _this.positionOffScreenLeft();
-//      _this.element.animate("left", getLeftOffScreenPosition() + 'px');
+      _this.element.animate({
+        "left": getLeftOffScreenPosition() + 'px'
+      });
     };
 
     _this.slideRight = function() {
-      _this.positionOffScreenRight();
-//      _this.element.animate("left", getRightOffScreenPosition()  + 'px');
+      _this.element.animate({
+        "left": getRightOffScreenPosition()  + 'px'
+      });
     };
 
     _this.slideIn = function() {
-      // TODO: replace this with horiz centering and a resize listener, kill the listener in slide{Left|Right}
       _this.element.animate({
-        "left": "50%"
+        "left": getCenterPosition() + 'px'
       });
     };
 
