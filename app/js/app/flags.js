@@ -65,7 +65,6 @@ define([
     _.each(unnormalisedData, function(flagged, id){
       Flags.data[id] = flagged / maxFlaggings;
     });
-    console.error(Flags.data);
     Flags.vent.trigger('reload', Flags.data);
   };
 
