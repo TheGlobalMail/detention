@@ -4,7 +4,8 @@ define([
   'backbone'
 ], function($, _){
 
-  var Flags = {};
+  // Module emits the following events: `reload`
+  var Flags = _.extend({}, Backbone.Events);
 
   // API url
   var api = 'http://detention-api.herokuapp.com';
@@ -19,45 +20,40 @@ define([
   // The current flagged data
   Flags.data = {};
 
-  // Stores references to any previous flaggings made in this session so that
-  // they can be unflagged by this user
+  // Stores references to prior flaggings so they can be unflagged by this user
   Flags.previousFlags = {};
 
-  // Load all data described which incidents have been flagged
-  // Returns a promise that is fulfilled when the data is returned from the API
+  // Load flags data from API. Returns Deferred object
   Flags.load = function(){
-    var defer = $.Deferred();
-    $.ajax(api + '/api/flagged')
+    return $.ajax(api + '/api/flagged')
       .done(function(data){
         unnormalisedData = data.flags;
         Flags.recalculateData();
-        defer.resolve();
-      })
-      .fail(defer.reject);
-    return defer;
+      });
   };
 
-  // Flags an event via the API
+  // Flags an event via the API. Returns Deferred object
   Flags.flag = function(id){
-    var defer = $.Deferred();
-    $.post(api + '/api/flag', {id: id})
+    return $.post(api + '/api/flag', {id: id})
       .done(function(data){
         Flags.previousFlags[id] = data.flag;
         Flags.data[id] = data.flagged;
-        defer.resolve();
-      })
-      .fail(defer.reject);
-    return defer;
+        Flags.recalculateData();
+      });
   };
 
-  // Unflags an event via the API
+  // Unflags an event via the API. Returns Deferred object
   Flags.unflag = function(id){
+    var flag = Flags.previousFlags[id];
+    Flags.previousFlags[id] = null;
+    return $.post(api + '/api/unflag', {id: id, flag: flag})
+      .done(function(data){
+        Flags.data[id] = data.flagged;
+        Flags.recalculateData();
+      });
   };
 
-  // An event emmitter that triggers the following events:
-  // * `reload`
-  Flags.vent = _.extend({}, Backbone.Events);
-
+  // Recaculate all of the flag weights and then trigger `reload` on the vent
   Flags.recalculateData = function(){
     maxFlaggings = _.max(_.values(unnormalisedData));
     if (!maxFlaggings || !isFinite(maxFlaggings)) maxFlaggings = 1;
@@ -65,7 +61,7 @@ define([
     _.each(unnormalisedData, function(flagged, id){
       Flags.data[id] = flagged / maxFlaggings;
     });
-    Flags.vent.trigger('reload', Flags.data);
+    Flags.trigger('reload', Flags.data);
   };
 
   return Flags;

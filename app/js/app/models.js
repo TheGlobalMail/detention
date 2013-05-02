@@ -365,7 +365,7 @@ define([
       _this.grid = null;
 
       if (data.event_type === 'incident') {
-        flags.vent.on('reload', updateHighlight);
+        flags.on('reload', updateHighlight);
       } else {
         element.addClass(data['type'] + '-event event');
       }
