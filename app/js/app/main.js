@@ -4,8 +4,9 @@ define([
   'moment',
   './process-data',
   './models',
-  './flags'
-], function($, _, moment, incidents, models, flags) {
+  './flags',
+  './sharing-panel'
+], function($, _, moment, incidents, models, flags, sharingPanel) {
   'use strict';
 
   var gridContainer = $('.incident-grid');
