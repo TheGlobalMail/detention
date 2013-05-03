@@ -131,6 +131,7 @@
       margin: 10px 0;
       padding: 20px 10px 20px 60px;
       background-position: 8px -117px;
+      background-color: transparent;
     }
     a.next {
       float:right;
@@ -240,11 +241,9 @@
       .share-tools {
         float: none;
         width:auto;
-        padding:10px 5px;
-        text-align: center;
+        padding:8px 10px;
         h4 {
-          width:auto;
-          float:none;
+          width:40%;
           margin: 0 0 10px;
         }
         ul {
@@ -266,6 +265,9 @@
 
 // PHONES
 @media only screen and (max-width: 700px) {
+  .hidden-phone {
+    display:none;
+  }
   .navbar {
     &.special-feature {
       position:relative;
@@ -344,6 +346,51 @@
       }
       .filters {
         display:none;
+      }
+    }
+    &.share {
+      padding:6px 0 10px;
+      .container{
+        width:90%;
+      }
+      .flags {
+        margin: 0 0 10px 0;
+        h3 {
+          margin-top: 4px;
+          .font-size(13);
+          line-height: 1.1;
+          width:70%;
+        }
+        .flag-icon {
+          margin: 0 8px 0 0;
+          width:30px;
+          height:30px;
+          background-position: center -25px;
+        }
+        .btn {
+          position:absolute;
+          right:0;
+          top:-2px;
+        }
+      }
+      .share-tools {
+        .border-radius(4px);
+        h4 {
+          width:55%;
+          margin: 2px 5px 0 0;
+        }
+        ul {
+          li.icon a {
+            width:30px;
+            height:26px;
+          }
+          li.icon.facebook a {
+            background-position: 0 -50px;
+          }
+          li.icon.email a {
+            background-position: 0 -106px;
+          }
+        }
       }
     }
   }

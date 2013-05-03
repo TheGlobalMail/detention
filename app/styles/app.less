@@ -6,6 +6,8 @@ body {
   clear: both;
 }
 
+@event-yellow:#fff69f;
+
 // Overwrite TGM Bootstrap nav styles
 .navbar {
   margin: 0;
@@ -42,6 +44,14 @@ body {
   margin-bottom: 20px;
   .opacity(20);
   text-shadow: 0 -1px 0 black;
+}
+
+.btn {
+  .box-shadow(0 1px 2px #111);
+  .transition(all 50ms ease-in);
+  &:hover {
+    .transition(all 50ms ease-out);
+  }
 }
 
 #intro-container {
@@ -150,6 +160,7 @@ body {
       min-height: @gridCellSize;
       margin: 30px 0 0 ;
       .cell {
+        .opacity(5);
         width: @gridCellSize;
         height: @gridCellSize;
         margin: 4px;
@@ -158,22 +169,13 @@ body {
         .transition(opacity 150ms ease-in);
         .border-radius(2px);
         behavior: url(../js/libs//PIE.htc);
-        &.critical-incident {
-          .opacity(25);
-        }
-        &.major-incident {
-          .opacity(15);
-        }
-        &.minor-incident {
-          .opacity(5);
-        }
         &:hover {
           width:@gridCellSize + 2px;
           height:@gridCellSize + 2px;
           .border-radius(4px);
           behavior: url(../js/libs//PIE.htc);
           margin: 3px;
-          .opacity(100);
+          .opacity(100) !important;
           .box-shadow(0 0 15px 5px rgba(0,0,0,0.6));
           .transition(opacity 50ms ease-out);
         }
@@ -183,7 +185,7 @@ body {
           .border-radius(4px);
           behavior: url(../js/libs//PIE.htc);
           margin: 2px;
-          .opacity(100);
+          .opacity(100) !important;
           background: url('/images/flag.svg') no-repeat center -27px #ffffff;
           background-size: 40% auto;
           .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
@@ -196,6 +198,7 @@ body {
           }
         }
         &.event {
+          .opacity(100)!important;
           .border-radius(50%);
           behavior: url(../js/libs//PIE.htc);
           width:@gridCellSize + 6px;
@@ -218,7 +221,7 @@ body {
           }
         }
         &.riot-event {
-          background-color: #fff69f;
+          background-color: @event-yellow;
           background-position: center -18px;
           &:hover {
             background-position: center -22px;
@@ -272,7 +275,6 @@ body {
       float:right;
       .opacity(20);
       .btn {
-        .box-shadow(none);
         margin-left: 10px;
       }
       .btn-group {
@@ -280,6 +282,7 @@ body {
           background: none;
           border:1px solid rgba(255,255,255,.3);
           text-align: left;
+          .box-shadow(none);
         }
         .caret {
           float:right;
@@ -298,6 +301,7 @@ body {
     border-top: 1px solid rgba(255,255,255,.1);
     .box-shadow(0 0 25px black);
     bottom:0;
+    z-index: 2000;
     .flags {
       position:relative;
       width:65%;
@@ -322,7 +326,6 @@ body {
       .btn {
         .font-size(11);
         border:none;
-        .box-shadow(none);
         margin: -9px 0 0 10px;
         padding:2px 6px;
         background-color: #3c3f3f;
@@ -392,6 +395,18 @@ footer {
   text-shadow: 0 -1px 0 black;
   position: relative;
   z-index: 9999;
+  &:before {
+    content:'';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height:232px;
+    background: url('/images/noise-fader.png') repeat-x center bottom transparent;
+    background-size: auto 232px;
+    top: -232px;
+    left: 0;
+    z-index: 0;
+  }
   h4 {
     color: white;
     text-transform: uppercase;
@@ -476,7 +491,7 @@ footer {
 // Modal styles
 .modal-backdrop, .modal-backdrop.fade.in {
   background: url('/images/noise.png') repeat 0 0 #141616;
-  .opacity(90);
+  .opacity(50);
 }
 .modal {
   background: #1f2222;
@@ -492,6 +507,7 @@ footer {
     right: 20px;
     top: 20px;
     height:26px;
+    .transition(opacity 100ms ease-in);
   }
   h3 {
     font-family: @serifFontFamily;
@@ -567,6 +583,55 @@ footer {
       }
     }
   }
+
+  &.event-modal {
+    min-height: 380px;
+    border:none;
+    border-top: 1px solid rgba(255,255,255,.2);
+    .modal-header {
+      padding:0 0 10px;
+      border-bottom: 1px solid rgba(255,255,255,.2);
+      h3 {
+        padding:0;
+        .font-size(22);
+        font-family: @sansFontFamily;
+        font-weight: 800;
+      }
+    }
+    .event-details {
+      .media {
+        min-height: 200px;
+        margin-top: 10px;
+        padding:10px;
+        background-color: rgba(0,0,0,0.2);
+      }
+      ul {
+        margin-top: 10px;
+        padding:0;
+        background-color: none;
+        li {
+          height:auto;
+        }
+      }
+    }
+  }
+
+  &.event-modal-boat {
+    background: @blue;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.4);
+  }
+  &.event-modal-riot {
+    color:#333;
+    background: @event-yellow;
+    text-shadow: 0 1px 0 rgba(255,255,255,.6);
+    .modal-header {
+      border-color: rgba(0,0,0,.1);
+    }
+    .close {
+      color:#333;
+    }
+  }
+
   .incident-details {
     ul {
       background-color: #d5d3bf;
@@ -593,11 +658,6 @@ footer {
       }
     }
   }
-  .event-details {
-    ul {
-      background-color: none;
-    }
-  }
   .flag {
     margin-top: 20px;
     text-align: center;
@@ -608,7 +668,6 @@ footer {
         color:white;
         border:none;
         .font-size(14);
-        .box-shadow(none);
         text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
         padding: 10px 20px 10px 40px;
         margin-left: 10px;
@@ -632,9 +691,10 @@ footer {
     }
   }
   a.prev, a.next {
+    text-shadow: none;
     position: absolute;
     width:65px;
-    padding:15px;
+    padding:20px 15px;
     .font-size(12);
     line-height: 1;
     text-transform: uppercase;
@@ -645,13 +705,14 @@ footer {
     .border-radius(6px);
     behavior: url(../js/libs//PIE.htc);
     .opacity(50);
-    background: url('/images/arrow.svg') no-repeat 10px -115px transparent;
+    background: url('/images/arrow.svg') no-repeat 10px -110px #141616;
     .transition(all 50ms ease-in);
     &:hover, &:active {
       background-color: rgba(255,255,255,0.1);
       text-decoration: none;
       .opacity(100);
       .transition(all 50ms ease-out);
+      cursor: pointer;
     }
   }
   a.prev {
@@ -666,7 +727,7 @@ footer {
     right: -180px;
     text-align: right;
     padding-right: 60px;
-    background-position: 90px -54px;
+    background-position: 90px -49px;
     display: none;
   }
   &.has-next .next {
