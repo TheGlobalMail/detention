@@ -71852,8 +71852,8 @@ define({
       "event_type": "incident",
       "month": "2009-12-01"
     },
-    "1--3K4ROZ": {
-      "Incident Number": "1--3K4ROZ",
+    "1-3K4ROZ": {
+      "Incident Number": "1-3K4ROZ",
       "Type": "Escape",
       "Level": "Critical",
       "Occurred On": "2009-12-22",
@@ -71870,7 +71870,7 @@ define({
       "incident_references": "",
       "contraband_category": "other",
       "interest": true,
-      "id": "1--3K4ROZ",
+      "id": "1-3K4ROZ",
       "event_type": "incident",
       "month": "2009-12-01"
     },
@@ -72877,7 +72877,7 @@ define({
         "1-2XSGTD",
         "1-2XSH2T",
         "1-2YEL05",
-        "1--3K4ROZ",
+        "1-3K4ROZ",
         "1-2YRVEX",
         "1-2YKPFF",
         "1-2YKOUD",
