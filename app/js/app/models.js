@@ -184,13 +184,7 @@ define([
 
     _this.flag = function() {
       var cell = _this.cells[_this.cellIndex];
-      var $cell = cell.element;
-      if (!$cell.hasClass('flagged')){
-        flags.flag(cell.data.id);
-      }else{
-        flags.unflag(cell.data.id);
-      }
-      $cell.toggleClass('flagged');
+      flags.toggleFlag(cell.data.id);
       _this.currentModal.setFlagText();
     };
 
@@ -307,7 +301,7 @@ define([
     };
 
     _this.setFlagText = function() {
-      var flagged = _this.cell.element.hasClass('flagged');
+      var flagged = flags.isFlagged(_this.cell.data.id);
       _this.element.find('.flag-btn')
         .toggleClass('unflag', flagged)
         .text((flagged ? 'Unflag' : 'Flag') + ' this incident');
@@ -373,23 +367,33 @@ define([
       _this.grid = null;
 
       if (data.event_type === 'incident') {
-        flags.on('reload', updateHighlight);
+        flags.on('reload change', updateHighlight);
       } else {
         element.addClass(data['type'] + '-event event');
       }
 
       setBindings();
 
-      updateHighlight(flags.data);
+      updateHighlight();
 
       return _this;
     }
 
-    function updateHighlight(flagData) {
-      var flagged = flagData[_this.data.id] || 0;
-      var opacity = flagged;
-      if (opacity < 0.15) opacity = 0.15;
-      _this.element.css('opacity', opacity);
+    // Update opacity and `flagged` class
+    function updateHighlight() {
+      var flagWeights = flags.data;
+      var score = Math.round((flagWeights[_this.data.id] || 0) * 100);
+      if (score < 15) score = 15;
+      if (_this.data.flagScore !== score){
+        _this.data.flagScore = score;
+        _this.element.css('opacity', _this.data.flagScore / 100);
+      }
+      var flagged = flags.isFlagged(_this.data.id);
+      if (_this.element.hasClass('flagged') && !flagged){
+        _this.element.removeClass('flagged');
+      }else if (!_this.element.hasClass('flagged') && flagged){
+        _this.element.addClass('flagged');
+      }
     }
 
     function cellOnMouseOver() {
