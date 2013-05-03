@@ -9,6 +9,35 @@
       }
     }
   }
+  .share {
+    padding:12px 0 16px;
+    .flags {
+      margin: 4px 0 0;
+      .flag-icon {
+        width:54px;
+        height:54px;
+        background-position: center -44px;
+        margin-right: 8px;
+      }
+      h3 {
+        .font-size(18);
+      }
+      p {
+        margin: 2px 0 0;
+      }
+    }
+    .share-tools {
+      padding: 8px 12px;
+    }
+  }
+  .modal {
+    &.fade.in {
+      top:3%;
+    }
+    .modal-body {
+      max-height: 420px;
+    }
+  }
 }
 
 // iPAD LANDSCAPE
@@ -68,18 +97,29 @@
     }
   }
   .share {
+    padding: 10px 0 15px;
     .flags {
-      width:57%;
+      width:55%;
       .flag-icon {
-        width:40px;
-        height: 40px;
-        margin: 4px 15px 40px 0;
-        background-position: center -35px;
+        width:48px;
+        height: 48px;
+        margin: 4px 15px 0 0;
+        background-position: center -39px;
       }
       h3 {
         .font-size(18);
         line-height: 1.4;
+        display:block;
       }
+      p {
+        display:none;
+      }
+      .btn {
+        margin:4px 0 0;
+      }
+    }
+    .share-tools {
+      padding:10px 14px;
     }
   }
   .modal {
@@ -88,6 +128,9 @@
     left: 7.5%;
     border: none;
     padding: 20px;
+    &.fade.in {
+      top:10%;
+    }
     .modal-header {
       padding: 0;
     }
@@ -144,7 +187,7 @@
 }
 
 // BIG PHONES AND SMALL TABLETS
-@media only screen and (max-width: 810px) {
+@media only screen and (max-width: 760px) {
   .navbar.special-feature {
     .brand.brand-center {
       float: none;
@@ -240,16 +283,9 @@
         h3 {
           .font-size(16);
           line-height: 1.2;
-          display:block;
-        }
-        p {
-          display:none;
         }
         .flag-icon {
           margin-bottom: 0;
-        }
-        .btn {
-          margin: 4px 0 0;
         }
       }
       .share-tools {
@@ -418,6 +454,7 @@
   .modal {
     width:auto;
     left:0;
+    height:100%;
     &.fade.in {
       top:0;
     }

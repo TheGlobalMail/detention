@@ -520,7 +520,7 @@ footer {
 // Modal styles
 .modal-backdrop, .modal-backdrop.fade.in {
   background: url('/images/noise.png') repeat 0 0 #141616;
-  .opacity(70);
+  .opacity(90);
 }
 .modal {
   background: #1f2222;
@@ -530,13 +530,30 @@ footer {
   .close {
     color: white;
     text-shadow:none;
-    .font-size(50);
-    margin-top: 0;
+
+    margin-bottom: 10px;
     position: absolute;
     right: 20px;
     top: 20px;
     height:26px;
     .transition(opacity 100ms ease-in);
+    width:115px;
+    h5 {
+      font-weight: normal;
+      text-transform: uppercase;
+      .font-size(11);
+      position:absolute;
+      width:86px;
+      top: -5px;
+      left:0;
+    }
+    span {
+      position:absolute;
+      right:0;
+      top:0;
+      margin: 0;
+      .font-size(50);
+    }
   }
   h3 {
     font-family: @serifFontFamily;
@@ -596,7 +613,7 @@ footer {
         max-width: none;
       }
       p {
-        .font-size(18);
+        .font-size(20);
         font-weight: 600;
         line-height: 1.4;
         margin-bottom: 35px;
