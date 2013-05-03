@@ -23,7 +23,7 @@ define([
         var rowElement = $(
           '<div class="date ' + obj.month +'">' +
             '<div class="month">' +
-            moment(Date.parse(obj.month)).format('MMMM YYYY') +
+              moment(Date.parse(obj.month)).format('MMMM YYYY') +
             '</div>' +
           '</div>'
         );
@@ -49,22 +49,23 @@ define([
     return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
   }
 
-  function affixMonths() {
+  function getFilterMenuScrollHandler() {
     var getMonthsToWatch = function() {
       return $('.date .month');
     };
     var monthsToWatch = getMonthsToWatch();
 
     var filterMenu = $('.filter-menu');
-    var setFilterMenuText = function(text) {
-      filterMenu.find('.month').text(text);
-    };
+    var filterMenuMonth = filterMenu.find('.month');
+    var filterMenuMonthText = filterMenuMonth.text();
     var filterMenuOriginalTopOffset = filterMenu.offset().top;
+    var filterMenuClassName = 'affix';
 
-    var className = 'affix';
     var navHeight = $('.navbar').outerHeight();
 
     return function() {
+      // Continuously update the element list until
+      // we've cached all that are expected
       if (monthsToWatch.length < incidents.months.length) {
         monthsToWatch = getMonthsToWatch();
       }
@@ -72,11 +73,11 @@ define([
       if (monthsToWatch.length) {
         // Fix the filter menu's position
         if (filterMenu.offset().top <= scrollY + navHeight) {
-          filterMenu.addClass(className);
+          filterMenu.addClass(filterMenuClassName);
         }
         // Unfix the filter menu's position
         if (filterMenuOriginalTopOffset > scrollY + navHeight) {
-          filterMenu.removeClass(className);
+          filterMenu.removeClass(filterMenuClassName);
         }
         // Check each month's position
         var lastMonthText = null;
@@ -86,25 +87,42 @@ define([
             lastMonthText = element.text();
           }
         });
-        if (lastMonthText) {
-          setFilterMenuText(lastMonthText);
+        // Update the filter menu if we've hit another month
+        if (lastMonthText && lastMonthText !== filterMenuMonthText) {
+          filterMenuMonthText = lastMonthText;
+          filterMenuMonth.text(filterMenuMonthText);
         }
       }
     }
   }
 
+  var filterMenuScrollEvent = 'scroll.filter-nav';
+
+  function setFilterMenuBindings() {
+    var filterMenuScrollHandler = getFilterMenuScrollHandler();
+    filterMenuScrollHandler();
+    $(window).on(filterMenuScrollEvent, filterMenuScrollHandler);
+  }
+
+  function unsetFilterMenuBindings() {
+    $(window).off(filterMenuScrollEvent);
+  }
+
+  function onResize() {
+    unsetFilterMenuBindings();
+    setFilterMenuBindings();
+  }
+
   function setBindings() {
-    // TODO: on resize
-    var onScroll = affixMonths();
-    onScroll();
-    $(window).scroll(onScroll);
+    setFilterMenuBindings();
+    $(window).resize(onResize);
   }
 
   function init() {
     flags
       .load()
       .always(buildIncidentMonthGrid);
-    $(setBindings);
+    setBindings();
   }
 
   return {
