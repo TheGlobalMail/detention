@@ -286,10 +286,10 @@ define([
           _this[field] = _this.element.find('.' + field);
           _this[field].text(cell.data[field] || '-');
         });
-        
+
         incidentDetails.hide();
         eventDetails.show();
-        
+
         _this.element
           .addClass(eventModalClass)
           .addClass(eventModalClass + '-' + cell.data.type);
