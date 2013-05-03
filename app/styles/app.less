@@ -566,11 +566,25 @@ footer {
         color:#747368;
         text-shadow: none;
       }
-      &:last-child {
+      &.summary-li {
         margin: 0;
         width: 100%;
         height:auto;
         max-width: none;
+      }
+      &.disclaimer {
+        .font-size(12);
+        margin: 0;
+        width: 100%;
+        height:auto;
+        max-width: none;
+        border: none;
+        text-shadow: none;
+        a {
+          .font-size(12);
+          font-family: @sansFontFamily;
+          text-shadow: none;
+        }
       }
       p {
         .font-size(18);
@@ -660,11 +674,18 @@ footer {
           margin-right: 0;
           padding-right: 0;
         }
-        &:last-child {
+        &.summary-li {
           padding: 20px 0 0;
           border-top: 1px solid #c2c1af;
           border-right: none;
           margin: 0;
+        }
+        &.disclaimer {
+          margin: 20px 0 0;
+          padding: 20px 0 0;
+          border-top: 1px solid #c2c1af;
+          border-right: none;
+          text-shadow:none;
         }
       }
     }
