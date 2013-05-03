@@ -79,6 +79,8 @@ define([
         // Unfix the filter menu's position
         if (filterMenuOriginalTopOffset > scrollY + navHeight) {
           filterMenu.removeClass(filterMenuClassName);
+          filterMenuMonthText = '';
+          filterMenuMonth.text(filterMenuMonthText);
         }
         // Check each month's position
         var lastMonthText = null;
@@ -89,7 +91,11 @@ define([
           }
         });
         // Update the filter menu if we've hit another month
-        if (lastMonthText && lastMonthText !== filterMenuMonthText) {
+        if (
+          lastMonthText &&
+          lastMonthText !== filterMenuMonthText &&
+          filterMenu.hasClass(filterMenuClassName)
+        ) {
           filterMenuMonthText = lastMonthText;
           filterMenuMonth.text(filterMenuMonthText);
         }
