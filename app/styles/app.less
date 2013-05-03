@@ -254,153 +254,166 @@ body {
   padding: 9% 0 10%;
 }
 
-.pinned {
+
+.filter-menu {
   color:white;
-  background-color: #1c1f1f;
-  background: url('/images/noise.png') repeat 0 0 rgba(28,31,31,.9);
-  position:fixed;
+  text-shadow:0 -1px 0 black;
   display:block;
   width:100%;
   left:0;
-  text-shadow:0 -1px 0 black;
-  &.filter-menu {
-    background: none;
-    position:absolute;
-    padding: 22px 0 10px;
-    &.affix {
-      position:fixed;
-      margin-top: 48px;
-      top:0;
-      background-color: #1c1f1f;
-      background: url('/images/noise.png') repeat 0 0 rgba(28,31,31,.9);
-      border-bottom: 1px solid rgba(255,255,255,.05);
-      .box-shadow(0 0 25px black);
-      z-index: 99;
-      .month {
-        .transition(all 150ms ease-in);
-        margin-top: 4px;
-      }
-    }
+  background: none;
+  position:absolute;
+  padding: 22px 0 10px;
+  &.affix {
+    position:fixed;
+    margin-top: 48px;
+    top:0;
+    background-color: #1c1f1f;
+    background: url('/images/noise.png') repeat 0 0 rgba(28,31,31,.9);
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    .box-shadow(0 0 25px black);
+    z-index: 99;
     .month {
-      float: left;
-      margin:8px 0 0;
-      .opacity(100);
+      .transition(all 150ms ease-in);
+      margin-top: 4px;
     }
-    .filters {
-      float:right;
-      .opacity(20);
+  }
+  .month {
+    float: left;
+    margin:8px 0 0;
+    .opacity(100);
+  }
+  .filters {
+    float:right;
+    .opacity(20);
+    .btn {
+      margin-left: 10px;
+    }
+    .btn-group {
       .btn {
-        margin-left: 10px;
+        background: none;
+        border:1px solid rgba(255,255,255,.3);
+        text-align: left;
+        .box-shadow(none);
       }
-      .btn-group {
-        .btn {
-          background: none;
-          border:1px solid rgba(255,255,255,.3);
-          text-align: left;
-          .box-shadow(none);
-        }
-        .caret {
-          float:right;
-        }
-        &.incidents .btn {
-          width:120px;
-        }
-        &.facilities .btn {
-          width:200px;
-        }
+      .caret {
+        float:right;
+      }
+      &.incidents .btn {
+        width:120px;
+      }
+      &.facilities .btn {
+        width:200px;
       }
     }
   }
-  &.share {
-    padding:20px 0 30px;
-    border-top: 1px solid rgba(255,255,255,.1);
-    .box-shadow(0 0 25px black);
+}
+.share {
+  color:white;
+  background-color: #1c1f1f;
+  background: url('/images/noise.png') repeat 0 0 rgba(28,31,31,.9);
+  text-shadow:0 -1px 0 black;
+  display:block;
+  width:100%;
+  height:auto;
+  left:0;
+  padding:20px 0 30px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  .box-shadow(0 0 25px black);
+  position:fixed;
+  bottom:-160px;
+  z-index: 2000;
+  .transition(all 150ms ease-out);
+  .opacity(0);
+  &.pinned {
     bottom:0;
-    z-index: 2000;
-    .flags {
-      position:relative;
-      width:65%;
-      max-width: 630px;
+    .opacity(100);
+    .transition(all 250ms ease-in-out);
+  }
+  .flags {
+    position:relative;
+    width:65%;
+    max-width: 630px;
+    float:left;
+    margin-top: 8px;
+    .flag-icon {
       float:left;
-      margin-top: 8px;
-      .flag-icon {
-        float:left;
-        width:60px;
-        height:60px;
-        margin-right: 16px;
-        .border-radius(8px);
-        behavior: url(../js/libs//PIE.htc);
-        background: url('/images/flag.svg') no-repeat center -52px #ffffff;
-        background-size: 40% auto;
-        .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
-      }
-      h3 {
-        margin: 0;
-        display:inline;
-      }
-      .btn {
-        .font-size(11);
-        border:none;
-        margin: -9px 0 0 10px;
-        padding:2px 6px;
-        background-color: #3c3f3f;
-        &:hover {
-          background-color:#515454;
-        }
-      }
-      p {
-        margin-top: 5px;
-        .font-size(13);
-        line-height: 1.3;
-      }
-    }
-    .share-tools {
-      float:right;
-      width:260px;
-      padding:15px 20px;
-      background: rgba(255,255,255,.05);
+      width:60px;
+      height:60px;
+      margin-right: 16px;
       .border-radius(8px);
       behavior: url(../js/libs//PIE.htc);
-      h4 {
-        font-weight: normal;
-        .font-size(11);
-        text-transform: uppercase;
-        width:80px;
-        margin: 0;
-        color:@grayLight;
-        float:left;
+      background: url('/images/flag.svg') no-repeat center -52px #ffffff;
+      background-size: 40% auto;
+      .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
+    }
+    h3 {
+      margin: 0;
+      display:inline;
+    }
+    .btn {
+      .font-size(11);
+      border:none;
+      margin: -9px 0 0 10px;
+      padding:2px 6px;
+      background-color: #3c3f3f;
+      &:hover {
+        background-color:#515454;
       }
-      ul {
-        margin: 0;
-        li {
-          display:inline-block;
-          margin: 0 0 0 6px;
-          list-style: none;
-          text-indent: -9000px;
-          &.icon a {
-            background: url('/images/share-icons.svg') no-repeat 0 0 transparent;
-            background-size: 100% auto;
-            display:block;
-            width:50px;
-            height:46px;
-            .opacity(40);
-            .transition(opacity 150ms ease-in);
-            &:hover {
-              .transition(opacity 150ms ease-out);
-              .opacity(100);
-            }
+    }
+    p {
+      margin-top: 5px;
+      .font-size(13);
+      line-height: 1.3;
+    }
+  }
+  .share-tools {
+    float:right;
+    width:260px;
+    padding:15px 20px;
+    background: rgba(255,255,255,.05);
+    .border-radius(8px);
+    behavior: url(../js/libs//PIE.htc);
+    h4 {
+      font-weight: normal;
+      .font-size(11);
+      text-transform: uppercase;
+      width:80px;
+      margin: 0;
+      color:@grayLight;
+      float:left;
+    }
+    ul {
+      margin: 0;
+      li {
+        display:inline-block;
+        margin: 0 0 0 6px;
+        list-style: none;
+        text-indent: -9000px;
+        &.icon a {
+          background: url('/images/share-icons.svg') no-repeat 0 0 transparent;
+          background-size: 100% auto;
+          display:block;
+          width:50px;
+          height:46px;
+          .opacity(40);
+          .transition(opacity 150ms ease-in);
+          &:hover {
+            .transition(opacity 150ms ease-out);
+            .opacity(100);
           }
-          &.icon.facebook a {
-            background-position: 0 -83px;
-          }
-          &.icon.email a {
-            background-position: 0 -176px;
-          }
+        }
+        &.icon.facebook a {
+          background-position: 0 -83px;
+        }
+        &.icon.email a {
+          background-position: 0 -176px;
         }
       }
     }
   }
 }
+
 
 footer {
   background-color: #222;
