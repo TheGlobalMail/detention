@@ -23,6 +23,9 @@ define([
   // Stores references to prior flaggings so they can be unflagged by this user
   Flags.flaggedByUser = {};
 
+  // Stores references to all flaggings (either by user or shared with them)
+  Flags.flagged = {};
+
   // Stores references to prior flaggings so they can be unflagged by this user
   Flags.currentlyFlagged = 0;
 
@@ -37,7 +40,12 @@ define([
 
   // Checks if the incident is currently flagged
   Flags.isFlagged = function(id){
-    return Flags.flaggedByUser[id];
+    return Flags.flagged[id];
+  };
+
+  // Returns a list of all incident ids that are flagged
+  Flags.flaggedIds = function(){
+    return _.keys(Flags.flagged).sort();
   };
 
   // Flags or unflags depending on current state
@@ -46,22 +54,31 @@ define([
   };
 
   // Flags an event via the API. Returns Deferred. Triggers `change` event
-  Flags.flag = function(id){
+  Flags.flag = function(id, notMadeByUser){
     Flags.currentlyFlagged += 1;
-    Flags.flaggedByUser[id] = 'pending';
-    Flags.trigger('change', Flags.currentlyFlagged);
-    return $.post(api + '/api/flag', {id: id})
-      .done(function(data){
-        Flags.flaggedByUser[id] = data.flag;
-        Flags.data[id] = data.flagged;
-        Flags.recalculateData();
-      });
+    if (notMadeByUser){
+      Flags.flagged[id] = notMadeByUser;
+    }else{
+      Flags.flaggedByUser[id] = 'pending';
+      Flags.flagged[id] = 'pending';
+    }
+    Flags.trigger('change', Flags.currentlyFlagged, notMadeByUser);
+    if (!notMadeByUser){
+      return $.post(api + '/api/flag', {id: id})
+        .done(function(data){
+          Flags.flaggedByUser[id] = data.flag;
+          Flags.flagged[id] = data.flag;
+          Flags.data[id] = data.flagged;
+          Flags.recalculateData();
+        });
+    }
   };
 
   // Unflags an event via the API. Returns Deferred or null. Triggers `change` event
   Flags.unflag = function(id){
     var defer;
     var flag = Flags.flaggedByUser[id];
+    Flags.flagged[id] = null;
     if (Flags.currentlyFlagged > 0){
       Flags.currentlyFlagged = Flags.currentlyFlagged - 1;
     }
@@ -80,7 +97,7 @@ define([
 
   // Unflags all events. User flagged events update the api. Triggers `change`
   Flags.clearAll = function(){
-    _.each(Flags.flaggedByUser, function(flag, id){
+    _.each(Flags.flagged, function(flag, id){
       Flags.unflag(id);
     });
   };
@@ -94,6 +111,18 @@ define([
       Flags.data[id] = flagged / maxFlaggings;
     });
     Flags.trigger('reload', Flags.data);
+  };
+
+  // Flag incidents that were shared
+  Flags.setSharedFlags = function(ids){
+    _.each(ids, function(id){
+      console.error('sharing for' + id);
+      // check to see if ids is valid
+      if (Flags.data[id]){
+        console.error('flaggin!');
+        Flags.flag(id, 'shared');
+      }
+    });
   };
 
   return Flags;
