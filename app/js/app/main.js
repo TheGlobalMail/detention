@@ -45,10 +45,66 @@ define([
       });
   }
 
+  function getScrollY() {
+    return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+  }
+
+  function affixMonths() {
+    var getMonthsToWatch = function() {
+      return $('.date .month');
+    };
+    var monthsToWatch = getMonthsToWatch();
+
+    var filterMenu = $('.filter-menu');
+    var setFilterMenuText = function(text) {
+      filterMenu.find('.month').text(text);
+    };
+    var filterMenuOriginalTopOffset = filterMenu.offset().top;
+
+    var className = 'affix';
+    var navHeight = $('.navbar').outerHeight();
+
+    return function() {
+      if (monthsToWatch.length < incidents.months.length) {
+        monthsToWatch = getMonthsToWatch();
+      }
+      var scrollY = getScrollY();
+      if (monthsToWatch.length) {
+        // Fix the filter menu's position
+        if (filterMenu.offset().top <= scrollY + navHeight) {
+          filterMenu.addClass(className);
+        }
+        // Unfix the filter menu's position
+        if (filterMenuOriginalTopOffset > scrollY + navHeight) {
+          filterMenu.removeClass(className);
+        }
+        // Check each month's position
+        var lastMonthText = null;
+        _.each(monthsToWatch, function(element) {
+          element = $(element);
+          if (element.offset().top <= scrollY + navHeight + filterMenu.outerHeight()) {
+            lastMonthText = element.text();
+          }
+        });
+        if (lastMonthText) {
+          setFilterMenuText(lastMonthText);
+        }
+      }
+    }
+  }
+
+  function setBindings() {
+    // TODO: on resize
+    var onScroll = affixMonths();
+    onScroll();
+    $(window).scroll(onScroll);
+  }
+
   function init() {
     flags
       .load()
       .always(buildIncidentMonthGrid);
+    $(setBindings);
   }
 
   return {
