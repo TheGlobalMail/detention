@@ -49,7 +49,7 @@ define([
     return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
   }
 
-  function getFilterNavScrollHandler() {
+  function getFilterMenuScrollHandler() {
     var getMonthsToWatch = function() {
       return $('.date .month');
     };
@@ -59,8 +59,8 @@ define([
     var filterMenuMonth = filterMenu.find('.month');
     var filterMenuMonthText = filterMenuMonth.text();
     var filterMenuOriginalTopOffset = filterMenu.offset().top;
+    var filterMenuClassName = 'affix';
 
-    var className = 'affix';
     var navHeight = $('.navbar').outerHeight();
 
     return function() {
@@ -73,11 +73,11 @@ define([
       if (monthsToWatch.length) {
         // Fix the filter menu's position
         if (filterMenu.offset().top <= scrollY + navHeight) {
-          filterMenu.addClass(className);
+          filterMenu.addClass(filterMenuClassName);
         }
         // Unfix the filter menu's position
         if (filterMenuOriginalTopOffset > scrollY + navHeight) {
-          filterMenu.removeClass(className);
+          filterMenu.removeClass(filterMenuClassName);
         }
         // Check each month's position
         var lastMonthText = null;
@@ -87,7 +87,7 @@ define([
             lastMonthText = element.text();
           }
         });
-        // Update the filter nav if we've hit another month
+        // Update the filter menu if we've hit another month
         if (lastMonthText && lastMonthText !== filterMenuMonthText) {
           filterMenuMonthText = lastMonthText;
           filterMenuMonth.text(filterMenuMonthText);
@@ -96,25 +96,25 @@ define([
     }
   }
 
-  var filterNavScrollEvent = 'scroll.filter-nav';
+  var filterMenuScrollEvent = 'scroll.filter-nav';
 
-  function setFilterNavBindings() {
-    var filterNavScrollHandler = getFilterNavScrollHandler();
-    filterNavScrollHandler();
-    $(window).on(filterNavScrollEvent, filterNavScrollHandler);
+  function setFilterMenuBindings() {
+    var filterMenuScrollHandler = getFilterMenuScrollHandler();
+    filterMenuScrollHandler();
+    $(window).on(filterMenuScrollEvent, filterMenuScrollHandler);
   }
 
-  function unsetFilterNavBindings() {
-    $(window).off(filterNavScrollEvent);
+  function unsetFilterMenuBindings() {
+    $(window).off(filterMenuScrollEvent);
   }
 
   function onResize() {
-    unsetFilterNavBindings();
-    setFilterNavBindings();
+    unsetFilterMenuBindings();
+    setFilterMenuBindings();
   }
 
   function setBindings() {
-    setFilterNavBindings();
+    setFilterMenuBindings();
     $(window).resize(onResize);
   }
 
