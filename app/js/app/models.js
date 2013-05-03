@@ -270,7 +270,7 @@ define([
         _.each(map, function(property, className) {
           var text = cell.data[property] || '';
           if (property === 'Summary'){
-            var html = text.replace(/Client s. 47F\(1\)/gi, '<span class="redact">CLIENT NAME</span>');
+            var html = text.replace(/Client s. 47F\(1\)/gi, '<span class="redact">CLIENT NAME REDACTED</span>');
             _this.element.find(className).html(html);
           }else{
             _this.element.find(className).text(text);
