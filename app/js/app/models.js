@@ -268,8 +268,13 @@ define([
 
         // Update the modal's text
         _.each(map, function(property, className) {
-          var text = cell.data[property];
-          _this.element.find(className).text(text);
+          var text = cell.data[property] || '';
+          if (property === 'Summary'){
+            var html = text.replace(/Client s. 47F\(1\)/gi, '<span class="redact">CLIENT NAME</span>');
+            _this.element.find(className).html(html);
+          }else{
+            _this.element.find(className).text(text);
+          }
         });
 
         incidentDetails.show();
