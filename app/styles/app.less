@@ -255,7 +255,7 @@ body {
     background: none;
     position:absolute;
     padding: 22px 0 10px;
-    .transition(all 150ms ease-in);
+    // .transition(all 150ms ease-in);
     &.affix {
       position:fixed;
       margin-top: 48px;
@@ -265,6 +265,10 @@ body {
       border-bottom: 1px solid rgba(255,255,255,.1);
       .box-shadow(0 0 25px black);
       z-index: 99;
+      .month {
+        .transition(all 150ms ease-in);
+        margin-top: 4px;
+      }
     }
     .month {
       float: left;
