@@ -18,6 +18,7 @@ define([
 
     var grid = new models.GridController;
 
+    var start = +new Date;
     _(incidents.months)
       // Build the grid in rows of months
       .map(function(obj) {
@@ -43,6 +44,10 @@ define([
         requestAnimationFrame(function() {
           gridContainer.append(rowElement);
         });
+      })
+      .tap(function() {
+        var end = +new Date;
+        console.log(end - start);
       });
   }
 
@@ -64,7 +69,7 @@ define([
 
     var navHeight = $('.navbar').outerHeight();
 
-    return function() {
+    return _.throttle(function() {
       // Continuously update the element list until
       // we've cached all that are expected
       if (monthsToWatch.length < incidents.months.length) {
@@ -100,20 +105,20 @@ define([
           filterMenuMonth.text(filterMenuMonthText);
         }
       }
-    }
+    }, 20);
   }
 
   function getFlaggingPanelScrollHandler() {
     var flagPanel = $('#sharing-panel');
     var grid = $('#incidents');
     var className = 'pinned';
-    return function() {
+    return _.throttle(function() {
       if (grid.offset().top <= $(window).height() + getScrollY()) {
         flagPanel.addClass(className);
       } else {
         flagPanel.removeClass(className);
       }
-    };
+    }, 20);
   }
 
   var filterMenuScrollEvent = 'scroll.filter-nav';

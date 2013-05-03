@@ -3,15 +3,16 @@ requirejs.config({
     jquery: '../components/jquery/jquery',
     lodash: '../components/lodash/lodash',
     backbone: '../components/backbone/backbone',
-    moment: '../components/moment/moment',
+    moment: '../components/moment/moment'
   }
 });
 
 requirejs([
   'jquery',
-  'utils/requestAnimationFrame',
+  'utils/shims',
   'app/main'
 ],
-function ($, utils, app) {
+function ($, shims, app) {
+  shims();
   $(app.init);
 });
