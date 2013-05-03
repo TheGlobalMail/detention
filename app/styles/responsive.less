@@ -195,6 +195,15 @@
             height:@gridCellSize + 4px;
             margin: 1px;
           }
+          &.flagged {
+            width:@gridCellSize + 4px;
+            height:@gridCellSize + 4px;
+            margin: 1px;
+            background-position: center -25px;
+            &:hover {
+              background-position: center 8px;
+            }
+          }
           &.event {
             .border-radius(50%);
             width:@gridCellSize + 4px;
