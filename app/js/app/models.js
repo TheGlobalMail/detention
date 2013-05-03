@@ -19,6 +19,8 @@ define([
       _this.currentModal.element.on("show", modalOnShow);
       _this.currentModal.element.on("hide", modalOnHide);
 
+      _this.displayingModal = false;
+
       _this.setBindings();
 
       return _this;
@@ -26,6 +28,8 @@ define([
 
     function modalOnShow() {
       // Called when bootstrap has shown the modal
+
+      _this.displayingModal = true;
 
       _this.currentModal.positionInCenter().display();
 
@@ -42,6 +46,8 @@ define([
       _this.currentModal.element.hide();
       _this.nextModal.element.hide();
       _this.prevModal.element.hide();
+
+      _this.displayingModal = false;
     }
 
     _this.addCell = function(cell) {
@@ -182,9 +188,11 @@ define([
     };
 
     _this.windowOnResize = _.debounce(function() {
-      _this.currentModal.positionInCenter();
-      _this.nextModal.positionOffScreenRight();
-      _this.prevModal.positionOffScreenLeft();
+      if (_this.displayingModal) {
+        _this.currentModal.positionInCenter();
+        _this.nextModal.positionOffScreenRight();
+        _this.prevModal.positionOffScreenLeft();
+      }
     }, 50);
 
     _this.setBindings = function() {
@@ -373,7 +381,7 @@ define([
     }
 
     function cellOnMouseOver() {
-      // TODO: display a small detail..?
+      // TODO: display a small detail
     }
 
     function cellOnClick() { // click/touch
