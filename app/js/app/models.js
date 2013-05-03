@@ -246,6 +246,14 @@ define([
       var eventDetails = _this.element.find('.event-details');
       var eventModalClass = 'event-modal';
 
+      // Remove any event classes from the modal
+      var classList = _this.element.attr('class').split(' ');
+      _.each(classList, function(className) {
+        if (className.indexOf(eventModalClass) === 0) {
+          _this.element.removeClass(className);
+        }
+      });
+
       // Generic incidents
       if (cell.data.event_type === 'incident') {
 
@@ -260,23 +268,17 @@ define([
 
         // Update the modal's text
         _.each(map, function(property, className) {
-          _this.element.find(className).text(cell.data[property]);
+          var text = cell.data[property];
+          _this.element.find(className).text(text);
         });
 
         incidentDetails.show();
         eventDetails.hide();
 
-        var classList = _this.element.attr('class').split(' ');
-        _.each(classList, function(className) {
-          if (className.indexOf(eventModalClass) == 0) {
-            _this.element.removeClass(className);
-          }
-        });
-
         _this.setFlagText();
       } else { // Events
         _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
-          _this[field] = _this.element.find('.' + field)
+          _this[field] = _this.element.find('.' + field);
           _this[field].text(cell.data[field] || '-');
         });
         
