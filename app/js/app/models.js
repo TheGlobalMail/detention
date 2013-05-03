@@ -272,6 +272,8 @@ define([
             _this.element.removeClass(className);
           }
         });
+
+        _this.setFlagText();
       } else { // Events
         _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
           _this[field] = _this.element.find('.' + field)
@@ -285,8 +287,6 @@ define([
           .addClass(eventModalClass)
           .addClass(eventModalClass + '-' + cell.data.type);
       }
-
-      _this.setFlagText();
 
       return _this;
     };
@@ -302,9 +302,13 @@ define([
 
     _this.setFlagText = function() {
       var flagged = flags.isFlagged(_this.cell.data.id);
-      _this.element.find('.flag-btn')
-        .toggleClass('unflag', flagged)
-        .text((flagged ? 'Unflag' : 'Flag') + ' this incident');
+      var $button = _this.element.find('.flag-btn');
+      if (flagged){
+        $button.addClass('unflag');
+      }else{
+        $button.removeClass('unflag');
+      }
+      $button.text((flagged ? 'Unflag' : 'Flag') + ' this incident');
     };
 
     function getCenterPosition() {
