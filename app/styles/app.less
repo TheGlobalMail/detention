@@ -148,6 +148,7 @@ body {
   }
 }
 
+@gridCellSize: 30px;
 #incidents {
   border-top: 1px solid rgba(255,255,255,.1);
   .box-shadow(0 -1px 0 rgba(0,0,0,0.5));
@@ -159,78 +160,77 @@ body {
     margin: 0 auto;
     clear: both;
     .date {
-      @gridCellSize: 30px;
       min-height: @gridCellSize;
       margin: 30px 0 0 ;
-      .cell {
-        .opacity(5);
-        width: @gridCellSize;
-        height: @gridCellSize;
-        margin: 4px;
-        background: white;
-        float: left;
-        .transition(opacity 150ms ease-in);
-        .border-radius(2px);
-        behavior: url(../js/libs//PIE.htc);
-        &:hover {
-          width:@gridCellSize + 2px;
-          height:@gridCellSize + 2px;
-          .border-radius(4px);
-          behavior: url(../js/libs//PIE.htc);
-          margin: 3px;
-          .opacity(100) !important;
-          .box-shadow(0 0 15px 5px rgba(0,0,0,0.6));
-          .transition(opacity 50ms ease-out);
-        }
-        &.flagged {
-          width:@gridCellSize + 4px;
-          height:@gridCellSize + 4px;
-          .border-radius(4px);
-          behavior: url(../js/libs//PIE.htc);
-          margin: 2px;
-          .opacity(100) !important;
-          background: url('/images/flag.svg') no-repeat center -27px #ffffff;
-          background-size: 40% auto;
-          .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
-          .transition(all 100ms ease-in);
-          &:hover {
-            .transition(all 200ms ease-out);
-            background-color: @blue;
-            background-position: center 9px;
-            .box-shadow(0 0 15px 5px rgba(0,0,0,0.3));
-          }
-        }
-        &.event {
-          .opacity(100)!important;
-          .border-radius(50%);
-          behavior: url(../js/libs//PIE.htc);
-          width:@gridCellSize + 6px;
-          height:@gridCellSize + 6px;
-          margin: 1px;
-          background: url('/images/events.svg') no-repeat center 13px;
-          background-size: 80% auto;
-          &:hover {
-            .border-radius(50%);
-            behavior: url(../js/libs//PIE.htc);
-            width:@gridCellSize + 12px;
-            height:@gridCellSize + 12px;
-            margin: -2px;
-          }
-        }
-        &.boat-event {
-          background-color: @blue;
-          &:hover {
-            background-position: center 14px;
-          }
-        }
-        &.riot-event {
-          background-color: @event-yellow;
-          background-position: center -18px;
-          &:hover {
-            background-position: center -22px;
-          }
-        }
-      }
+    }
+  }
+}
+.cell {
+  .opacity(5);
+  width: @gridCellSize;
+  height: @gridCellSize;
+  margin: 4px;
+  background: white;
+  float: left;
+  .transition(opacity 150ms ease-in);
+  .border-radius(2px);
+  behavior: url(../js/libs//PIE.htc);
+  &:hover {
+    width:@gridCellSize + 2px;
+    height:@gridCellSize + 2px;
+    .border-radius(4px);
+    behavior: url(../js/libs//PIE.htc);
+    margin: 3px;
+    .opacity(100) !important;
+    .box-shadow(0 0 15px 5px rgba(0,0,0,0.6));
+    .transition(opacity 50ms ease-out);
+  }
+  &.flagged {
+    width:@gridCellSize + 4px;
+    height:@gridCellSize + 4px;
+    .border-radius(4px);
+    behavior: url(../js/libs//PIE.htc);
+    margin: 2px;
+    .opacity(100) !important;
+    background: url('/images/flag.svg') no-repeat center -27px #ffffff;
+    background-size: 40% auto;
+    .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
+    .transition(all 100ms ease-in);
+    &:hover {
+      .transition(all 200ms ease-out);
+      background-color: @blue;
+      background-position: center 9px;
+      .box-shadow(0 0 15px 5px rgba(0,0,0,0.3));
+    }
+  }
+  &.event {
+    .opacity(100)!important;
+    .border-radius(50%);
+    behavior: url(../js/libs//PIE.htc);
+    width:@gridCellSize + 6px;
+    height:@gridCellSize + 6px;
+    margin: 1px;
+    background: url('/images/events.svg') no-repeat center 13px;
+    background-size: 80% auto;
+    &:hover {
+      .border-radius(50%);
+      behavior: url(../js/libs//PIE.htc);
+      width:@gridCellSize + 12px;
+      height:@gridCellSize + 12px;
+      margin: -2px;
+    }
+  }
+  &.boat-event {
+    background-color: @blue;
+    &:hover {
+      background-position: center 14px;
+    }
+  }
+  &.riot-event {
+    background-color: @event-yellow;
+    background-position: center -18px;
+    &:hover {
+      background-position: center -22px;
     }
   }
 }

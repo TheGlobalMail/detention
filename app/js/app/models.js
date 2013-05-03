@@ -369,14 +369,15 @@ define([
 
     function constructor(data) {
       var element = _this.element = document.createElement('div');
-      element.className = 'cell';
+      element.classList.add('cell');
       _this.data = data;
       _this.grid = null;
 
       if (data.event_type === 'incident') {
         flags.on('reload change', updateHighlight);
       } else {
-        element.className += ' ' + data['type'] + '-event event';
+        element.classList.add(data['type'] + '-event');
+        element.classList.add('event');
       }
 
       setBindings();
@@ -391,15 +392,19 @@ define([
       var flagWeights = flags.data;
       var score = Math.round((flagWeights[_this.data.id] || 0) * 100);
       var classes = _this.element.classList;
-      if (score < 15) score = 15;
-      if (_this.data.flagScore !== score){
+      if (score < 15) {
+        score = 15;
+      }
+      if (_this.data.flagScore !== score) {
         _this.data.flagScore = score;
-        _this.element.style.opacity = _this.data.flagScore / 100;
+        if (score > 15) {
+          _this.element.style.opacity = _this.data.flagScore / 100;
+        }
       }
       var flagged = flags.isFlagged(_this.data.id);
-      if (classes.contains('flagged') && !flagged){
+      if (classes.contains('flagged') && !flagged) {
         classes.remove('flagged');
-      }else if (!classes.contains('flagged') && flagged){
+      } else if (!classes.contains('flagged') && flagged) {
         classes.add('flagged');
       }
     }
