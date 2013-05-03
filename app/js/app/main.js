@@ -65,7 +65,7 @@ define([
 
     var navHeight = $('.navbar').outerHeight();
 
-    return function() {
+    return _.throttle(function() {
       // Continuously update the element list until
       // we've cached all that are expected
       if (monthsToWatch.length < incidents.months.length) {
@@ -101,20 +101,20 @@ define([
           filterMenuMonth.text(filterMenuMonthText);
         }
       }
-    }
+    }, 20);
   }
 
   function getFlaggingPanelScrollHandler() {
     var flagPanel = $('#sharing-panel');
     var grid = $('#incidents');
     var className = 'pinned';
-    return function() {
+    return _.throttle(function() {
       if (grid.offset().top <= $(window).height() + getScrollY()) {
         flagPanel.addClass(className);
       } else {
         flagPanel.removeClass(className);
       }
-    };
+    }, 20);
   }
 
   var filterMenuScrollEvent = 'scroll.filter-nav';
