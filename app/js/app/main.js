@@ -103,6 +103,19 @@ define([
     }
   }
 
+  function getFlaggingPanelScrollHandler() {
+    var flagPanel = $('#sharing-panel');
+    var grid = $('#incidents');
+    var className = 'pinned';
+    return function() {
+      if (grid.offset().top <= $(window).height() + getScrollY()) {
+        flagPanel.addClass(className);
+      } else {
+        flagPanel.removeClass(className);
+      }
+    };
+  }
+
   var filterMenuScrollEvent = 'scroll.filter-nav';
 
   function setFilterMenuBindings() {
@@ -122,6 +135,11 @@ define([
 
   function setBindings() {
     setFilterMenuBindings();
+
+    var flaggingPanelScrollHandler = getFlaggingPanelScrollHandler();
+    flaggingPanelScrollHandler();
+    $(window).scroll(flaggingPanelScrollHandler);
+
     $(window).resize(onResize);
   }
 
