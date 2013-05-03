@@ -373,14 +373,16 @@ define([
     var _this = this;
 
     function constructor(data) {
-      var element = _this.element = $('<div class="cell">');
+      var element = _this.element = document.createElement('div');
+      element.classList.add('cell');
       _this.data = data;
       _this.grid = null;
 
       if (data.event_type === 'incident') {
         flags.on('reload change', updateHighlight);
       } else {
-        element.addClass(data['type'] + '-event event');
+        element.classList.add(data['type'] + '-event');
+        element.classList.add('event');
       }
 
       setBindings();
@@ -394,16 +396,21 @@ define([
     function updateHighlight() {
       var flagWeights = flags.data;
       var score = Math.round((flagWeights[_this.data.id] || 0) * 100);
-      if (score < 15) score = 15;
-      if (_this.data.flagScore !== score){
+      var classes = _this.element.classList;
+      if (score < 15) {
+        score = 15;
+      }
+      if (_this.data.flagScore !== score) {
         _this.data.flagScore = score;
-        _this.element.css('opacity', _this.data.flagScore / 100);
+        if (score > 15) {
+          _this.element.style.opacity = _this.data.flagScore / 100;
+        }
       }
       var flagged = flags.isFlagged(_this.data.id);
-      if (_this.element.hasClass('flagged') && !flagged){
-        _this.element.removeClass('flagged');
-      }else if (!_this.element.hasClass('flagged') && flagged){
-        _this.element.addClass('flagged');
+      if (classes.contains('flagged') && !flagged) {
+        classes.remove('flagged');
+      } else if (!classes.contains('flagged') && flagged) {
+        classes.add('flagged');
       }
     }
 
@@ -416,8 +423,8 @@ define([
     }
 
     function setBindings() {
-      _this.element.on('mouseover', cellOnMouseOver);
-      _this.element.on('click touch', cellOnClick);
+      _this.element.addEventListener('mouseover', cellOnMouseOver);
+      _this.element.addEventListener('click', cellOnClick);
     }
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
