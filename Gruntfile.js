@@ -76,7 +76,7 @@ module.exports = function(grunt) {
           '<%= project.app %>/index.html',
           '{.tmp,<%= project.app %>}/styles/{,/*}*.css',
           '{.tmp,<%= project.app %>}/js/{,/*,**/,*/}*.js',
-          '<%= project.app %>/images/{,*/}*.{png,jpg,jpeg,webp}'
+          '<%= project.app %>/images/{,*/}*.{png,jpg,jpeg,svg,webp}'
         ],
         tasks: ['livereload']
       }
@@ -212,7 +212,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= project.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg}',
+          src: '{,*/}*.{png,jpg,jpeg,svg}',
           dest: '<%= project.dist %>/images'
         }]
       }
@@ -256,9 +256,9 @@ module.exports = function(grunt) {
           src: [
             'index.html',
             'analytics.html',
+            'images/*.svg',
             '*.{ico,txt}',
-            '.htaccess',
-            'graphs/*',
+            '.htaccess'
           ]
         }]
       }

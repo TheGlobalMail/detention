@@ -26,9 +26,6 @@ define([
   // Stores references to all flaggings (either by user or shared with them)
   Flags.flagged = {};
 
-  // Stores references to prior flaggings so they can be unflagged by this user
-  Flags.currentlyFlagged = 0;
-
   // Load flags data from API. Returns Deferred object
   Flags.load = function(){
     return $.ajax(api + '/api/flagged')
@@ -55,14 +52,16 @@ define([
 
   // Flags an event via the API. Returns Deferred. Triggers `change` event
   Flags.flag = function(id, notMadeByUser){
-    Flags.currentlyFlagged += 1;
+    if (_.isNull(Flags.data[id])){
+      return;
+    }
     if (notMadeByUser){
       Flags.flagged[id] = notMadeByUser;
     }else{
       Flags.flaggedByUser[id] = 'pending';
       Flags.flagged[id] = 'pending';
     }
-    Flags.trigger('change', Flags.currentlyFlagged, notMadeByUser);
+    Flags.trigger('change', _.keys(Flags.flagged).length, notMadeByUser);
     if (!notMadeByUser){
       return $.post(api + '/api/flag', {id: id})
         .done(function(data){
@@ -78,20 +77,16 @@ define([
   Flags.unflag = function(id){
     var defer;
     var flag = Flags.flaggedByUser[id];
-    Flags.flagged[id] = null;
-    if (Flags.currentlyFlagged > 0){
-      Flags.currentlyFlagged = Flags.currentlyFlagged - 1;
-    }
-    // Only update the api if this user did actually flag this event
+    delete Flags.flagged[id];
     if (Flags.flaggedByUser[id] && Flags.flaggedByUser[id] !== 'pending'){
-      Flags.flaggedByUser[id] = null;
+      delete Flags.flaggedByUser[id];
       defer = $.post(api + '/api/unflag', {id: id, flag: flag})
         .done(function(data){
           Flags.data[id] = data.flagged;
           Flags.recalculateData();
         });
     }
-    Flags.trigger('change', Flags.currentlyFlagged);
+    Flags.trigger('change', _.keys(Flags.flagged).length);
     return defer;
   };
 
@@ -116,12 +111,7 @@ define([
   // Flag incidents that were shared
   Flags.setSharedFlags = function(ids){
     _.each(ids, function(id){
-      console.error('sharing for' + id);
-      // check to see if ids is valid
-      if (Flags.data[id]){
-        console.error('flaggin!');
-        Flags.flag(id, 'shared');
-      }
+      Flags.flag(id, 'shared');
     });
   };
 
