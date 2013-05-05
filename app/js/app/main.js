@@ -106,7 +106,7 @@ define([
 
   function getFlaggingPanelScrollHandler() {
     var flagPanel = $('#sharing-panel');
-    var grid = $('#incidents');
+    var grid = $('.incident-grid');
     var className = 'pinned';
     return _.throttle(function() {
       if (grid.offset().top <= $(window).height() + getScrollY()) {
