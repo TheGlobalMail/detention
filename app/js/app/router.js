@@ -15,8 +15,9 @@ define([
     if (notMadeByUser) return;
 
     var url = '/';
-    if (flags.currentlyFlagged){
-      url = 'flagged/' + flags.flaggedIds().join(',');
+    var ids = flags.flaggedIds();
+    if (ids.length){
+      url = 'flagged/' + ids.join(',');
     }
     Backbone.history.navigate(url, {trigger: false, replace: true});
 

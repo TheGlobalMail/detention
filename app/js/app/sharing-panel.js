@@ -10,13 +10,13 @@ define([
   flags.on('change', function(flagged){
     var text;
     if (!flagged){
-      text = 'No incidents ';
+      text = 'No incidents have';
     }else if (flagged === 1){
-      text = '1 incident ';
+      text = '1 incident has';
     }else{
-      text = flagged.toString() + ' incidents ';
+      text = flagged.toString() + ' incidents have';
     }
-    text += ' have been flagged';
+    text += ' been flagged';
     $flaggedCount.text(text);
   });
 
