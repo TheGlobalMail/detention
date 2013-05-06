@@ -5,6 +5,9 @@ define([
   'backbone'
 ], function($, _, flags){
 
+  // Emit `change` events for any module that uses url e.g. share buttons
+  var vent = _.extend({}, Backbone.Events);
+
   $(function(){
     Backbone.history.start({pushState: true});
   });
@@ -20,7 +23,7 @@ define([
       url = 'flagged/' + ids.join(',');
     }
     Backbone.history.navigate(url, {trigger: false, replace: true});
-
+    vent.trigger('change');
   });
 
   // When data is loaded, flag whatever ids are in the url
@@ -29,6 +32,9 @@ define([
     if (sharedUrl){
       flags.setSharedFlags(sharedUrl[1].split(','));
     }
+    vent.trigger('change');
   });
+
+  return vent;
 });
 
