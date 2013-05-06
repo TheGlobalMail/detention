@@ -24,7 +24,7 @@ define([
   });
 
   // When data is loaded, flag whatever ids are in the url
-  flags.on('reload', function(){
+  flags.on('load', function(){
     var sharedUrl = location.pathname.match(/flagged\/(.*)/i);
     if (sharedUrl){
       flags.setSharedFlags(sharedUrl[1].split(','));

@@ -12,9 +12,6 @@ body {
 .navbar {
   margin: 0;
   &.special-feature {
-    position: fixed;
-    top:0;
-    display: block;
     width: 100%;
     padding: 8px 0;
     z-index: 999;
@@ -36,9 +33,6 @@ body {
   }
 }
 
-#main {
-  margin-top: 48px;
-}
 
 .month {
   .font-size(22);
@@ -122,7 +116,6 @@ body {
       margin-left: -20px;
       .transition(all 150ms ease-out);
       .border-radius(50%);
-      behavior: url(../js/libs//PIE.htc);
       &:hover {
         bottom: 9%;
         .transition(all 150ms ease-in);
@@ -184,13 +177,11 @@ body {
   background: white;
   float: left;
   .transition(opacity 150ms ease-in);
-  .border-radius(2px);
-  behavior: url(../js/libs//PIE.htc);
+  // .border-radius(2px);
   &:hover {
     width:@gridCellSize + 2px;
     height:@gridCellSize + 2px;
-    .border-radius(4px);
-    behavior: url(../js/libs//PIE.htc);
+    // .border-radius(4px);
     margin: 3px;
     .opacity(100) !important;
     .box-shadow(0 0 15px 5px rgba(0,0,0,0.6));
@@ -201,7 +192,6 @@ body {
     width:@gridCellSize + 4px;
     height:@gridCellSize + 4px;
     .border-radius(4px);
-    behavior: url(../js/libs//PIE.htc);
     margin: 2px;
     .opacity(100) !important;
     background: url('/images/flag.svg') no-repeat center -27px #ffffff;
@@ -218,7 +208,6 @@ body {
   &.event {
     .opacity(100)!important;
     .border-radius(50%);
-    behavior: url(../js/libs//PIE.htc);
     width:@gridCellSize + 6px;
     height:@gridCellSize + 6px;
     margin: 1px;
@@ -226,7 +215,6 @@ body {
     background-size: 80% auto;
     &:hover {
       .border-radius(50%);
-      behavior: url(../js/libs//PIE.htc);
       width:@gridCellSize + 12px;
       height:@gridCellSize + 12px;
       margin: -2px;
@@ -269,7 +257,6 @@ body {
   padding: 22px 0 10px;
   &.affix {
     position:fixed;
-    margin-top: 48px;
     top:0;
     background-color: #1c1f1f;
     background: url('/images/noise.png') repeat 0 0 rgba(28,31,31,.95);
@@ -331,7 +318,7 @@ body {
   &.pinned {
     bottom:0;
     .opacity(100);
-    .transition(all 250ms ease-in-out);
+    .transition(all 500ms 250ms ease-in-out);
   }
   .flags {
     position:relative;
@@ -345,7 +332,6 @@ body {
       height:60px;
       margin: 0 16px 20px 0;
       .border-radius(8px);
-      behavior: url(../js/libs//PIE.htc);
       background: url('/images/flag.svg') no-repeat center -52px #ffffff;
       background-size: 40% auto;
       .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
@@ -385,7 +371,6 @@ body {
     padding:15px 20px;
     background: rgba(255,255,255,.05);
     .border-radius(4px);
-    behavior: url(../js/libs//PIE.htc);
     h4 {
       font-weight: normal;
       .font-size(11);
@@ -463,7 +448,6 @@ footer {
     background-color: #000;
     padding: 10px 14px 6px;
     .border-top-radius(6px);
-    behavior: url(../js/libs//PIE.htc);
     .transition(all 150ms ease-out);
     &:hover {
       text-decoration: none;
@@ -539,6 +523,8 @@ footer {
   padding:30px;
   margin-left: 0;
   width:65%;
+  max-width: 900px;
+  z-index: 9999;
   .close {
     color: white;
     text-shadow:none;
@@ -608,7 +594,7 @@ footer {
     li {
       list-style: none;
       display:inline-block;
-      .font-size(13);
+      .font-size(14);
       line-height: 1.2;
       max-width: 150px;
       height:40px;
@@ -805,7 +791,6 @@ footer {
     .transition(top 0ms ease-out);
     color:white;
     .border-radius(6px);
-    behavior: url(../js/libs//PIE.htc);
     .opacity(50);
     background: url('/images/arrow.svg') no-repeat 10px -110px transparent;
     .transition(all 50ms ease-in);
