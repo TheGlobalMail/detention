@@ -428,19 +428,22 @@ define([
       var backgroundOpacity = ((score / 100) * 85) + 15;
       // Round to the nearest number divisible by 5
       backgroundOpacity = Math.round(backgroundOpacity / 5) * 5;
+      var isFlagged = flags.isFlagged(_this.data.id);
 
       var classes = _this.element.classList;
       if (_this.data.flagScore !== score) {
         _this.data.flagScore = score;
         if (score > 0) {
-          _this.element.setAttribute('test', '123');
-          _this.element.style.backgroundColor = 'rgba(255,255,255,' + backgroundOpacity / 100 + ')';
+          if (isFlagged) {
+            _this.element.style.backgroundColor = undefined;
+          } else {
+            _this.element.style.backgroundColor = 'rgba(255,255,255,' + backgroundOpacity / 100 + ')';
+          }
         }
       }
-      var flagged = flags.isFlagged(_this.data.id);
-      if (classes.contains('flagged') && !flagged) {
+      if (classes.contains('flagged') && !isFlagged) {
         classes.remove('flagged');
-      } else if (!classes.contains('flagged') && flagged) {
+      } else if (!classes.contains('flagged') && isFlagged) {
         classes.add('flagged');
       }
     }
