@@ -17,7 +17,7 @@ define([
   // The current max number of flaggings across all incidents
   var maxFlaggings = 0;
 
-  // The current flagged data
+  // Flagged data from the API. Key is incident id and value is # of flaggings
   Flags.data = {};
 
   // Stores references to prior flaggings so they can be unflagged by this user
@@ -32,6 +32,7 @@ define([
       .done(function(data){
         unnormalisedData = data.flags;
         Flags.recalculateData();
+        Flags.trigger('load');
       });
   };
 
@@ -62,6 +63,7 @@ define([
       Flags.flagged[id] = 'pending';
     }
     Flags.trigger('change', _.keys(Flags.flagged).length, notMadeByUser);
+    Flags.trigger('flag', id);
     if (!notMadeByUser){
       return $.post(api + '/api/flag', {id: id})
         .done(function(data){
@@ -87,6 +89,7 @@ define([
         });
     }
     Flags.trigger('change', _.keys(Flags.flagged).length);
+    Flags.trigger('unflag', id);
     return defer;
   };
 
