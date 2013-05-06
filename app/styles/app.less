@@ -258,13 +258,13 @@ body {
   &.affix {
     position:fixed;
     top:0;
+    padding: 50px 0 25px;
     background-color: #1c1f1f;
     background: url('/images/noise.png') repeat 0 0 rgba(28,31,31,.95);
     border-bottom: 1px solid rgba(255,255,255,.05);
     .box-shadow(0 0 25px black);
     z-index: 99;
     .month {
-      .transition(all 150ms ease-in);
       margin-top: 4px;
     }
   }
@@ -300,19 +300,18 @@ body {
 }
 .share {
   color:white;
-  background-color: #1c1f1f;
-  // background: url('/images/noise.png') repeat 0 0 rgba(28,31,31,.95);
+  background-color: #232626;
   text-shadow:0 -1px 0 black;
   display:block;
   width:100%;
   height:auto;
   left:0;
-  padding:20px 0;
+  padding:16px 0;
   border-top: 1px solid rgba(255,255,255,.1);
-  .box-shadow(0 0 25px black);
+  .box-shadow(0 0 10px black);
   position:fixed;
   bottom:-160px;
-  z-index: 2000;
+  z-index: 999;
   .transition(all 150ms ease-out);
   .opacity(0);
   &.pinned {
@@ -328,15 +327,16 @@ body {
     margin-top: 4px;
     .flag-icon {
       float:left;
-      width:60px;
-      height:60px;
-      margin: 0 16px 20px 0;
+      width:56px;
+      height:56px;
+      margin: 0 16px 15px 0;
       .border-radius(8px);
-      background: url('/images/flag.svg') no-repeat center -52px #ffffff;
+      background: url('/images/flag.svg') no-repeat center -47px #ffffff;
       background-size: 40% auto;
       .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
     }
     h3 {
+      .font-size(20);
       margin: 0;
       display:inline;
     }
@@ -351,7 +351,7 @@ body {
       }
     }
     p {
-      margin-top: 5px;
+      margin-top: 3px;
       .font-size(13);
       line-height: 1.3;
       a {
@@ -368,7 +368,7 @@ body {
   .share-tools {
     float:right;
     width:260px;
-    padding:15px 20px;
+    padding:12px 20px;
     background: rgba(255,255,255,.05);
     .border-radius(4px);
     h4 {
@@ -419,7 +419,7 @@ footer {
   margin-top: 40px;
   text-shadow: 0 -1px 0 black;
   position: relative;
-  z-index: 9999;
+  z-index: 1000;
   &:before {
     content:'';
     display: block;
@@ -516,6 +516,7 @@ footer {
 .modal-backdrop, .modal-backdrop.fade.in {
   background: url('/images/noise.png') repeat 0 0 #141616;
   .opacity(90);
+  z-index: 9999;
 }
 .modal {
   background: #1f2222;
@@ -524,7 +525,7 @@ footer {
   margin-left: 0;
   width:65%;
   max-width: 900px;
-  z-index: 9999;
+  z-index: 99999;
   .close {
     color: white;
     text-shadow:none;
@@ -573,6 +574,7 @@ footer {
   }
   &.fade.in {
     top:15%;
+
   }
   .modal-header {
     padding: 10px 0 0;
