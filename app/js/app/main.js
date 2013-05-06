@@ -6,8 +6,9 @@ define([
   './models',
   './flags',
   './sharing-panel',
-  './router'
-], function($, _, moment, incidents, models, flags, sharingPanel, router) {
+  './router',
+  './tracking'
+], function($, _, moment, incidents, models, flags, sharingPanel, router, tracking) {
   'use strict';
 
   var gridContainer = $('.incident-grid');

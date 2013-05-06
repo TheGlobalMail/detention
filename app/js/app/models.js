@@ -2,12 +2,15 @@ define([
   'jquery',
   'lodash',
   './../../components/tgm-bootstrap/js/bootstrap-modal',
-  './flags'
+  './flags',
+  'backbone'
 ], function($, _, modal, flags) {
   "use strict";
 
   var modalContainer = $('#modal-container');
   var rootModal = $('.modal');
+
+  var vent = _.extend({}, Backbone.Events);
 
   function GridController() {
     var _this = this;
@@ -40,6 +43,8 @@ define([
 
       _this.prevModal = new Modal(_this, true, '.prev-modal');
       _this.prevModal.positionOffScreenLeft();
+
+      vent.trigger('incident-displayed', _this.cells[_this.cellIndex].data.id);
     }
 
     function modalOnHide() {
@@ -433,6 +438,7 @@ define([
   return {
     GridController: GridController,
     Modal: Modal,
-    Cell: Cell
+    Cell: Cell,
+    vent: vent
   };
 });
