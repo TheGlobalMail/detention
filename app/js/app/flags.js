@@ -62,6 +62,9 @@ define([
       Flags.flaggedByUser[id] = 'pending';
       Flags.flagged[id] = 'pending';
     }
+    // Do this quickly here so that the counts update before the server
+    // responds. The final server response will correct any errors
+    unnormalisedData[id] = (unnormalisedData[id] || 0) + 1;
     Flags.trigger('change', _.keys(Flags.flagged).length, notMadeByUser);
     Flags.trigger('flag', id);
     if (!notMadeByUser){
@@ -81,6 +84,7 @@ define([
     var flag = Flags.flaggedByUser[id];
     delete Flags.flagged[id];
     if (Flags.flaggedByUser[id] && Flags.flaggedByUser[id] !== 'pending'){
+      unnormalisedData[id] = unnormalisedData[id] - 1;
       delete Flags.flaggedByUser[id];
       defer = $.post(api + '/api/unflag', {id: id, flag: flag})
         .done(function(data){
@@ -116,6 +120,13 @@ define([
     _.each(ids, function(id){
       Flags.flag(id, 'shared');
     });
+  };
+  
+  // Flag incidents that were shared
+  Flags.numberOfTimesFlagged = function(id){
+    console.error('looking for: ' + id + ' and  ' + unnormalisedData[id]);
+    console.error(unnormalisedData);
+    return unnormalisedData[id] || 0;
   };
 
   return Flags;

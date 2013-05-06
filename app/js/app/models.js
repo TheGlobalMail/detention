@@ -193,6 +193,7 @@ define([
       var cell = _this.cells[_this.cellIndex];
       flags.toggleFlag(cell.data.id);
       _this.currentModal.setFlagText();
+      _this.currentModal.updateFlagCount();
     };
 
     _this.windowOnResize = _.throttle(function() {
@@ -294,6 +295,7 @@ define([
         incidentDetails.show();
         eventDetails.hide();
 
+        _this.updateFlagCount();
         _this.setFlagText();
       } else { // Events
         _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
@@ -330,6 +332,19 @@ define([
         $button.removeClass('unflag');
       }
       $button.text((flagged ? 'Unflag' : 'Flag') + ' this incident');
+    };
+
+    _this.updateFlagCount = function() {
+      var flaggedCount = flags.numberOfTimesFlagged(_this.cell.data.id)
+      console.error(flaggedCount);
+      var $flaggedByOthers = _this.element.find('.flagged-by-others');
+      if (!flaggedCount){
+        $flaggedByOthers.text('Be the first to flag this incident');
+      }else{
+        $flaggedByOthers.text('This incident has been flagged ' +
+          (flaggedCount === 1 ? 'once': flaggedCount + ' times')
+        );
+      }
     };
 
     function getCenterPosition() {
