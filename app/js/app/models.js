@@ -336,7 +336,6 @@ define([
 
     _this.updateFlagCount = function() {
       var flaggedCount = flags.numberOfTimesFlagged(_this.cell.data.id)
-      console.error(flaggedCount);
       var $flaggedByOthers = _this.element.find('.flagged-by-others');
       if (!flaggedCount){
         $flaggedByOthers.text('Be the first to flag this incident');
@@ -409,12 +408,11 @@ define([
 
       if (data.event_type === 'incident') {
         flags.on('reload change', updateHighlight);
+        if (flags.loaded) updateHighlight();
       } else {
         element.classList.add(data['type'] + '-event');
         element.classList.add('event');
       }
-
-      updateHighlight();
 
       element.setAttribute('data-incident-number', data["Incident Number"]);
 
