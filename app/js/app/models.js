@@ -17,6 +17,7 @@ define([
 
     function constructor() {
       _this.cells = [];
+      _this.cellsByIncidentNumber = {};
 
       _this.currentModal = new Modal(_this, false, '.current-modal');
 
@@ -58,7 +59,8 @@ define([
 
     _this.addCell = function(cell) {
       cell.grid = _this;
-      _this.cells.push(cell)
+      _this.cells.push(cell);
+      _this.cellsByIncidentNumber[cell.data["Incident Number"]] = cell;
     };
 
     _this.hasNextCell = function() {
@@ -193,7 +195,7 @@ define([
       _this.currentModal.setFlagText();
     };
 
-    _this.windowOnResize = _.debounce(function() {
+    _this.windowOnResize = _.throttle(function() {
       if (_this.displayingModal) {
         _this.currentModal.positionInCenter();
         _this.nextModal.positionOffScreenRight();
@@ -201,8 +203,15 @@ define([
       }
     }, 50);
 
+    _this.cellOnClick = function() {
+      var incidentNumber = this.getAttribute('data-incident-number');
+      var cell = _this.cellsByIncidentNumber[incidentNumber];
+      _this.showCellModal(cell);
+    };
+
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
+      $('#incidents').on('click touch', '.cell', _this.cellOnClick)
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
@@ -390,9 +399,9 @@ define([
         element.classList.add('event');
       }
 
-      setBindings();
-
       updateHighlight();
+
+      element.setAttribute('data-incident-number', data["Incident Number"]);
 
       return _this;
     }
@@ -408,7 +417,7 @@ define([
       if (_this.data.flagScore !== score) {
         _this.data.flagScore = score;
         if (score > 15) {
-          _this.element.style.opacity = _this.data.flagScore / 100;
+          _this.element.style.cssText += '; opacity: ' + _this.data.flagScore / 100 + ';';
         }
       }
       var flagged = flags.isFlagged(_this.data.id);
@@ -417,19 +426,6 @@ define([
       } else if (!classes.contains('flagged') && flagged) {
         classes.add('flagged');
       }
-    }
-
-    function cellOnMouseOver() {
-      // TODO: display a small detail
-    }
-
-    function cellOnClick() { // click/touch
-      _this.grid.showCellModal(_this);
-    }
-
-    function setBindings() {
-      _this.element.addEventListener('mouseover', cellOnMouseOver);
-      _this.element.addEventListener('click', cellOnClick);
     }
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));

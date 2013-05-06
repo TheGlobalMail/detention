@@ -19,6 +19,7 @@ define([
     }
 
     var grid = new models.GridController;
+    var start = +new Date;
 
     _(incidents.months)
       // Build the grid in rows of months
@@ -33,7 +34,7 @@ define([
         _.each(obj.incidents, function(ID) {
           var cell = new models.Cell(incidents.data[ID]);
           grid.addCell(cell);
-          rowElement.append(cell.element);
+          rowElement[0].appendChild(cell.element);
         });
         return rowElement;
       // Insert a clearing div
@@ -45,6 +46,10 @@ define([
         requestAnimationFrame(function() {
           gridContainer.append(rowElement);
         });
+      })
+      .tap(function() {
+        requestAnimationFrame(setMonthBindings);
+        console.log(+new Date - start)
       });
   }
 
@@ -52,9 +57,13 @@ define([
     return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
   }
 
-  function getFilterMenuScrollHandler() {
+  function getMonthScrollHandler() {
+    var getDatesToWatch = function() {
+      return $('.date');
+    };
+    var datesToWatch = getDatesToWatch();
     var getMonthsToWatch = function() {
-      return $('.date .month');
+      return datesToWatch.find('.month');
     };
     var monthsToWatch = getMonthsToWatch();
 
@@ -70,10 +79,20 @@ define([
       // Continuously update the element list until
       // we've cached all that are expected
       if (monthsToWatch.length < incidents.months.length) {
+        datesToWatch = getDatesToWatch();
         monthsToWatch = getMonthsToWatch();
       }
       var scrollY = getScrollY();
       if (monthsToWatch.length) {
+        // Trigger the application of the render classes
+        _.each(datesToWatch.filter(':not(.render)'), function(element) {
+          element = $(element);
+          var elementTop = element.offset().top;
+          // TODO: only apply the class if within `x` px of the viewport, else remove
+          if (elementTop <= scrollY + window.innerHeight + 100) {
+            element.addClass('render');
+          }
+        });
         // Fix the filter menu's position
         if (filterMenu.offset().top <= scrollY + navHeight) {
           filterMenu.addClass(filterMenuClassName);
@@ -102,7 +121,7 @@ define([
           filterMenuMonth.text(filterMenuMonthText);
         }
       }
-    }, 20);
+    }, 100);
   }
 
   function getFlaggingPanelScrollHandler() {
@@ -115,28 +134,27 @@ define([
       } else {
         flagPanel.removeClass(className);
       }
-    }, 20);
+    }, 50);
   }
 
-  var filterMenuScrollEvent = 'scroll.filter-nav';
+  var monthScrollEvent = 'scroll.incident-month';
 
-  function setFilterMenuBindings() {
-    var filterMenuScrollHandler = getFilterMenuScrollHandler();
-    filterMenuScrollHandler();
-    $(window).on(filterMenuScrollEvent, filterMenuScrollHandler);
+  function setMonthBindings() {
+    var monthScrollHandler = getMonthScrollHandler();
+    monthScrollHandler();
+    $(window).on(monthScrollEvent, monthScrollHandler);
   }
 
-  function unsetFilterMenuBindings() {
-    $(window).off(filterMenuScrollEvent);
+  function unsetMonthBindings() {
+    $(window).off(monthScrollEvent);
   }
 
   function onResize() {
-    unsetFilterMenuBindings();
-    setFilterMenuBindings();
+    unsetMonthBindings();
+    setMonthBindings();
   }
 
   function setBindings() {
-    setFilterMenuBindings();
 
     var flaggingPanelScrollHandler = getFlaggingPanelScrollHandler();
     flaggingPanelScrollHandler();
