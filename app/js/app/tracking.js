@@ -13,7 +13,7 @@ define([
   });
 
   models.vent.on('incident-displayed', function(id){
-    window._gaq && __gaq.push(['_trackEvent', 'Incident', 'ID', id]);
+    window._gaq && _gaq.push(['_trackEvent', 'Incident', 'ID', id]);
   });
 
 });
