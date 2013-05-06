@@ -88,7 +88,6 @@ define([
         _.each(datesToWatch.filter(':not(.render)'), function(element) {
           element = $(element);
           var elementTop = element.offset().top;
-          // TODO: only apply the class if within `x` px of the viewport, else remove
           if (elementTop <= scrollY + window.innerHeight + 100) {
             element.addClass('render');
           }
