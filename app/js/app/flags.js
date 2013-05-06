@@ -26,10 +26,14 @@ define([
   // Stores references to all flaggings (either by user or shared with them)
   Flags.flagged = {};
 
+  // True if any data is loaded
+  Flags.loaded = false;
+
   // Load flags data from API. Returns Deferred object
   Flags.load = function(){
     return $.ajax(api + '/api/flagged')
       .done(function(data){
+        Flags.loaded = true;
         unnormalisedData = data.flags;
         Flags.recalculateData();
         Flags.trigger('load');
@@ -124,8 +128,6 @@ define([
   
   // Flag incidents that were shared
   Flags.numberOfTimesFlagged = function(id){
-    console.error('looking for: ' + id + ' and  ' + unnormalisedData[id]);
-    console.error(unnormalisedData);
     return unnormalisedData[id] || 0;
   };
 

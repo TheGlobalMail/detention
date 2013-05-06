@@ -49,7 +49,6 @@ define([
       })
       .tap(function() {
         requestAnimationFrame(setMonthBindings);
-        console.log(+new Date - start)
       });
   }
 
