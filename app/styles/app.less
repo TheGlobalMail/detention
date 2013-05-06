@@ -169,21 +169,23 @@ body {
     }
   }
 }
+
+.cellRGBA(@opacity: 1) {
+  background-color: rgba(255, 255, 255, @opacity);
+}
+
 .cell {
-  .opacity(5);
   width: @gridCellSize;
   height: @gridCellSize;
   margin: 4px;
-  background: white;
   float: left;
+  .cellRGBA(0.15);
   .transition(opacity 150ms ease-in);
-  // .border-radius(2px);
   &:hover {
     width:@gridCellSize + 2px;
     height:@gridCellSize + 2px;
-    // .border-radius(4px);
     margin: 3px;
-    .opacity(100) !important;
+    .cellRGBA;
     .box-shadow(0 0 15px 5px rgba(0,0,0,0.6));
     .transition(opacity 50ms ease-out);
     cursor:pointer;
@@ -193,7 +195,7 @@ body {
     height:@gridCellSize + 4px;
     .border-radius(4px);
     margin: 2px;
-    .opacity(100) !important;
+    .cellRGBA;
     background: url('/images/flag.svg') no-repeat center -27px #ffffff;
     background-size: 40% auto;
     .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
@@ -206,7 +208,7 @@ body {
     }
   }
   &.event {
-    .opacity(100)!important;
+    .cellRGBA;
     .border-radius(50%);
     width:@gridCellSize + 6px;
     height:@gridCellSize + 6px;
