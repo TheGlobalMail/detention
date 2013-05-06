@@ -82,6 +82,24 @@ body {
     .transition(all 150ms ease-in);
     z-index: 99;
   }
+  .arrow {
+      background: url(../images/arrow.svg) center top no-repeat transparent;
+      background-size: 100% auto;
+      display: block;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      left: 50%;
+      bottom: 10%;
+      margin-left: -20px;
+      .transition(all 150ms ease-out);
+      .border-radius(50%);
+      &:hover {
+        bottom: 9%;
+        .transition(all 150ms ease-in);
+        background-color: rgba(255,255,255,0.2);
+      }
+    }
   .title {
     position:relative;
     text-align: center;
@@ -104,28 +122,10 @@ body {
       font-weight: 100;
       letter-spacing: .05em;
     }
-    .arrow {
-      background: url(../images/arrow.svg) center top no-repeat transparent;
-      background-size: 100% auto;
-      display: block;
-      width: 40px;
-      height: 40px;
-      position: absolute;
-      left: 50%;
-      bottom: 10%;
-      margin-left: -20px;
-      .transition(all 150ms ease-out);
-      .border-radius(50%);
-      &:hover {
-        bottom: 9%;
-        .transition(all 150ms ease-in);
-        background-color: rgba(255,255,255,0.2);
-      }
-    }
   }
   .intro {
     text-align: center;
-    padding: 10% 10% 15%;
+    padding: 10% 10% 25%;
     max-width: 900px;
     font-weight: 100;
     margin: 0 auto;
@@ -147,6 +147,12 @@ body {
           border-color: white;
           text-decoration: none;
         }
+      }
+    }
+    .arrow {
+      bottom:15%;
+      &:hover {
+        bottom: 14.5%;
       }
     }
   }
