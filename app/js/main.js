@@ -9,8 +9,8 @@ requirejs.config({
 
 requirejs([
   'jquery',
-  'utils/shims',
-  'app/main'
+  './utils/shims',
+  './app/main'
 ],
 function ($, shims, app) {
   shims();
