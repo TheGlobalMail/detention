@@ -191,7 +191,14 @@ define([
 
     _this.flag = function() {
       var cell = _this.cells[_this.cellIndex];
-      flags.toggleFlag(cell.data.id);
+      flags.flag(cell.data.id);
+      _this.currentModal.setFlagText();
+      _this.currentModal.updateFlagCount();
+    };
+
+    _this.unflag = function() {
+      var cell = _this.cells[_this.cellIndex];
+      flags.unflag(cell.data.id);
       _this.currentModal.setFlagText();
       _this.currentModal.updateFlagCount();
     };
@@ -252,6 +259,7 @@ define([
       rootModal.on('click.modal', '.next', _this.grid.displayNextModal);
       rootModal.on('click.modal', '.prev', _this.grid.displayPrevModal);
       rootModal.on('click.modal', '.flag-btn', _this.grid.flag);
+      rootModal.on('click.modal', '.unflag-btn', _this.grid.unflag);
     }
 
     _this.setCell = function(cell) {
@@ -325,13 +333,21 @@ define([
 
     _this.setFlagText = function() {
       var flagged = flags.isFlagged(_this.cell.data.id);
-      var $button = _this.element.find('.flag-btn');
+      var flaggedByUser = flags.isUserFlagged(_this.cell.data.id);
+      var $flagButton = _this.element.find('.flag-btn');
+      var $unflagButton = _this.element.find('.unflag-btn');
       if (flagged){
-        $button.addClass('unflag');
+        if (flaggedByUser){
+          $flagButton.hide();
+        }else{
+          $flagButton.show();
+        }
+        $unflagButton.show();
       }else{
-        $button.removeClass('unflag');
+        $flagButton.show();
+        $unflagButton.hide();
       }
-      $button.text((flagged ? 'Unflag' : 'Flag') + ' this incident');
+      $flagButton.text((!flaggedByUser ? 'Reflag' : 'Flag') + ' this incident');
     };
 
     _this.updateFlagCount = function() {
