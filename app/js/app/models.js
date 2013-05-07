@@ -47,7 +47,6 @@ define([
 
       _this.currentModal.positionInCenter().display();
 
-      _this.currentModal.positionInCenter().display();
       _this.nextModal = new Modal(_this, true, '.next-modal');
       _this.nextModal.positionOffScreenRight();
 
@@ -243,16 +242,19 @@ define([
       }
     }, 50);
 
+    _this.getCellbyElement = function(element) {
+      var incidentNumber = element.getAttribute('data-incident-number');
+      return _this.cellsByIncidentNumber[incidentNumber];
+    };
+
     _this.cellOnClick = function() {
-      var incidentNumber = this.getAttribute('data-incident-number');
-      var cell = _this.cellsByIncidentNumber[incidentNumber];
+      var cell = _this.getCellbyElement(this);
       _this.showCellModal(cell);
     };
 
     _this.cellOnOver = function() {
+      var cell = _this.getCellbyElement(this);
       var $cell = $(this);
-      var incidentNumber = $cell.data('incident-number');
-      var cell = _this.cellsByIncidentNumber[incidentNumber];
       if (!cell.data.Summary) return;
       var pos = $cell.offset();
       if (_this.pullQuoteTimer) clearTimeout(_this.pullQuoteTimer);
@@ -286,9 +288,10 @@ define([
 
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
-      $('#incidents').on('click touch', '.cell', _this.cellOnClick);
-      $('#incidents').on('mouseover', '.cell', _this.cellOnOver);
-      $('#incidents').on('mouseout', '.cell', _this.cellOnOut);
+      var incidents = $('#incidents');
+      incidents.on('click touch', '.cell', _this.cellOnClick);
+      incidents.on('mouseover', '.cell', _this.cellOnOver);
+      incidents.on('mouseout', '.cell', _this.cellOnOut);
       modalBackdrop.click(function() {
         _this.currentModal.element.trigger("hide");
       });
@@ -438,15 +441,15 @@ define([
     };
 
     function getCenterPosition() {
-      return ($(window).width() - _this.element.outerWidth()) / 2;
+      return (window.innerWidth - _this.element.outerWidth()) / 2;
     }
 
     function getLeftOffScreenPosition() {
-      return -_this.element.outerWidth() - 200;
+      return -window.innerWidth;
     }
 
     function getRightOffScreenPosition() {
-      return $(window).width() + _this.element.outerWidth();
+      return window.innerWidth * 2;
     }
 
     _this.positionInCenter = function() {
