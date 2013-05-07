@@ -17,6 +17,8 @@ define([
 
   var vent = _.extend({}, Backbone.Events);
 
+  var specialPullQuote = window.location.href.match(/bam/);
+
   function GridController() {
     var _this = this;
 
@@ -249,7 +251,7 @@ define([
       _this.showCellModal(cell);
     };
 
-    _this.cellOnOver = function() {
+    _this.showPullQuote = function() {
       var $cell = $(this);
       var incidentNumber = $cell.data('incident-number');
       var cell = _this.cellsByIncidentNumber[incidentNumber];
@@ -258,37 +260,51 @@ define([
       if (_this.pullQuoteTimer) clearTimeout(_this.pullQuoteTimer);
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteTimer = setTimeout(function(){
-        _this.$pullQuote.find('blockquote').text('"' + cell.data.Summary.replace(redactedRegex, 'NAME REDACTED') + '"');
+        var summary  = cell.data.Summary.replace(redactedRegex, 'NAME REDACTED');
+        var words = summary.split(' ');
+        if (specialPullQuote && words.length > 8){
+          summary = '...' + words.slice(3, 11).join(' ') + '...';
+        }
+        _this.$pullQuote.find('blockquote').text('"' + summary + '"');
         _this.$pullQuote.find('em').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
         var width = _this.$pullQuote.width();
         var height = _this.$pullQuote.height();
         var offset = {top: pos.top - (height / 2) - 15};
-        if (pos.left > $(window).width() - width - 100){
-          console.error('got left!');
-          offset.left = pos.left - (width + 80);
-          _this.$pullQuote.removeClass('right');
+        if (!specialPullQuote){
+          if (pos.left > $(window).width() - width - 100){
+            offset.left = pos.left - (width + 80);
+            _this.$pullQuote.removeClass('right');
+          }else{
+             offset.left = pos.left + 50;
+            _this.$pullQuote.addClass('right');
+          }
         }else{
-           offset.left = pos.left + 50;
-          _this.$pullQuote.addClass('right');
+          _this.$pullQuote.removeClass('right');
+          _this.$pullQuote.addClass('bam');
+          offset = {top: $(window).scrollTop() + 300, left: ($(window).width() / 2 - width / 2)};
+          _this.hidePullQuote(1000);
         }
         _this.$pullQuote.css('top', offset.top);
         _this.$pullQuote.css('left', offset.left);
+        _this.$pullQuote.stop();
+        _this.$pullQuote.css('opacity', 100);
         _this.$pullQuote.show();
       }, 50);
     };
 
-    _this.cellOnOut = function() {
+    _this.hidePullQuote = function(delay) {
+      if (!delay) delay = 50;
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteLeaveTimer = setTimeout(function(){
-        _this.$pullQuote.fadeOut();
-      }, 50);
+        _this.$pullQuote.fadeOut(3000);
+      }, delay);
     };
 
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
       $('#incidents').on('click touch', '.cell', _this.cellOnClick);
-      $('#incidents').on('mouseover', '.cell', _this.cellOnOver);
-      $('#incidents').on('mouseout', '.cell', _this.cellOnOut);
+      $('#incidents').on('mouseover', '.cell', _this.showPullQuote);
+      $('#incidents').on('mouseout', '.cell', _this.hidePullQuoote);
       modalBackdrop.click(function() {
         _this.currentModal.element.trigger("hide");
       });
