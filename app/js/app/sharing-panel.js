@@ -7,6 +7,7 @@ define([
   "use strict";
 
   var $flaggedCount = $('#flagged-count');
+  var $sharingPanel = $('#sharing-panel');
 
   // Update the number of incidents flagged on change
   flags.on('change', function(flagged){
@@ -58,14 +59,18 @@ define([
   // been flagged, and if so, was it by the user
   var $explanation = $('#flagging-explanation');
   router.on('change', function(){
-    var text;
+    var text, css;
     if (!flags.anyFlags()){
       text = "Flagging an incident increases it's brightness in the grid. Incidents that are flagged by the most readers will appear the brightest. Share flagged incidents using the buttons to the right.";
+      css = 'noflags';
     }else if (!flags.anyUserFlags()){
       text = 'These are incidents that another reader has highlighted as being of particular interest or concern. You can add your own incidents and share them - or reshare these using the buttons on the right.';
+      css = 'sharedflags';
     }else{
       text = 'Share your flagged incidents using the buttons on the right.';
+      css = 'userflags';
     }
+    $sharingPanel.attr('class', $sharingPanel.attr('class').replace(/\w*flags/, css));
     $explanation.text(text);
   });
 });
