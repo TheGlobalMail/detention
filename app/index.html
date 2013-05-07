@@ -160,75 +160,74 @@
 
     <!-- Modals -->
 
-    <div id="modal-container"></div>
-    <div class="modal hide fade offset3" tabindex="-1">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><h5>Back to all incidents</h5> <span>×</span></button>
-        <h3 class='incident-details'>
-          Incident
-          <span class="incident-number"></span>
-        </h3>
-        <h3 class='event-details'>
-          Related Event
-        </h3>
-      </div>
-      <div class="modal-body">
-        <div class="incident-details">
-          <ul>
-            <li>
-              <span class="subtitle">Date</span>
-              <span class="date"></span>
-            </li>
-            <li>
-              <span class="subtitle">Facility</span>
-              <span class="facility"></span>
-            </li>
-            <li>
-              <span class="subtitle">Incident type</span>
-              <span class="incident-type"></span>
-            </li>
-            <li>
-              <span class="subtitle">Level</span>
-              <span class="level"></span>
-            </li>
-            <li class="summary-li">
-              <span class="subtitle">Summary</span>
-              <p class="summary"></p>
-              <a class="ext-link" href="/">View complete summary and any related data at detentionlogs.com</a>
-            </li>
-            <li class="disclaimer">The summary is presented as it was written in the incident reports received from DIAC. Client (or refugee) names were generally redacted by DIAC; SERCO and other staff names redacted by The Global Mail. <a href="/">More about this project.</a></li>
-          </ul>
-          <a class="prev">Prev Incident</a>
-          <a class="next">Next Incident</a>
-          <div class="flag">
-            <div class="container">
-              <h4>Think others should see this?</h4>
-              <div class="flag-group">
-                <div class="btn flag-btn">Flag this incident</div>
-                <span class="flagged-by-others">Be the first to flag this incident</span>
+    <div id="modal-container">
+      <div class="modal-backdrop fade in"></div>
+      <div class="modal-slideshow">
+        <div class="modal hide fade offset3" tabindex="-1">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><h5>Back to all incidents</h5> <span>×</span></button>
+            <h3 class='incident-details'>
+              Incident
+              <span class="incident-number"></span>
+            </h3>
+            <h3 class='event-details'>
+              Related Event
+            </h3>
+          </div>
+          <div class="modal-body">
+            <div class="incident-details">
+              <ul>
+                <li>
+                  <span class="subtitle">Date</span>
+                  <span class="date"></span>
+                </li>
+                <li>
+                  <span class="subtitle">Facility</span>
+                  <span class="facility"></span>
+                </li>
+                <li>
+                  <span class="subtitle">Incident type</span>
+                  <span class="incident-type"></span>
+                </li>
+                <li>
+                  <span class="subtitle">Level</span>
+                  <span class="level"></span>
+                </li>
+                <li class="summary-li">
+                  <span class="subtitle">Summary</span>
+                  <p class="summary"></p>
+                  <a class="ext-link" href="/">View complete summary and any related data at detentionlogs.com</a>
+                </li>
+                <li class="disclaimer">The summary is presented as it was written in the incident reports received from DIAC. Client (or refugee) names were generally redacted by DIAC; SERCO and other staff names redacted by The Global Mail. <a href="/">More about this project.</a></li>
+              </ul>
+              <a class="prev">Prev Incident</a>
+              <a class="next">Next Incident</a>
+              <div class="flag">
+                <div class="container">
+                  <h4>Think others should see this?</h4>
+                  <div class="flag-group">
+                    <div class="btn flag-btn">Flag this incident</div>
+                    <div class="btn unflag unflag-btn">Unflag this incident</div>
+                    <span class="flagged-by-others">Be the first to flag this incident</span>
+                  </div>
               </div>
             </div>
-            <p>
-              <strong>Flagging an incident increases it's brightness in the grid. Incidents that are flagged by the most readers will appear the brightest.</strong> The incidents you flag can also be shared with others by using the buttons at the bottom of the screen, or by copying and pasting the url.
-            </p>
+            <div class="event-details">
+              <div class="media">Image or video goes here</div>
+              <a class="prev">Prev Incident</a>
+              <a class="next">Next Incident</a>
+              <ul>
+                <li>
+                  <span class="occurred_on"></span>
+                </li>
+                <li>
+                  <p class="summary"></p>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-
-
-        <div class="event-details">
-          <div class="media">Image or video goes here</div>
-          <a class="prev">Prev Incident</a>
-          <a class="next">Next Incident</a>
-          <ul>
-            <li>
-              <span class="occurred_on"></span>
-            </li>
-            <li>
-              <p class="summary"></p>
-            </li>
-          </ul>
-
-        </div>
+      </div>
     </div>
   </div>
 
