@@ -189,7 +189,7 @@ define([
         .value();
       var offset = _this.currentModal.element.offset().top - modalSlideshow.offset().top;
       var height = maxHeight + offset;
-      modalBackdrop.css({"height": height});
+      modalBackdrop.css({"height": window.innerHeight});
       modalSlideshow.css({"height": height});
     };
 
@@ -234,6 +234,7 @@ define([
         _this.currentModal.positionInCenter();
         _this.nextModal.positionOffScreenRight();
         _this.prevModal.positionOffScreenLeft();
+        _this.resizeContainers();
       }
     }, 50);
 
@@ -245,7 +246,7 @@ define([
 
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
-      $('#incidents').on('click touch', '.cell', _this.cellOnClick)
+      $('#incidents').on('click touch', '.cell', _this.cellOnClick);
       modalBackdrop.click(function() {
         _this.currentModal.element.trigger("hide");
       });
@@ -423,13 +424,13 @@ define([
     };
 
     _this.slideLeft = function() {
-      _this.element.css({
+      _this.element.animate({
         "left": getLeftOffScreenPosition() + 'px'
       });
     };
 
     _this.slideRight = function() {
-      _this.element.css({
+      _this.element.animate({
         "left": getRightOffScreenPosition()  + 'px'
       });
     };
