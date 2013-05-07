@@ -3,14 +3,17 @@ define([
   'lodash',
   './../../components/tgm-bootstrap/js/bootstrap-modal',
   './flags',
+  'moment',
   'backbone'
-], function($, _, modal, flags) {
+], function($, _, modal, flags, moment) {
   "use strict";
 
   var modalContainer = $('#modal-container');
   var modalSlideshow = modalContainer.find('.modal-slideshow');
   var modalBackdrop = modalContainer.find('.modal-backdrop');
   var rootModal = $('.modal');
+
+  var redactedRegex = /client s. 47F\(1\)/gi;
 
   var vent = _.extend({}, Backbone.Events);
 
@@ -29,6 +32,8 @@ define([
       _this.displayingModal = false;
 
       _this.setBindings();
+
+      _this.$pullQuote = $('#pullquote');
 
       return _this;
     }
@@ -244,9 +249,46 @@ define([
       _this.showCellModal(cell);
     };
 
+    _this.cellOnOver = function() {
+      var $cell = $(this);
+      var incidentNumber = $cell.data('incident-number');
+      var cell = _this.cellsByIncidentNumber[incidentNumber];
+      if (!cell.data.Summary) return;
+      var pos = $cell.offset();
+      if (_this.pullQuoteTimer) clearTimeout(_this.pullQuoteTimer);
+      if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
+      _this.pullQuoteTimer = setTimeout(function(){
+        _this.$pullQuote.find('blockquote').text('"' + cell.data.Summary.replace(redactedRegex, 'NAME REDACTED') + '"');
+        _this.$pullQuote.find('em').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
+        var width = _this.$pullQuote.width();
+        var height = _this.$pullQuote.height();
+        var offset = {top: pos.top - (height / 2) - 15};
+        if (pos.left > $(window).width() - width - 100){
+          console.error('got left!');
+          offset.left = pos.left - (width + 80);
+          _this.$pullQuote.removeClass('right');
+        }else{
+           offset.left = pos.left + 50;
+          _this.$pullQuote.addClass('right');
+        }
+        _this.$pullQuote.css('top', offset.top);
+        _this.$pullQuote.css('left', offset.left);
+        _this.$pullQuote.show();
+      }, 50);
+    };
+
+    _this.cellOnOut = function() {
+      if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
+      _this.pullQuoteLeaveTimer = setTimeout(function(){
+        _this.$pullQuote.hide();
+      }, 50);
+    };
+
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
       $('#incidents').on('click touch', '.cell', _this.cellOnClick);
+      $('#incidents').on('mouseover', '.cell', _this.cellOnOver);
+      $('#incidents').on('mouseout', '.cell', _this.cellOnOut);
       modalBackdrop.click(function() {
         _this.currentModal.element.trigger("hide");
       });
@@ -323,7 +365,7 @@ define([
         _.each(map, function(property, className) {
           var text = cell.data[property] || '';
           if (property === 'Summary') {
-            var html = text.replace(/s. 47F\(1\)/gi, ' <span class="redact">NAME REDACTED</span>');
+            var html = text.replace(redactedRegex, ' <span class="redact">NAME REDACTED</span>');
             _this.element.find(className).html(html);
           } else {
             _this.element.find(className).text(text);

@@ -7,7 +7,8 @@ define([
   './flags',
   './sharing-panel',
   './router',
-  './tracking'
+  './tracking',
+  'tooltips'
 ], function($, _, moment, incidents, models, flags, sharingPanel, router, tracking) {
   'use strict';
 
