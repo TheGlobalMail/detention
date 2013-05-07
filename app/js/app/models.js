@@ -8,6 +8,8 @@ define([
   "use strict";
 
   var modalContainer = $('#modal-container');
+  var modalSlideshow = modalContainer.find('.modal-slideshow');
+  var modalBackdrop = modalContainer.find('.modal-backdrop');
   var rootModal = $('.modal');
 
   var vent = _.extend({}, Backbone.Events);
@@ -34,6 +36,8 @@ define([
     function modalOnShow() {
       // Called when bootstrap has shown the modal
 
+      modalContainer.addClass("show");
+
       _this.displayingModal = true;
 
       _this.currentModal.positionInCenter().display();
@@ -50,6 +54,9 @@ define([
 
     function modalOnHide() {
       // Called when bootstrap has hidden the modal
+
+      modalContainer.removeClass("show");
+
       _this.currentModal.element.hide();
       _this.nextModal.element.hide();
       _this.prevModal.element.hide();
@@ -97,7 +104,7 @@ define([
         _this.currentModal.element.removeClass('has-prev');
       }
 
-      _this.addIdentifierClasses();
+      _this.postDisplay();
     };
 
     _this.getNextCell = function() {
@@ -142,7 +149,7 @@ define([
         _this.nextModal.setCell(_this.getNextCell());
       }
 
-      _this.addIdentifierClasses();
+      _this.postDisplay();
     };
 
     _this.displayPrevModal = function() {
@@ -166,7 +173,24 @@ define([
         _this.prevModal.setCell(_this.getPrevCell());
       }
 
+      _this.postDisplay();
+    };
+
+    _this.postDisplay = function() {
+      _this.resizeContainers();
       _this.addIdentifierClasses();
+    };
+
+    _this.resizeContainers = function() {
+      var maxHeight = _([_this.prevModal, _this.currentModal, _this.nextModal])
+        .pluck('element')
+        .invoke('outerHeight')
+        .max()
+        .value();
+      var offset = _this.currentModal.element.offset().top - modalSlideshow.offset().top;
+      var height = maxHeight + offset;
+      modalBackdrop.css({"height": height});
+      modalSlideshow.css({"height": height});
     };
 
     _this.addIdentifierClasses = function() {
@@ -178,6 +202,7 @@ define([
         'prev-modal': _this.prevModal
       };
 
+      // Remove classes which refer to a previous state
       _.each(map, function(modal, className) {
         var element = modal.element;
         _(map).keys().each(function(key) {
@@ -185,6 +210,7 @@ define([
             element.removeClass(key);
           }
         });
+
         element.addClass(className)
       });
     };
@@ -213,6 +239,9 @@ define([
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
       $('#incidents').on('click touch', '.cell', _this.cellOnClick)
+      modalBackdrop.click(function() {
+        _this.currentModal.element.trigger("hide");
+      });
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
@@ -240,10 +269,10 @@ define([
         _this.clonedElement = true;
       // If we're using the rootModal
       } else {
-        setBindings()
+        setBindings();
       }
       _this.element = element;
-      modalContainer.append(element);
+      modalSlideshow.append(element);
 
       return _this;
     }
@@ -284,10 +313,10 @@ define([
         // Update the modal's text
         _.each(map, function(property, className) {
           var text = cell.data[property] || '';
-          if (property === 'Summary'){
+          if (property === 'Summary') {
             var html = text.replace(/s. 47F\(1\)/gi, ' <span class="redact">NAME REDACTED</span>');
             _this.element.find(className).html(html);
-          }else{
+          } else {
             _this.element.find(className).text(text);
           }
         });
@@ -315,7 +344,9 @@ define([
     };
 
     _this.initModal = function() {
-      this.element.modal();
+      _this.element.modal({
+        backdrop: false
+      });
     };
 
     _this.display = function() {
@@ -326,9 +357,9 @@ define([
     _this.setFlagText = function() {
       var flagged = flags.isFlagged(_this.cell.data.id);
       var $button = _this.element.find('.flag-btn');
-      if (flagged){
+      if (flagged) {
         $button.addClass('unflag');
-      }else{
+      } else {
         $button.removeClass('unflag');
       }
       $button.text((flagged ? 'Unflag' : 'Flag') + ' this incident');
@@ -366,23 +397,23 @@ define([
     };
 
     _this.positionOffScreenLeft = function() {
-      _this.element.css("left", getLeftOffScreenPosition());
+      _this.element.css("left", getLeftOffScreenPosition() + 'px');
       return _this;
     };
 
     _this.positionOffScreenRight = function() {
-      _this.element.css("left", getRightOffScreenPosition());
+      _this.element.css("left", getRightOffScreenPosition() + 'px');
       return _this;
     };
 
     _this.slideLeft = function() {
-      _this.element.animate({
+      _this.element.css({
         "left": getLeftOffScreenPosition() + 'px'
       });
     };
 
     _this.slideRight = function() {
-      _this.element.animate({
+      _this.element.css({
         "left": getRightOffScreenPosition()  + 'px'
       });
     };
