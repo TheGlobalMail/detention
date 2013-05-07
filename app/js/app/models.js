@@ -373,13 +373,14 @@ define([
           $flagButton.hide();
         }else{
           $flagButton.show();
+          $flagButton.text('Reflag this incident');
         }
         $unflagButton.show();
       }else{
         $flagButton.show();
+        $flagButton.text('Flag this incident');
         $unflagButton.hide();
       }
-      $flagButton.text((!flaggedByUser ? 'Reflag' : 'Flag') + ' this incident');
     };
 
     _this.updateFlagCount = function() {

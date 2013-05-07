@@ -326,6 +326,22 @@ body {
     .opacity(100);
     .transition(all 500ms 250ms ease-in-out);
   }
+  &.noflags {
+    padding:10px 0 15px;
+    .flags {
+      max-width: none;
+      width:auto;
+      .flag-icon, h3, .btn {
+        display:none;
+      }
+      p {
+        .font-size(14);
+      }
+    }
+    .share-tools {
+      display:none;
+    }
+  }
   .flags {
     position:relative;
     width:65%;
