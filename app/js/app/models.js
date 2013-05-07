@@ -262,8 +262,8 @@ define([
       _this.pullQuoteTimer = setTimeout(function(){
         var summary  = cell.data.Summary.replace(redactedRegex, 'NAME REDACTED');
         var words = summary.split(' ');
-        if (specialPullQuote && words.length > 8){
-          summary = '...' + words.slice(3, 11).join(' ') + '...';
+        if (specialPullQuote && words.length > 12){
+          summary = '...' + words.slice(3, 15).join(' ') + '...';
         }
         _this.$pullQuote.find('blockquote').text('"' + summary + '"');
         _this.$pullQuote.find('em').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
@@ -281,7 +281,7 @@ define([
         }else{
           _this.$pullQuote.removeClass('right');
           _this.$pullQuote.addClass('bam');
-          offset = {top: $(window).scrollTop() + 300, left: ($(window).width() / 2 - width / 2)};
+          offset = {top: pos.top - 150, left: ($(window).width() / 2 - width / 2)};
           _this.hidePullQuote(1000);
         }
         _this.$pullQuote.css('top', offset.top);
