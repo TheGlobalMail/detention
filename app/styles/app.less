@@ -242,6 +242,64 @@ body {
   }
 }
 
+.pullquote {
+  position:relative;
+  padding: 30px;
+  background-color: #191c1c;
+  border: 1px solid #4c5459;
+  text-align: left;
+  width:400px;
+  line-height: 1.2;
+  .box-shadow(0 2px 3px black);
+  ul {
+    margin: 0;
+    padding: 0;
+    height:20px;
+    li {
+      list-style: none;
+      vertical-align: top;
+      .font-size(12);
+      line-height: 1;
+      font-weight: normal;
+      display:inline-block;
+      border-right: 1px solid white;
+      padding: 0 10px 0 0;
+      margin: 0;
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+  blockquote {
+    padding: 0;
+    margin: 0;
+    border:none;
+    font-style: italic;
+    .font-size(30);
+  }
+  .incident-number {
+    .font-size(14);
+    line-height: 1;
+    font-weight: normal;
+    font-style: italic;
+    color:@grayLight;
+    margin-top: -10px;
+  }
+  &.right {
+    &:after {
+      content: '';
+      display:block;
+      position:absolute;
+      top:50%;
+      margin-top: -10px;
+      left:-11px;
+      width:11px;
+      height:20px;
+      background: url('/images/tooltip-arrows.png') no-repeat 0 0 transparent;
+    }
+  }
+}
+
 #links {
   border-top: 1px solid rgba(255,255,255,.1);
   .box-shadow(0 -1px 0 rgba(0,0,0,0.5));
