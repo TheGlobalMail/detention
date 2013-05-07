@@ -50,6 +50,16 @@ define([
     return _.keys(Flags.flagged).sort();
   };
 
+  // Returns true if there are any flags
+  Flags.anyFlags = function(){
+    return !_.isEmpty(Flags.flagged);
+  };
+
+  // Returns true if there are any flags
+  Flags.anyUserFlags = function(){
+    return !_.isEmpty(Flags.flaggedByUser);
+  };
+
   // Flags or unflags depending on current state
   Flags.toggleFlag = function(id){
     return !Flags.isFlagged(id) ? Flags.flag(id) : Flags.unflag(id);

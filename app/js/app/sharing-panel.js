@@ -31,6 +31,7 @@ define([
   var $twitterShare = $('#sharing-panel li.twitter a');
   var $facebookShare = $('#sharing-panel li.facebook a');
   var $emailShare = $('#sharing-panel li.email a');
+
   router.on('change', function(){
     var text;
     var flagged = flags.flaggedIds().length;
@@ -51,5 +52,20 @@ define([
     var emailHref = 'mailto:info@theglobalmail.org?subject=' + encodeURIComponent($('title').text());
     emailHref += '&body=' + encodeURIComponent(textWithLink);
     $emailShare.attr('href', emailHref);
+  });
+
+  // Update the explanation text on the sharing panel if any incidents have
+  // been flagged, and if so, was it by the user
+  var $explanation = $('#flagging-explanation');
+  router.on('change', function(){
+    var text;
+    if (!flags.anyFlags()){
+      text = "Flagging an incident increases it's brightness in the grid. Incidents that are flagged by the most readers will appear the brightest. Share flagged incidents using the buttons to the right.";
+    }else if (!flags.anyUserFlags()){
+      text = 'These are incidents that another reader has highlighted as being of particular interest or concern. You can add your own incidents and share them - or reshare these using the buttons on the right.';
+    }else{
+      text = 'Share your flagged incidents using the buttons on the right.';
+    }
+    $explanation.text(text);
   });
 });
