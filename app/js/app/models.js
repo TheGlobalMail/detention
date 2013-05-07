@@ -3,14 +3,17 @@ define([
   'lodash',
   './../../components/tgm-bootstrap/js/bootstrap-modal',
   './flags',
+  'moment',
   'backbone'
-], function($, _, modal, flags) {
+], function($, _, modal, flags, moment) {
   "use strict";
 
   var modalContainer = $('#modal-container');
   var modalSlideshow = modalContainer.find('.modal-slideshow');
   var modalBackdrop = modalContainer.find('.modal-backdrop');
   var rootModal = $('.modal');
+
+  var redactedRegex = /(client )*s. 47F\(1\)/gi;
 
   var vent = _.extend({}, Backbone.Events);
 
@@ -30,6 +33,8 @@ define([
 
       _this.setBindings();
 
+      _this.$pullQuote = $('#pullquote');
+
       return _this;
     }
 
@@ -42,7 +47,6 @@ define([
 
       _this.currentModal.positionInCenter().display();
 
-      _this.currentModal.positionInCenter().display();
       _this.nextModal = new Modal(_this, true, '.next-modal');
       _this.nextModal.positionOffScreenRight();
 
@@ -238,15 +242,55 @@ define([
       }
     }, 50);
 
+    _this.getCellbyElement = function(element) {
+      var incidentNumber = element.getAttribute('data-incident-number');
+      return _this.cellsByIncidentNumber[incidentNumber];
+    };
+
     _this.cellOnClick = function() {
-      var incidentNumber = this.getAttribute('data-incident-number');
-      var cell = _this.cellsByIncidentNumber[incidentNumber];
+      var cell = _this.getCellbyElement(this);
       _this.showCellModal(cell);
+    };
+
+    _this.cellOnOver = function() {
+      var cell = _this.getCellbyElement(this);
+      var $cell = $(this);
+      if (!cell.data.Summary) return;
+      var pos = $cell.offset();
+      if (_this.pullQuoteTimer) clearTimeout(_this.pullQuoteTimer);
+      if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
+      _this.pullQuoteTimer = setTimeout(function(){
+        _this.$pullQuote.find('blockquote').text('"' + cell.data.Summary.replace(redactedRegex, 'NAME REDACTED') + '"');
+        _this.$pullQuote.find('em').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
+        var width = _this.$pullQuote.width();
+        var height = _this.$pullQuote.height();
+        var offset = {top: pos.top - (height / 2) - 15};
+        if (pos.left > $(window).width() - width - 100){
+          offset.left = pos.left - (width + 80);
+          _this.$pullQuote.removeClass('right');
+        }else{
+           offset.left = pos.left + 50;
+          _this.$pullQuote.addClass('right');
+        }
+        _this.$pullQuote.css('top', offset.top);
+        _this.$pullQuote.css('left', offset.left);
+        _this.$pullQuote.show();
+      }, 50);
+    };
+
+    _this.cellOnOut = function() {
+      if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
+      _this.pullQuoteLeaveTimer = setTimeout(function(){
+        _this.$pullQuote.fadeOut();
+      }, 50);
     };
 
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
-      $('#incidents').on('click touch', '.cell', _this.cellOnClick);
+      var incidents = $('#incidents');
+      incidents.on('click touch', '.cell', _this.cellOnClick);
+      incidents.on('mouseover', '.cell', _this.cellOnOver);
+      incidents.on('mouseout', '.cell', _this.cellOnOut);
       modalBackdrop.click(function() {
         _this.currentModal.element.trigger("hide");
       });
@@ -323,7 +367,7 @@ define([
         _.each(map, function(property, className) {
           var text = cell.data[property] || '';
           if (property === 'Summary') {
-            var html = text.replace(/s. 47F\(1\)/gi, ' <span class="redact">NAME REDACTED</span>');
+            var html = text.replace(redactedRegex, ' <span class="redact">NAME REDACTED</span>');
             _this.element.find(className).html(html);
           } else {
             _this.element.find(className).text(text);
@@ -396,15 +440,15 @@ define([
     };
 
     function getCenterPosition() {
-      return ($(window).width() - _this.element.outerWidth()) / 2;
+      return (window.innerWidth - _this.element.outerWidth()) / 2;
     }
 
     function getLeftOffScreenPosition() {
-      return -_this.element.outerWidth() - 200;
+      return -window.innerWidth;
     }
 
     function getRightOffScreenPosition() {
-      return $(window).width() + _this.element.outerWidth();
+      return window.innerWidth * 2;
     }
 
     _this.positionInCenter = function() {

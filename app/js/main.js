@@ -7,7 +7,8 @@ requirejs.config({
     moment: '../components/moment/moment'
   },
   shim: {
-    xdr: { deps: ['jquery'] }
+    xdr: { deps: ['jquery'] },
+    tooltips: { deps: ['jquery'] }
   }
 });
 
