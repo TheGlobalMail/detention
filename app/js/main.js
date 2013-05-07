@@ -4,8 +4,7 @@ requirejs.config({
     xdr: './utils/xdr',
     lodash: '../components/lodash/lodash',
     backbone: '../components/backbone/backbone',
-    moment: '../components/moment/moment',
-    tooltips: '../components/bootstrap/js/bootstrap-tooltip'
+    moment: '../components/moment/moment'
   },
   shim: {
     xdr: { deps: ['jquery'] },
