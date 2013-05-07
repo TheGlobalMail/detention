@@ -13,7 +13,7 @@ define([
   var modalBackdrop = modalContainer.find('.modal-backdrop');
   var rootModal = $('.modal');
 
-  var redactedRegex = /client s. 47F\(1\)/gi;
+  var redactedRegex = /(client )*s. 47F\(1\)/gi;
 
   var vent = _.extend({}, Backbone.Events);
 
