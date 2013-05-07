@@ -45,9 +45,24 @@ define([
     return Flags.flagged[id];
   };
 
+  // Checks if the incident is currently flagged by this user
+  Flags.isUserFlagged = function(id){
+    return Flags.flaggedByUser[id];
+  };
+
   // Returns a list of all incident ids that are flagged
   Flags.flaggedIds = function(){
     return _.keys(Flags.flagged).sort();
+  };
+
+  // Returns true if there are any flags
+  Flags.anyFlags = function(){
+    return !_.isEmpty(Flags.flagged);
+  };
+
+  // Returns true if there are any flags
+  Flags.anyUserFlags = function(){
+    return !_.isEmpty(Flags.flaggedByUser);
   };
 
   // Flags or unflags depending on current state
