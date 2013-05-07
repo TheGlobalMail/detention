@@ -180,12 +180,11 @@ module.exports = function(grunt) {
           baseUrl: "app/js",
           mainConfigFile: "app/js/main.js",
           include: ["main"],
-          // Exclude the data
-          exclude: ["data/incidents"],
-          // r.js compiled file, to be passed in to the build process
-          out: "app/main-compiled.js",
-          // Deactivate compression
-          optimize: "none"
+          out: "dist/js/main.js",
+          optimize: "none",
+          preserveLicenseComments: false,
+          useStrict: true,
+          wrap: true
         }
       }
     },
@@ -262,6 +261,15 @@ module.exports = function(grunt) {
           ]
         }]
       }
+    },
+
+    bower: {
+        options: {
+            exclude: ['modernizr']
+        },
+        all: {
+            rjsConfig: '<%= yeoman.app %>/js/main.js'
+        }
     },
 
     cdn: {
