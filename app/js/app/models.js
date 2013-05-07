@@ -280,7 +280,7 @@ define([
     _this.cellOnOut = function() {
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteLeaveTimer = setTimeout(function(){
-        _this.$pullQuote.hide();
+        _this.$pullQuote.fadeOut();
       }, 50);
     };
 
