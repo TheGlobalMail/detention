@@ -434,12 +434,13 @@ define([
       if (_this.data.flagScore !== score) {
         _this.data.flagScore = score;
         if (score > 0) {
-          if (isFlagged) {
-            _this.element.style.backgroundColor = undefined;
-          } else {
+          if (!isFlagged) {
             _this.element.style.backgroundColor = 'rgba(255,255,255,' + backgroundOpacity / 100 + ')';
           }
         }
+      }
+      if (isFlagged && _this.element.style.backgroundColor) {
+        _this.element.style.backgroundColor = "";
       }
       if (classes.contains('flagged') && !isFlagged) {
         classes.remove('flagged');
