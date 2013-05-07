@@ -425,7 +425,7 @@ define([
       // Scale the score as a percentage
       var score = Math.round((flagWeights[_this.data.id] || 0) * 100);
       // Scale the scare between 15 and 100
-      var backgroundOpacity = ((score / 100) * 85) + 15;
+      var backgroundOpacity = ((score / 100) * 95) + 5;
       // Round to the nearest number divisible by 5
       backgroundOpacity = Math.round(backgroundOpacity / 5) * 5;
       var isFlagged = flags.isFlagged(_this.data.id);
