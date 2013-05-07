@@ -373,7 +373,7 @@ define([
           $flagButton.hide();
         }else{
           $flagButton.show();
-          $flagButton.text('Reflag this incident');
+          $flagButton.text('Flag it yourself');
         }
         $unflagButton.show();
       }else{
