@@ -260,7 +260,6 @@ define([
         var height = _this.$pullQuote.height();
         var offset = {top: pos.top - (height / 2) - 15};
         if (pos.left > $(window).width() - width - 100){
-          console.error('got left!');
           offset.left = pos.left - (width + 80);
           _this.$pullQuote.removeClass('right');
         }else{
