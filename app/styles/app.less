@@ -367,12 +367,17 @@ body {
   .filters {
     float:right;
     .opacity(20);
+    .transition(opacity 150ms ease-in);
+    &:hover, &:active, &:focus {
+      .transition(opacity 150ms ease-out);
+      .opacity(100);
+    }
     .btn {
       margin-left: 10px;
     }
     .btn-group {
       color: black;
-      font-size: 14px;
+      .font-size(14);
       .btn {
         background: none;
         border:1px solid rgba(255,255,255,.3);
@@ -387,6 +392,26 @@ body {
       }
       &.facilities .btn {
         width:200px;
+      }
+      > .dropdown-menu {
+        border:1px solid rgba(255,255,255,.3);
+        background-color: #191c1c;
+        color:white;
+        padding:0;
+        left:10px;
+        margin-top: -1px;
+        .border-radius(4px);
+        min-width: 148px;
+        li {
+          .font-size(12);
+          text-transform: uppercase;
+          line-height: 1;
+          padding: 10px 12px;
+          border-bottom:1px solid rgba(255,255,255,.1);
+          &:last-child {
+            border: none;
+          }
+        }
       }
     }
   }
