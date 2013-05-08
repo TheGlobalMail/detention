@@ -269,13 +269,13 @@ define([
         _this.$pullQuote.find('em').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
         var width = _this.$pullQuote.width();
         var height = _this.$pullQuote.height();
-        var offset = {top: pos.top - (height / 2) - 15};
+        var offset = {top: pos.top - height - 80};
         if (!specialPullQuote){
-          if (pos.left > $(window).width() - width - 100){
-            offset.left = pos.left - (width + 80);
+          if (pos.left > $(window).width() - width * 2){
+            offset.left = pos.left - (width / 2) - 15;
             _this.$pullQuote.removeClass('right');
           }else{
-             offset.left = pos.left + 50;
+             offset.left = pos.left + (width / 2) - (width / 2) - 15;
             _this.$pullQuote.addClass('right');
           }
         }else{

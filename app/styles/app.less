@@ -273,34 +273,42 @@ body {
   }
   blockquote {
     padding: 0;
-    margin: 0;
+    margin: 0 0 10px;
     border:none;
+    font-weight: bold;
     font-style: italic;
     .font-size(30);
+    color:white;
   }
-  .incident-number {
+  em {
     .font-size(14);
     line-height: 1;
     font-weight: normal;
     font-style: italic;
     color:@grayLight;
-    margin-top: -10px;
   }
   &.bam {
-    width: 80%; 
+    width: 80%;
   }
-  &.right {
-    &:after {
-      content: '';
-      display:block;
-      position:absolute;
-      top:50%;
-      margin-top: -10px;
-      left:-11px;
-      width:11px;
-      height:20px;
-      background: url('/images/tooltip-arrows.png') no-repeat 0 0 transparent;
-    }
+  &:after {
+    content: '';
+    display:block;
+    position:absolute;
+    bottom:-11px;
+    margin-left: -10px;
+    left:50%;
+    width:20px;
+    height:11px;
+    background: url('/images/tooltip-arrows.png') no-repeat 0 0 transparent;
+  }
+  &.right:after {
+    left: 20px;
+    margin-left: 0;
+  }
+  &.left:after {
+    left: initial;
+    margin-left: 0;
+    right: 20px;
   }
 }
 
