@@ -286,14 +286,19 @@ define([
       }, delay);
     };
 
+    _this.hideModals = function() {
+      _this.currentModal.element.trigger("hide");
+    };
+
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
-      $('#incidents').on('click touch', '.cell', _this.cellOnClick);
-      $('#incidents').on('mouseover', '.cell', _this.showPullQuote);
-      $('#incidents').on('mouseout', '.cell', _this.hidePullQuoote);
-      modalBackdrop.click(function() {
-        _this.currentModal.element.trigger("hide");
-      });
+
+      var incidents = $('#incidents');
+      incidents.on('click touch', '.cell', _this.cellOnClick);
+      incidents.on('mouseover', '.cell', _this.showPullQuote);
+      incidents.on('mouseout', '.cell', _this.hidePullQuote);
+
+      modalBackdrop.click(_this.hideModals);
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
