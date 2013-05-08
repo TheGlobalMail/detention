@@ -19,13 +19,12 @@ define([
     }
 
     var grid = new models.GridController;
-    var start = +new Date;
 
     _(incidents.months)
       // Build the grid in rows of months
       .map(function(obj) {
         var rowElement = $(
-          '<div class="date ' + obj.month +'">' +
+          '<div class="date ' + obj.month + '">' +
             '<div class="month">' +
               moment(Date.parse(obj.month)).format('MMMM YYYY') +
             '</div>' +
@@ -40,9 +39,7 @@ define([
       // Insert a clearing div
       }).each(function(rowElement) {
         rowElement.append('<div class="clear">')
-      })
-      // Progressively append each of the rows
-      .each(function(rowElement) {
+      }).each(function(rowElement) {
         requestAnimationFrame(function() {
           gridContainer.append(rowElement);
         });
@@ -55,6 +52,10 @@ define([
           $('.loading').removeClass('loading')
         });
       });
+
+    _.each(grid.cells, function(cell) {
+      cell.setBindings();
+    });
   }
 
   function getScrollY() {

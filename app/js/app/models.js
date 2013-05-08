@@ -500,18 +500,17 @@ define([
 
     function constructor(data) {
       var element = _this.element = document.createElement('div');
-      element.classList.add('cell');
+      var classes = 'cell ';
       _this.data = data;
       _this.grid = null;
 
       if (data.event_type === 'incident') {
-        flags.on('reload change', updateHighlight);
         if (flags.loaded) updateHighlight();
       } else {
-        element.classList.add(data['type'] + '-event');
-        element.classList.add('event');
+        classes += data['type'] + '-event event';
       }
 
+      element.className = classes;
       element.setAttribute('data-incident-number', data["Incident Number"]);
 
       return _this;
@@ -522,30 +521,34 @@ define([
       var flagWeights = flags.data;
       // Scale the score as a percentage
       var score = Math.round((flagWeights[_this.data.id] || 0) * 100);
-      // Scale the scare between 15 and 100
-      var backgroundOpacity = ((score / 100) * 95) + 5;
-      // Round to the nearest number divisible by 5
-      backgroundOpacity = Math.round(backgroundOpacity / 5) * 5;
       var isFlagged = flags.isFlagged(_this.data.id);
 
       var classes = _this.element.classList;
       if (_this.data.flagScore !== score) {
         _this.data.flagScore = score;
-        if (score > 0) {
-          if (!isFlagged) {
-            _this.element.style.backgroundColor = 'rgba(255,255,255,' + backgroundOpacity / 100 + ')';
-          }
+        if (score > 0 && !isFlagged) {
+          // Scale the scare between 15 and 100
+          var opacity = ((score / 100) * 95) + 5;
+          // Round to the nearest number divisible by 5
+          opacity = Math.round(opacity / 5) * 5;
+          _this.element.style.backgroundColor = 'rgba(255,255,255,' + opacity / 100 + ')';
         }
       }
-      if (isFlagged && _this.element.style.backgroundColor) {
-        _this.element.style.backgroundColor = "";
-      }
-      if (classes.contains('flagged') && !isFlagged) {
+      if (isFlagged) {
+        if (_this.element.style.backgroundColor) {
+          _this.element.style.backgroundColor = '';
+        }
+        if (!classes.contains('flagged')) {
+          classes.add('flagged');
+        }
+      } else if (classes.contains('flagged')) {
         classes.remove('flagged');
-      } else if (!classes.contains('flagged') && isFlagged) {
-        classes.add('flagged');
       }
     }
+
+    _this.setBindings = function() {
+      flags.on('reload change', updateHighlight);
+    };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
   }
