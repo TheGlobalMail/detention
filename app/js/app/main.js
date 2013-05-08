@@ -51,7 +51,9 @@ define([
         requestAnimationFrame(setMonthBindings);
       })
       .tap(function() {
-        requestAnimationFrame($('.loading').removeClass('loading'));
+        requestAnimationFrame(function() {
+          $('.loading').removeClass('loading')
+        });
       });
   }
 
