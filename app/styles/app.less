@@ -340,10 +340,11 @@ body {
   background: none;
   position:absolute;
   padding: 22px 0 10px;
+  z-index: 10;
   &.affix {
     position:fixed;
     top:0;
-    padding: 50px 0 25px;
+    padding: 40px 0 20px;
     background-color: #1c1f1f;
     background: url('/images/noise.png') repeat 0 0 rgba(28,31,31,.95);
     border-bottom: 1px solid rgba(255,255,255,.05);
@@ -361,6 +362,11 @@ body {
   .filters {
     float:right;
     .opacity(20);
+    .transition(opacity 150ms ease-in);
+    &:hover {
+      .opacity(100);
+      .transition(opacity 150ms ease-out);
+    }
     .btn {
       margin-left: 10px;
     }
