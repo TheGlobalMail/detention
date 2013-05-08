@@ -146,8 +146,6 @@
       .modal {
         width:80%;
         margin: 0 auto;
-        left: 7.5%;
-        border: none;
         padding: 20px;
         &.fade.in {
           top:5%;
@@ -162,11 +160,12 @@
         h3 {
           padding: 10px 15px;
         }
-        .incident-details ul {
+        ul {
           padding: 15px 15px 20px;
           li {
             display:block;
             max-width: none;
+            .font-size(12);
             border-right: none;
             border-bottom: 1px solid #c2c1af;
             height: auto;
@@ -175,9 +174,6 @@
             &.summary-li {
               border:none;
               padding:0;
-            }
-            &.disclaimer {
-              border:none;
             }
           }
         }
@@ -337,6 +333,18 @@
       }
     }
   }
+  .pullquote {
+    width:300px;
+    padding:20px;
+    blockquote {
+      .font-size(24);
+      // margin-bottom: 6px;
+      max-height: 85px;
+    }
+    span, em {
+      .font-size(11);
+    }
+  }
 }
 
 // PHONES
@@ -468,14 +476,30 @@
       }
     }
   }
+  .pullquote {
+    width:200px;
+    padding:15px;
+    blockquote {
+      .font-size(18);
+      margin-bottom: 6px;
+      max-height: 65px;
+    }
+    span, em {
+      .font-size(11);
+      line-height: 1.2;
+      display:block;
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
   #modal-container {
     .modal-slideshow {
-
       .modal {
-        padding:5%;
-        width:90%;
-        left:0;
+        padding:4%;
+        width:92%;
         height:100%;
+        border: none;
         &.fade.in {
           top:0;
         }
@@ -496,8 +520,8 @@
           }
         }
         .incident-details ul li.summary-li p {
-          .font-size(14);
-          margin-bottom: 10px;
+          .font-size(16);
+          margin-bottom: 20px;
         }
         a.prev, a.next {
           width:55px;
