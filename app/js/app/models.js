@@ -246,46 +246,52 @@ define([
       _this.showCellModal(cell);
     };
 
-    _this.cellOnOver = function() {
-      var cell = _this.getCellbyElement(this);
+    _this.showPullQuote = function() {
       var $cell = $(this);
+      var cell = _this.getCellbyElement(this);
       if (!cell.data.Summary) return;
       var pos = $cell.offset();
       if (_this.pullQuoteTimer) clearTimeout(_this.pullQuoteTimer);
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteTimer = setTimeout(function(){
-        _this.$pullQuote.find('blockquote').text('"' + cell.data.Summary.replace(redactedRegex, 'NAME REDACTED') + '"');
+        var summary  = cell.data.Summary.replace(redactedRegex, 'Client');
+        var words = summary.split(' ');
+        //summary = '...' + words.slice(3, 15).join(' ') + '...';
+        _this.$pullQuote.find('blockquote').text('"' + summary + '"');
         _this.$pullQuote.find('em').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
         var width = _this.$pullQuote.width();
         var height = _this.$pullQuote.height();
-        var offset = {top: pos.top - (height / 2) - 15};
-        if (pos.left > $(window).width() - width - 100){
-          offset.left = pos.left - (width + 80);
+        var offset = {top: pos.top - height - 80};
+        if (pos.left > $(window).width() - width * 2){
+          offset.left = pos.left - (width / 2) - 15;
           _this.$pullQuote.removeClass('right');
         }else{
-           offset.left = pos.left + 50;
+           offset.left = pos.left + (width / 2) - (width / 2) - 15;
           _this.$pullQuote.addClass('right');
         }
+        _this.hidePullQuote(1000);
         _this.$pullQuote.css('top', offset.top);
         _this.$pullQuote.css('left', offset.left);
+        _this.$pullQuote.stop();
+        _this.$pullQuote.css('opacity', 100);
         _this.$pullQuote.show();
       }, 50);
     };
 
-    _this.cellOnOut = function() {
+    _this.hidePullQuote = function(delay) {
+      if (!delay) delay = 50;
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteLeaveTimer = setTimeout(function(){
-        _this.$pullQuote.fadeOut();
-      }, 50);
+        _this.$pullQuote.fadeOut(3000);
+      }, delay);
     };
 
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
-      var incidents = $('#incidents');
-      incidents.on('click touch', '.cell', _this.cellOnClick);
-      incidents.on('mouseover', '.cell', _this.cellOnOver);
-      incidents.on('mouseout', '.cell', _this.cellOnOut);
-      modalBackdrop.on("click", function() {
+      $('#incidents').on('click touch', '.cell', _this.cellOnClick);
+      $('#incidents').on('mouseover', '.cell', _this.showPullQuote);
+      $('#incidents').on('mouseout', '.cell', _this.hidePullQuoote);
+      modalBackdrop.click(function() {
         _this.currentModal.element.trigger("hide");
       });
     };
