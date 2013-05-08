@@ -415,13 +415,19 @@ body {
     .flags {
       max-width: none;
       width:auto;
+      margin: 0;
       .flag-icon, h3, .btn {
         display:none;
       }
       p {
         .font-size(14);
+        line-height: 1.4;
         span {
-          display:block;
+          float:left;
+          width:70%;
+        }
+        a {
+          float:right;
         }
       }
     }
