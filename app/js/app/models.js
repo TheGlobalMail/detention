@@ -94,18 +94,12 @@ define([
       _this.nextModal.positionOffScreenRight().display();
       _this.prevModal.positionOffScreenLeft().display();
 
+      _this.addHasNextPrev(_this.currentModal);
       if (_this.hasNextCell()) {
         _this.nextModal.setCell(_this.getNextCell());
-        _this.currentModal.element.addClass('has-next');
-      } else {
-        _this.currentModal.element.removeClass('has-next');
       }
-
       if (_this.hasPrevCell()) {
         _this.prevModal.setCell(_this.getPrevCell());
-        _this.currentModal.element.addClass('has-prev');
-      } else {
-        _this.currentModal.element.removeClass('has-prev');
       }
 
       _this.postDisplay();
@@ -292,7 +286,7 @@ define([
       incidents.on('click touch', '.cell', _this.cellOnClick);
       incidents.on('mouseover', '.cell', _this.cellOnOver);
       incidents.on('mouseout', '.cell', _this.cellOnOut);
-      modalBackdrop.click(function() {
+      modalBackdrop.on("click", function() {
         _this.currentModal.element.trigger("hide");
       });
     };
