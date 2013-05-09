@@ -39,9 +39,13 @@ define([
       // Insert a clearing div
       }).each(function(rowElement) {
         rowElement.append('<div class="clear">')
-      }).each(function(rowElement) {
+      }).tap(function(rowElements) {
+        var container = document.createElement('div');
+        _.each(rowElements, function(rowElement) {
+          container.appendChild(rowElement[0]);
+        });
         requestAnimationFrame(function() {
-          gridContainer.append(rowElement);
+          gridContainer[0].appendChild(container);
         });
       })
       .tap(function() {
