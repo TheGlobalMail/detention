@@ -21,41 +21,57 @@ define([
     var grid = new models.GridController;
 
     _(incidents.months)
+
       // Build the grid in rows of months
       .map(function(obj) {
-        var rowElement = $(
-          '<div class="date ' + obj.month + '">' +
-            '<div class="month">' +
-              moment(Date.parse(obj.month)).format('MMMM YYYY') +
-            '</div>' +
-          '</div>'
-        );
+
+        var rowElement = document.createElement('div');
+        rowElement.className = 'date ' + obj.month;
+
+        var monthElement = document.createElement('div');
+        monthElement.className = 'month';
+        monthElement.textContent = moment(Date.parse(obj.month)).format('MMMM YYYY');
+        rowElement.appendChild(monthElement);
+
         _.each(obj.incidents, function(ID) {
           var cell = new models.Cell(incidents.data[ID]);
           grid.addCell(cell);
-          rowElement[0].appendChild(cell.element);
+          rowElement.appendChild(cell.element);
         });
+
         return rowElement;
+
       // Insert a clearing div
       }).each(function(rowElement) {
-        rowElement.append('<div class="clear">')
-      }).each(function(rowElement) {
-        requestAnimationFrame(function() {
-          gridContainer.append(rowElement);
-        });
-      })
-      .tap(function() {
-        requestAnimationFrame(setMonthBindings);
-      })
-      .tap(function() {
-        requestAnimationFrame(function() {
-          $('.loading').removeClass('loading')
-        });
-      });
 
-    _.each(grid.cells, function(cell) {
-      cell.setBindings();
-    });
+        var clearingElement = document.createElement('div');
+        clearingElement.className = 'clear';
+        rowElement.appendChild(clearingElement);
+
+      // Combine the rows into a fragment and merge into the container
+      }).tap(function(rowElements) {
+
+        var fragment = document.createDocumentFragment();
+        _.each(rowElements, function(rowElement) {
+          fragment.appendChild(rowElement);
+        });
+
+        requestAnimationFrame(function() {
+          gridContainer[0].appendChild(fragment);
+        });
+
+      })
+
+      // Cleanup and handlers
+      .tap(function() {
+
+        // Set the scroll handlers for the months/filter menu interactions
+        setTimeout(setMonthBindings, 0);
+
+        // Deactivate the loading state
+        $('.loading').removeClass('loading')
+
+      });
   }
 
   function getScrollY() {
@@ -170,7 +186,9 @@ define([
   function init() {
     flags
       .load()
-      .always(buildIncidentMonthGrid);
+      .always(
+        buildIncidentMonthGrid
+    );
     setBindings();
   }
 

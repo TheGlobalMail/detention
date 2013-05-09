@@ -299,6 +299,12 @@ define([
       incidents.on('mouseout', '.cell', _this.hidePullQuote);
 
       modalBackdrop.click(_this.hideModals);
+
+      flags.on('reload change', function() {
+        _.each(_this.cells, function(cell) {
+          cell.updateHighlight();
+        })
+      });
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
@@ -504,8 +510,8 @@ define([
       _this.data = data;
       _this.grid = null;
 
-      if (data.event_type === 'incident') {
-        if (flags.loaded) updateHighlight();
+      if (flags.loaded && data.event_type === 'incident') {
+        _this.updateHighlight();
       } else {
         classes += data['type'] + '-event event';
       }
@@ -517,7 +523,7 @@ define([
     }
 
     // Update opacity and `flagged` class
-    function updateHighlight() {
+    _this.updateHighlight = function() {
       var flagWeights = flags.data;
       // Scale the score as a percentage
       var score = Math.round((flagWeights[_this.data.id] || 0) * 100);
@@ -544,10 +550,6 @@ define([
       } else if (classes.contains('flagged')) {
         classes.remove('flagged');
       }
-    }
-
-    _this.setBindings = function() {
-      flags.on('reload change', updateHighlight);
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
