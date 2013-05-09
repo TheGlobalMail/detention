@@ -262,7 +262,7 @@ define([
         var width = _this.$pullQuote.width();
         var height = _this.$pullQuote.height();
         var offset = {top: pos.top - height - 80};
-        if (pos.left > $(window).width() - width * 2){
+        if (pos.left > window.innerWidth - width * 2){
           offset.left = pos.left - (width / 2) - 15;
           _this.$pullQuote.removeClass('right');
         }else{
