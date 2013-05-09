@@ -537,7 +537,7 @@ define([
           var opacity = ((score / 100) * 95) + 5;
           // Round to the nearest number divisible by 5
           opacity = Math.round(opacity / 5) * 5;
-          _this.element.style.backgroundColor = 'rgba(255,255,255,' + opacity / 100 + ')';
+          _this.element.style.cssText = 'background-color: rgba(255,255,255,' + opacity / 100 + ');';
         }
       }
       if (isFlagged) {
