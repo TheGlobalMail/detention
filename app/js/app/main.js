@@ -103,34 +103,43 @@ define([
         datesToWatch = getDatesToWatch();
         monthsToWatch = getMonthsToWatch();
       }
-      var scrollY = getScrollY();
+
+      var yScrollOffset = getScrollY() + navHeight;
+
       if (monthsToWatch.length) {
-        // Fix the filter menu's position
-        if (filterMenu.offset().top <= scrollY + navHeight) {
-          filterMenu.addClass(filterMenuClassName);
-        }
-        // Unfix the filter menu's position
-        if (filterMenuOriginalTopOffset > scrollY + navHeight) {
-          filterMenu.removeClass(filterMenuClassName);
-          filterMenuMonthText = '';
-          filterMenuMonth.text(filterMenuMonthText);
-        }
-        // Check each month's position
-        var lastMonthText = null;
-        _.each(monthsToWatch, function(element) {
-          element = $(element);
-          if (element.offset().top <= scrollY + navHeight + filterMenu.outerHeight()) {
-            lastMonthText = element.text();
-          }
-        });
-        // Update the filter menu if we've hit another month
         if (
-          lastMonthText &&
-          lastMonthText !== filterMenuMonthText &&
-          filterMenu.hasClass(filterMenuClassName)
+          filterMenuOriginalTopOffset <= yScrollOffset &&
+          filterMenu.offset().top <= yScrollOffset
         ) {
-          filterMenuMonthText = lastMonthText;
-          filterMenuMonth.text(filterMenuMonthText);
+          // Fix the filter menu's position
+          filterMenu.addClass(filterMenuClassName);
+          // Check each month's position
+          var lastMonthText = null;
+          _.each(monthsToWatch, function(element, i) {
+            element = $(element);
+            if (
+              // Automatically pick up the first element due to a delay between
+              // triggering the visibility of the menu and hitting the
+              // OR conditional.
+              (i == 0 && !filterMenuMonthText) ||
+              element.offset().top <= yScrollOffset
+            ) {
+              lastMonthText = element.text();
+            }
+          });
+          // Update the filter menu if we've hit another month
+          if (
+            lastMonthText &&
+            lastMonthText !== filterMenuMonthText
+          ) {
+            filterMenuMonthText = lastMonthText;
+            filterMenuMonth.text(filterMenuMonthText);
+          }
+        } else {
+          // Unfix the filter menu's position
+          filterMenu.removeClass(filterMenuClassName);
+          // Suppress the text
+          filterMenuMonthText = null;
         }
       }
     }, 100);
@@ -141,7 +150,7 @@ define([
     var grid = $('.incident-grid');
     var className = 'pinned';
     return _.throttle(function() {
-      if (grid.offset().top <= $(window).height() + getScrollY()) {
+      if (grid.offset().top <= window.innerHeight + getScrollY()) {
         flagPanel.addClass(className);
       } else {
         flagPanel.removeClass(className);
