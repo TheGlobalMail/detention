@@ -169,11 +169,27 @@
             border-right: none;
             border-bottom: 1px solid #c2c1af;
             height: auto;
-            padding: 0 0 10px;
-            margin: 0 0 10px;
+            padding: 0 0 8px;
+            margin: 0 0 8px;
+            .subtitle {
+              float: left;
+              .font-size(11);
+              margin-right: 6px;
+              margin-top: 2px;
+              > span {
+                float: left;
+                margin-top: 0;
+              }
+            }
             &.summary-li {
               border:none;
               padding:0;
+              p {
+                clear: both;
+              }
+            }
+            &.disclaimer {
+              padding:6px 10px 8px;
             }
           }
         }
@@ -366,7 +382,7 @@
     .title {
       height:140px;
       h1 {
-        .font-size(34);
+        .font-size(30);
         margin-top: 110px;
         letter-spacing: 0;
         &:after {
@@ -421,20 +437,25 @@
   .pinned {
     &.filter-menu {
       margin-top:0;
-      padding: 15px 0 10px;
+
       .month {
         .font-size(16);
       }
       .filters {
         display:none;
       }
+      &.affix {
+        padding: 5px 0 8px;
+        .box-shadow(0 0 10px black);
+      }
     }
     &.share {
-      padding:6px 0 10px;
+      padding:6px 0 8px;
       .container{
         width:90%;
       }
       &.noflags {
+        display:none;
         padding: 6px 0;
         .flags {
           p {
@@ -455,7 +476,6 @@
       }
       .flags {
         margin: 0 0 10px 0;
-        // min-height: 30px;
         h3 {
           margin-top: 4px;
           .font-size(13);
@@ -514,12 +534,24 @@
   #modal-container {
     .modal-slideshow {
       .modal {
-        padding:4%;
-        width:92%;
+        padding:5% 2% 2%;
+        width:96%;
         height:100%;
         border: none;
+        h3 {
+          // .font-size(12);
+          padding:10px;
+        }
         &.fade.in {
           top:0;
+        }
+        ul {
+          padding:4px 10px 10px;
+          li {
+            &.disclaimer {
+              margin-top: 10px;
+            }
+          }
         }
         .flag {
           .container {
@@ -538,8 +570,8 @@
           }
         }
         .incident-details ul li.summary-li p {
-          .font-size(16);
-          margin-bottom: 20px;
+          .font-size(14);
+          margin-bottom: 10px;
         }
         a.prev, a.next {
           width:55px;
