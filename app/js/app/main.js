@@ -4,10 +4,10 @@ define([
   'moment',
   './process-data',
   './models',
-  './flags',
-  './sharing-panel',
-  './router',
-  './tracking'
+//  './flags',
+//  './sharing-panel',
+//  './router',
+//  './tracking'
 ], function($, _, moment, incidents, models, flags, sharingPanel, router, tracking) {
   'use strict';
 
@@ -48,14 +48,14 @@ define([
           gridContainer[0].appendChild(container);
         });
       })
-      .tap(function() {
-        requestAnimationFrame(setMonthBindings);
-      })
-      .tap(function() {
-        requestAnimationFrame(function() {
-          $('.loading').removeClass('loading')
-        });
-      });
+//      .tap(function() {
+//        requestAnimationFrame(setMonthBindings);
+//      })
+//      .tap(function() {
+//        requestAnimationFrame(function() {
+//          $('.loading').removeClass('loading')
+//        });
+//      });
 
     _.each(grid.cells, function(cell) {
       cell.setBindings();
@@ -172,10 +172,12 @@ define([
   }
 
   function init() {
-    flags
-      .load()
-      .always(buildIncidentMonthGrid);
-    setBindings();
+//    flags
+//      .load()
+//      .always(
+    buildIncidentMonthGrid()
+    //);
+//    setBindings();
   }
 
   return {
