@@ -105,14 +105,6 @@ define([
       }
       var scrollY = getScrollY();
       if (monthsToWatch.length) {
-        // Trigger the application of the render classes
-        _.each(datesToWatch.filter(':not(.render)'), function(element) {
-          element = $(element);
-          var elementTop = element.offset().top;
-          if (elementTop <= scrollY + window.innerHeight + 100) {
-            element.addClass('render');
-          }
-        });
         // Fix the filter menu's position
         if (filterMenu.offset().top <= scrollY + navHeight) {
           filterMenu.addClass(filterMenuClassName);
