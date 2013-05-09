@@ -672,6 +672,7 @@ footer {
       .transition(opacity 100ms ease-in);
       text-shadow:0 -1px 0 black;
       width:115px;
+      .opacity(50);
       &:hover {
         .opacity(100);
       }
@@ -837,7 +838,7 @@ footer {
               background-color: #333;
               text-transform: uppercase;
               text-shadow:0 -1px 0 black;
-              padding:4px 8px;
+              padding:2px 5px 3px;
               .box-shadow(0 1px 0 rgba(0,0,0,0.2));
               margin: 0 0 1px;
             }
@@ -854,13 +855,17 @@ footer {
             margin: 0;
           }
           &.disclaimer {
+            width: auto;
+            display: block;
             color:#555;
             background-color: rgba(0,0,0,0.05);
             .border-radius(4px);
             line-height: 1.4;
-            padding: 8px 10px 12px;
+            padding: 8px 10px 10px;
             text-shadow:none;
+            text-align: center;
             .font-size(12);
+            font-style: italic;
             margin: 20px 0 0;
             height:auto;
             max-width: none;
@@ -915,6 +920,7 @@ footer {
             background-color: #084975;
           }
           &.unflag {
+            margin-top: 0;
             background-color: @grayDark;
             &:hover {
               background-color: @gray;
