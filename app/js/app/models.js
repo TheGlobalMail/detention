@@ -13,6 +13,8 @@ define([
   var modalBackdrop = modalContainer.find('.modal-backdrop');
   var rootModal = $('.modal');
 
+  var MAX_WORDS_IN_PULLQUOTE = 8;
+
   var redactedRegex = /(client )*s. 47F\(1\)/gi;
 
   var vent = _.extend({}, Backbone.Events);
@@ -256,7 +258,9 @@ define([
       _this.pullQuoteTimer = setTimeout(function(){
         var summary  = cell.data.Summary.replace(redactedRegex, 'Client');
         var words = summary.split(' ');
-        //summary = '...' + words.slice(3, 15).join(' ') + '...';
+        if (words.length > MAX_WORDS_IN_PULLQUOTE){
+          summary = words.slice(0, MAX_WORDS_IN_PULLQUOTE).join(' ') + '...';
+        }
         _this.$pullQuote.find('blockquote').text('"' + summary + '"');
         _this.$pullQuote.find('em#pullquote-date').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
         _this.$pullQuote.find('em#pullquote-facility').text(cell.data.location);
@@ -354,6 +358,7 @@ define([
       var incidentDetails = _this.element.find('.incident-details');
       var eventDetails = _this.element.find('.event-details');
       var eventModalClass = 'event-modal';
+      var redaction = false;
 
       // Remove any event classes from the modal
       var classList = _this.element.attr('class').split(' ');
@@ -379,12 +384,21 @@ define([
         _.each(map, function(property, className) {
           var text = cell.data[property] || '';
           if (property === 'Summary') {
+            if (!redaction){
+              redaction = !!text.match(redactedRegex);
+            }
             var html = text.replace(redactedRegex, ' <span class="redact">NAME REDACTED</span>');
             _this.element.find(className).html(html);
           } else {
             _this.element.find(className).text(text);
           }
         });
+
+        if (redaction){
+          _this.element.find('.disclaimer').show();
+        }else{
+          _this.element.find('.disclaimer').hide();
+        }
 
         incidentDetails.show();
         eventDetails.hide();
