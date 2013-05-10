@@ -64,7 +64,7 @@ define([
           .addClass('filter-selected');
         // Scroll to the first matching element so that it is in the centre of
         // the page
-        $.scrollTo(selected, { duration: 500, offset: -140, easing: 'easeInOutCubic'});
+        $.scrollTo(selected, { duration: 500, offset: -140, easing: 'easeInOutQuad'});
       }
       this.currentFacility = facility;
     }

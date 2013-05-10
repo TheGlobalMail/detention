@@ -200,12 +200,19 @@ body {
   float: left;
   .cellRGBA(0.05);
   &.filter-selected{
-    .cellRGBA(1) !important;
-    .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
+    .opacity(100);
+    border: 1px solid white;
+    margin: 2px;
+    // .box-shadow(0 0 15px 0 rgba(255,255,255,0.25));
+    .border-radius(4px);
+    &:hover {
+      width: @gridCellSize;
+      height: @gridCellSize;
+      margin: 2px;
+    }
   }
   &.filtered {
-    // .cellRGBA(1) !important;
-    .opacity(25);
+    .opacity(60);
   }
   &:hover {
     width:@gridCellSize + 2px;
@@ -292,6 +299,17 @@ body {
     font-style: italic;
     color:@grayLight;
   }
+  #pullquote-facility {
+    border: none;
+    margin: 0;
+    padding: 0;
+    .font-size(12);
+    text-transform: uppercase;
+    line-height: 1;
+    font-weight: normal;
+    font-style: normal;
+    color:white;
+  }
   span {
     .font-size(12);
     text-transform: uppercase;
@@ -301,11 +319,6 @@ body {
     border-left: 1px solid @gray;
     margin: 0 0 0 10px;
     padding: 0 0 0 10px;
-    &.facility {
-      border: none;
-      margin: 0;
-      padding: 0;
-    }
   }
   &.bam {
     width: 80%;
