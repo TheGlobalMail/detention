@@ -106,6 +106,31 @@
       }
     }
   }
+  .filter-menu {
+    .filters {
+      .btn-group {
+        .btn {
+          &:after {
+            content:'';
+            display: block;
+            position: absolute;
+            width: 30px;
+            height:30px;
+            background: url('/images/filter-fade.png') no-repeat 0 0 transparent;
+            top: 0;
+            right: 0;
+            z-index: 10;
+          }
+        }
+        &.incidents .btn {
+          width:110px;
+        }
+        &.facilities .btn {
+          width:230px;
+        }
+      }
+    }
+  }
   .share {
     padding: 10px 0 15px;
     &.noflags {
@@ -305,7 +330,7 @@
       }
     }
   }
-  .filter-menu.affix {
+  .filter-menu {
     padding: 15px 0 10px;
     .month {
       margin-top: 13px;
@@ -317,6 +342,25 @@
       }
       .btn-group {
         margin: 0;
+        .btn {
+          &:after {
+            content:'';
+            display: block;
+            position: absolute;
+            width: 30px;
+            height:30px;
+            background: url('/images/filter-fade.png') no-repeat 0 0 transparent;
+            top: 0;
+            right: 0;
+            z-index: 10;
+          }
+        }
+        &.incidents .btn {
+          width:110px;
+        }
+        &.facilities .btn {
+          width:230px;
+        }
       }
     }
   }
