@@ -520,6 +520,7 @@ define([
       element.className = classes;
       element.setAttribute('data-incident-number', data["Incident Number"]);
       element.setAttribute('data-facility', data.location);
+      element.setAttribute('data-category', data.incident_category);
 
       return _this;
     }
