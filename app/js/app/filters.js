@@ -38,10 +38,11 @@ define([
       '</a></li>'
     );
     _.each(names, function(name){
+      var label = name === 'protest' ? 'protest by detainees' : name;
       $filter.append(
         '<li>' +
         '<a data-' + options.type + '="' + name + '" href="#' + name + '">' +
-        name + ' <span class="filter-count">(' + filtered[name].length + ')</span>' +
+        label + ' <span class="filter-count">(' + filtered[name].length + ')</span>' +
         '</a></li>'
       );
     });
