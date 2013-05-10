@@ -20,12 +20,16 @@ define([
 
   // Populate the facility menu items
   var $facilities = $('#facilities');
-  $facilities.append('<li><a data-facility="all" href="#all">All Facilities (' + _.keys(incidents.data).length + ')</a></li>');
+  $facilities.append(
+    '<li><a data-facility="all" href="#all">All Facilities ' +
+    '<span class="facility-count">(' + _.keys(incidents.data).length + ')</span>' +
+    '</a></li>'
+  );
   _.each(locationNames, function(name){
     $facilities.append(
       '<li>' +
       '<a data-facility="' + name + '" href="#' + name + '">' +
-      name + ' (' + locations[name].length + ')' +
+      name + ' <span class="facility-count">(' + locations[name].length + ')</span>' +
       '</a></li>'
     );
   });
