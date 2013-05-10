@@ -258,7 +258,8 @@ define([
         var words = summary.split(' ');
         //summary = '...' + words.slice(3, 15).join(' ') + '...';
         _this.$pullQuote.find('blockquote').text('"' + summary + '"');
-        _this.$pullQuote.find('em').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
+        _this.$pullQuote.find('em#pullquote-date').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
+        _this.$pullQuote.find('em#pullquote-facility').text(cell.data.location);
         var width = _this.$pullQuote.width();
         var height = _this.$pullQuote.height();
         var offset = {top: pos.top - height - 80};
