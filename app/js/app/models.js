@@ -513,6 +513,7 @@ define([
       }
 
       element.setAttribute('data-incident-number', data["Incident Number"]);
+      element.setAttribute('data-facility', data.location);
 
       return _this;
     }
