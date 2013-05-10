@@ -74,10 +74,10 @@ define([
 
     // Clear all existing filters
     clear: function(){
-      _.keys(this.state, function(filter){
-        this.state[filter] = 'all';
-      }, this);
+      this.state.category = 'all';
+      this.state.facility = 'all';
       this.filter();
+      $.scrollTo($('.cell:first'), { duration: 500, offset: -140, easing: 'easeInOutQuad'});
     },
 
     // Add `filtered` class to cells where data-facility doesn't match facility
