@@ -61,7 +61,7 @@ define([
   router.on('change', function(){
     var text, css;
     if (!flags.anyFlags()){
-      text = "Each square in the grid represents a single incident. The brightest incidents have been flagged by readers as being of particular interest or concern. View an incident to flag it yourself. ";
+      text = "Each square in the grid represents a single 'incident report'. The brightest incidents have been flagged by readers as being of particular interest or concern. View an incident to flag it yourself. ";
       css = 'noflags';
     }else if (!flags.anyUserFlags()){
       text = 'These are incidents that another reader has flag as being of particular interest or concern. You can flag your own incidents and share them using the buttons on the right. ';
