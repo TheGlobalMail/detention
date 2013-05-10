@@ -13,6 +13,8 @@ define([
   var modalBackdrop = modalContainer.find('.modal-backdrop');
   var rootModal = $('.modal');
 
+  var MAX_WORDS_IN_PULLQUOTE = 8;
+
   var redactedRegex = /(client )*s. 47F\(1\)/gi;
 
   var vent = _.extend({}, Backbone.Events);
@@ -256,7 +258,9 @@ define([
       _this.pullQuoteTimer = setTimeout(function(){
         var summary  = cell.data.Summary.replace(redactedRegex, 'Client');
         var words = summary.split(' ');
-        //summary = '...' + words.slice(3, 15).join(' ') + '...';
+        if (words.length > MAX_WORDS_IN_PULLQUOTE){
+          summary = words.slice(0, MAX_WORDS_IN_PULLQUOTE).join(' ') + '...';
+        }
         _this.$pullQuote.find('blockquote').text('"' + summary + '"');
         _this.$pullQuote.find('em#pullquote-date').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
         _this.$pullQuote.find('em#pullquote-facility').text(cell.data.location);
