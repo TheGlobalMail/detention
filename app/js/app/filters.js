@@ -63,6 +63,9 @@ define([
   // Manages the state of the filters
   var Filter = {
 
+    // filter panel 
+    $filters: $('#filters'),
+
     // Keep track of the current filtered facility
     state: {facility: 'all', category: 'all'},
 
@@ -89,6 +92,7 @@ define([
         $('.cell').removeClass('filtered');
         $('.cell').removeClass('filter-selected');
         $.scrollTo($('.cell:first'), { duration: 500, offset: -140, easing: 'easeInOutQuad'});
+        this.$filters.removeClass('active');
       }else{
         var filters = [
           {type: 'facility', value: facility},
@@ -114,6 +118,7 @@ define([
         if (selected.length){
           $.scrollTo(selected, { duration: 500, offset: -140, easing: 'easeInOutQuad'});
         }
+        this.$filters.addClass('active');
       }
     }
 
