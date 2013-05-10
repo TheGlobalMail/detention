@@ -388,7 +388,7 @@ body {
       &.facilities .btn {
         width:200px;
       }
-      > .dropdown-menu {
+      .dropdown-menu {
         border:1px solid rgba(255,255,255,.3);
         background-color: #191c1c;
         color:white;
@@ -401,10 +401,20 @@ body {
           .font-size(12);
           text-transform: uppercase;
           line-height: 1;
-          padding: 10px 12px;
-          border-bottom:1px solid rgba(255,255,255,.1);
+          padding: 10px 14px;
+          border-bottom:1px solid #232626;
+          .transition(background 200ms ease-in);
+          &:first-child {
+            .border-top-radius(3px);
+          }
           &:last-child {
             border: none;
+            .border-bottom-radius(3px);
+          }
+          &:hover {
+            background-color: #232626;
+            cursor:pointer;
+            .transition(background 100ms ease-out);
           }
         }
       }
