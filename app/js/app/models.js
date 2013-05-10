@@ -354,6 +354,7 @@ define([
       var incidentDetails = _this.element.find('.incident-details');
       var eventDetails = _this.element.find('.event-details');
       var eventModalClass = 'event-modal';
+      var redaction = false;
 
       // Remove any event classes from the modal
       var classList = _this.element.attr('class').split(' ');
@@ -379,12 +380,21 @@ define([
         _.each(map, function(property, className) {
           var text = cell.data[property] || '';
           if (property === 'Summary') {
+            if (!redaction){
+              redaction = !!text.match(redactedRegex);
+            }
             var html = text.replace(redactedRegex, ' <span class="redact">NAME REDACTED</span>');
             _this.element.find(className).html(html);
           } else {
             _this.element.find(className).text(text);
           }
         });
+
+        if (redaction){
+          _this.element.find('.disclaimer').show();
+        }else{
+          _this.element.find('.disclaimer').hide();
+        }
 
         incidentDetails.show();
         eventDetails.hide();
