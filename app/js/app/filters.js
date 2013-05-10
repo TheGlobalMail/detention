@@ -52,7 +52,7 @@ define([
           .addClass('filter-selected');
         // Scroll to the first matching element so that it is in the centre of
         // the page
-        $.scrollTo(selected, { duration: 1500, offset: -($(window).height() / 2 + 15)});
+        $.scrollTo(selected, { duration: 500, offset: - 140});
       }
       this.currentFacility = facility;
     }
