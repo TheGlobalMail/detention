@@ -203,14 +203,16 @@ body {
   float: left;
   .cellRGBA(0.05);
   &.filter-selected{
-    .opacity(100);
+    .opacity(100) !important;
     border: 2px solid white;
     margin: 2px;
     .border-radius(4px);
+    .transition(background 200ms ease-in);
     &:hover {
       width: @gridCellSize;
       height: @gridCellSize;
       margin: 2px;
+      .cellRGBA(1) !important;
     }
   }
   &.filtered {
