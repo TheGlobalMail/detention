@@ -285,6 +285,7 @@ define([
 
     _this.hidePullQuote = function(delay) {
       if (!delay) delay = 50;
+      _this.$pullQuote.stop();
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteLeaveTimer = setTimeout(function(){
         _this.$pullQuote.fadeOut(3000);
