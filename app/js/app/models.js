@@ -259,7 +259,7 @@ define([
         var summary  = cell.data.Summary.replace(redactedRegex, 'Client');
         var words = summary.split(' ');
         if (words.length > MAX_WORDS_IN_PULLQUOTE){
-          summary = words.slice(0, MAX_WORDS_IN_PULLQUOTE).join(' ') + '...';
+          summary = words.slice(0, MAX_WORDS_IN_PULLQUOTE).join(' ') + ' ' + '...';
         }
         _this.$pullQuote.find('blockquote').text('"' + summary + '"');
         _this.$pullQuote.find('em#pullquote-date').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
