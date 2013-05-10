@@ -200,6 +200,14 @@ body {
   float: left;
   .cellRGBA(0.05);
   .transition(opacity 150ms ease-in);
+  &.filter-selected{
+    .cellRGBA(1) !important;
+  }
+  &.filtered {
+    .transition(opacity 150ms ease-out);
+    .cellRGBA(1) !important;
+    .opacity(2.5);
+  }
   &:hover {
     width:@gridCellSize + 2px;
     height:@gridCellSize + 2px;
@@ -335,6 +343,7 @@ body {
   color:white;
   text-shadow:0 -1px 0 black;
   display:block;
+  z-index: 99;
   width:100%;
   left:0;
   background: none;
@@ -355,6 +364,7 @@ body {
       display: block;
     }
   }
+
   .month {
     float: left;
     margin:8px 0 0;
@@ -365,15 +375,27 @@ body {
     float:right;
     .opacity(20);
     .transition(opacity 150ms ease-in);
-    &:hover {
-      .opacity(100);
+    &:hover, &:active, &:focus {
       .transition(opacity 150ms ease-out);
+      .opacity(100);
+    }
+    h4 {
+      display:inline-block;
+      margin: 0 2px 0 0;
+      .font-size(12);
+      font-weight: normal;
+      text-transform: uppercase;
     }
     .btn {
-      margin-left: 10px;
+      margin-left: 6px;
+      display:inline-block;
     }
     .btn-group {
+      margin-top: -4px;
+      color: black;
+      .font-size(14);
       .btn {
+        margin: 0;
         background: none;
         border:1px solid rgba(255,255,255,.3);
         text-align: left;
@@ -384,10 +406,49 @@ body {
         right: 12px;
       }
       &.incidents .btn {
-        width:120px;
+        width:110px;
       }
       &.facilities .btn {
         width:200px;
+      }
+      ul.dropdown-menu {
+        border:1px solid rgba(255,255,255,.3);
+        background-color: #191c1c;
+        color:white;
+        padding:0;
+        left:10px;
+        margin-top: -1px;
+        .border-radius(4px);
+        min-width: 148px;
+        max-height: 315px;
+        overflow:scroll;
+        li {
+          .font-size(12);
+          text-transform: uppercase;
+          line-height: 1;
+          padding: 8px 14px;
+          border-bottom:1px solid #232626;
+          .transition(background 200ms ease-in);
+          a {
+            padding:0;
+            color:white;
+            &:hover {
+              background: none;
+            }
+          }
+          &:first-child {
+            .border-top-radius(3px);
+          }
+          &:last-child {
+            border: none;
+            .border-bottom-radius(3px);
+          }
+          &:hover {
+            background-color: #232626;
+            cursor:pointer;
+            .transition(background 100ms ease-out);
+          }
+        }
       }
     }
   }

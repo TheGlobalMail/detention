@@ -84,12 +84,14 @@
         <div class="container">
           <div class="month"></div>
           <div class="filters hidden-phone">
-            <div class="btn-group incidents">
+            <h4>Highlight: </h4>
+            <div class="btn-group incidents dropdown">
               <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                 All incidents
                 <span class="caret"></span>
               </a>
-              <ul class="dropdown-menu">
+              <ul role="menu" class="dropdown-menu">
+                <li>All incidents</li>
                 <li>Riots</li>
                 <li>Self-harm</li>
                 <li>Births</li>
@@ -97,17 +99,12 @@
                 <li>Assaults</li>
               </ul>
             </div>
-            <div class="btn-group facilities">
+            <div class="btn-group facilities dropdown">
               <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                 All Facilities
                 <span class="caret"></span>
               </a>
-              <ul class="dropdown-menu">
-                <li>Riots</li>
-                <li>Self-harm</li>
-                <li>Births</li>
-                <li>Deaths</li>
-                <li>Assaults</li>
+              <ul id="facilities" role="menu" class="dropdown-menu">
               </ul>
             </div>
             <a href="/" class="btn">Reset</a>
