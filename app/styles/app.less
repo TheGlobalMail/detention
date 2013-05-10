@@ -24,7 +24,7 @@ body {
 }
 
 .container {
-  width: 90%;
+  width: 94%;
   max-width: 1400px;
   min-width: 290px;
   color: white;
@@ -177,8 +177,6 @@ body {
   border-top: 1px solid rgba(255,255,255,.1);
   .box-shadow(0 -1px 0 rgba(0,0,0,0.5));
   margin: 0 auto;
-  width: 90%;
-  margin-top: 0;
   padding: 0 0 5%;
   .incident-grid {
     margin: 0 auto;
@@ -201,11 +199,12 @@ body {
   .cellRGBA(0.05);
   .transition(opacity 150ms ease-in);
   &.filter-selected{
-    background-color: pink !important;
+    .cellRGBA(1) !important;
   }
   &.filtered {
     .transition(opacity 150ms ease-out);
-    .opacity(0);
+    .cellRGBA(1) !important;
+    .opacity(2.5);
   }
   &:hover {
     width:@gridCellSize + 2px;
@@ -358,9 +357,10 @@ body {
     .box-shadow(0 0 25px black);
     z-index: 99;
     .month {
-      margin-top: 4px;
+      margin-top: 2px;
     }
   }
+
   .month {
     float: left;
     margin:8px 0 0;
@@ -374,13 +374,23 @@ body {
       .transition(opacity 150ms ease-out);
       .opacity(100);
     }
+    h4 {
+      display:inline-block;
+      margin: 0 2px 0 0;
+      .font-size(12);
+      font-weight: normal;
+      text-transform: uppercase;
+    }
     .btn {
-      margin-left: 10px;
+      margin-left: 6px;
+      display:inline-block;
     }
     .btn-group {
+      margin-top: -4px;
       color: black;
       .font-size(14);
       .btn {
+        margin: 0;
         background: none;
         border:1px solid rgba(255,255,255,.3);
         text-align: left;
@@ -390,12 +400,12 @@ body {
         float:right;
       }
       &.incidents .btn {
-        width:120px;
+        width:110px;
       }
       &.facilities .btn {
         width:200px;
       }
-      .dropdown-menu {
+      ul.dropdown-menu {
         border:1px solid rgba(255,255,255,.3);
         background-color: #191c1c;
         color:white;
@@ -404,13 +414,22 @@ body {
         margin-top: -1px;
         .border-radius(4px);
         min-width: 148px;
+        max-height: 315px;
+        overflow:scroll;
         li {
           .font-size(12);
           text-transform: uppercase;
           line-height: 1;
-          padding: 10px 14px;
+          padding: 8px 14px;
           border-bottom:1px solid #232626;
           .transition(background 200ms ease-in);
+          a {
+            padding:0;
+            color:white;
+            &:hover {
+              background: none;
+            }
+          }
           &:first-child {
             .border-top-radius(3px);
           }
