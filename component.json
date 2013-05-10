@@ -8,6 +8,7 @@
     "bootstrap": "2.3.0",
     "requirejs": "~2.1.5",
     "requirejs-plugins": "~1.0.0",
-    "moment": "~2.0.0"
+    "moment": "~2.0.0",
+    "jquery.scrollTo": "~1.4.5"
   }
 }

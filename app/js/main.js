@@ -1,6 +1,7 @@
 requirejs.config({
   paths: {
     jquery: '../components/jquery/jquery',
+    scrollto: '../components/jquery.scrollTo/jquery.scrollTo',
     xdr: './utils/xdr',
     lodash: '../components/lodash/lodash',
     backbone: '../components/backbone/backbone',
@@ -9,7 +10,8 @@ requirejs.config({
   },
   shim: {
     xdr: { deps: ['jquery'] },
-    tooltips: { deps: ['jquery'] }
+    tooltips: { deps: ['jquery'] },
+    scrollto: { deps: ['jquery'] }
   }
 });
 

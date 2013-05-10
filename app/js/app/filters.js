@@ -1,7 +1,8 @@
 define([
   'jquery',
   'lodash',
-  './process-data'
+  './process-data',
+  'scrollto'
 ], function($, _, incidents){
 
   var locations = {};
@@ -44,8 +45,14 @@ define([
         $('.cell').removeClass('filter-selected');
       }else{
         $('.cell[data-facility!="'+facility+'"]').addClass('filtered');
-        $('.cell[data-facility="'+facility+'"]').removeClass('filtered');
-        $('.cell[data-facility="'+facility+'"]').addClass('filter-selected');
+        // Scroll to the first matching cell
+        var selected = $('.cell[data-facility="'+facility+'"]');
+        selected
+          .removeClass('filtered')
+          .addClass('filter-selected');
+        // Scroll to the first matching element so that it is in the centre of
+        // the page
+        $.scrollTo(selected, { duration: 1500, offset: -($(window).height() / 2 + 15)});
       }
       this.currentFacility = facility;
     }
