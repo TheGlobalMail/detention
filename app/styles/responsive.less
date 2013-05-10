@@ -28,7 +28,7 @@
 }
 
 
-// SMALLER SCREENS
+// PORTRAIT
 @media only screen and (max-width: 980px) {
   .navbar.special-feature {
     padding: 8px 0;
@@ -147,6 +147,9 @@
         .modal-header {
           padding: 0;
         }
+        .modal-body {
+          max-height: none;
+        }
         .close {
           right: 15px;
           top: 11px;
@@ -217,12 +220,6 @@
       }
     }
   }
-}
-
-// iPAD PORTRAIT
-
-@media only screen and (max-width: 800px) {
-
 }
 
 // BIG PHONES AND SMALL TABLETS
@@ -608,8 +605,12 @@
           top:0;
         }
         ul {
+
           padding:8px 12px 12px;
           li {
+            &.summary-li {
+              min-height: auto;
+            }
             &.disclaimer {
               display:none;
             }
