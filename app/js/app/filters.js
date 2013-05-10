@@ -8,6 +8,7 @@ define([
   var locations = {};
   var locationNames;
 
+  // Extract the facility locations from the incident data
   _.each(incidents.data, function(incident){
     if (!incident.location) incident.location = 'unknown';
     if (!locations[incident.location]){
@@ -15,21 +16,28 @@ define([
     }
     locations[incident.location].push(incident.id);
   });
-
   locationNames = _.keys(locations).sort();
 
+  // Populate the facility menu items
   var $facilities = $('#facilities');
-  $facilities.append('<li><a data-facility="all" href="#all">All Facilities</a></li>');
+  $facilities.append('<li><a data-facility="all" href="#all">All Facilities (' + _.keys(incidents.data).length + ')</a></li>');
   _.each(locationNames, function(name){
-    $facilities.append('<li><a data-facility="' + name + '" href="#' + name + '">' + name + '</a></li>');
+    $facilities.append(
+      '<li>' +
+      '<a data-facility="' + name + '" href="#' + name + '">' +
+      name + ' (' + locations[name].length + ')' +
+      '</a></li>'
+    );
   });
 
+  // Click events on filter menu items
   $facilities.find('a').click(function(e){
     e.preventDefault();
     Filter.byFacility($(this).data('facility'));
     $facilities.parent().find('a[data-toggle]').text($(this).text());
   });
 
+  // Manages the state of the filters
   var Filter = {
 
     // Keep track of the current filtered facility
