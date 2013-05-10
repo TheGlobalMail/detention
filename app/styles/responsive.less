@@ -1,46 +1,3 @@
-// NORMAL SCREENS
-@media only screen and (max-height: 900px) {
-  #intro-container {
-    .title {
-      height: 180px;
-      h1 {
-        margin-top: 220px;
-      }
-    }
-  }
-  .share {
-    padding:12px 0 16px;
-    .flags {
-      margin: 4px 0 0;
-      .flag-icon {
-        width:54px;
-        height:54px;
-        background-position: center -44px;
-        margin-right: 8px;
-      }
-      h3 {
-        .font-size(18);
-      }
-      p {
-        margin: 2px 0 0;
-      }
-    }
-    .share-tools {
-      padding: 8px 12px;
-    }
-  }
-  #modal-container {
-    .modal {
-      &.fade.in {
-        top:3%;
-      }
-      .modal-body {
-        max-height: 420px;
-      }
-    }
-  }
-}
-
 // iPAD LANDSCAPE
 
 @media only screen and (max-width: 1500px) {
@@ -58,16 +15,28 @@
       }
     }
   }
+  #modal-container {
+    .modal {
+      &.fade.in {
+        top:5%;
+      }
+      .modal-body {
+        max-height: 420px;
+      }
+    }
+  }
 }
 
-// SMALLER SCREENS AND PORTRAIT
+
+// SMALLER SCREENS
 @media only screen and (max-width: 980px) {
   .navbar.special-feature {
     padding: 8px 0;
     .brand.brand-center {
-      background-position: left center;
+      background-position: 24px center;
       float: left;
       margin: 0;
+      width:412px;
     }
   }
   #intro-container {
@@ -79,8 +48,10 @@
       background-size: auto 100px;
     }
     .title {
+      height: 280px;
+      max-height: none;
       h1 {
-        margin-top: 175px;
+        margin-top: 320px;
         .font-size(85);
         &:after {
           top:-10px;
@@ -91,7 +62,7 @@
       }
     }
     .intro {
-      padding-bottom: 30%;
+      padding-bottom: 40%;
       .arrow {
         bottom:10%;
         &:hover {
@@ -132,7 +103,7 @@
     }
   }
   .share {
-    padding: 10px 0 15px;
+    padding:12px 0 16px;
     &.noflags {
       .flags {
         p {
@@ -142,12 +113,13 @@
       }
     }
     .flags {
+      margin: 4px 0 0;
       width:55%;
       .flag-icon {
-        width:48px;
-        height: 48px;
-        margin: 4px 15px 0 0;
-        background-position: center -39px;
+        width:54px;
+        height:54px;
+        background-position: center -44px;
+        margin-right: 8px;
       }
       h3 {
         .font-size(18);
@@ -162,18 +134,16 @@
       }
     }
     .share-tools {
-      padding:10px 14px;
+       padding: 8px 12px;
     }
   }
+
   #modal-container {
     .modal-slideshow {
       .modal {
         width:80%;
         margin: 0 auto;
         padding: 20px;
-        &.fade.in {
-          top:5%;
-        }
         .modal-header {
           padding: 0;
         }
@@ -209,6 +179,7 @@
             &.summary-li {
               border:none;
               padding:0;
+              min-height: 160px;
               p {
                 clear: both;
                 line-height: 1.3;
@@ -248,13 +219,20 @@
   }
 }
 
+// iPAD PORTRAIT
+
+@media only screen and (max-width: 800px) {
+
+}
+
 // BIG PHONES AND SMALL TABLETS
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 750px) {
   .navbar.special-feature {
     .brand.brand-center {
       float: none;
       margin: 0 auto;
       width: 190px;
+      background-position: left center;
     }
   }
   #intro-container {
@@ -421,7 +399,7 @@
 }
 
 // PHONES
-@media only screen and (max-width: 680px) {
+@media only screen and (max-width: 670px) {
   .hidden-phone {
     display:none;
   }
