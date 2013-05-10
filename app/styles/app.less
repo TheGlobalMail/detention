@@ -513,6 +513,7 @@ footer {
       .font-size(14);
       .btn {
         margin: 4px 0 0;
+        padding: 5px 10px 3px;
         background: none;
         border:1px solid rgba(255,255,255,.3);
         text-align: left;
@@ -523,6 +524,17 @@ footer {
         &.reset {
           margin-top: 0;
         }
+        &:after {
+          content:'';
+          display: block;
+          position: absolute;
+          width: 30px;
+          height:30px;
+          background: url('/images/filter-fade.png') no-repeat 0 0 transparent;
+          top: 0;
+          right: 0;
+          z-index: 10;
+        }
       }
       .caret {
         position: absolute;
@@ -530,9 +542,10 @@ footer {
       }
       &.incidents .btn {
         width:110px;
+        overflow:hidden;
       }
       &.facilities .btn {
-        width:200px;
+        width:230px;
         overflow:hidden;
       }
       ul.dropdown-menu {
@@ -554,7 +567,7 @@ footer {
           a {
             padding:0;
             color:white;
-            .facility-count {
+            .filter-count {
               font-style: italic;
               color:@grayLight;
             }
