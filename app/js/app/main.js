@@ -9,7 +9,8 @@ define([
   './router',
   './tracking',
   './filters',
-  'dropdown'
+  'dropdown',
+  'easing'
 ], function($, _, moment, incidents, models, flags, sharingPanel, router, tracking) {
   'use strict';
 
