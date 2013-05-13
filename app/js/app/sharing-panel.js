@@ -76,4 +76,9 @@ define([
   $sharingPanel.find('button.close').on('click tap', function(){
     $sharingPanel.attr('data-info-dismissed', 'true');
   });
+
+  // Clicking on the flag icon scrolls to the first flagged event
+  $sharingPanel.find('button.flag-icon').on('click', function(){
+    $.scrollTo($('.flagged:first'), { duration: 500, offset: -140, easing: 'easeInOutQuad'});
+  });
 });

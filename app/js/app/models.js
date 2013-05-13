@@ -267,14 +267,26 @@ define([
         _this.$pullQuote.find('em#pullquote-facility').text(cell.data.location);
         var width = _this.$pullQuote.width();
         var height = _this.$pullQuote.height();
-        var offset = {top: pos.top - height - 80};
-        if (pos.left > window.innerWidth - width * 2){
-          offset.left = pos.left - (width / 2) - 15;
-          _this.$pullQuote.removeClass('right');
+        var offset = {};
+        var position = [];
+        if ((pos.top - $(window).scrollTop()) < ($(window).innerHeight() / 2 - 80)){
+          offset.top = pos.top + 50;
+          position.push('top');
         }else{
-           offset.left = pos.left + (width / 2) - (width / 2) - 15;
-          _this.$pullQuote.addClass('right');
+          offset.top = pos.top - height - 80;
+          position.push('bottom');
         }
+        if (pos.left > $(window).innerWidth() / 2){
+          offset.left = pos.left - width - 15;
+          position.push('left');
+        }else{
+          offset.left = pos.left + (width / 2) - (width / 2) - 15;
+          position.push('right');
+        }
+        if (window.innerWidth < 700){
+          offset.left = 10;
+        }
+        _this.$pullQuote.attr('data-position', position.join('-'));
         _this.hidePullQuote(1000);
         _this.$pullQuote.css('top', offset.top);
         _this.$pullQuote.css('left', offset.left);
