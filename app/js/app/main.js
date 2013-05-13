@@ -9,6 +9,7 @@ define([
   './router',
   './tracking',
   './filters',
+  './footer',
   'dropdown',
   'easing'
 ], function($, _, moment, incidents, models, flags, sharingPanel, router, tracking) {

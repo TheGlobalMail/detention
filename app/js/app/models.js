@@ -314,7 +314,7 @@ define([
 
       var incidents = $('#incidents');
       if (Modernizr.touch){
-        incidents.on('tap', '.cell', _this.onCellTouch);
+        incidents.on('click', '.cell', _this.onCellTouch);
       }else{
         incidents.on('click', '.cell', _this.cellOnClick);
         incidents.on('mouseover', '.cell', _this.showPullQuote);
