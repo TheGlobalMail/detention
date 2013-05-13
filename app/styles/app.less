@@ -447,11 +447,22 @@ footer {
     height:11px;
     background: url('/images/tooltip-arrows.png') no-repeat 0 0 transparent;
   }
-  &.right:after {
+  &[data-position=top-right]:after {
+    top:-11px;
     left: 20px;
     margin-left: 0;
   }
-  &.left:after {
+  &[data-position=top-left]:after {
+    top:-11px;
+    left: initial;
+    margin-left: 0;
+    right: 20px;
+  }
+  &[data-position=bottom-right]:after {
+    left: 20px;
+    margin-left: 0;
+  }
+  &[data-position=bottom-left]:after {
     left: initial;
     margin-left: 0;
     right: 20px;
