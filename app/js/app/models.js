@@ -73,7 +73,7 @@ define([
     _this.addCell = function(cell) {
       cell.grid = _this;
       _this.cells.push(cell);
-      _this.cellsByIncidentNumber[cell.data["Incident Number"]] = cell;
+      _this.cellsByIncidentNumber[cell.data.id] = cell;
     };
 
     _this.hasNextCell = function() {
@@ -373,16 +373,17 @@ define([
       if (cell.data.event_type === 'incident') {
 
         var map = { // modal element class -> cell.data property
-          '.incident-number': 'Incident Number',
-          '.date': 'Occurred On',
-          '.facility': 'Location',
-          '.incident-type': 'Type',
+          '.incident-number': 'id',
+          '.date': 'occurred_on',
+          '.facility': 'location',
+          '.incident-type': 'incident_type',
           '.level': 'Level',
           '.summary': 'Summary'
         };
 
         // Update the modal's text
         _.each(map, function(property, className) {
+          console.error(cell.data)
           var text = cell.data[property] || '';
           if (property === 'Summary') {
             if (!redaction){
@@ -390,6 +391,10 @@ define([
             }
             var html = text.replace(redactedRegex, ' <span class="redact">NAME REDACTED</span>');
             _this.element.find(className).html(html);
+          } else if (property === 'incident_type' || property === 'location') {
+            _this.element.find(className).text(text.replace(/(?:^|\s)\S/g, function(c){ return c.toUpperCase();  }));
+          } else if (property === 'occurred_on') {
+            _this.element.find(className).text(moment(text).format('D/M/YYYY'));
           } else {
             _this.element.find(className).text(text);
           }
@@ -533,7 +538,7 @@ define([
       }
 
       element.className = classes;
-      element.setAttribute('data-incident-number', data["Incident Number"]);
+      element.setAttribute('data-incident-number', data.id);
       element.setAttribute('data-facility', data.location);
       element.setAttribute('data-category', data.incident_category);
 
