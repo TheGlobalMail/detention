@@ -285,7 +285,7 @@ define([
     };
 
     // First touch events opens the pullquote. The second opens the modal
-    _this.onCellTouch = function() {
+    _this.onCellTouch = function(e) {
       var id = $(this).data('incident-number');
       if (_this.firstCellTouch !== id){
         _this.firstCellTouch = id;
