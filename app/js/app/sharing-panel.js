@@ -64,10 +64,10 @@ define([
       text = "Each square in the grid represents a single 'incident report'. The brightest incidents have been flagged by readers as being of particular interest or concern. View an incident to flag it yourself. ";
       css = 'noflags';
     }else if (!flags.anyUserFlags()){
-      text = 'Incidents that have been flagged as being of particular interest or concern are highlighted in the grid with this icon. View an incident to flag it yourself. ';
+      text = 'Incidents that have been flagged as being of particular interest or concern are displayed in the grid with this icon. View an incident to flag it yourself. ';
       css = 'sharedflags';
     }else{
-      text = 'Share your flagged incidents using the buttons on the right. ';
+      text = 'Flagged incidents are displayed in the grid with this icon. Share your flagged incidents using the buttons on the right. ';
       css = 'userflags';
     }
     $sharingPanel.attr('class', $sharingPanel.attr('class').replace(/\w*flags/, css));
