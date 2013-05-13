@@ -607,7 +607,18 @@ footer {
     .transition(bottom 500ms 150ms ease-in-out);
   }
   &.noflags {
-    padding:8px 0 14px;
+    background-color: #fff69f;
+    margin: 0 0 30px;
+    padding:12px 0 16px;
+    width:90%;
+    left: 50%;
+    margin-left: -45%;
+    .border-radius(4px);
+    .opacity(80);
+    .container{
+      width:auto;
+      padding: 0 20px;
+    }
     .flags {
       max-width: none;
       width:100%;
@@ -616,15 +627,27 @@ footer {
         display:none;
       }
       p {
+        margin: 0;
+        color:@grayDarker;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.5);
         .font-size(14);
         line-height: 1.3;
-        span {
-          float:left;
-          width:70%;
-        }
+        width:90%;
         a {
-          float:right;
+          color:black;
+          &:hover {
+            color:@grayDarker;
+            border-color: inherit;
+          }
         }
+      }
+      .close {
+        position: absolute;
+        .font-size(44);
+        right:0;
+        top:0;
+        width:25px;
+        height:25px;
       }
     }
     .share-tools {

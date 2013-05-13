@@ -345,6 +345,11 @@
   .pinned {
     &.share {
       padding: 10px 0 20px;
+      &.noflags {
+        .flags {
+          margin: 0;
+        }
+      }
       .flags {
         float:none;
         width:auto;
@@ -490,25 +495,7 @@
     }
     &.share {
       padding:10px 0 12px;
-      &.noflags {
-        display:none;
-        padding: 6px 0;
-        .flags {
-          p {
-            .font-size(12);
-            text-align: center;
-            span {
-              display:none;
-            }
-            a {
-              float:none;
-            }
-          }
-        }
-        .share-tools {
-          display:none;
-        }
-      }
+
       .flags {
         margin: 0;
         width:65%;
@@ -565,6 +552,23 @@
           li.icon.email a {
             background-position: 0 -106px;
           }
+        }
+      }
+      &.noflags {
+        padding: 6px 0 8px;
+        margin-bottom: 10px;
+        .container {
+          min-width: auto;
+          padding: 0 4%;
+        }
+        .flags {
+          width:auto;
+          p {
+            .font-size(12);
+          }
+        }
+        h3, .btn, .share-tools {
+          display:none;
         }
       }
     }
