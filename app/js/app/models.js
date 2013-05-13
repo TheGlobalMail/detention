@@ -547,13 +547,14 @@ define([
       _this.data = data;
       _this.grid = null;
 
-      if (flags.loaded && data.event_type === 'incident') {
-        _this.updateHighlight();
-      } else {
+      if (flags.loaded && data.event_type !== 'incident') {
         classes += data['type'] + '-event event';
       }
-
       element.className = classes;
+
+      if (flags.loaded && data.event_type === 'incident') {
+        _this.updateHighlight();
+      }
       element.setAttribute('data-incident-number', data.id);
       element.setAttribute('data-facility', data.location);
       element.setAttribute('data-category', data.incident_category);
