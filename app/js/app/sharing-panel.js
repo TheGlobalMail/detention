@@ -73,7 +73,7 @@ define([
     $sharingPanel.attr('class', $sharingPanel.attr('class').replace(/\w*flags/, css));
     $explanation.text(text);
   });
-  $sharingPanel.find('button.close').on('click', function(){
+  $sharingPanel.find('button.close').on('click tap', function(){
     $sharingPanel.attr('data-info-dismissed', 'true');
   });
 });

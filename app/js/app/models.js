@@ -1,11 +1,12 @@
 define([
   'jquery',
+  'touch',
   'lodash',
   './../../components/tgm-bootstrap/js/bootstrap-modal',
   './flags',
   'moment',
   'backbone'
-], function($, _, modal, flags, moment) {
+], function($, touch, _, modal, flags, moment) {
   "use strict";
 
   var modalContainer = $('#modal-container');
@@ -283,6 +284,18 @@ define([
       }, 50);
     };
 
+    // First touch events opens the pullquote. The second opens the modal
+    _this.onCellTouch = function() {
+      var id = $(this).data('incident-number');
+      if (_this.firstCellTouch !== id){
+        _this.firstCellTouch = id;
+        _this.showPullQuote.call(this);
+      }else{
+        _this.firstCellTouch = null;
+        _this.cellOnClick.call(this);
+      }
+    };
+
     _this.hidePullQuote = function(delay) {
       if (!delay) delay = 50;
       _this.$pullQuote.stop();
@@ -300,9 +313,13 @@ define([
       $(window).resize(_this.windowOnResize);
 
       var incidents = $('#incidents');
-      incidents.on('click touch', '.cell', _this.cellOnClick);
-      incidents.on('mouseover', '.cell', _this.showPullQuote);
-      incidents.on('mouseout', '.cell', _this.hidePullQuote);
+      if (Modernizr.touch){
+        incidents.on('tap', '.cell', _this.onCellTouch);
+      }else{
+        incidents.on('click', '.cell', _this.cellOnClick);
+        incidents.on('mouseover', '.cell', _this.showPullQuote);
+        incidents.on('mouseout', '.cell', _this.hidePullQuote);
+      }
 
       modalBackdrop.click(_this.hideModals);
 
@@ -383,7 +400,6 @@ define([
 
         // Update the modal's text
         _.each(map, function(property, className) {
-          console.error(cell.data)
           var text = cell.data[property] || '';
           if (property === 'Summary') {
             if (!redaction){

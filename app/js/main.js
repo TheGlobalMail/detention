@@ -3,6 +3,7 @@ requirejs.config({
     jquery: '../components/jquery/jquery',
     scrollto: '../components/jquery.scrollTo/jquery.scrollTo',
     easing: '../components/jquery-easing/jquery.easing',
+    touch: '../components/jquery-simple-touch/jquery-simple-touch',
     xdr: './utils/xdr',
     lodash: '../components/lodash/lodash',
     backbone: '../components/backbone/backbone',
