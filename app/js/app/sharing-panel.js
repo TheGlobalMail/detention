@@ -78,7 +78,7 @@ define([
   });
 
   // Clicking on the flag icon scrolls to the first flagged event
-  $sharingPanel.find('button.flag-icon').on('click', function(){
+  $sharingPanel.find('button.first-flag').on('click', function(){
     $.scrollTo($('.flagged:first'), { duration: 500, offset: -140, easing: 'easeInOutQuad'});
   });
 });
