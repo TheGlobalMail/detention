@@ -63,13 +63,11 @@ define([
       })
       // Cleanup and handlers
       .tap(function() {
-
         // Set the scroll handlers for the months/filter menu interactions
         setTimeout(setMonthBindings, 0);
 
         // Deactivate the loading state
-        $('.loading').removeClass('loading')
-
+        $('body').removeClass('loading')
       });
   }
 
