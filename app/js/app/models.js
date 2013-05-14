@@ -38,6 +38,14 @@ define([
 
       _this.$pullQuote = $('#pullquote');
 
+      // Dismiss the pullquote if the mouse moves over it
+      if (!Modernizr.touch){
+        _this.$pullQuote.on('mouseover', function(){
+          _this.$pullQuote.stop();
+          _this.$pullQuote.hide();
+        });
+      }
+
       return _this;
     }
 
