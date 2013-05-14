@@ -17,6 +17,7 @@ define([
 
   var $gridContainer = $('.incident-grid');
   var gridContainer = $gridContainer[0];
+  var loadingComplete = false;
 
   function buildIncidentMonthGrid() {
     if ($gridContainer.children().length) {
@@ -63,13 +64,12 @@ define([
       })
       // Cleanup and handlers
       .tap(function() {
-
         // Set the scroll handlers for the months/filter menu interactions
         setTimeout(setMonthBindings, 0);
 
         // Deactivate the loading state
-        $('.loading').removeClass('loading')
-
+        loadingComplete = true;
+        $('body').removeClass('loading')
       });
   }
 
@@ -149,10 +149,12 @@ define([
     var grid = $('.incident-grid');
     var className = 'pinned';
     return _.throttle(function() {
-      if (grid.offset().top <= window.innerHeight + getScrollY()) {
-        flagPanel.addClass(className);
-      } else {
-        flagPanel.removeClass(className);
+      if (loadingComplete) {
+        if (grid.offset().top <= window.innerHeight + getScrollY()) {
+          flagPanel.addClass(className);
+        } else {
+          flagPanel.removeClass(className);
+        }
       }
     }, 50);
   }
@@ -188,7 +190,7 @@ define([
       .load()
       .always(
         buildIncidentMonthGrid
-    );
+      );
     setBindings();
   }
 

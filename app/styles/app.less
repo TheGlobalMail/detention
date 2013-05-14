@@ -101,7 +101,7 @@ body {
         .transition(all 150ms ease-in);
         background-color: rgba(255,255,255,0.2);
       }
-      &.loading {
+      .loading &.loading-icon {
         width:44px;
         height:44px;
         margin-left: -22px;
@@ -183,6 +183,9 @@ body {
   margin: 0 auto;
   margin-top: 0;
   padding: 0 0 5%;
+  .loading & {
+    display: none;
+  }
   .incident-grid {
     margin: 0 auto;
     clear: both;
@@ -286,6 +289,9 @@ body {
   font-weight: bold;
   .font-size(30);
   padding: 9% 0 10%;
+  .loading & {
+    display: none;
+  }
 }
 
 footer {
@@ -296,6 +302,9 @@ footer {
   text-shadow: 0 -1px 0 black;
   position: relative;
   z-index: 1000;
+  .loading & {
+    display: none;
+  }
   &:before {
     content:'';
     display: block;
@@ -614,6 +623,9 @@ footer {
   z-index: 99999;
   .transition(bottom 150ms ease-out);
   .opacity(0);
+  .loading & {
+    display: none;
+  }
   &.pinned {
     bottom:0;
     .opacity(100);
@@ -725,6 +737,7 @@ footer {
     }
   }
   &.noflags {
+    z-index: 500;
     background-color: white;
     margin: 0 0 30px;
     padding:12px 0 18px;
