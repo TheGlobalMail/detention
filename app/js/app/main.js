@@ -2,7 +2,7 @@ define([
   'jquery',
   'lodash',
   'moment',
-  './process-data',
+  'incidents',
   './models',
   './flags',
   './sharing-panel',
@@ -69,7 +69,7 @@ define([
 
         // Deactivate the loading state
         loadingComplete = true;
-        $('body').removeClass('loading')
+        $('body').removeClass('loading');
       });
   }
 
