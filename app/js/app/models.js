@@ -288,10 +288,12 @@ define([
         }
         _this.$pullQuote.attr('data-position', position.join('-'));
         _this.hidePullQuote(1000);
-        _this.$pullQuote.css('top', offset.top);
-        _this.$pullQuote.css('left', offset.left);
         _this.$pullQuote.stop();
-        _this.$pullQuote.css('opacity', 100);
+        _this.$pullQuote.css({
+          'top': offset.top,
+          'left': offset.left,
+          'opacity': 100
+        });
         _this.$pullQuote.show();
       }, 50);
     };
