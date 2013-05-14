@@ -103,12 +103,12 @@
     }
   }
   .share {
-    padding:12px 0 16px;
     &.noflags {
       .flags {
         p {
           display:block;
           .font-size(12);
+          width:75%;
         }
       }
     }
@@ -130,7 +130,7 @@
         display:none;
       }
       .btn {
-        margin:4px 0 0;
+        margin:4px 10px 0 0;
       }
     }
     .share-tools {
@@ -312,7 +312,6 @@
         margin-top: 13px;
       }
     }
-
     .filters {
       h4 {
         display:block;
@@ -344,17 +343,15 @@
   }
   .pinned {
     &.share {
-      padding: 10px 0 14px;
       &.noflags {
         .flags {
           margin: 0;
+          a.btn.tour {
+            right:40px;
+          }
         }
       }
       .flags {
-        float:none;
-        width:auto;
-        max-width: none;
-        margin-bottom: 20px;
         h3 {
           .font-size(16);
           line-height: 1.2;
@@ -364,11 +361,10 @@
         }
       }
       .share-tools {
-        float: none;
-        clear:both;
         width:auto;
         padding:8px 10px;
         h4 {
+          display:none;
           width:40%;
           margin: 0 0 10px;
         }
@@ -480,7 +476,6 @@
   .pinned {
     &.filter-menu {
       margin-top:0;
-
       .month {
         .font-size(16);
         margin: 0;
@@ -494,42 +489,32 @@
       }
     }
     &.share {
-      padding:10px 0 12px;
+      padding:8px 0 10px;
 
       .flags {
         margin: 0;
-        width:65%;
+        width:100%;
         float:left;
         line-height: 1.1;
         h3 {
-          .font-size(12);
+          .font-size(13);
           width:auto;
-          display:inline;
           vertical-align: top;
           margin: 0 4px 0 0;
         }
         .flag-icon {
           margin: 0 8px 0 0;
-          width:26px;
-          height:26px;
-          background-position: center -21px;
+          width:39px;
+          height:39px;
+          background-position: center -31px;
           .border-radius(4px);
         }
-        .btn {
-          position:relative;
-          background: none;
-          .box-shadow(none);
-          padding: 0;
-          border-bottom: 1px dotted white;
-          .border-radius(0);
-          margin: 0;
-          line-height: 1.2;
-          text-align: left;
-          vertical-align: top;
-          display:inline;
+        .btn, a.btn.tour {
+          .font-size(10);
         }
       }
       .share-tools {
+        display:none;
         padding: 0;
         background: none;
         float:right;
@@ -555,7 +540,7 @@
         }
       }
       &.noflags {
-        padding: 6px 0 8px;
+        padding: 6px 0 45px;
         margin-bottom: 15px;
         .container {
           padding: 0 10px;
@@ -564,6 +549,17 @@
           width:100%;
           p {
             .font-size(12);
+            width:auto;
+          }
+          a.btn.tour {
+            top:auto;
+            left:0;
+            bottom:-35px;
+            right:auto;
+          }
+          .close {
+            top:auto;
+            bottom:-32px;
           }
         }
         h3, .btn, .share-tools {
