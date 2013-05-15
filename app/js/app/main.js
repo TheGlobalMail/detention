@@ -1,9 +1,4 @@
 define([
-  'jquery',
-  'lodash',
-  'moment',
-  'incidents',
-  './models',
   './flags',
   './sharing-panel',
   './router',
@@ -16,7 +11,7 @@ define([
   './footer',
   'dropdown',
   'easing'
-], function($, _, moment, incidents, models, flags, sharingPanel, router, tracking, events, handlers, grid) {
+], function(flags, sharingPanel, router, tracking, events, handlers, grid) {
   'use strict';
 
   function setBindings() {
