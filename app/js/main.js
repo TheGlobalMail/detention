@@ -12,6 +12,7 @@ requirejs.config({
     incidents: './data/incidents'
   },
   shim: {
+    backbone: { deps: ['jquery', 'lodash'] },
     xdr: { deps: ['jquery'] },
     touch: { deps: ['jquery'] },
     tooltips: { deps: ['jquery'] },
