@@ -500,6 +500,9 @@ define([ 'jquery', 'touch',
         $flagButton.text('Flag this incident');
         $unflagButton.hide();
       }
+      // Add an additional class if more than one flag button is present
+      _this.element.find('.flag')
+        .toggleClass('multiple-flag-buttons', !!flagged && !flaggedByUser);
     };
 
     _this.updateFlagCount = function() {
