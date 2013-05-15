@@ -586,7 +586,7 @@ footer {
               font-style: italic;
               color:@grayLight;
             }
-            &:hover {
+            &:hover, &:active, &:focus {
               background: none;
             }
           }
@@ -601,6 +601,21 @@ footer {
             background-color: #232626;
             cursor:pointer;
             .transition(background 100ms ease-out);
+          }
+          &.no-incidents {
+            &:hover, &:active, &:focus {
+              background: none;
+              cursor:default;
+            }
+            a {
+              color:@gray;
+              .filter-count {
+                color:@gray;
+              }
+              &:hover, &:active, &:focus {
+                cursor:default;
+              }
+            }
           }
         }
       }
@@ -744,10 +759,11 @@ footer {
   &.noflags {
     z-index: 500;
     background-color: white;
-    margin: 0 0 30px;
-    padding:12px 0 18px;
+    margin: 0 0 20px;
+    padding:10px 0 14px;
     width:90%;
     left: 50%;
+    min-height: 33px;
     margin-left: -45%;
     .border-radius(2px);
     .opacity(90);
@@ -789,7 +805,7 @@ footer {
         display:inline-block;
         position: absolute;
         top:0;
-        right:60px;
+        right:40px;
         color:white;
         border: none;
         box-shadow: none;
@@ -802,7 +818,7 @@ footer {
         display:block;
         .font-size(40);
         right:0;
-        top:0;
+        top:5px;
         width:25px;
         height:25px;
       }

@@ -92,21 +92,13 @@ define([
     _.each(names, function(name){
       var $count = $filter.find('a[data-' + filter.type + '="' + name + '"] .filter-count');
       var count = filtered[name].length;
-      var text = '(' + count;
+      var text = '(' + count + ')';
       total += count;
-      if (state !== 'all'){
-        text += ' for  ' + state;
-      }
-      text += ')';
       $count.text(text);
       $count.parents('li').toggleClass('no-incidents', !count);
     });
     var $count = $filter.find('a[data-' + filter.type + '="all"] .filter-count');
-    var text = '(' + total;
-    if (state !== 'all'){
-      text += ' for  ' + state;
-    }
-    text += ')';
+    var text = '(' + total + ')';
     $count.text(text);
     $count.parents('li').toggleClass('no-incidents', !total);
   }
@@ -114,7 +106,7 @@ define([
   // Manages the state of the filters
   var Filter = {
 
-    // filter panel 
+    // filter panel
     $filters: $('#filters'),
 
     // Keep track of the current filtered facility
