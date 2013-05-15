@@ -1,8 +1,9 @@
 define([
   'jquery',
   'lodash',
+  './process-data',
   'backbone'
-], function($, _){
+], function($, _, incidents){
 
   // Module emits the following events: `reload`, `change`
   var Flags = _.extend({}, Backbone.Events);
@@ -53,6 +54,16 @@ define([
   // Returns a list of all incident ids that are flagged
   Flags.flaggedIds = function(){
     return _.keys(Flags.flagged).sort();
+  };
+
+  // Returns a sorted list of all incident that are flagged
+  window.Flags = Flags;
+  Flags.flaggedIncidents = function(){
+    return _(Flags.flagged)
+      .keys()
+      .map(function(id){ return incidents.data[id]; })
+      .sortBy('occurredOn')
+      .value();
   };
 
   // Returns true if there are any flags
