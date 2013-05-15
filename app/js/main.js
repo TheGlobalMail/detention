@@ -8,9 +8,11 @@ requirejs.config({
     lodash: '../components/lodash/lodash',
     backbone: '../components/backbone/backbone',
     moment: '../components/moment/moment',
-    dropdown: '../components/bootstrap/js/bootstrap-dropdown'
+    dropdown: '../components/bootstrap/js/bootstrap-dropdown',
+    incidents: './data/incidents'
   },
   shim: {
+    backbone: { deps: ['jquery', 'lodash'] },
     xdr: { deps: ['jquery'] },
     touch: { deps: ['jquery'] },
     tooltips: { deps: ['jquery'] },
