@@ -586,7 +586,7 @@ footer {
               font-style: italic;
               color:@grayLight;
             }
-            &:hover {
+            &:hover, &:active, &:focus {
               background: none;
             }
           }
@@ -603,10 +603,17 @@ footer {
             .transition(background 100ms ease-out);
           }
           &.no-incidents {
+            &:hover, &:active, &:focus {
+              background: none;
+              cursor:default;
+            }
             a {
               color:@gray;
               .filter-count {
                 color:@gray;
+              }
+              &:hover, &:active, &:focus {
+                cursor:default;
               }
             }
           }
