@@ -2,8 +2,9 @@ define([
   'jquery',
   'lodash',
   './flags',
-  './router'
-], function($, _, flags, router) {
+  './router',
+  './models',
+], function($, _, flags, router, models) {
   "use strict";
 
   var $flaggedCount = $('#flagged-count');
@@ -98,5 +99,6 @@ define([
     }else{
       $(this).text('Show');
     }
+    models.vent.trigger('modals:hide');
   });
 });

@@ -1,6 +1,4 @@
-define([
-  'jquery',
-  'touch',
+define([ 'jquery', 'touch',
   'lodash',
   './../../components/tgm-bootstrap/js/bootstrap-modal',
   './flags',
@@ -330,6 +328,13 @@ define([
     _this.hideModals = function() {
       _this.currentModal.element.trigger("hide");
     };
+
+    // Setup a listener on the vent to hide the modal. 
+    vent.on('modals:hide', function(){
+      if (_this.displayingModal){
+        _this.hideModals();
+      }
+    });
 
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
