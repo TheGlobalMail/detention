@@ -77,8 +77,6 @@ body {
     position: absolute;
     width: 110%;
     height:100px;
-    // background: url('/images/wire.svg') no-repeat center center transparent;
-    // background-size: 100% auto;
     top:19%;
     left: -5%;
     .transition(all 150ms ease-in);
@@ -96,6 +94,7 @@ body {
       margin-left: -20px;
       .transition(bottom 150ms ease-out);
       .border-radius(50%);
+      border: none;
       &:hover {
         bottom: 9%;
         .transition(all 150ms ease-in);
@@ -211,7 +210,7 @@ body {
     margin: 2px;
     .border-radius(4px);
     .transition(background 200ms ease-in);
-    &:hover {
+    &:hover, &:active, &:focus {
       width: @gridCellSize;
       height: @gridCellSize;
       margin: 2px;
@@ -224,11 +223,11 @@ body {
       .opacity(100);
     }
   }
-  &:hover {
+  &:hover, &:active, &:focus {
     width:@gridCellSize + 2px;
     height:@gridCellSize + 2px;
     margin: 3px;
-    .cellRGBA;
+    .cellRGBA(1) !important;
     .box-shadow(0 0 15px 5px rgba(0,0,0,0.6));
     .transition(opacity 50ms ease-out);
     cursor:pointer;
@@ -278,6 +277,15 @@ body {
       background-position: center -22px;
     }
   }
+  &[data-being-shown]{
+    width:@gridCellSize + 8px;
+    height:@gridCellSize + 8px;
+    .border-radius(5px);
+    margin: 0;
+    .box-shadow(0 0 15px 0 rgba(255,255,255,0.5));
+    background-position: center -32px;
+  }
+
 }
 
 
@@ -861,9 +869,10 @@ footer {
   .modal {
     background: #1f2222;
     color: white;
-    padding:30px;
+    padding:2% 2% 0;
     margin-left: 0;
     width:65%;
+    height:auto;
     max-width: 700px;
     z-index: 99999;
     position: absolute;
@@ -922,9 +931,10 @@ footer {
       padding: 10px 0 0;
     }
     .modal-body {
-      padding: 0;
+      padding: 0 0 60px;
       position: static;
-      max-height: none;
+      height: auto;
+      max-height: 460px;
       overflow-x: visible;
       overflow-y: scroll;
     }
@@ -1101,6 +1111,7 @@ footer {
         h4 {
           .font-size(16);
           float:left;
+          margin-right: 10px;
         }
         .flag-group {
           float:left;
@@ -1123,7 +1134,6 @@ footer {
           text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
           padding: 10px 0;
           width:250px;
-          margin-left: 10px;
           background: url('/images/flag.svg') no-repeat 15px 11px @blue;
           &:hover {
             background-color: #084975;
@@ -1144,6 +1154,30 @@ footer {
         .opacity(60);
         margin-top: 15px;
       }
+      &.multiple-flag-buttons {
+        .container {
+          max-width: none;
+          .flag-group {
+            max-width: 380px;
+          }
+          .btn {
+            width:180px;
+            padding-left: 20px;
+            float:left;
+          }
+          .btn.unflag {
+            font-weight: normal;
+            background: transparent;
+            .box-shadow(none);
+            .border-radius(0);
+            padding: 10px 0 0;
+            width:140px;
+            margin-left: 10px;
+            .font-size(12);
+            border-bottom: 1px dotted white;
+          }
+        }
+      }
     }
     a.prev, a.next {
       text-shadow: none;
@@ -1154,7 +1188,7 @@ footer {
       line-height: 1;
       text-transform: uppercase;
       font-weight: 600;
-      top: 120px;
+      top: 40%;
       .transition(top 0ms ease-out);
       color:white;
       .border-radius(6px);

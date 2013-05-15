@@ -1,4 +1,5 @@
 define([
+  './intro',
   './flags',
   './sharing-panel',
   './router',
@@ -12,7 +13,7 @@ define([
   './footer',
   'dropdown',
   'easing'
-], function(flags, sharingPanel, router, tracking, events, handlers, grid, tour) {
+], function(intro, flags, sharingPanel, router, tracking, events, handlers, grid, tour) {
   'use strict';
 
   function setBindings() {

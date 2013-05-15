@@ -1,6 +1,4 @@
-define([
-  'jquery',
-  'touch',
+define([ 'jquery', 'touch',
   'lodash',
   './../../components/tgm-bootstrap/js/bootstrap-modal',
   './flags',
@@ -323,6 +321,13 @@ define([
       _this.currentModal.element.trigger("hide");
     };
 
+    // Setup a listener on the vent to hide the modal. 
+    vent.on('modals:hide', function(){
+      if (_this.displayingModal){
+        _this.hideModals();
+      }
+    });
+
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
 
@@ -493,6 +498,9 @@ define([
         $flagButton.text('Flag this incident');
         $unflagButton.hide();
       }
+      // Add an additional class if more than one flag button is present
+      _this.element.find('.flag')
+        .toggleClass('multiple-flag-buttons', !!flagged && !flaggedByUser);
     };
 
     _this.updateFlagCount = function() {

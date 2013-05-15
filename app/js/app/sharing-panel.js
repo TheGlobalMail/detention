@@ -2,8 +2,9 @@ define([
   'jquery',
   'lodash',
   './flags',
-  './router'
-], function($, _, flags, router) {
+  './router',
+  './models',
+], function($, _, flags, router, models) {
   "use strict";
 
   var $flaggedCount = $('#flagged-count');
@@ -81,6 +82,7 @@ define([
 
   // Clicking on the flag icon scrolls to the first flagged event
   var currentFlagIndex = 0;
+  var currentFlagCell = null;
   $sharingPanel.find('#show-next-flag').on('click', function(){
     var flaggedIncidents = flags.flaggedIncidents();
     if (!flaggedIncidents.length) return;
@@ -88,8 +90,13 @@ define([
       currentFlagIndex = 0;
     }
     var showIncident = flaggedIncidents[currentFlagIndex];
+    if (currentFlagCell){
+      currentFlagCell.removeAttr('data-being-shown');
+    }
+    currentFlagCell = $('.flagged[data-incident-number="' + showIncident.id + '"]');
+    currentFlagCell.attr('data-being-shown', 'true');
     $.scrollTo(
-      $('.flagged[data-incident-number="' + showIncident.id + '"]'),
+      currentFlagCell,
       { duration: 500, offset: -140, easing: 'easeInOutQuad'}
     );
     currentFlagIndex++;
@@ -98,5 +105,6 @@ define([
     }else{
       $(this).text('Show');
     }
+    models.vent.trigger('modals:hide');
   });
 });
