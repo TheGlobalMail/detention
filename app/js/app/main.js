@@ -6,12 +6,13 @@ define([
   './events',
   './handlers',
   './grid',
+  './tour',
   // dependencies
   './filters',
   './footer',
   'dropdown',
   'easing'
-], function(flags, sharingPanel, router, tracking, events, handlers, grid) {
+], function(flags, sharingPanel, router, tracking, events, handlers, grid, tour) {
   'use strict';
 
   function setBindings() {
@@ -27,7 +28,10 @@ define([
       .always(
         grid.build
       );
+
     handlers.setBindings();
+    tour.init();
+
     setBindings();
   }
 

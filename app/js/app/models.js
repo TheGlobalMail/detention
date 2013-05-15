@@ -34,17 +34,9 @@ define([
 
       _this.displayingModal = false;
 
-      _this.setBindings();
-
       _this.$pullQuote = $('#pullquote');
 
-      // Dismiss the pullquote if the mouse moves over it
-      if (!Modernizr.touch){
-        _this.$pullQuote.on('mouseover', function(){
-          _this.$pullQuote.stop();
-          _this.$pullQuote.hide();
-        });
-      }
+      _this.setBindings();
 
       return _this;
     }
@@ -341,6 +333,12 @@ define([
         incidents.on('click', '.cell', _this.cellOnClick);
         incidents.on('mouseover', '.cell', _this.showPullQuote);
         incidents.on('mouseout', '.cell', _this.hidePullQuote);
+
+        // Dismiss the pullquote if the mouse moves over it
+        _this.$pullQuote.on('mouseover', function(){
+          _this.$pullQuote.stop();
+          _this.$pullQuote.hide();
+        });
       }
 
       modalBackdrop.click(_this.hideModals);

@@ -6,15 +6,14 @@ define([
   './events'
 ], function($, _, incidents, models, events) {
   "use strict";
-  var $gridContainer = $('.incident-grid');
-  var gridContainer = $gridContainer[0];
+
+  var gridContainer = $('.incident-grid');
+  var grid = new models.GridController;
 
   function buildIncidentMonthGrid() {
-    if ($gridContainer.children().length) {
-      $gridContainer.children().remove();
+    if (gridContainer.children().length) {
+      gridContainer.children().remove();
     }
-
-    var grid = new models.GridController;
 
     _(incidents.months)
       // Build the grid in rows of months
@@ -49,13 +48,14 @@ define([
         });
 
         requestAnimationFrame(function() {
-          gridContainer.appendChild(fragment);
+          gridContainer[0].appendChild(fragment);
           events.trigger('grid/complete');
         });
       });
   }
 
   return {
-    build: buildIncidentMonthGrid
+    build: buildIncidentMonthGrid,
+    grid: grid
   };
 });
