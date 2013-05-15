@@ -279,7 +279,12 @@ body {
     }
   }
   &[data-being-shown]{
-    background-color: pink !important;
+    width:@gridCellSize + 8px;
+    height:@gridCellSize + 8px;
+    .border-radius(5px);
+    margin: 0;
+    .box-shadow(0 0 15px 0 rgba(255,255,255,0.5));
+    background-position: center -32px;
   }
 
 }
