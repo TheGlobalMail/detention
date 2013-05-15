@@ -291,7 +291,7 @@ define([
           offset.left = pos.left + (width / 2) - (width / 2) - 15;
           position.push('right');
         }
-        if (window.innerWidth < 700){
+        if (window.innerWidth <= 670){
           offset.left = 10;
         }
         _this.$pullQuote.attr('data-position', position.join('-'));
