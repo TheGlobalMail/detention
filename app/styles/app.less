@@ -602,6 +602,14 @@ footer {
             cursor:pointer;
             .transition(background 100ms ease-out);
           }
+          &.no-incidents {
+            a {
+              color:@gray;
+              .filter-count {
+                color:@gray;
+              }
+            }
+          }
         }
       }
     }
@@ -748,6 +756,7 @@ footer {
     padding:10px 0 14px;
     width:90%;
     left: 50%;
+    min-height: 33px;
     margin-left: -45%;
     .border-radius(2px);
     .opacity(90);
