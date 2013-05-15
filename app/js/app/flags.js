@@ -1,7 +1,7 @@
 define([
   'jquery',
   'lodash',
-  './process-data',
+  'incidents',
   'backbone'
 ], function($, _, incidents){
 
