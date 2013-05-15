@@ -14,7 +14,7 @@ define([
   var modalBackdrop = modalContainer.find('.modal-backdrop');
   var rootModal = $('.modal');
 
-  var MAX_WORDS_IN_PULLQUOTE = 8;
+  var MAX_WORDS_IN_PULLQUOTE = 10;
 
   var redactedRegex = /(client )*s. 47F\(1\)/gi;
 
