@@ -1,10 +1,13 @@
-define([ 'jquery', 'touch',
+define([
+  'jquery',
   'lodash',
-  './../../components/tgm-bootstrap/js/bootstrap-modal',
   './flags',
   'moment',
-  'backbone'
-], function($, touch, _, modal, flags, moment) {
+  // dependencies
+  'touch',
+  'backbone',
+  './../../components/tgm-bootstrap/js/bootstrap-modal'
+], function($, _, flags, moment) {
   "use strict";
 
   var modalContainer = $('#modal-container');
@@ -267,14 +270,14 @@ define([ 'jquery', 'touch',
         var height = _this.$pullQuote.height();
         var offset = {};
         var position = [];
-        if ((pos.top - $(window).scrollTop()) < ($(window).innerHeight() / 2 - 80)){
+        if ((pos.top - $(window).scrollTop()) < (window.innerHeight / 2 - 80)){
           offset.top = pos.top + 50;
           position.push('top');
         }else{
           offset.top = pos.top - height - 80;
           position.push('bottom');
         }
-        if (pos.left > $(window).innerWidth() / 2){
+        if (pos.left > window.innerWidth / 2){
           offset.left = pos.left - width - 15;
           position.push('left');
         }else{
@@ -547,12 +550,16 @@ define([ 'jquery', 'touch',
     _this.slideLeft = function() {
       _this.element.animate({
         "left": getLeftOffScreenPosition() + 'px'
+      }, function() {
+        _this.element.find('.modal-body').scrollTop(0);
       });
     };
 
     _this.slideRight = function() {
       _this.element.animate({
         "left": getRightOffScreenPosition()  + 'px'
+      }, function() {
+        _this.element.find('.modal-body').scrollTop(0);
       });
     };
 
