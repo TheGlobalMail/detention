@@ -186,6 +186,15 @@
         .flag {
           border-top: 1px solid rgba(255,255,255,0.2);
           padding-top: 10px;
+          .container {
+            h4 {
+              float:none;
+            }
+            .flag-group {
+              float:none;
+              margin: 0 auto;
+            }
+          }
         }
         a.prev, a.next {
           position:relative;
@@ -312,6 +321,14 @@
             &:hover {
               background-position: center -18px;
             }
+          }
+          &[data-being-shown]{
+            width:@gridCellSize + 6px;
+            height:@gridCellSize + 6px;
+            .border-radius(5px);
+            margin: 0;
+            .box-shadow(0 0 15px 0 rgba(255,255,255,0.5));
+            background-position: center -28px;
           }
         }
       }
@@ -525,8 +542,13 @@
         display:none;
       }
       &.noflags {
-        padding: 6px 0 40px;
-        margin-bottom: 15px;
+        padding: 4px 0 35px;
+        margin-bottom: 0;
+        width:100%;
+        .border-radius(0);
+        border-top: 1px solid white;
+        margin-left: -50%;
+        background-color: rgba(255,255,255,.85);
         .container {
           padding: 0 10px;
         }
@@ -534,18 +556,24 @@
           width:100%;
           p {
             .font-size(12);
+            line-height: 1.2;
             width:auto;
           }
           a.btn.tour {
-            padding: 2px 8px;
+            padding: 5px 5px 6px;
+            line-height: 1;
             top:auto;
+            margin-top: 0;
             left:0;
-            bottom:-30px;
+            bottom:-25px;
             right:auto;
           }
           .close {
+            width:20px;
+            height:20px;
             top:auto;
-            bottom:-30px;
+            .font-size(34);
+            bottom:-22px;
           }
         }
         h3, .btn, .share-tools {
@@ -582,8 +610,8 @@
           right:6px;
         }
         .modal-body {
-          height:70%;
-          padding-bottom: 30%;
+          height:85%;
+          padding-bottom: 15%;
         }
         h3 {
           padding:10px 12px;
@@ -610,11 +638,11 @@
               display:none;
             }
             .flag-group {
-              float:none;
               margin: 0 auto;
-              max-width: none;
+              width:240px;
+              text-align: center;
               .btn {
-                padding: 8px 0;
+                float:none;
                 margin: 0 auto;
                 display:block;
                 .font-size(12);

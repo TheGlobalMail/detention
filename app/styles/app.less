@@ -241,8 +241,8 @@ body {
     .transition(all 100ms ease-in);
     &:hover {
       .transition(all 200ms ease-out);
-      background-color: @blue;
-      background-position: center 9px;
+      background-color: @blue !important;
+      background-position: center 9px !important;
       .box-shadow(0 0 15px 5px rgba(0,0,0,0.3));
     }
   }
@@ -421,7 +421,6 @@ footer {
     font-style: italic;
     .font-size(30);
     color:white;
-    // max-height: 110px;
     overflow:hidden;
   }
   em {
@@ -728,8 +727,6 @@ footer {
     float:right;
     width:260px;
     padding:8px 14px;
-    background: rgba(255,255,255,.05);
-    .border-radius(4px);
     h4 {
       font-weight: normal;
       .font-size(11);
