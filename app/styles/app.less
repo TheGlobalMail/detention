@@ -409,7 +409,9 @@ footer {
   width:400px;
   line-height: 1.2;
   .box-shadow(0 2px 3px black);
-  display: none;
+  &#main-pullquote {
+    display: none;
+  }
   blockquote {
     position:relative;
     padding: 0;
@@ -428,7 +430,7 @@ footer {
     font-weight: normal;
     font-style: italic;
     color:@grayLight;
-    &#pullquote-facility {
+    &.pullquote-facility {
       border: none;
       margin: 0;
       padding: 0;
@@ -1229,7 +1231,7 @@ footer {
   &.show {
     display: block;
     .backdrop {
-      .opacity(70);
+      .opacity(55);
     }
   }
   .intro,
@@ -1242,6 +1244,15 @@ footer {
     z-index: 500;
     .text-container {
       position: absolute;
+      .cell {
+        .cellRGBA(0.75);
+        float: right;
+      }
+      .pullquote {
+        position: relative;
+        float: right;
+        margin-bottom: 3em;
+      }
       p {
         font-size: 2em;
         width: 30em;
