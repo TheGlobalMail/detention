@@ -322,6 +322,14 @@
               background-position: center -18px;
             }
           }
+          &[data-being-shown]{
+            width:@gridCellSize + 6px;
+            height:@gridCellSize + 6px;
+            .border-radius(5px);
+            margin: 0;
+            .box-shadow(0 0 15px 0 rgba(255,255,255,0.5));
+            background-position: center -28px;
+          }
         }
       }
     }
