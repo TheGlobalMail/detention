@@ -79,7 +79,7 @@ define([
     var grid = $('.incident-grid');
     var className = 'pinned';
     return _.throttle(function() {
-      if (grid.offset().top <= window.innerHeight + getScrollY()) {
+      if (grid.offset().top <= window.innerHeight + getScrollY() - 100) {
         flagPanel.addClass(className);
       } else {
         flagPanel.removeClass(className);

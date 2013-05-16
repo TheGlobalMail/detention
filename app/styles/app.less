@@ -96,8 +96,7 @@ body {
       .transition(bottom 150ms ease-out);
       .border-radius(50%);
       border: none;
-      &:hover {
-        bottom: 9%;
+      &:hover, &:active {
         .transition(all 150ms ease-in);
         background-color: rgba(255,255,255,0.2);
       }
@@ -169,9 +168,6 @@ body {
     }
     .arrow {
       bottom:15%;
-      &:hover {
-        bottom: 14.5%;
-      }
     }
   }
 }
