@@ -2,14 +2,14 @@ define([
   'jquery',
   'lodash',
   './grid',
-  './events'
-], function($, _, grid, events) {
+  './events',
+  'incidents'
+], function($, _, grid, events, incidents) {
   "use strict";
 
   var scrollDuration = 1000;
 
   var body = $('body');
-
   var incidentContainer = $('#incidents');
 
   var tourContainer = $('.tour-container');
@@ -23,17 +23,17 @@ define([
   var firstExample = tourContainer.find('.first-example');
   var firstExampleText = firstExample.find('.text-container');
   var firstExampleNext = firstExample.find('.next');
-  var firstExampleCell;
+  var firstExampleMonth;
 
   var secondExample = tourContainer.find('.second-example');
   var secondExampleText = secondExample.find('.text-container');
   var secondExampleNext = secondExample.find('.next');
-  var secondExampleCell;
+  var secondExampleMonth;
 
   var flagIntro = tourContainer.find('.flag-intro');
   var flagIntroText = flagIntro.find('.text-container');
   var flagIntroNext = flagIntro.find('.next');
-  var flagIntroCell;
+  var flagIntroMonth;
 
   function startTour() {
     body.addClass('in-tour');
@@ -52,7 +52,8 @@ define([
     $.scrollTo(incidentTop, scrollDuration);
 
     // First example
-    incidentTop = firstExampleCell.element.offsetTop;
+    incidentTop = firstExampleMonth.offsetTop;
+    // TODO: lineup cell with nearest one
     firstExampleText.css({
       top: incidentTop + (window.innerHeight - firstExampleText.height()) / 2,
       left: (window.innerWidth - firstExampleText.width()) / 2
@@ -63,7 +64,7 @@ define([
     });
 
     // Second example
-    incidentTop = secondExampleCell.element.offsetTop;
+    incidentTop = secondExampleMonth.offsetTop;
     secondExampleText.css({
       top: incidentTop + (window.innerHeight - secondExampleText.height()) / 2,
       left: (window.innerWidth - secondExampleText.width()) / 2
@@ -74,7 +75,7 @@ define([
     });
     
     // Flagging introduction
-    incidentTop = flagIntroCell.element.offsetTop;
+    incidentTop = flagIntroMonth.offsetTop;
     flagIntroText.css({
       top: incidentTop + (window.innerHeight - flagIntroText.height()) / 2,
       left: (window.innerWidth - flagIntroText.width()) / 2
@@ -86,30 +87,20 @@ define([
   }
 
   function scrollToFirstExample() {
-    $.scrollTo(firstExampleCell.element.offsetTop, scrollDuration);
+    $.scrollTo(firstExampleMonth.offsetTop, scrollDuration);
   }
 
   function scrollToSecondExample() {
-    $.scrollTo(secondExampleCell.element.offsetTop, scrollDuration);
+    $.scrollTo(secondExampleMonth.offsetTop, scrollDuration);
   }
 
   function scrollToFlagIntro() {
-    $.scrollTo(flagIntroCell.element.offsetTop, scrollDuration);
+    $.scrollTo(flagIntroMonth.offsetTop, scrollDuration);
   }
 
   function endTour() {
     body.removeClass('in-tour');
     tourContainer.removeClass('show');
-  }
-
-  function getCellByIncident(incident) {
-    var cells = grid.grid.cells;
-    for (var i=0; i < cells.length; i++) {
-      var cell = cells[i];
-      if (cell.data.id === incident) {
-        return cell;
-      }
-    }
   }
 
   function setBindings() {
@@ -121,13 +112,17 @@ define([
     exit.on('click', endTour);
     flagIntroNext.on('click', endTour);
 
-    firstExampleCell = getCellByIncident('1-3KY9NP');
-    secondExampleCell = getCellByIncident('1-5K4R74');
-    flagIntroCell = getCellByIncident('1-73O4A6');
+    var months = incidentContainer.find('.date');
+    firstExampleMonth = months.get(8);
+    secondExampleMonth = months.get(13);
+    flagIntroMonth = months.get(18);
 
-    // TODO: remove this
+    $('.start-tour').on('click', startTour);
+
+    // TODO: scrap this
 //    _.delay(startTour, 300);
   }
+
   function init() {
     events.on('grid/complete', setBindings)
   }
