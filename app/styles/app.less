@@ -92,6 +92,7 @@ body {
       left: 50%;
       bottom: 10%;
       margin-left: -20px;
+      padding: 0;
       .transition(bottom 150ms ease-out);
       .border-radius(50%);
       border: none;
@@ -991,7 +992,6 @@ footer {
       border-top: 1px solid rgba(255,255,255,.2);
       .modal-header {
         padding:0 0 0 15px;
-        border-bottom: 1px solid rgba(255,255,255,.2);
         h3 {
           padding:0;
           .font-size(22);
@@ -1032,11 +1032,9 @@ footer {
       color:#333;
       background: @event-yellow;
       text-shadow: 0 1px 0 rgba(255,255,255,.6);
-      .modal-header {
-        border-color: rgba(0,0,0,.1);
-      }
       .close {
         color:#333;
+        text-shadow:none;
       }
     }
     .incident-details {
