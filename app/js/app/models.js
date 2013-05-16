@@ -35,7 +35,7 @@ define([
 
       _this.displayingModal = false;
 
-      _this.$pullQuote = $('#pullquote');
+      _this.$pullQuote = $('#main-pullquote');
 
       _this.setBindings();
 
@@ -264,8 +264,8 @@ define([
           summary = words.slice(0, MAX_WORDS_IN_PULLQUOTE).join(' ') + ' ' + '...';
         }
         _this.$pullQuote.find('blockquote').text('"' + summary + '"');
-        _this.$pullQuote.find('em#pullquote-date').text(moment(cell.data.occurredOn).format('D/M/YYYY'));
-        _this.$pullQuote.find('em#pullquote-facility').text(cell.data.location);
+        _this.$pullQuote.find('em.pullquote-date').text(moment(cell.data.occurred_on).format('D/M/YYYY'));
+        _this.$pullQuote.find('em.pullquote-facility').text(cell.data.location);
         var width = _this.$pullQuote.width();
         var height = _this.$pullQuote.height();
         var offset = {};
