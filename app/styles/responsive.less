@@ -186,6 +186,15 @@
         .flag {
           border-top: 1px solid rgba(255,255,255,0.2);
           padding-top: 10px;
+          .container {
+            h4 {
+              float:none;
+            }
+            .flag-group {
+              float:none;
+              margin: 0 auto;
+            }
+          }
         }
         a.prev, a.next {
           position:relative;
@@ -582,8 +591,8 @@
           right:6px;
         }
         .modal-body {
-          height:70%;
-          padding-bottom: 30%;
+          height:85%;
+          padding-bottom: 15%;
         }
         h3 {
           padding:10px 12px;
@@ -610,11 +619,11 @@
               display:none;
             }
             .flag-group {
-              float:none;
               margin: 0 auto;
-              max-width: none;
+              width:240px;
+              text-align: center;
               .btn {
-                padding: 8px 0;
+                float:none;
                 margin: 0 auto;
                 display:block;
                 .font-size(12);
