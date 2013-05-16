@@ -321,7 +321,7 @@ define([ 'jquery', 'touch',
       _this.currentModal.element.trigger("hide");
     };
 
-    // Setup a listener on the vent to hide the modal. 
+    // Setup a listener on the vent to hide the modal.
     vent.on('modals:hide', function(){
       if (_this.displayingModal){
         _this.hideModals();
@@ -430,7 +430,7 @@ define([ 'jquery', 'touch',
             if (!redaction){
               redaction = !!text.match(redactedRegex);
             }
-            var html = text.replace(redactedRegex, ' <span class="redact">NAME REDACTED</span>');
+            var html = text.replace(redactedRegex, ' <span class="redact">Client Name</span>');
             _this.element.find(className).html(html);
           } else if (property === 'incident_type' || property === 'location') {
             _this.element.find(className).text(text.replace(/(?:^|\s)\S/g, function(c){ return c.toUpperCase();  }));
