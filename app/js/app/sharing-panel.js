@@ -107,4 +107,14 @@ define([
     }
     models.vent.trigger('modals:hide');
   });
+
+  flags.on('change', function(){
+    if (currentFlagCell){
+      if (!flags.isFlagged(currentFlagCell.data('incident-number'))){
+        currentFlagCell.removeAttr('data-being-shown');
+        currentFlagCell = null;
+        currentFlagIndex = 0;
+      }
+    }
+  });
 });
