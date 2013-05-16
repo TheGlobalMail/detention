@@ -542,8 +542,12 @@
         display:none;
       }
       &.noflags {
-        padding: 6px 0 40px;
-        margin-bottom: 15px;
+        padding: 4px 0 35px;
+        margin-bottom: 0;
+        width:100%;
+        .border-radius(0);
+        margin-left: -50%;
+        background-color: rgba(255,255,255,.8);
         .container {
           padding: 0 10px;
         }
@@ -551,18 +555,24 @@
           width:100%;
           p {
             .font-size(12);
+            line-height: 1.2;
             width:auto;
           }
           a.btn.tour {
-            padding: 2px 8px;
+            padding: 5px 5px 6px;
+            line-height: 1;
             top:auto;
+            margin-top: 0;
             left:0;
-            bottom:-30px;
+            bottom:-25px;
             right:auto;
           }
           .close {
+            width:20px;
+            height:20px;
             top:auto;
-            bottom:-30px;
+            .font-size(34);
+            bottom:-22px;
           }
         }
         h3, .btn, .share-tools {
