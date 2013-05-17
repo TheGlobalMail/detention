@@ -148,7 +148,7 @@ define([
     $('.start-tour').on('click', startTour);
 
     // TODO: scrap this
-    _.delay(startTour, 300);
+//    _.delay(startTour, 300);
   }
 
   function init() {
