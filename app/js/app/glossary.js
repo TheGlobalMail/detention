@@ -6,15 +6,17 @@ define(['lodash'], function(_){
     'IR': 'Incident Report'
   };
 
-  // Replaces words in the glossary with spans
+  // Returns an object with the `html` replaced with sup tags and `glossary`
+  // containing the defnitions in list items
   var applyToHtml = function(html){
     var glossaryHtml = '';
     var usedGlossary = [];
     _.each(glossary, function(defn, abbrev){
-      if (html.match(abbrev)){
+      var regex = new RegExp('(^| )(' + abbrev + ')($| )', 'gm');
+      if (html.match(regex)){
         usedGlossary.push(defn);
         html = html
-          .replace(new RegExp(abbrev, 'gm'), abbrev + '<sup>' + usedGlossary.length + '</sup>');
+          .replace(regex, '$1$2<sup>' + usedGlossary.length + '</sup>$3');
       }
     });
     if (usedGlossary.length){
