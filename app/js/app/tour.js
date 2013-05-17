@@ -14,7 +14,7 @@ define([
 
   var tourContainer = $('.tour-container');
   var backdrop = tourContainer.find('.backdrop');
-  var exit = tourContainer.find('.exit');
+  var exit = tourContainer.find('.close');
 
   var intro = tourContainer.find('.intro');
   var introText = intro.find('.text-container');
