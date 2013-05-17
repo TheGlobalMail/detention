@@ -339,7 +339,7 @@ body {
 footer {
   background-color: #222;
   #gradient.vertical-three-colors(#000,#111,2%,#222);
-  padding: 40px 0 160px;
+  padding: 40px 0 60px;
   margin-top: 40px;
   text-shadow: 0 -1px 0 black;
   position: relative;
@@ -389,6 +389,13 @@ footer {
     float: left;
     font-size: 80%;
     padding: 0 40px 0 0;
+    &.photo-credit {
+      clear:both;
+      margin-top: 40px;
+      li {
+        .font-size(12);
+      }
+    }
     li {
       color: @gray;
       .font-size(14);
@@ -1267,9 +1274,25 @@ footer {
         margin-bottom: 3em;
       }
       p {
-        .font-size(20);
-        line-height: 1.4;
-        width: 30em;
+        .font-size(18);
+        line-height: 1.5;
+        width:100%;
+        max-width: 540px;
+        min-width: 300px;
+        strong {
+          .font-size(20);
+        }
+        a {
+          font-size: inherit;
+          text-transform: none;
+          font-weight: normal;
+          color:white;
+          border-bottom: 1px dotted white;
+          &:hover {
+            color:@blue;
+            border-color: @blue;
+          }
+        }
       }
     }
     .next, .back {
