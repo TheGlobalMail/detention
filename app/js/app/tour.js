@@ -19,21 +19,25 @@ define([
   var intro = tourContainer.find('.intro');
   var introText = intro.find('.text-container');
   var introNext = intro.find('.next');
+  var introScrollTo;
 
   var firstExample = tourContainer.find('.first-example');
   var firstExampleText = firstExample.find('.text-container');
   var firstExampleNext = firstExample.find('.next');
   var firstExampleMonth;
+  var firstExampleScrollTo;
 
   var secondExample = tourContainer.find('.second-example');
   var secondExampleText = secondExample.find('.text-container');
   var secondExampleNext = secondExample.find('.next');
   var secondExampleMonth;
+  var secondExampleScrollTo;
 
   var flagIntro = tourContainer.find('.flag-intro');
   var flagIntroText = flagIntro.find('.text-container');
   var flagIntroNext = flagIntro.find('.next');
   var flagIntroMonth;
+  var flagIntroScrollTo;
 
   function startTour() {
     body.addClass('in-tour');
@@ -43,49 +47,49 @@ define([
 
   function positionElements() {
     // Introduction
-    var incidentTop = incidentContainer.offset().top;
+    introScrollTo = incidentContainer.offset().top;
     introText.css({
-      top: incidentTop + (window.innerHeight - introText.height()) / 2,
+      top: introScrollTo + (window.innerHeight - introText.height()) / 2,
       left: (window.innerWidth - introText.width()) / 2
     });
     introNext.css({
-      top: incidentTop + window.innerHeight - introNext.height() - 100,
+      top: introScrollTo + window.innerHeight - introNext.height() - 100,
       left: (window.innerWidth - introNext.width()) / 2
     });
-    $.scrollTo(incidentTop, scrollDuration);
+    scrollToIntro();
 
     // First example
-    incidentTop = firstExampleMonth.offsetTop;
+    firstExampleScrollTo = firstExampleMonth.offsetTop;
     firstExampleText.css({
-      top: incidentTop + (window.innerHeight - firstExampleText.height()) / 2,
+      top: firstExampleScrollTo + (window.innerHeight - firstExampleText.height()) / 2,
       left: (window.innerWidth - firstExampleText.width()) / 2
     });
-    positionOnNearestCell(firstExampleMonth, firstExampleText);
+    firstExampleScrollTo += positionOnNearestCell(firstExampleMonth, firstExampleText);
     firstExampleNext.css({
-      top: incidentTop + window.innerHeight - firstExampleNext.height() - 100,
+      top: firstExampleScrollTo + window.innerHeight - firstExampleNext.height() - 100,
       left: (window.innerWidth - firstExampleNext.width()) / 2
     });
 
     // Second example
-    incidentTop = secondExampleMonth.offsetTop;
+    secondExampleScrollTo = secondExampleMonth.offsetTop;
     secondExampleText.css({
-      top: incidentTop + (window.innerHeight - secondExampleText.height()) / 2,
+      top: secondExampleScrollTo + (window.innerHeight - secondExampleText.height()) / 2,
       left: (window.innerWidth - secondExampleText.width()) / 2
     });
-    positionOnNearestCell(secondExampleMonth, secondExampleText);
+    secondExampleScrollTo += positionOnNearestCell(secondExampleMonth, secondExampleText);
     secondExampleNext.css({
-      top: incidentTop + window.innerHeight - secondExampleNext.height() - 100,
+      top: secondExampleScrollTo + window.innerHeight - secondExampleNext.height() - 100,
       left: (window.innerWidth - secondExampleNext.width()) / 2
     });
 
     // Flagging introduction
-    incidentTop = flagIntroMonth.offsetTop;
+    flagIntroScrollTo = flagIntroMonth.offsetTop;
     flagIntroText.css({
-      top: incidentTop + (window.innerHeight - flagIntroText.height()) / 2,
+      top: flagIntroScrollTo + (window.innerHeight - flagIntroText.height()) / 2,
       left: (window.innerWidth - flagIntroText.width()) / 2
     });
     flagIntroNext.css({
-      top: incidentTop + window.innerHeight - flagIntroNext.height() - 100,
+      top: flagIntroScrollTo + window.innerHeight - flagIntroNext.height() - 100,
       left: (window.innerWidth - flagIntroNext.width()) / 2
     });
   }
@@ -120,18 +124,23 @@ define([
       .css({
         'top': topDifference
       });
+    return topDifference
+  }
+
+  function scrollToIntro() {
+    $.scrollTo(introScrollTo, scrollDuration);
   }
 
   function scrollToFirstExample() {
-    $.scrollTo(firstExampleMonth.offsetTop, scrollDuration);
+    $.scrollTo(firstExampleScrollTo, scrollDuration);
   }
 
   function scrollToSecondExample() {
-    $.scrollTo(secondExampleMonth.offsetTop, scrollDuration);
+    $.scrollTo(secondExampleScrollTo, scrollDuration);
   }
 
   function scrollToFlagIntro() {
-    $.scrollTo(flagIntroMonth.offsetTop, scrollDuration);
+    $.scrollTo(flagIntroScrollTo, scrollDuration);
   }
 
   function endTour() {
