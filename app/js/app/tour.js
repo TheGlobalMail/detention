@@ -38,7 +38,10 @@ define([
   function startTour() {
     body.addClass('in-tour');
     tourContainer.addClass('show');
+    positionElements();
+  }
 
+  function positionElements() {
     // Introduction
     var incidentTop = incidentContainer.offset().top;
     introText.css({
@@ -53,11 +56,36 @@ define([
 
     // First example
     incidentTop = firstExampleMonth.offsetTop;
-    // TODO: lineup cell with nearest one
     firstExampleText.css({
       top: incidentTop + (window.innerHeight - firstExampleText.height()) / 2,
       left: (window.innerWidth - firstExampleText.width()) / 2
     });
+
+    var $firstExampleMonth = $(firstExampleMonth);
+    var monthOffset = $firstExampleMonth.offset();
+    var cells = $firstExampleMonth.find('.cell');
+    var testCell = cells.first();
+    var cellWidth = testCell.outerWidth(true);
+    var tourCell = firstExampleText.find('.cell');
+    var tourCellOffset = tourCell.offset();
+    // Find the nearest cell below the tour cell
+    var cellsPerRow = Math.floor($firstExampleMonth.width() / cellWidth);
+    var cellCountFromLeft = Math.floor((tourCellOffset.left - monthOffset.left) / cellWidth);
+    var cellRowCountFromTop = Math.floor((tourCellOffset.top - monthOffset.top) / cellWidth);
+    var nearestCellIndex = (cellRowCountFromTop * cellsPerRow) + cellCountFromLeft;
+    var nearestCell = $(cells.get(nearestCellIndex));
+    // Find the positional difference between the nearest cell and tour cell
+    var nearestCellOffset = nearestCell.offset();
+    var leftDifference = nearestCellOffset.left - tourCellOffset.left;
+    var topDifference = nearestCellOffset.top - tourCellOffset.top;
+    // Shift the cell and the pull quote inline with the nearest cell
+    tourCell
+      .add(firstExampleText.find('.pullquote'))
+      .css({
+        'top': topDifference,
+        'left': leftDifference
+      });
+
     firstExampleNext.css({
       top: incidentTop + window.innerHeight - firstExampleNext.height() - 100,
       left: (window.innerWidth - firstExampleNext.width()) / 2
@@ -73,7 +101,7 @@ define([
       top: incidentTop + window.innerHeight - secondExampleNext.height() - 100,
       left: (window.innerWidth - secondExampleNext.width()) / 2
     });
-    
+
     // Flagging introduction
     incidentTop = flagIntroMonth.offsetTop;
     flagIntroText.css({
@@ -120,7 +148,7 @@ define([
     $('.start-tour').on('click', startTour);
 
     // TODO: scrap this
-//    _.delay(startTour, 300);
+    _.delay(startTour, 300);
   }
 
   function init() {
