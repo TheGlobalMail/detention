@@ -1275,14 +1275,10 @@ footer {
     .text-container {
       position: absolute;
       .cell {
-        .cellRGBA(0.75);
-        float: right;
         position: relative;
-        margin-right: 15px;
       }
       .pullquote {
         position: relative;
-        float: right;
         margin-top: 15px;
         margin-bottom: 3em;
       }
@@ -1292,6 +1288,7 @@ footer {
         width:100%;
         max-width: 540px;
         min-width: 300px;
+        position: relative;
         strong {
           .font-size(20);
         }
@@ -1308,40 +1305,60 @@ footer {
         }
       }
     }
-    .next, .back {
-      position: absolute;
-      color: white;
-      width: auto;
-      display: block;
-      margin: 0 auto;
+  }
+  .first-example {
+    .cell {
+      .cellRGBA(0.75);
+      float: right;
+      margin-right: 15px;
+    }
+    .pullquote {
+      float: right;
+    }
+  }
+  .second-example {
+    .cell {
+      .cellRGBA(0.6);
+      float: left;
+      margin-left: 15px;
+    }
+    .pullquote {
+      float: left;
+    }
+  }
+  .next, .back {
+    position: absolute;
+    color: white;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    .arrow {
+      position:relative;
+      left:auto;
+      bottom:auto;
+      margin: 0 auto 5px;
+    }
+    &:hover {
+      .opacity(80);
+      cursor: pointer;
+    }
+    &.exit {
       .arrow {
-        position:relative;
-        left:auto;
-        bottom:auto;
-        margin: 0 auto 5px;
+        float:left;
+        margin:0 10px 0 0;
+        background-position: center -61px;
       }
-      &:hover {
-        .opacity(80);
-        cursor: pointer;
-      }
-      &.exit {
-        .arrow {
-          float:left;
-          margin:0 10px 0 0;
-          background-position: center -61px;
-        }
-        span {
-          display:block;
-          line-height: 1;
-          margin-top: 10px;
-        }
+      span {
+        display:block;
+        line-height: 1;
+        margin-top: 10px;
       }
     }
-    .back {
-      .arrow {
-        margin: 5px auto 0;
-        background-position: center -184px;
-      }
+  }
+  .back {
+    .arrow {
+      margin: 5px auto 0;
+      background-position: center -184px;
     }
   }
   .backdrop {
