@@ -60,32 +60,7 @@ define([
       top: incidentTop + (window.innerHeight - firstExampleText.height()) / 2,
       left: (window.innerWidth - firstExampleText.width()) / 2
     });
-
-    var $firstExampleMonth = $(firstExampleMonth);
-    var monthOffset = $firstExampleMonth.offset();
-    var cells = $firstExampleMonth.find('.cell');
-    var testCell = cells.first();
-    var cellWidth = testCell.outerWidth(true);
-    var tourCell = firstExampleText.find('.cell');
-    var tourCellOffset = tourCell.offset();
-    // Find the nearest cell below the tour cell
-    var cellsPerRow = Math.floor($firstExampleMonth.width() / cellWidth);
-    var cellCountFromLeft = Math.floor((tourCellOffset.left - monthOffset.left) / cellWidth);
-    var cellRowCountFromTop = Math.floor((tourCellOffset.top - monthOffset.top) / cellWidth);
-    var nearestCellIndex = (cellRowCountFromTop * cellsPerRow) + cellCountFromLeft;
-    var nearestCell = $(cells.get(nearestCellIndex));
-    // Find the positional difference between the nearest cell and tour cell
-    var nearestCellOffset = nearestCell.offset();
-    var leftDifference = nearestCellOffset.left - tourCellOffset.left;
-    var topDifference = nearestCellOffset.top - tourCellOffset.top;
-    // Shift the cell and the pull quote inline with the nearest cell
-    tourCell
-      .add(firstExampleText.find('.pullquote'))
-      .css({
-        'top': topDifference,
-        'left': leftDifference
-      });
-
+    positionOnNearestCell(firstExampleMonth, firstExampleText);
     firstExampleNext.css({
       top: incidentTop + window.innerHeight - firstExampleNext.height() - 100,
       left: (window.innerWidth - firstExampleNext.width()) / 2
@@ -97,6 +72,7 @@ define([
       top: incidentTop + (window.innerHeight - secondExampleText.height()) / 2,
       left: (window.innerWidth - secondExampleText.width()) / 2
     });
+    positionOnNearestCell(secondExampleMonth, secondExampleText);
     secondExampleNext.css({
       top: incidentTop + window.innerHeight - secondExampleNext.height() - 100,
       left: (window.innerWidth - secondExampleNext.width()) / 2
@@ -112,6 +88,38 @@ define([
       top: incidentTop + window.innerHeight - flagIntroNext.height() - 100,
       left: (window.innerWidth - flagIntroNext.width()) / 2
     });
+  }
+
+  function positionOnNearestCell(monthElement, tourTextElement) {
+    var $monthElement = $(monthElement);
+    var monthOffset = $monthElement.offset();
+    var cells = $monthElement.find('.cell');
+    var testCell = cells.first();
+    var cellWidth = testCell.outerWidth(true);
+    var tourCell = tourTextElement.find('.cell');
+    var tourCellOffset = tourCell.offset();
+    // Find the nearest cell below the tour cell
+    var cellsPerRow = Math.floor($monthElement.width() / cellWidth);
+    var cellCountFromLeft = Math.floor((tourCellOffset.left - monthOffset.left) / cellWidth);
+    var cellRowCountFromTop = Math.floor((tourCellOffset.top - monthOffset.top) / cellWidth);
+    var nearestCellIndex = (cellRowCountFromTop * cellsPerRow) + cellCountFromLeft;
+    var nearestCell = $(cells.get(nearestCellIndex));
+    // Find the positional difference between the nearest cell and tour cell
+    var nearestCellOffset = nearestCell.offset();
+    var leftDifference = nearestCellOffset.left - tourCellOffset.left;
+    var topDifference = nearestCellOffset.top - tourCellOffset.top;
+    // Shift the cell and the pull quote inline with the nearest cell
+    var pullQuote = tourTextElement.find('.pullquote');
+    tourCell
+      .add(pullQuote)
+      .css({
+        'top': topDifference,
+        'left': leftDifference
+      });
+    tourTextElement.find('p')
+      .css({
+        'top': topDifference
+      });
   }
 
   function scrollToFirstExample() {
