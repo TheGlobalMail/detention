@@ -18,6 +18,7 @@ define([
   var MAX_WORDS_IN_PULLQUOTE = 10;
 
   var redactedRegex = /(client *)*s. 47F\(1\)/gi;
+  var redactedStaffRegex = /REDACTED_STAFF/gi;
 
   var vent = _.extend({}, Backbone.Events);
 
@@ -258,7 +259,9 @@ define([
       if (_this.pullQuoteTimer) clearTimeout(_this.pullQuoteTimer);
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteTimer = setTimeout(function(){
-        var summary  = cell.data.Summary.replace(redactedRegex, 'Client');
+        var summary  = cell.data.Summary
+          .replace(redactedRegex, 'Client')
+          .replace(redactedStaffRegex, 'Staff');
         var words = summary.split(' ');
         if (words.length > MAX_WORDS_IN_PULLQUOTE){
           summary = words.slice(0, MAX_WORDS_IN_PULLQUOTE).join(' ') + ' ' + '...';
@@ -434,9 +437,11 @@ define([
           var text = cell.data[property] || '';
           if (property === 'Summary') {
             if (!redaction){
-              redaction = !!text.match(redactedRegex);
+              redaction = !!(text.match(redactedRegex) || text.match(redactedStaffRegex));
             }
-            var html = text.replace(redactedRegex, ' <span class="redact">Client Name</span>');
+            var html = text
+              .replace(redactedRegex, ' <span class="redact">Client Name</span>')
+              .replace(redactedStaffRegex, ' <span class="redact">Staff Name</span>');
             _this.element.find(className).html(html);
           } else if (property === 'incident_type' || property === 'location') {
             _this.element.find(className).text(text.replace(/(?:^|\s)\S/g, function(c){ return c.toUpperCase();  }));
