@@ -274,18 +274,21 @@ define([
           offset.top = pos.top + 50;
           position.push('top');
         }else{
-          offset.top = pos.top - height - 80;
+          if (window.innerWidth <= 670){
+            offset.top = pos.top - height - 50;
+          }else{
+            offset.top = pos.top - height - 80;
+          }
           position.push('bottom');
         }
-        if (pos.left > window.innerWidth / 2){
+        if (window.innerWidth <= 670){
+          offset.left = 10;
+        }else if (pos.left > window.innerWidth / 2){
           offset.left = pos.left - width - 15;
           position.push('left');
         }else{
           offset.left = pos.left + (width / 2) - (width / 2) - 15;
           position.push('right');
-        }
-        if (window.innerWidth <= 670){
-          offset.left = 10;
         }
         _this.$pullQuote.attr('data-position', position.join('-'));
         _this.hidePullQuote(1000);
