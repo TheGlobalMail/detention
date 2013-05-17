@@ -159,10 +159,10 @@ define([
     tourContainer.removeClass('show');
   }
 
-  function onResize() {
+  var onResize = _.debounce(function() {
     positionElements();
     scrollCallbacks[scrollCallbackIndex]();
-  }
+  }, 100);
 
   function setBindings() {
     introNext.on('click', scrollToFirstExample);
@@ -183,7 +183,7 @@ define([
     $(window).on('resize', onResize);
 
     // TODO: scrap this
-    // _.delay(startTour, 300);
+//    _.delay(startTour, 300);
   }
 
   function init() {
