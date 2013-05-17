@@ -39,10 +39,14 @@ define([
   var flagIntroMonth;
   var flagIntroScrollTo;
 
+  var scrollCallbackIndex = 0;
+  var scrollCallbacks = [];
+
   function startTour() {
     body.addClass('in-tour');
     tourContainer.addClass('show');
     positionElements();
+    scrollToIntro();
   }
 
   function positionElements() {
@@ -56,7 +60,6 @@ define([
       top: introScrollTo + window.innerHeight - introNext.height() - 100,
       left: (window.innerWidth - introNext.width()) / 2
     });
-    scrollToIntro();
 
     // First example
     firstExampleScrollTo = firstExampleMonth.offsetTop;
@@ -127,25 +130,38 @@ define([
     return topDifference
   }
 
-  function scrollToIntro() {
+  var scrollToIntro = _.throttle(function() {
+    scrollCallbackIndex = 0;
     $.scrollTo(introScrollTo, scrollDuration);
-  }
+  }, scrollDuration);
+  scrollCallbacks.push(scrollToIntro);
 
-  function scrollToFirstExample() {
+  var scrollToFirstExample = _.throttle(function() {
+    scrollCallbackIndex = 1;
     $.scrollTo(firstExampleScrollTo, scrollDuration);
-  }
+  }, scrollDuration);
+  scrollCallbacks.push(scrollToFirstExample);
 
-  function scrollToSecondExample() {
+  var scrollToSecondExample = _.throttle(function() {
+    scrollCallbackIndex = 2;
     $.scrollTo(secondExampleScrollTo, scrollDuration);
-  }
+  }, scrollDuration);
+  scrollCallbacks.push(scrollToSecondExample);
 
-  function scrollToFlagIntro() {
+  var scrollToFlagIntro = _.throttle(function() {
+    scrollCallbackIndex = 3;
     $.scrollTo(flagIntroScrollTo, scrollDuration);
-  }
+  }, scrollDuration);
+  scrollCallbacks.push(scrollToFlagIntro);
 
   function endTour() {
     body.removeClass('in-tour');
     tourContainer.removeClass('show');
+  }
+
+  function onResize() {
+    positionElements();
+    scrollCallbacks[scrollCallbackIndex]();
   }
 
   function setBindings() {
@@ -164,8 +180,10 @@ define([
 
     $('.start-tour').on('click', startTour);
 
+    $(window).on('resize', onResize);
+
     // TODO: scrap this
-//    _.delay(startTour, 300);
+    // _.delay(startTour, 300);
   }
 
   function init() {
