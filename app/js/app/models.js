@@ -2,12 +2,13 @@ define([
   'jquery',
   'lodash',
   './flags',
+  './glossary',
   'moment',
   // dependencies
   'touch',
   'backbone',
   './../../components/tgm-bootstrap/js/bootstrap-modal'
-], function($, _, flags, moment) {
+], function($, _, flags, glossary, moment) {
   "use strict";
 
   var modalContainer = $('#modal-container');
@@ -442,6 +443,9 @@ define([
             var html = text
               .replace(redactedRegex, ' <span class="redact">Client Name</span>')
               .replace(redactedStaffRegex, ' <span class="redact">Staff Name</span>');
+
+            html = glossary.applyToHtml(html);
+
             _this.element.find(className).html(html);
           } else if (property === 'incident_type' || property === 'location') {
             _this.element.find(className).text(text.replace(/(?:^|\s)\S/g, function(c){ return c.toUpperCase();  }));
