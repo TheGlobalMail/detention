@@ -100,7 +100,9 @@ body {
   .transition(bottom 150ms ease-out);
   .border-radius(50%);
   border: none;
-  &:hover, &:active {
+  &:hover,
+  &:active,
+  .next:hover & {
     .transition(all 150ms ease-in);
     background-color: rgba(255,255,255,0.2);
   }
