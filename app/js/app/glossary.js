@@ -8,23 +8,21 @@ define(['lodash'], function(_){
 
   // Replaces words in the glossary with spans
   var applyToHtml = function(html){
-    var glossarisedHtml = html;
+    var glossaryHtml = '';
     var usedGlossary = [];
     _.each(glossary, function(defn, abbrev){
-      if (glossarisedHtml.match(abbrev)){
+      if (html.match(abbrev)){
         usedGlossary.push(defn);
-        glossarisedHtml = glossarisedHtml
+        html = html
           .replace(new RegExp(abbrev, 'gm'), abbrev + '<sup>' + usedGlossary.length + '</sup>');
       }
     });
     if (usedGlossary.length){
-      glossarisedHtml += '<ol class="glossary">';
-      glossarisedHtml += _.map(usedGlossary, function(glossary){
+      glossaryHtml += _.map(usedGlossary, function(glossary){
         return '<li>' + glossary + '</li>';
       }).join('');
-      glossarisedHtml += '</ol>';
     }
-    return glossarisedHtml;
+    return {html: html, glossary: glossaryHtml};
   };
 
   return { applyToHtml: applyToHtml };
