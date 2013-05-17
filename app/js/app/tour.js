@@ -48,8 +48,7 @@ define([
     body.addClass('in-tour');
     tourContainer.addClass('show');
     positionElements();
-//    scrollToIntro();
-    scrollToFlagIntro()
+    scrollToIntro();
   }
 
   function positionElements() {
@@ -209,7 +208,7 @@ define([
     $(window).on('resize', onResize);
 
     // TODO: scrap this
-    _.delay(startTour, 300);
+//    _.delay(startTour, 300);
   }
 
   function init() {
