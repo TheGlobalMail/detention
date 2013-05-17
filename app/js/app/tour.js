@@ -153,14 +153,14 @@ define([
     firstExampleNext.on('click', scrollToSecondExample);
     secondExampleNext.on('click', scrollToFlagIntro);
 
-    backdrop.on('click', endTour);
+//    backdrop.on('click', endTour);
     exit.on('click', endTour);
     flagIntroNext.on('click', endTour);
 
     var months = incidentContainer.find('.date');
     firstExampleMonth = months.get(8);
     secondExampleMonth = months.get(13);
-    flagIntroMonth = months.get(18);
+    flagIntroMonth = months.get(16);
 
     $('.start-tour').on('click', startTour);
 
