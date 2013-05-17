@@ -983,15 +983,27 @@ footer {
           .font-size(24);
           font-weight: 600;
           line-height: 1.4;
-          margin-bottom: 40px;
+          margin-bottom: 0;
         }
         a {
           color:#747368;
           .font-size(14);
           font-family: @serifFontFamily;
           &.ext-link {
-            padding-right: 20px;
-            background: url('/images/ext-link.svg') no-repeat right 4px transparent;
+            width: auto;
+            display: block;
+            .border-radius(4px);
+            line-height: 1.4;
+            padding: 8px 10px 10px;
+            text-shadow:none;
+            background: url('/images/ext-link.svg') no-repeat 98% 45% rgba(0,0,0,0.05);
+            margin-top: 40px;
+            height:auto;
+            max-width: none;
+            border: none;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            clear:both;
           }
         }
       }
@@ -1057,6 +1069,10 @@ footer {
           text-shadow: 0 1px 0 #ecebe2;
           p {
             text-shadow: 0 1px 0 #ecebe2;
+            sup {
+              .font-size(12);
+              vertical-align: middle;
+            }
             .redact {
               display:inline-block;
               .font-size(11);
@@ -1080,31 +1096,26 @@ footer {
             border-right: none;
             margin: 0;
           }
-          &.disclaimer {
-            width: auto;
-            display: block;
-            color:#555;
-            background-color: rgba(0,0,0,0.05);
-            .border-radius(4px);
-            line-height: 1.4;
-            padding: 8px 10px 10px;
-            text-shadow:none;
-            text-align: center;
-            .font-size(13);
+          .disclaimer {
+            .font-size(12);
             font-style: italic;
-            margin-top: 20px;
-            height:auto;
-            max-width: none;
-            border: none;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-            clear:both;
             a {
               .font-size(12);
               font-family: @sansFontFamily;
               text-shadow: none;
             }
           }
+        }
+      }
+      ol.glossary {
+        margin: 10px 0 0;
+        li {
+          .font-size(12);
+          font-weight: normal;
+          font-style: italic;
+          list-style:decimal inside;
+          display:list-item;
+          padding: 0 0 4px;
         }
       }
     }
