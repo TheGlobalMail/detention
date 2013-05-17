@@ -444,7 +444,9 @@ define([
               .replace(redactedRegex, ' <span class="redact">Client Name</span>')
               .replace(redactedStaffRegex, ' <span class="redact">Staff Name</span>');
 
-            html = glossary.applyToHtml(html);
+            var glossaryList = glossary.applyToHtml(html);
+            html = glossaryList.html;
+            _this.element.find('.glossary').html(glossaryList.glossary).toggle(!!glossaryList.glossary);
 
             _this.element.find(className).html(html);
           } else if (property === 'incident_type' || property === 'location') {
