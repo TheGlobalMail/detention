@@ -109,11 +109,11 @@ define([
     var cellRowCountFromTop = Math.floor((flagIntroImageOffset.top - monthOffset.top) / cellWidth);
     var nearestCellIndex = (cellRowCountFromTop * cellsPerRow) + cellCountFromLeft;
     var nearestCell = $(cells.get(nearestCellIndex));
-    // Find the positional difference between the nearest cell and tour cell
+    // Find the positional difference between the nearest cell and the image
     var nearestCellOffset = nearestCell.offset();
     var leftDifference = nearestCellOffset.left - flagIntroImageOffset.left;
     var topDifference = nearestCellOffset.top - flagIntroImageOffset.top;
-    // Shift the cell inline with the nearest cell
+    // Shift the image inline with the nearest cell
     flagIntroImage
       .css({
         'top': topDifference,
