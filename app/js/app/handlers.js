@@ -50,7 +50,10 @@ define([
               // Automatically pick up the first element due to a delay between
               // triggering the visibility of the menu and hitting the
               // OR conditional.
-              (i == 0 && !filterMenuMonthText) ||
+              (
+                i == 0 &&
+                !filterMenuMonthText
+              ) ||
               element.offset().top <= yScrollOffset
             ) {
               lastMonthText = element.text();
