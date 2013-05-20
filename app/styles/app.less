@@ -156,7 +156,6 @@ body {
     border-bottom: 1px solid rgba(0,0,0,0.5);
     .box-shadow(0 1px 0 rgba(255,255,255,.1));
     height: 100%;
-    min-height: 200px;
     h1 {
       position:relative;
       font-family: @sansFontFamily;
@@ -197,6 +196,12 @@ body {
           text-decoration: none;
         }
       }
+    }
+    .arrow {
+      position: relative;
+      bottom:auto;
+      left: auto;
+      margin: 60px auto 0;
     }
   }
 }
@@ -259,6 +264,8 @@ body {
     cursor:pointer;
   }
   &.flagged {
+    width:@gridCellSize + 4px;
+    height:@gridCellSize + 4px;
     .border-radius(4px);
     margin: 2px;
     .cellRGBA;
@@ -949,7 +956,7 @@ footer {
       li {
         list-style: none;
         display:inline-block;
-        .font-size(14);
+        .font-size(13);
         line-height: 1.2;
         width:auto;
         vertical-align: bottom;
@@ -1075,7 +1082,7 @@ footer {
               margin: 0 0 1px;
             }
           }
-          &:nth-child(2) {
+          &:nth-child(3) {
             border-right: none;
             margin-right: 0;
             padding-right: 0;
@@ -1107,6 +1114,7 @@ footer {
           list-style:decimal inside;
           display:list-item;
           padding: 4px 0 0;
+          border: none;
         }
       }
     }
