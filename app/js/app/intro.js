@@ -3,21 +3,29 @@ define([
 ], function($){
   'use strict';
 
-  $('section.title .arrow').on('click', function(){
-    console.error('off to' + $(this).data('next'))
+  var scrollAnimation = {
+    duration: 500,
+    easing: 'easeInOutQuad'
+  };
+
+  $('.title .arrow').on('click', function(){
     $.scrollTo(
       '#' + $(this).data('next'),
-      { duration: 500, easing: 'easeInOutQuad'}
+      scrollAnimation
     );
   });
 
-  $('section.intro .arrow').on('click', function(){
+  $('.intro .arrow').on('click', function(){
     // Don't do anything unless loading has completed
-    if ($('body').hasClass('loading')) return;
+    if ($('body').hasClass('loading')) {
+      return;
+    }
 
     $.scrollTo(
       '#' + $(this).data('next'),
-      { duration: 500, easing: 'easeInOutQuad'}
+      scrollAnimation
     );
   });
+
+
 });

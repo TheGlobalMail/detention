@@ -114,11 +114,13 @@ define([
   function getNearestCell(element) {
     // Find the month underneath `element` and then find the nearest cell.
     // If there is no month underneath, find the first month above `element`.
+
     var nearestMonth;
     var lastMonthAbove;
     var elementHeight = element.height();
     var elementOffset = element.offset();
-    for(var i = 0; i < months.length; i++) {
+
+    for (var i = 0; i < months.length; i++) {
       var month = $(months[i]);
       var monthHeight = month.height();
       var monthOffset = month.offset();
@@ -138,13 +140,15 @@ define([
     if (!nearestMonth) {
       nearestMonth = lastMonthAbove;
     }
+
+    // Find the nearest cell below the element
     var cells = nearestMonth.find('.cell');
     var cellWidth = cells.first().outerWidth(true);
-    // Find the nearest cell below the element
     var cellsPerRow = Math.floor(nearestMonth.width() / cellWidth);
     var cellCountFromLeft = Math.floor((elementOffset.left - monthOffset.left) / cellWidth);
     var cellRowCountFromTop = Math.floor((elementOffset.top - monthOffset.top) / cellWidth);
     var nearestCellIndex = (cellRowCountFromTop * cellsPerRow) + cellCountFromLeft;
+
     return $(cells.get(nearestCellIndex));
   }
 
@@ -202,7 +206,7 @@ define([
     introNext.on('click', scrollToFirstExample);
     firstExampleNext.on('click', scrollToSecondExample);
     secondExampleNext.on('click', scrollToFlagIntro);
-    
+
     exit.on('click', endTour);
     flagIntroNext.on('click', endTour);
 
