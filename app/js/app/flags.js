@@ -62,7 +62,7 @@ define([
     return _(Flags.flagged)
       .keys()
       .map(function(id){ return incidents.data[id]; })
-      .sortBy('occurredOn')
+      .sortBy('occurred_on')
       .value();
   };
 
