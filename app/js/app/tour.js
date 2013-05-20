@@ -95,10 +95,10 @@ define([
       left: (window.innerWidth - flagIntroText.width()) / 2
     });
     var offsetDifference = getOffsetDifference(flagIntroImage, getNearestCell(flagIntroImage));
+    flagIntroScrollTo += offsetDifference.top;
     // Shift the image inline with the nearest cell
     flagIntroImage.css(offsetDifference);
     flagIntroNext.css('top', offsetDifference.top);
-    flagIntroScrollTo += offsetDifference.top;
   }
 
   function getOffsetDifference(originElement, toElement) {
@@ -151,7 +151,7 @@ define([
   function positionCellOnNearestCell(tourTextElement) {
     var tourCell = tourTextElement.find('.cell');
     // Find the positional difference between the nearest cell and tour cell
-    var offsetDifference = getOffsetDifference(tourCell, getNearestCell(tourCell))
+    var offsetDifference = getOffsetDifference(tourCell, getNearestCell(tourCell));
     // Shift the cell and the pull quote inline with the nearest cell
     var pullQuote = tourTextElement.find('.pullquote');
     tourCell
@@ -202,8 +202,7 @@ define([
     introNext.on('click', scrollToFirstExample);
     firstExampleNext.on('click', scrollToSecondExample);
     secondExampleNext.on('click', scrollToFlagIntro);
-
-//    backdrop.on('click', endTour);
+    
     exit.on('click', endTour);
     flagIntroNext.on('click', endTour);
 
@@ -215,9 +214,6 @@ define([
     $('.start-tour').on('click', startTour);
 
     $(window).on('resize', onResize);
-
-    // TODO: scrap this
-//    _.delay(startTour, 300);
   }
 
   function init() {
