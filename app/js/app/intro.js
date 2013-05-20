@@ -1,31 +1,77 @@
 define([
-  'jquery'
-], function($){
+  'jquery',
+  'lodash'
+], function($, _){
   'use strict';
+
+  var navBar = $('.navbar');
+  var introContainer = $('#intro-container');
+
+  var title = introContainer.find('.title');
+  var titleArrow = title.find('.arrow');
+  var titleH1 = title.find('h1');
+  var titleH2 = title.find('h2');
+
+  var intro = introContainer.find('.intro');
+  var introArrow = intro.find('.arrow');
+  var introPara = intro.find('p');
 
   var scrollAnimation = {
     duration: 500,
     easing: 'easeInOutQuad'
   };
 
-  $('.title .arrow').on('click', function(){
-    $.scrollTo(
-      '#' + $(this).data('next'),
-      scrollAnimation
+  function setBindings() {
+    titleArrow.on('click', function(){
+      $.scrollTo(
+        titleArrow.data('next'),
+        scrollAnimation
+      );
+    });
+
+    introArrow.on('click', function(){
+      // Don't do anything unless loading has completed
+      if ($('body').hasClass('loading')) {
+        return;
+      }
+
+      $.scrollTo(
+        introArrow.data('next'),
+        scrollAnimation
+      );
+    });
+  }
+
+  function scaleContainers() {
+    var titleHeight = window.innerHeight - navBar.outerHeight() - 1;
+    title.css('height', titleHeight);
+
+    var headerHeight = titleH1.outerHeight(true) + titleH2.outerHeight(true);
+    var headerOffset = -8;
+    titleH1.css(
+      'padding-top',
+      ((titleHeight - headerHeight) / 2) + headerOffset
     );
-  });
 
-  $('.intro .arrow').on('click', function(){
-    // Don't do anything unless loading has completed
-    if ($('body').hasClass('loading')) {
-      return;
-    }
+    var introHeight = window.innerHeight;
+    intro.css('height', introHeight);
 
-    $.scrollTo(
-      '#' + $(this).data('next'),
-      scrollAnimation
-    );
-  });
+    var paraHeight = 0;
+    _.each(introPara, function(element) {
+      paraHeight += $(element).outerHeight(true);
+    });
+    var paraOffset = -8;
+    introPara
+      .first()
+      .css(
+        'padding-top',
+        ((introHeight - paraHeight) / 2) + paraOffset
+      );
 
+    title.add(intro)
+      .addClass('scaled');
+  }
 
+  setBindings();
+  scaleContainers();
 });

@@ -144,7 +144,6 @@ body {
     left: 0;
     z-index: 0;
   }
-
   .title {
     position:relative;
     text-align: center;
@@ -159,17 +158,18 @@ body {
       .font-size(168);
       font-weight: 800;
       letter-spacing: -.05em;
-      margin-top: 20%;
+      margin-top: 0;
     }
     h2 {
       .font-size(30);
       font-weight: 100;
       letter-spacing: .05em;
+      margin-bottom: 0;
     }
   }
   .intro {
     text-align: center;
-    padding: 10% 10% 25%;
+    padding: 0 10% 0;
     max-width: 900px;
     font-weight: 100;
     margin: 0 auto;
@@ -192,9 +192,6 @@ body {
           text-decoration: none;
         }
       }
-    }
-    .arrow {
-      bottom:15%;
     }
   }
 }
@@ -257,8 +254,6 @@ body {
     cursor:pointer;
   }
   &.flagged {
-    width:@gridCellSize + 4px;
-    height:@gridCellSize + 4px;
     .border-radius(4px);
     margin: 2px;
     .cellRGBA;
