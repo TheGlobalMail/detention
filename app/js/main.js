@@ -28,6 +28,7 @@ requirejs([
   './app/main'
 ],
 function ($, xdr, shims, app) {
+  window.XDR_DEBUG = true;
   shims();
   $(app.init);
 });

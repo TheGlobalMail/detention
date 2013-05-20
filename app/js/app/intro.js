@@ -74,4 +74,5 @@ define([
 
   setBindings();
   scaleContainers();
+  $(window).on('resize', _.throttle(scaleContainers, 50));
 });
