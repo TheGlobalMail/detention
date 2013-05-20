@@ -49,7 +49,7 @@ define([
     title.css('height', titleHeight);
 
     var headerHeight = titleH1.outerHeight(true) + titleH2.outerHeight(true);
-    var headerOffset = -8;
+    var headerOffset = -30;
     titleH1.css(
       'padding-top',
       ((titleHeight - headerHeight) / 2) + headerOffset
