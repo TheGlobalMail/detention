@@ -3,11 +3,12 @@ define([
   'lodash',
   './grid',
   './events',
-  'incidents'
-], function($, _, grid, events, incidents) {
+  'incidents',
+  './../utils/getScrollY'
+], function($, _, grid, events, incidents, getScrollY) {
   "use strict";
 
-  var scrollDuration = 1000;
+  var defaultScrollDuration = 1000;
 
   var body = $('body');
   var incidentContainer = $('#incidents');
@@ -173,26 +174,34 @@ define([
 
   var scrollToIntro = _.throttle(function() {
     scrollCallbackIndex = 0;
+    var scrollDuration = defaultScrollDuration;
+    var scrollY = getScrollY();
+    // Make the starting animation's duration a fraction
+    // of the distance from the starting point
+    var offsetFromScrollStart = Math.abs(scrollY - introScrollTo);
+    if (offsetFromScrollStart <= window.innerHeight) {
+      scrollDuration = (offsetFromScrollStart / window.innerHeight) * defaultScrollDuration;
+    }
     $.scrollTo(introScrollTo, scrollDuration);
-  }, scrollDuration);
+  }, defaultScrollDuration);
   scrollCallbacks.push(scrollToIntro);
 
   var scrollToFirstExample = _.throttle(function() {
     scrollCallbackIndex = 1;
-    $.scrollTo(firstExampleScrollTo, scrollDuration);
-  }, scrollDuration);
+    $.scrollTo(firstExampleScrollTo, defaultScrollDuration);
+  }, defaultScrollDuration);
   scrollCallbacks.push(scrollToFirstExample);
 
   var scrollToSecondExample = _.throttle(function() {
     scrollCallbackIndex = 2;
-    $.scrollTo(secondExampleScrollTo, scrollDuration);
-  }, scrollDuration);
+    $.scrollTo(secondExampleScrollTo, defaultScrollDuration);
+  }, defaultScrollDuration);
   scrollCallbacks.push(scrollToSecondExample);
 
   var scrollToFlagIntro = _.throttle(function() {
     scrollCallbackIndex = 3;
-    $.scrollTo(flagIntroScrollTo, scrollDuration);
-  }, scrollDuration);
+    $.scrollTo(flagIntroScrollTo, defaultScrollDuration);
+  }, defaultScrollDuration);
   scrollCallbacks.push(scrollToFlagIntro);
 
   function endTour() {
