@@ -83,10 +83,7 @@ define([
     var className = 'pinned';
     return _.throttle(function() {
       var top = grid.offset().top;
-      if (
-        top > 0 &&
-        top <= window.innerHeight + getScrollY() - 100
-      ) {
+      if (top <= window.innerHeight + getScrollY() - 100) {
         flagPanel.addClass(className);
       } else {
         flagPanel.removeClass(className);
@@ -114,13 +111,13 @@ define([
   function setBindings() {
 
     var flaggingPanelScrollHandler = getFlaggingPanelScrollHandler();
-    flaggingPanelScrollHandler();
     $(window).scroll(flaggingPanelScrollHandler);
 
     $(window).resize(onResize);
 
     events.on('grid/complete', function() {
       _.defer(setMonthBindings);
+      _.defer(flaggingPanelScrollHandler);
     });
   }
 
