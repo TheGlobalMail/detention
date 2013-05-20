@@ -35,14 +35,15 @@ define([
 
   var flagIntro = tourContainer.find('.flag-intro');
   var flagIntroText = flagIntro.find('.text-container');
-  var flagIntroSecondary = flagIntro.find('.secondary-container');
-  var flagIntroNext = flagIntroSecondary.find('.next');
-  var flagIntroImage = flagIntroSecondary.find('img');
+  var flagIntroNext = flagIntroText.find('.next');
+  var flagIntroImage = flagIntroText.find('img');
   var flagIntroMonth;
   var flagIntroScrollTo;
 
   var scrollCallbackIndex = 0;
   var scrollCallbacks = [];
+
+  var months;
 
   function startTour() {
     body.addClass('in-tour');
@@ -69,7 +70,7 @@ define([
       top: firstExampleScrollTo + (window.innerHeight - firstExampleText.height()) / 2,
       left: (window.innerWidth - firstExampleText.width()) / 2
     });
-    firstExampleScrollTo += positionCellOnNearestCell(firstExampleMonth, firstExampleText);
+    firstExampleScrollTo += positionCellOnNearestCell(firstExampleText);
     firstExampleNext.css({
       top: firstExampleScrollTo + window.innerHeight - firstExampleNext.height() - 100,
       left: (window.innerWidth - firstExampleNext.width()) / 2
@@ -81,7 +82,7 @@ define([
       top: secondExampleScrollTo + (window.innerHeight - secondExampleText.height()) / 2,
       left: (window.innerWidth - secondExampleText.width()) / 2
     });
-    secondExampleScrollTo += positionCellOnNearestCell(secondExampleMonth, secondExampleText);
+    secondExampleScrollTo += positionCellOnNearestCell(secondExampleText);
     secondExampleNext.css({
       top: secondExampleScrollTo + window.innerHeight - secondExampleNext.height() - 100,
       left: (window.innerWidth - secondExampleNext.width()) / 2
@@ -93,66 +94,74 @@ define([
       top: flagIntroScrollTo + (window.innerHeight - flagIntroText.height()) / 2,
       left: (window.innerWidth - flagIntroText.width()) / 2
     });
-    flagIntroSecondary.css({
-      top: flagIntroScrollTo + window.innerHeight - flagIntroSecondary.height() - 100,
-      left: (window.innerWidth - flagIntroSecondary.width()) / 2
-    });
-    var $monthElement = $(flagIntroMonth);
-    var monthOffset = $monthElement.offset();
-    var cells = $monthElement.find('.cell');
-    var testCell = cells.first();
-    var cellWidth = testCell.outerWidth(true);
-    var flagIntroImageOffset = flagIntroImage.offset();
-    // Find the nearest cell below the tour cell
-    var cellsPerRow = Math.floor($monthElement.width() / cellWidth);
-    var cellCountFromLeft = Math.floor((flagIntroImageOffset.left - monthOffset.left) / cellWidth);
-    var cellRowCountFromTop = Math.floor((flagIntroImageOffset.top - monthOffset.top) / cellWidth);
-    var nearestCellIndex = (cellRowCountFromTop * cellsPerRow) + cellCountFromLeft;
-    var nearestCell = $(cells.get(nearestCellIndex));
-    // Find the positional difference between the nearest cell and the image
-    var nearestCellOffset = nearestCell.offset();
-    var leftDifference = nearestCellOffset.left - flagIntroImageOffset.left;
-    var topDifference = nearestCellOffset.top - flagIntroImageOffset.top;
+    var offsetDifference = getOffsetDifference(flagIntroImage, getNearestCell(flagIntroImage));
     // Shift the image inline with the nearest cell
-    flagIntroImage
-      .css({
-        'top': topDifference,
-        'left': leftDifference
-      });
-    flagIntroNext.css('top', topDifference);
+    flagIntroImage.css(offsetDifference);
+    flagIntroNext.css('top', offsetDifference.top);
+    flagIntroScrollTo += offsetDifference.top;
   }
 
-  function positionCellOnNearestCell(monthElement, tourTextElement) {
-    var $monthElement = $(monthElement);
-    var monthOffset = $monthElement.offset();
-    var cells = $monthElement.find('.cell');
-    var testCell = cells.first();
-    var cellWidth = testCell.outerWidth(true);
-    var tourCell = tourTextElement.find('.cell');
-    var tourCellOffset = tourCell.offset();
-    // Find the nearest cell below the tour cell
-    var cellsPerRow = Math.floor($monthElement.width() / cellWidth);
-    var cellCountFromLeft = Math.floor((tourCellOffset.left - monthOffset.left) / cellWidth);
-    var cellRowCountFromTop = Math.floor((tourCellOffset.top - monthOffset.top) / cellWidth);
+  function getOffsetDifference(originElement, toElement) {
+    // Find the positional difference between the nearest cell and the image
+    var toElementOffset = toElement.offset();
+    var originElementOffset = originElement.offset();
+    return {
+      top: toElementOffset.top - originElementOffset.top,
+      left: toElementOffset.left - originElementOffset.left
+    };
+  }
+
+  function getNearestCell(element) {
+    // Find the month underneath `element` and then find the nearest cell.
+    // If there is no month underneath, find the first month above `element`.
+    var nearestMonth;
+    var lastMonthAbove;
+    var elementHeight = element.height();
+    var elementOffset = element.offset();
+    for(var i = 0; i < months.length; i++) {
+      var month = $(months[i]);
+      var monthHeight = month.height();
+      var monthOffset = month.offset();
+      // If the element is inline with or below the month
+      if (elementOffset.top >= monthOffset.top) {
+        lastMonthAbove = month;
+        // If the element is within the month
+        if (monthHeight + monthOffset.top >= elementHeight + elementOffset.top) {
+          nearestMonth = month;
+          break;
+        }
+      // If we have gone past the element
+      } else {
+        break;
+      }
+    }
+    if (!nearestMonth) {
+      nearestMonth = lastMonthAbove;
+    }
+    var cells = nearestMonth.find('.cell');
+    var cellWidth = cells.first().outerWidth(true);
+    // Find the nearest cell below the element
+    var cellsPerRow = Math.floor(nearestMonth.width() / cellWidth);
+    var cellCountFromLeft = Math.floor((elementOffset.left - monthOffset.left) / cellWidth);
+    var cellRowCountFromTop = Math.floor((elementOffset.top - monthOffset.top) / cellWidth);
     var nearestCellIndex = (cellRowCountFromTop * cellsPerRow) + cellCountFromLeft;
-    var nearestCell = $(cells.get(nearestCellIndex));
+    return $(cells.get(nearestCellIndex));
+  }
+
+  function positionCellOnNearestCell(tourTextElement) {
+    var tourCell = tourTextElement.find('.cell');
     // Find the positional difference between the nearest cell and tour cell
-    var nearestCellOffset = nearestCell.offset();
-    var leftDifference = nearestCellOffset.left - tourCellOffset.left;
-    var topDifference = nearestCellOffset.top - tourCellOffset.top;
+    var offsetDifference = getOffsetDifference(tourCell, getNearestCell(tourCell))
     // Shift the cell and the pull quote inline with the nearest cell
     var pullQuote = tourTextElement.find('.pullquote');
     tourCell
       .add(pullQuote)
-      .css({
-        'top': topDifference,
-        'left': leftDifference
-      });
+      .css(offsetDifference);
     tourTextElement.find('p')
       .css({
-        'top': topDifference
+        'top': offsetDifference.top
       });
-    return topDifference
+    return offsetDifference.top
   }
 
   var scrollToIntro = _.throttle(function() {
@@ -198,7 +207,7 @@ define([
     exit.on('click', endTour);
     flagIntroNext.on('click', endTour);
 
-    var months = incidentContainer.find('.date');
+    months = incidentContainer.find('.date');
     firstExampleMonth = months.get(8);
     secondExampleMonth = months.get(13);
     flagIntroMonth = months.get(16);
