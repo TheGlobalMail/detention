@@ -45,7 +45,10 @@ define([
 
   var months;
 
+  var inTour = false;
+
   function startTour() {
+    inTour = true;
     body.addClass('in-tour');
     tourContainer.addClass('show');
     positionElements();
@@ -193,13 +196,16 @@ define([
   scrollCallbacks.push(scrollToFlagIntro);
 
   function endTour() {
+    inTour = false;
     body.removeClass('in-tour');
     tourContainer.removeClass('show');
   }
 
   var onResize = _.debounce(function() {
-    positionElements();
-    scrollCallbacks[scrollCallbackIndex]();
+    if (inTour) {
+      positionElements();
+      scrollCallbacks[scrollCallbackIndex]();
+    }
   }, 100);
 
   function setBindings() {
