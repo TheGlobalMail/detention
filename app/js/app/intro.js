@@ -4,6 +4,8 @@ define([
 ], function($, _){
   'use strict';
 
+  var body = $('body');
+
   var navBar = $('.navbar');
   var introContainer = $('#intro-container');
 
@@ -68,11 +70,10 @@ define([
         ((introHeight - paraHeight) / 2) + paraOffset
       );
 
-    title.add(intro)
-      .addClass('scaled');
+    body.removeClass('pre-load');
   }
 
   setBindings();
   scaleContainers();
-  $(window).on('resize', _.throttle(scaleContainers, 50));
+  $(window).on('resize', _.debounce(scaleContainers, 50));
 });
