@@ -456,7 +456,7 @@
       }
     }
     .intro {
-      padding: 0 6px 0;
+      padding: 0 6px;
       p {
         .font-size(14);
         line-height: 1.4;
@@ -464,10 +464,12 @@
           .font-size(16);
         }
       }
+      .arrow {
+        margin-top: 20px;
+      }
     }
     &:after {
-      height:70px;
-      background-size: auto 70px;
+      display:none;
     }
   }
   #incidents {
@@ -592,6 +594,26 @@
     }
     &:after {
       display: none;
+    }
+  }
+  .tour-container {
+    .close {
+      top:15px;
+      right:10px;
+    }
+    .intro,
+    .first-example,
+    .second-example,
+    .flag-intro {
+      .text-container {
+        padding: 0 10px;
+        p {
+          .font-size(13);
+          strong {
+            .font-size(14);
+          }
+        }
+      }
     }
   }
   #modal-container {
