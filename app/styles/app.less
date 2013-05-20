@@ -191,6 +191,12 @@ body {
         }
       }
     }
+    .arrow {
+      position: relative;
+      bottom:auto;
+      left: auto;
+      margin: 60px auto 0;
+    }
   }
 }
 
@@ -252,6 +258,8 @@ body {
     cursor:pointer;
   }
   &.flagged {
+    width:@gridCellSize + 4px;
+    height:@gridCellSize + 4px;
     .border-radius(4px);
     margin: 2px;
     .cellRGBA;
@@ -942,7 +950,7 @@ footer {
       li {
         list-style: none;
         display:inline-block;
-        .font-size(14);
+        .font-size(13);
         line-height: 1.2;
         width:auto;
         vertical-align: bottom;
@@ -1068,7 +1076,7 @@ footer {
               margin: 0 0 1px;
             }
           }
-          &:nth-child(2) {
+          &:nth-child(3) {
             border-right: none;
             margin-right: 0;
             padding-right: 0;
@@ -1100,6 +1108,7 @@ footer {
           list-style:decimal inside;
           display:list-item;
           padding: 4px 0 0;
+          border: none;
         }
       }
     }
