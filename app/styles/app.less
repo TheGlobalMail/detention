@@ -950,6 +950,17 @@ footer {
     z-index: 99999;
     position: absolute;
     .box-shadow(0 15px 8px -10px rgba(0,0,0,0.5));
+    &:after {
+      content:'';
+      display:block;
+      height:50px;
+      width:100%;
+      position: absolute;
+      bottom:0;
+      left:0;
+      .box-shadow(inset 0 -20px 50px -15px #1f2222);
+      z-index: 100;
+    }
     h3 {
       font-family: @serifFontFamily;
       .font-size(14);
@@ -971,10 +982,10 @@ footer {
       padding: 0 0 0 15px;
     }
     .modal-body {
-      padding: 0 15px 15px;
+      padding: 0 15px 35px;
       position: static;
       height: auto;
-      max-height: 500px;
+      max-height: 480px;
       overflow-x: visible;
       overflow-y: scroll;
     }
