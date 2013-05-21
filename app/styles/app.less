@@ -631,7 +631,14 @@ footer {
           border-bottom:1px solid #232626;
           .transition(background 200ms ease-in);
           &.location {
+            .font-size(11);
+            color:@grayLight;
             cursor: default !important;
+            padding: 12px 14px 6px;
+            border-bottom:1px dotted #232626;
+            &:hover, &:active, &:focus {
+              background: none;
+            }
           }
           a {
             padding:0;
