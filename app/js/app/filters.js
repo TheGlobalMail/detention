@@ -1,23 +1,80 @@
-define([
-  'jquery',
+define([ 'jquery',
   'lodash',
   'incidents',
   'scrollto'
 ], function($, _, incidents){
 
+  var locations = [
+    {
+      location: 'Chistmas Island',
+      facilities: [
+        'Christmas Island',
+        'Construction Camp APOD',
+        'Lilac Aqua',
+        'North West Point Immigration Facility',
+        'Phosphate Hill APOD',
+        'Phosphate Hill B Compound'
+      ]
+    },
+    {
+      location: "New South Wales",
+      facilities: [
+        'Sydney IRH',
+        'Villawood IDC'
+      ]
+    },
+    {
+      location: "Northern Territory",
+      facilities: [
+        'Berrimah Accommodation Facility',
+        'Darwin Airport Lodge',
+        'Northern IDC'
+      ],
+    },
+    {
+      location: "Queensland",
+      facilities: [
+        'Brisbane ITA',
+        'Scherger IDC',
+        'Virginia Palms Motel'
+      ]
+    },
+    {
+      location: "South Australia",
+      facilities: [
+        'Adelaide ITA',
+        'Inverbrackie APOD',
+        'Port Augusta IRH',
+        'SA Detention Operations'
+      ]
+    },
+    {
+      location: "Victoria",
+      facilities: [
+        'Maribyrnong IDC',
+        'Melbourne ITA'
+      ]
+    },
+    {
+      location: "Western Australia",
+      facilities: [
+        'Curtin IDC',
+        'Gwalia Lodge',
+        'Jandakot APOD',
+        'Leonora APOD',
+        'Leonora Lodge',
+        'Perth IDC',
+        'Perth IRH'
+      ]
+    }
+  ];
+
   var filters = [
-    {type: 'facility', el: '#facilities', alllabel: 'All Facilities', attr: 'location' },
+    {type: 'facility', el: '#facilities', alllabel: 'All Facilities', attr: 'location', structure: locations },
     {type: 'category', el: '#categories', alllabel: 'All Incidents', attr: 'incident_category' }
   ];
 
   _.each(filters, buildFilter);
-
-  $('#reset-filter').click(function(e){
-    e.preventDefault();
-    $('#facilities-label').text('All Facilities');
-    $('#categories-label').text('All Categories');
-    Filter.clear();
-  });
 
   function buildFilter(options){
     var filtered = {};
@@ -25,8 +82,8 @@ define([
 
     // Extract the data for each filter category from the incident data
     _.each(incidents.data, function(incident){
+      if (incident.event_type !== 'incident') return;
       var value = incident[options.attr];
-      if (!value) value = 'unknown';
       if (!filtered[value]){
         filtered[value] = [];
       }
@@ -41,14 +98,33 @@ define([
       ' <span class="filter-count">(' + _.keys(incidents.data).length + ')</span>' +
       '</a></li>'
     );
-    _.each(names, function(name){
-      var label = name === 'protest' ? 'protest by detainees' : name;
-      $filter.append(
-        '<li>' +
-        '<a data-' + options.type + '="' + name + '" href="#' + name + '">' +
-        label + ' <span class="filter-count">(' + filtered[name].length + ')</span>' +
-        '</a></li>'
-      );
+    if (!options.structure){
+      _.each(names, function(name){
+        var label = name === 'protest' ? 'protest by detainees' : name;
+        $filter.append(
+          '<li>' +
+          '<a data-' + options.type + '="' + name + '" href="#' + name + '">' +
+          label + ' <span class="filter-count">(' + filtered[name.toLowerCase()].length + ')</span>' +
+          '</a></li>'
+        );
+      });
+    }else{
+      _.each(options.structure, function(location){
+        var html = '<li class="location">' + location.location + '</li>';
+        _.each(location.facilities, function(locationName){
+          var name = locationName.toLowerCase();
+          html += '<li>' +
+            '<a data-' + options.type + '="' + name + '" href="#' + name + '">' +
+            name + ' <span class="filter-count">(' + filtered[name].length + ')</span>' +
+            '</a></li>';
+        });
+        $filter.append(html);
+      });
+    }
+
+    // Disable clicking on the location list items
+    $filter.find('li.location').click(function(e){
+      e.stopPropagation();
     });
 
     // Click events on filter menu items
@@ -57,7 +133,7 @@ define([
       e.preventDefault();
       Filter.filterBy(options.type, value);
       updateAllFilterCounts(options);
-      var labelText = $(this).text().replace(/ \(.*\)/, '');
+      var labelText = $(this).text().replace(/ \(.*$/, '');
       $filter.parent().find('a[data-toggle]').text(labelText);
     });
   }
@@ -187,5 +263,20 @@ define([
     }
 
   };
+
+  // Return an address for locations
+  function getLocation(name){
+    var location = _.detect(locations, function(location){
+      return name.match(location.re);
+    });
+    return location ? location.address : '';
+  }
+
+  $('#reset-filter').click(function(e){
+    e.preventDefault();
+    $('#facilities-label').text('All Facilities');
+    $('#categories-label').text('All Categories');
+    Filter.clear();
+  });
 
 });
