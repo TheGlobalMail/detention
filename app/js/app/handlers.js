@@ -7,6 +7,8 @@ define([
 ], function($, _, getScrollY, incidents, events) {
   "use strict";
 
+  var body = $('body');
+
   function getMonthScrollHandler() {
     var getDatesToWatch = function() {
       return $('.date');
@@ -83,7 +85,10 @@ define([
     var className = 'pinned';
     return _.throttle(function() {
       var top = grid.offset().top;
-      if (top <= window.innerHeight + getScrollY() - 100) {
+      if (
+        top <= window.innerHeight + getScrollY() - 100 &&
+        !body.hasClass('loading')
+      ) {
         flagPanel.addClass(className);
       } else {
         flagPanel.removeClass(className);
@@ -110,14 +115,14 @@ define([
 
   function setBindings() {
 
-    var flaggingPanelScrollHandler = getFlaggingPanelScrollHandler();
-    $(window).scroll(flaggingPanelScrollHandler);
-
     $(window).resize(onResize);
+
+    var flaggingPanelScrollHandler = getFlaggingPanelScrollHandler();
+    flaggingPanelScrollHandler();
+    $(window).scroll(flaggingPanelScrollHandler);
 
     events.on('grid/complete', function() {
       _.defer(setMonthBindings);
-      _.defer(flaggingPanelScrollHandler);
     });
   }
 
