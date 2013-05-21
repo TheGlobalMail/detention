@@ -602,8 +602,21 @@
     .first-example,
     .second-example,
     .flag-intro {
+      .back, .next {
+        span {
+          display:none;
+        }
+      }
+      .cell {
+        display:none;
+      }
+      .pullquote {
+        float:none;
+        margin: 0 auto;
+      }
       .text-container {
-        padding: 0 10px;
+        width:90%;
+        margin: 0 auto;
         p {
           .font-size(13);
           line-height: 1.4;
@@ -611,6 +624,13 @@
           strong {
             .font-size(14);
           }
+        }
+      }
+    }
+    .flag-intro {
+      .next {
+        span {
+          display:block;
         }
       }
     }
