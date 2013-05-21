@@ -110,7 +110,7 @@ define([ 'jquery',
       });
     }else{
       _.each(options.structure, function(location){
-        var html = '<li class="location">' + location.location + '</li>';
+        var html = '<li class="location">' + location.location + ':</li>';
         _.each(location.facilities, function(locationName){
           var name = locationName.toLowerCase();
           html += '<li>' +
