@@ -6,7 +6,7 @@ define([ 'jquery',
 
   var locations = [
     {
-      location: 'Chistmas Island',
+      location: 'Christmas Island',
       facilities: [
         'Christmas Island',
         'Construction Camp APOD',
