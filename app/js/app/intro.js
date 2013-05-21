@@ -46,7 +46,7 @@ define([
 
   function scaleContainers() {
     var titleHeight = window.innerHeight - navBar.outerHeight() - 1;
-    title.css('height', titleHeight);
+    title.css('min-height', titleHeight);
 
     var headerHeight = titleH1.outerHeight(true) + titleH2.outerHeight(true);
     var headerOffset = -30;
@@ -56,7 +56,7 @@ define([
     );
 
     var introHeight = window.innerHeight;
-    intro.css('height', introHeight);
+    intro.css('min-height', introHeight);
 
     var paraHeight = 0;
     _.each(introPara, function(element) {
