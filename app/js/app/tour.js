@@ -9,9 +9,14 @@ define([
   "use strict";
 
   var defaultScrollDuration = 1000;
+  var inTour = false;
+  var scrollCallbackIndex = 0;
+  var scrollCallbacks = [];
+  var originalScrollPosition;
 
   var body = $('body');
   var incidentContainer = $('#incidents');
+  var months;
 
   var tourContainer = $('.tour-container');
   var backdrop = tourContainer.find('.backdrop');
@@ -41,15 +46,9 @@ define([
   var flagIntroMonth;
   var flagIntroScrollTo;
 
-  var scrollCallbackIndex = 0;
-  var scrollCallbacks = [];
-
-  var months;
-
-  var inTour = false;
-
   function startTour() {
     inTour = true;
+    originalScrollPosition = getScrollY();
     body.addClass('in-tour');
     tourContainer.addClass('show');
     positionElements();
@@ -208,6 +207,7 @@ define([
     inTour = false;
     body.removeClass('in-tour');
     tourContainer.removeClass('show');
+    $.scrollTo(originalScrollPosition, defaultScrollDuration);
   }
 
   var onResize = _.debounce(function() {
