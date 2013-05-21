@@ -1368,10 +1368,13 @@ footer {
       margin-top: 20px;
     }
     .next {
+      text-align: left;
       position: relative;
       float: left;
     }
     img {
+      border: 1px solid @gray;
+      .box-shadow(0 2px 10px black);
       float: right;
       position: relative;
     }
@@ -1382,6 +1385,7 @@ footer {
     width: auto;
     display: block;
     margin: 0 auto;
+    text-align: center;
     .arrow {
       position:relative;
       left:auto;
@@ -1406,6 +1410,9 @@ footer {
     }
   }
   .back {
+    span {
+      display:none;
+    }
     .arrow {
       margin: 5px auto 0;
       background-position: center -184px;
