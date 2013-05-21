@@ -610,9 +610,28 @@ footer {
         width:201px;
         overflow:hidden;
       }
-      &.facilities .btn {
-        width:306px;
-        overflow:hidden;
+      &.facilities {
+        .btn {
+          width:306px;
+          overflow:hidden;
+        }
+        ul.dropdown-menu {
+          li {
+            padding: 8px 12px 8px 20px;
+            &:first-child {
+              padding: 8px 12px;
+              &:before {
+                display:none;
+              }
+            }
+            &:before {
+              content:'-';
+              position: absolute;
+              left:12px;
+              top:11px;
+            }
+          }
+        }
       }
       ul.dropdown-menu {
         border:1px solid rgba(255,255,255,.3);
@@ -624,12 +643,26 @@ footer {
         max-height: 315px;
         overflow:scroll;
         li {
+          position: relative;
           .font-size(12);
           text-transform: uppercase;
           line-height: 1;
-          padding: 8px 14px;
+          padding: 8px 12px;
           border-bottom:1px solid #232626;
           .transition(background 200ms ease-in);
+          &.location {
+            .font-size(11);
+            color:@grayLight;
+            cursor: default !important;
+            padding: 12px 12px 6px;
+            border-bottom:1px dotted #232626;
+            &:before {
+              display:none;
+            }
+            &:hover, &:active, &:focus {
+              background: none;
+            }
+          }
           a {
             padding:0;
             color:white;
