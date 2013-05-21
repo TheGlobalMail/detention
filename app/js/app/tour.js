@@ -17,6 +17,7 @@ define([
   var body = $('body');
   var incidentContainer = $('#incidents');
   var months;
+  var startTourElement = $('.start-tour');
 
   var tourContainer = $('.tour-container');
   var backdrop = tourContainer.find('.backdrop');
@@ -31,14 +32,12 @@ define([
   var firstExampleText = firstExample.find('.text-container');
   var firstExampleBack = firstExample.find('.back');
   var firstExampleNext = firstExample.find('.next');
-  var firstExampleMonth;
   var firstExampleScrollTo;
 
   var secondExample = tourContainer.find('.second-example');
   var secondExampleText = secondExample.find('.text-container');
   var secondExampleBack = secondExample.find('.back');
   var secondExampleNext = secondExample.find('.next');
-  var secondExampleMonth;
   var secondExampleScrollTo;
 
   var flagIntro = tourContainer.find('.flag-intro');
@@ -46,7 +45,6 @@ define([
   var flagIntroBack = flagIntro.find('.back');
   var flagIntroNext = flagIntroText.find('.next');
   var flagIntroImage = flagIntroText.find('img');
-  var flagIntroMonth;
   var flagIntroScrollTo;
 
   function startTour() {
@@ -72,56 +70,98 @@ define([
       top: introScrollTo + (window.innerHeight - introText.height()) / 2,
       left: (window.innerWidth - introText.width()) / 2
     });
+    var introTextBottom = introText.offset().top + introText.outerHeight();
+    var introTextTop = introScrollTo + window.innerHeight - introNext.height() - 100;
+    if (introTextTop < introTextBottom) {
+      introTextTop += introTextBottom - introTextTop + 20;
+    }
     introNext.css({
-      top: introScrollTo + window.innerHeight - introNext.height() - 100,
+      top: introTextTop,
       left: (window.innerWidth - introNext.width()) / 2
     });
 
     // First example
     firstExampleScrollTo = introScrollTo + (window.innerHeight * 2);
+    var firstExampleTextTop = firstExampleScrollTo + (window.innerHeight - firstExampleText.height()) / 2;
+    var firstExampleTextBottom = firstExampleTextTop + firstExampleText.outerHeight();
     firstExampleText.css({
-      top: firstExampleScrollTo + (window.innerHeight - firstExampleText.height()) / 2,
+      top: firstExampleTextTop,
       left: (window.innerWidth - firstExampleText.width()) / 2
     });
     firstExampleScrollTo += positionCellOnNearestCell(firstExampleText);
+    var firstExampleBackHeight = firstExampleBack.outerHeight();
+    var firstExampleBackTop = firstExampleScrollTo + firstExampleBackHeight;
+    var firstExampleBackBottom = firstExampleBackTop + firstExampleBackHeight;
+    if (firstExampleBackBottom >= firstExampleTextTop) {
+      firstExampleBackTop -= firstExampleBackBottom - firstExampleTextTop;
+      firstExampleScrollTo -= firstExampleBackBottom - firstExampleTextTop;
+    }
     firstExampleBack.css({
-      top: firstExampleScrollTo + firstExampleBack.height(),
+      top: firstExampleBackTop,
       left: (window.innerWidth - firstExampleBack.width()) / 2
     });
+    var firstExampleNextTop = firstExampleScrollTo + window.innerHeight - firstExampleNext.height() - 100;
+    if (firstExampleNextTop < firstExampleTextBottom) {
+      firstExampleNextTop += firstExampleTextBottom - firstExampleNextTop + 20;
+    }
     firstExampleNext.css({
-      top: firstExampleScrollTo + window.innerHeight - firstExampleNext.height() - 100,
+      top: firstExampleNextTop,
       left: (window.innerWidth - firstExampleNext.width()) / 2
     });
 
     // Second example
     secondExampleScrollTo = firstExampleScrollTo + (window.innerHeight * 2);
+    var secondExampleTextTop = secondExampleScrollTo + (window.innerHeight - secondExampleText.height()) / 2;
+    var secondExampleTextBottom = secondExampleTextTop + secondExampleText.outerHeight();
     secondExampleText.css({
-      top: secondExampleScrollTo + (window.innerHeight - secondExampleText.height()) / 2,
+      top: secondExampleTextTop,
       left: (window.innerWidth - secondExampleText.width()) / 2
     });
     secondExampleScrollTo += positionCellOnNearestCell(secondExampleText);
+    var secondExampleBackHeight = secondExampleBack.outerHeight();
+    var secondExampleBackTop = secondExampleScrollTo + secondExampleBackHeight;
+    var secondExampleBackBottom = secondExampleBackTop + secondExampleBackHeight;
+    if (secondExampleBackBottom >= secondExampleTextTop) {
+      secondExampleBackTop -= secondExampleBackBottom - secondExampleTextTop;
+      secondExampleScrollTo -= secondExampleBackBottom - secondExampleTextTop;
+    }
     secondExampleBack.css({
-      top: secondExampleScrollTo + secondExampleBack.height(),
+      top: secondExampleBackTop,
       left: (window.innerWidth - secondExampleBack.width()) / 2
     });
+    var secondExampleNextTop = secondExampleScrollTo + window.innerHeight - secondExampleNext.height() - 100;
+    if (secondExampleNextTop < secondExampleTextBottom) {
+      secondExampleNextTop += secondExampleTextBottom - secondExampleNextTop;
+    }
     secondExampleNext.css({
-      top: secondExampleScrollTo + window.innerHeight - secondExampleNext.height() - 100,
+      top: secondExampleNextTop,
       left: (window.innerWidth - secondExampleNext.width()) / 2
     });
 
     // Flagging introduction
-    flagIntroScrollTo = secondExampleScrollTo + (window.innerHeight * 2);
+    flagIntroScrollTo = secondExampleNextTop + secondExampleNext.outerHeight() + window.innerHeight;
+    var flagIntroTextHeight = flagIntroText.outerHeight();
+    var flagIntroTextTop = flagIntroScrollTo + (window.innerHeight - flagIntroTextHeight) / 2;
     flagIntroText.css({
-      top: flagIntroScrollTo + (window.innerHeight - flagIntroText.height()) / 2,
+      top: flagIntroTextTop,
       left: (window.innerWidth - flagIntroText.width()) / 2
     });
     var offsetDifference = getOffsetDifference(flagIntroImage, getNearestCell(flagIntroImage));
     flagIntroScrollTo += offsetDifference.top;
+    var flagIntroBackTop = flagIntroScrollTo + flagIntroBack.outerHeight();
+    var flagIntroBackBottom = flagIntroBackTop + flagIntroBack.outerHeight();
+    if (flagIntroBackBottom > flagIntroTextTop) {
+      flagIntroBackTop += flagIntroTextTop - flagIntroBackBottom - 20;
+      flagIntroScrollTo += flagIntroTextTop - flagIntroBackBottom - 10;
+    }
     flagIntroBack.css({
-      top: flagIntroScrollTo + flagIntroBack.height(),
+      top: flagIntroBackTop,
       left: (window.innerWidth - flagIntroBack.width()) / 2
     });
     // Shift the image inline with the nearest cell
+    if (offsetDifference.top < -5) {
+      offsetDifference.top = 0;
+    }
     flagIntroImage.css(offsetDifference);
     flagIntroNext.css('top', offsetDifference.top);
   }
@@ -180,17 +220,26 @@ define([
   function positionCellOnNearestCell(tourTextElement) {
     var tourCell = tourTextElement.find('.cell');
     // Find the positional difference between the nearest cell and tour cell
-    var offsetDifference = getOffsetDifference(tourCell, getNearestCell(tourCell));
-    // Shift the cell and the pull quote inline with the nearest cell
-    var pullQuote = tourTextElement.find('.pullquote');
-    tourCell
-      .add(pullQuote)
-      .css(offsetDifference);
-    tourTextElement.find('p')
-      .css({
-        'top': offsetDifference.top
-      });
-    return offsetDifference.top
+    var nearestCell = getNearestCell(tourCell);
+    if (nearestCell.length) {
+      var offsetDifference = getOffsetDifference(tourCell, nearestCell);
+      // Suppressing a weird bug
+      if (offsetDifference.left >= tourCell.outerWidth(true)) {
+        offsetDifference.left = 0;
+      }
+      // Shift the cell and the pull quote inline with the nearest cell
+      var pullQuote = tourTextElement.find('.pullquote');
+      tourCell
+        .add(pullQuote)
+        .css(offsetDifference);
+      tourTextElement.find('p')
+        .css({
+          'margin-top': offsetDifference.top
+        });
+      return offsetDifference.top
+    } else {
+      return 0;
+    }
   }
 
   var scrollToIntro = _.throttle(function() {
@@ -233,21 +282,19 @@ define([
   }, 100);
 
   function setBindings() {
+    startTourElement.on('click', startTour);
+    exit.on('click', endTour);
     introNext.on('click', scrollToFirstExample);
     firstExampleBack.on('click', scrollToIntro);
     firstExampleNext.on('click', scrollToSecondExample);
     secondExampleBack.on('click', scrollToFirstExample);
     secondExampleNext.on('click', scrollToFlagIntro);
     flagIntroBack.on('click', scrollToSecondExample);
-
-    exit.on('click', endTour);
     flagIntroNext.on('click', endTour);
 
-    months = incidentContainer.find('.date');
-
-    $('.start-tour').on('click', startTour);
-
     $(window).on('resize', onResize);
+
+    months = incidentContainer.find('.date');
   }
 
   function init() {
