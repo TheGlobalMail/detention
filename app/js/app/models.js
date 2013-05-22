@@ -255,12 +255,11 @@ define([
     _this.showPullQuote = function() {
       var $cell = $(this);
       var cell = _this.getCellbyElement(this);
-      if (!cell.data.Summary) return;
       var pos = $cell.offset();
       if (_this.pullQuoteTimer) clearTimeout(_this.pullQuoteTimer);
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteTimer = setTimeout(function(){
-        var summary  = cell.data.Summary
+        var summary  = cell.getSummary()
           .replace(redactedRegex, 'Client')
           .replace(redactedStaffRegex, 'Staff');
         var words = summary.split(' ');
@@ -646,6 +645,9 @@ define([
       return moment(Date.parse(_this.data.occurred_on)).format(format);
     };
 
+    _this.getSummary = function(){
+      return _this.data.Summary || _this.data.summary;
+    };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
   }
