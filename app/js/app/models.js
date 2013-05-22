@@ -260,7 +260,7 @@ define([
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteTimer = setTimeout(function(){
         var summary  = cell.getSummary()
-          .replace(redactedRegex, 'Client')
+          .replace(redactedRegex, 'REDACTED')
           .replace(redactedStaffRegex, 'Staff');
         var words = summary.split(' ');
         if (words.length > MAX_WORDS_IN_PULLQUOTE){
@@ -268,7 +268,7 @@ define([
         }
         _this.$pullQuote.find('blockquote').text('"' + summary + '"');
         _this.$pullQuote.find('em.pullquote-date').text(cell.formattedOccurredOn());
-        _this.$pullQuote.find('em.pullquote-facility').text(cell.data.location);
+        _this.$pullQuote.find('em.pullquote-facility').text(cell.formattedLocation());
         var width = _this.$pullQuote.width();
         var height = _this.$pullQuote.height();
         var offset = {};
@@ -440,7 +440,7 @@ define([
               redaction = !!(text.match(redactedRegex) || text.match(redactedStaffRegex));
             }
             var html = text
-              .replace(redactedRegex, ' <span class="redact">Client Name</span>')
+              .replace(redactedRegex, ' <span class="redact">REDACTED</span>')
               .replace(redactedStaffRegex, ' <span class="redact">Staff Name</span>');
 
             var glossaryList = glossary.applyToHtml(html);
@@ -448,8 +448,10 @@ define([
             _this.element.find('.glossary').html(glossaryList.glossary).toggle(!!glossaryList.glossary);
 
             _this.element.find(className).html(html);
-          } else if (property === 'incident_type' || property === 'location') {
-            _this.element.find(className).text(text.replace(/(?:^|\s)\S/g, function(c){ return c.toUpperCase();  }));
+          } else if (property === 'incident_type') {
+            _this.element.find(className).text((text || '').replace(/(?:^|\s)\S/g, function(c){ return c.toUpperCase();  }));
+          } else if (property === 'location') {
+            _this.element.find(className).text(cell.formattedLocation());
           } else if (property === 'occurred_on') {
             _this.element.find(className).text(cell.formattedOccurredOn());
           } else {
@@ -475,8 +477,17 @@ define([
         _this.setFlagText();
       } else { // Events
         _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
+          var text;
           _this[field] = _this.element.find('.' + field);
-          _this[field].text(cell.data[field] || '-');
+          if (field === 'occurred_on'){
+            _this[field].text(cell.formattedOccurredOn());
+          }else if (field === 'description'){
+            text = cell.data[field] || '';
+            text = text.replace(/\[(http.*)\]/, '<a href="$1" class="ext-link" target="_BLANK">$1</a>');
+            _this[field].html(text);
+          } else{
+            _this[field].text(cell.data[field] || '-');
+          }
         });
 
         incidentDetails.hide();
@@ -648,6 +659,12 @@ define([
     _this.formattedOccurredOn = function() {
       var format = _this.data.event_type === 'incident' ? 'D/M/YYYY h:mm a' : 'D/M/YYYY';
       return moment(Date.parse(_this.data.occurred_on)).format(format);
+    };
+
+    _this.formattedLocation = function() {
+      return (_this.data.location || '')
+        .replace(/(?:^|\s)\S/g, function(c){ return c.toUpperCase();  })
+        .replace(/ (irh|idc|apod|ita)/ig, function(c){ return c.toUpperCase();  });
     };
 
     _this.getSummary = function(){
