@@ -463,6 +463,11 @@ define([
           _this.element.find('.disclaimer').hide();
         }
 
+        // Display a link the to detailed incident if available
+        _this.element.find('.detailed-incident')
+          .attr('href', _this.cell.uri())
+          .toggle(_this.cell.hasDetailedReport());
+
         incidentDetails.show();
         eventDetails.hide();
 
@@ -647,6 +652,14 @@ define([
 
     _this.getSummary = function(){
       return _this.data.Summary || _this.data.summary;
+    };
+
+    _this.hasDetailedReport = function(){
+      return _this.data.detailed_report;
+    };
+
+    _this.uri = function(){
+      return 'http://detentionlogs.com.au/data/incidents/incident_number/' + _this.data.id;
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
