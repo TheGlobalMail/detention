@@ -260,7 +260,7 @@ define([
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteTimer = setTimeout(function(){
         var summary  = cell.getSummary()
-          .replace(redactedRegex, 'Client')
+          .replace(redactedRegex, 'REDACTED')
           .replace(redactedStaffRegex, 'Staff');
         var words = summary.split(' ');
         if (words.length > MAX_WORDS_IN_PULLQUOTE){
@@ -440,7 +440,7 @@ define([
               redaction = !!(text.match(redactedRegex) || text.match(redactedStaffRegex));
             }
             var html = text
-              .replace(redactedRegex, ' <span class="redact">Client Name</span>')
+              .replace(redactedRegex, ' <span class="redact">REDACTED</span>')
               .replace(redactedStaffRegex, ' <span class="redact">Staff Name</span>');
 
             var glossaryList = glossary.applyToHtml(html);
