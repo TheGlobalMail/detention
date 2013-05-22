@@ -18,10 +18,15 @@ define([
   var introArrow = intro.find('.arrow');
   var introPara = intro.find('p');
 
+  var prevHeight;
+  var prevWidth;
+
   var scrollAnimation = {
     duration: 500,
     easing: 'easeInOutQuad'
   };
+
+  var inPreLoad = true;
 
   function setBindings() {
     titleArrow.on('click', function(){
@@ -45,31 +50,47 @@ define([
   }
 
   function scaleContainers() {
-    var titleHeight = window.innerHeight - navBar.outerHeight() - 1;
-    title.css('min-height', titleHeight);
+    // Increase the height of the header and intro sections such that
+    // they fill the viewport, then vertically center their children.
 
-    var headerHeight = titleH1.outerHeight(true) + titleH2.outerHeight(true);
-    var headerOffset = -30;
-    titleH1.css(
-      'padding-top',
-      ((titleHeight - headerHeight) / 2) + headerOffset
-    );
+    if (
+      prevHeight !== window.innerHeight &&
+      prevWidth !== window.innerWidth
+    ) {
+      prevHeight = window.innerHeight;
+      prevWidth = window.innerWidth;
 
-    var introHeight = window.innerHeight;
-    intro.css('min-height', introHeight);
+      var titleHeight = window.innerHeight - navBar.outerHeight() - 1;
+      title.css('min-height', titleHeight);
 
-    var paraHeight = 0;
-    _.each(introPara, function(element) {
-      paraHeight += $(element).outerHeight(true);
-    });
-    var paraOffset = -8;
-    introPara
-      .first()
-      .css(
+      var headerHeight = titleH1.outerHeight(true) + titleH2.outerHeight(true);
+      var headerOffset = -30;
+      titleH1.css(
         'padding-top',
-        ((introHeight - paraHeight) / 2) + paraOffset
+        ((titleHeight - headerHeight) / 2) + headerOffset
       );
 
+      var introHeight = window.innerHeight;
+      intro.css('min-height', introHeight);
+
+      var childHeight = 0;
+      _.each(introPara, function(element) {
+        childHeight += $(element).outerHeight(true);
+      });
+      childHeight += introArrow.outerHeight(true);
+      var paddingTop = ((introHeight - childHeight) / 2);
+      introPara.first()
+        .css('padding-top', paddingTop);
+
+      if (inPreLoad) {
+        _.defer(endPreLoad);
+      }
+    }
+  }
+
+  function endPreLoad() {
+    // Let the initial content display
+    inPreLoad = false;
     body.removeClass('pre-load');
   }
 

@@ -82,16 +82,24 @@ define([
   function getFlaggingPanelScrollHandler() {
     var flagPanel = $('#sharing-panel');
     var grid = $('.incident-grid');
-    var className = 'pinned';
+    var onClassName = 'pinned';
+    var offClassName = 'hide';
+
     return _.throttle(function() {
       var top = grid.offset().top;
       if (
         top <= window.innerHeight + getScrollY() - 100 &&
         !body.hasClass('loading')
       ) {
-        flagPanel.addClass(className);
+        flagPanel
+          .removeClass(offClassName)
+          .addClass(onClassName);
       } else {
-        flagPanel.removeClass(className);
+        flagPanel.removeClass(onClassName);
+        // Circumventing the iPad's broken position: fixed implementation
+        setTimeout(function() {
+          flagPanel.addClass(offClassName);
+        }, 150)
       }
     }, 50);
   }
@@ -119,7 +127,7 @@ define([
 
     var flaggingPanelScrollHandler = getFlaggingPanelScrollHandler();
     flaggingPanelScrollHandler();
-    $(window).scroll(flaggingPanelScrollHandler);
+    $(window).on('scroll', flaggingPanelScrollHandler);
 
     events.on('grid/complete', function() {
       _.defer(setMonthBindings);
