@@ -463,6 +463,11 @@ define([
           _this.element.find('.disclaimer').hide();
         }
 
+        // Display a link the to detailed incident if available
+        _this.element.find('.detailed-incident')
+          .attr('href', _this.cell.uri())
+          .toggle(_this.cell.hasDetailedReport());
+
         incidentDetails.show();
         eventDetails.hide();
 
@@ -470,8 +475,17 @@ define([
         _this.setFlagText();
       } else { // Events
         _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
+          var text;
           _this[field] = _this.element.find('.' + field);
-          _this[field].text(cell.data[field] || '-');
+          if (field === 'occurred_on'){
+            _this[field].text(cell.formattedOccurredOn());
+          }else if (field === 'description'){
+            text = cell.data[field] || '';
+            text = text.replace(/\[(http.*)\]/, '<a href="$1" class="ext-link" target="_BLANK">$1</a>');
+            _this[field].html(text);
+          } else{
+            _this[field].text(cell.data[field] || '-');
+          }
         });
 
         incidentDetails.hide();
@@ -647,6 +661,14 @@ define([
 
     _this.getSummary = function(){
       return _this.data.Summary || _this.data.summary;
+    };
+
+    _this.hasDetailedReport = function(){
+      return _this.data.detailed_report;
+    };
+
+    _this.uri = function(){
+      return 'http://detentionlogs.com.au/data/incidents/incident_number/' + _this.data.id;
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));

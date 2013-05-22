@@ -97,7 +97,14 @@ define([
     currentFlagCell.attr('data-being-shown', 'true');
     $.scrollTo(
       currentFlagCell,
-      { duration: 500, offset: -140, easing: 'easeInOutQuad'}
+      {
+        duration: 500,
+      offset: -140,
+      easing: 'easeInOutQuad',
+      onAfter: function(){
+        currentFlagCell.trigger('mouseover');
+      }
+      }
     );
     currentFlagIndex++;
     if (flaggedIncidents.length > 1){
