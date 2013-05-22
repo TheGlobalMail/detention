@@ -475,8 +475,17 @@ define([
         _this.setFlagText();
       } else { // Events
         _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
+          var text;
           _this[field] = _this.element.find('.' + field);
-          _this[field].text(cell.data[field] || '-');
+          if (field === 'occurred_on'){
+            _this[field].text(cell.formattedOccurredOn());
+          }else if (field === 'description'){
+            text = cell.data[field] || '';
+            text = text.replace(/\[(http.*)\]/, '<a href="$1" class="ext-link" target="_BLANK">$1</a>');
+            _this[field].html(text);
+          } else{
+            _this[field].text(cell.data[field] || '-');
+          }
         });
 
         incidentDetails.hide();
