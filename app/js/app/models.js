@@ -268,7 +268,7 @@ define([
           summary = words.slice(0, MAX_WORDS_IN_PULLQUOTE).join(' ') + ' ' + '...';
         }
         _this.$pullQuote.find('blockquote').text('"' + summary + '"');
-        _this.$pullQuote.find('em.pullquote-date').text(moment(Date.parse(cell.data.occurred_on)).format('D/M/YYYY h:mm a'));
+        _this.$pullQuote.find('em.pullquote-date').text(cell.formattedOccurredOn());
         _this.$pullQuote.find('em.pullquote-facility').text(cell.data.location);
         var width = _this.$pullQuote.width();
         var height = _this.$pullQuote.height();
@@ -452,7 +452,7 @@ define([
           } else if (property === 'incident_type' || property === 'location') {
             _this.element.find(className).text(text.replace(/(?:^|\s)\S/g, function(c){ return c.toUpperCase();  }));
           } else if (property === 'occurred_on') {
-            _this.element.find(className).text(moment(Date.parse(text)).format('D/M/YYYY h:mm a'));
+            _this.element.find(className).text(cell.formattedOccurredOn());
           } else {
             _this.element.find(className).text(text);
           }
@@ -640,6 +640,12 @@ define([
         classes.remove('flagged');
       }
     };
+
+    _this.formattedOccurredOn = function() {
+      var format = _this.data.event_type === 'incident' ? 'D/M/YYYY h:mm a' : 'D/M/YYYY';
+      return moment(Date.parse(_this.data.occurred_on)).format(format);
+    };
+
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
   }
