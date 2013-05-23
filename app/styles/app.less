@@ -300,12 +300,20 @@ body {
       background-position: center 14px;
     }
   }
-  &.riot-event {
+  &.media-event {
     background-color: @event-yellow;
     background-position: center -18px;
     &:hover {
       background-color: @event-yellow !important;
       background-position: center -22px;
+    }
+  }
+  &.opening-event {
+    background-color: @event-yellow;
+    background-position: center -55px;
+    &:hover {
+      background-color: @event-yellow !important;
+      background-position: center -65px;
     }
   }
   &[data-being-shown]{
@@ -1096,7 +1104,7 @@ footer {
       background: @blue;
       text-shadow: 0 -1px 0 rgba(0,0,0,.4);
     }
-    &.event-modal-riot {
+    &.event-modal-media, &.event-modal-opening {
       color:#333;
       background: @event-yellow;
       text-shadow: 0 1px 0 rgba(255,255,255,.6);
