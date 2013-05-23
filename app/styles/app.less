@@ -1097,15 +1097,16 @@ footer {
         }
         ul {
           clear:both;
-          border-top: 1px solid rgba(255,255,255,.2);
+          border-bottom: 1px solid rgba(255,255,255,.2);
           margin-top: 10px;
-          padding:10px 0 0;
+          padding:10px 0;
           background-color: none;
           li {
             height:auto;
             width:auto;
             max-width: none;
             display:block;
+            border: none;
             p.summary {
               width:auto;
             }
@@ -1124,6 +1125,11 @@ footer {
       .close {
         color:#333;
         text-shadow:none;
+      }
+      .event-details {
+        ul {
+          border-color: rgba(0,0,0,0.2);
+        }
       }
     }
     .incident-details {
