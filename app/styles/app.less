@@ -1522,3 +1522,67 @@ footer {
     display: block;
   }
 }
+
+#ie {
+  z-index: 99999;
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: @white;
+  background: url('/images/noise.png') repeat 0 0 #1c1f1f;
+  text-align: center;
+  .text-container {
+    width: 700px;
+    height: 483px;
+    overflow: visible;
+    margin: 0 auto;
+    padding: 0;
+    top: -75px;
+  }
+  .container {
+    width:100%;
+    max-width: none;
+    height:100%;
+    // background: url('/images/title-bg.png') no-repeat center top transparent;
+    // background-size: 100% auto;
+
+    h3 {
+      font-weight: normal;
+      line-height: 1.2;
+      margin-top: 160px;
+      margin-bottom: 40px;
+
+      strong {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      a {
+        color: white;
+        font-style: italic;
+        text-decoration: underline;
+      }
+    }
+
+    a.close {
+      float: none;
+      position:relative;
+      margin-top: 50px;
+      width: 290px;
+      font-size: 14px;
+      border: 1px solid @gray;
+      padding: 10px;
+      margin: 0 auto;
+      color: white;
+      text-transform: uppercase;
+      .border-radius(4px);
+      behavior: url(../js/libs/PIE.htc);
+      &:hover {
+        text-decoration: none;
+        border: 1px solid @white;
+      }
+    }
+  }
+}
