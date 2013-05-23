@@ -45,7 +45,7 @@ define(['lodash'], function(_){
     'Phosphate Hill': 'Temporary immigration facility, Christmas Island',
     'RDH': 'Royal Darwin Hospital',
     'RRT': 'Refugee Review Tribunal',
-    'RFS': 'Refugee Family Services',
+    // 'RFS': 'Refugee Family Services',
     'SIDC': 'Scherger Immigration Detention Centre',
     'SIRH': 'Sydney Immigration Residential Housing',
     'SASH Watch': 'Suicide and Self-Harm Watch',
