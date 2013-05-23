@@ -231,7 +231,7 @@ define([
     resetCells: function(){
       var _this = this;
       window.requestAnimationFrame(function(){
-        grid.grid.$el.addClass('filtering');
+        grid.grid.$el.removeClass('filtering');
         _this.$currentFilter.removeClass('filter-selected');
         _this.$currentFilter = null;
         _this.$filters.removeClass('active');
