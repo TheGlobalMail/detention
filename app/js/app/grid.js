@@ -7,8 +7,8 @@ define([
 ], function($, _, incidents, models, events) {
   "use strict";
 
-  var gridContainer = $('.incident-grid');
-  var grid = new models.GridController;
+  var gridContainer = $('#incident-grid');
+  var grid = new models.GridController({$el: gridContainer});
 
   function buildIncidentMonthGrid() {
     if (gridContainer.children().length) {

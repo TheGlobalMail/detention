@@ -65,7 +65,7 @@ define(['lodash'], function(_){
     var usedGlossary = [];
     // First, find all the references to known abbreviations
     _.each(_.keys(glossary), function(abbrev){
-      var regex = new RegExp('(^|[^\w>"])(' + abbrev + ')($|[^\w<"])', 'gm');
+      var regex = new RegExp('(^|[^\\w>"])(' + abbrev + ')($|[^\\w<"])', 'gm');
       if (html.match(regex)){
         html = html
           .replace(regex, '$1$2<sup data-abbrev="'+abbrev+'"></sup>$3');

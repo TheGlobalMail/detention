@@ -1,8 +1,9 @@
 define([
   'jquery',
   'lodash',
-  'incidents'
-], function($, _, incidents){
+  'incidents',
+  './grid'
+], function($, _, incidents, grid){
 
   var locations = [
     {
@@ -188,6 +189,9 @@ define([
     // Keep track of the current filtered facility
     state: {facility: 'all', category: 'all'},
 
+    // current filters
+    $currentFilter: null,
+
     // Update filter data and then call filter
     filterBy: function(type, value){
       if (this.state[type] === value) return;
@@ -225,10 +229,14 @@ define([
 
     // Clear all filtering classes and scroll to the first cell
     resetCells: function(){
-      $('.cell').removeClass('filtered');
-      $('.cell').removeClass('filter-selected');
-      $.scrollTo($('#incidents'), {duration: 500, easing: 'easeInOutQuad'});
-      this.$filters.removeClass('active');
+      var _this = this;
+      window.requestAnimationFrame(function(){
+        grid.grid.$el.addClass('filtering');
+        _this.$currentFilter.removeClass('filter-selected');
+        _this.$currentFilter = null;
+        _this.$filters.removeClass('active');
+        $.scrollTo($('#incidents'), {duration: 500, easing: 'easeInOutQuad'});
+      });
     },
 
     // Filter cells based on the current values in this.state
@@ -239,28 +247,27 @@ define([
       ];
       // ignore any filter item set to 'all'
       filters = _.select(filters, function(filter){ return filter.value !== 'all'; });
-      var filterSelector = _.map(filters, function(filter){
-        return '.cell[data-'+filter.type +'!="'+filter.value+'"]';
-      }).join(',');
-      var selectredSelector = '.cell' + _.map(filters, function(filter){
+      var selectedSelector = '.cell' + _.map(filters, function(filter){
         return '[data-'+filter.type +'="'+filter.value+'"]';
       }).join('');
-      $(filterSelector)
-        .addClass('filtered')
-        .removeClass('filter-selected');
-
+      if (this.$currentFilter){
+        this.$currentFilter.removeClass('filter-selected');
+      }
       // Scroll to the first matching cell
-      var selected = $(selectredSelector);
-      selected
-        .removeClass('filtered')
-        .addClass('filter-selected');
+      this.$currentFilter = $(selectedSelector);
       // Scroll to the first matching element so that it is in the centre of
       // the page
-      if (selected.length){
-        // TODO: replace the offset with the fixed menu's height
-        $.scrollTo(selected, {duration: 500, offset: -140, easing: 'easeInOutQuad'});
-      }
-      this.$filters.addClass('active');
+      var _this = this;
+      window.requestAnimationFrame(function(){
+        _this.$filters.addClass('active');
+        _this.$currentFilter
+          .addClass('filter-selected');
+        grid.grid.$el.addClass('filtering');
+        if (_this.$currentFilter.length){
+          // TODO: replace the offset with the fixed menu's height
+          $.scrollTo(_this.$currentFilter, {duration: 500, offset: -140, easing: 'easeInOutQuad'});
+        }
+      });
     }
 
   };

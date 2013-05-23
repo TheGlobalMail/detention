@@ -25,8 +25,9 @@ define([
 
   var vent = _.extend({}, Backbone.Events);
 
-  function GridController() {
+  function GridController(options) {
     var _this = this;
+    _this.$el = options.$el;
 
     function constructor() {
       _this.cells = [];
@@ -692,7 +693,7 @@ define([
 
     _this.formattedOccurredOn = function() {
       var format = _this.data.event_type === 'incident' ? 'D/M/YYYY h:mm a' : 'D/M/YYYY';
-      return moment(Date.parse(_this.data.occurred_on)).format(format);
+      return moment(_this.data.occurred_on.replace(/\+.*/, '')).format(format);
     };
 
     _this.formattedLocation = function() {
