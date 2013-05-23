@@ -18,7 +18,7 @@ define([
 
   var MAX_WORDS_IN_PULLQUOTE = 10;
 
-  var redactedRegex = /(client *)*s. 47F\(1\)|REDACTED_CLIENT/gi;
+  var redactedRegex = /(client *|clien |1_|1-)*s. *I*47F *\(1\)*|REDACTED_CLIENT/gi;
   var redactedStaffRegex = /REDACTED_STAFF/gi;
 
   var vent = _.extend({}, Backbone.Events);
@@ -496,6 +496,22 @@ define([
         _this.element
           .addClass(eventModalClass)
           .addClass(eventModalClass + '-' + cell.data.type);
+
+        // add video if available
+        if (cell.data.multimedia && cell.data.multimedia.match(/youtube/)){
+          var $media = _this.element.find('.media');
+          var $youtube = $media.find('iframe');
+          var videoId = cell.data.multimedia.match(/v=(.*)/)[1];
+          if (!$youtube.length){
+            $media.html(
+              '<iframe id="event-video" width="560" height="315" src="http://www.youtube.com/embed/'+videoId+'" frameborder="0"></iframe>'
+            );
+          }else{
+            $youtube.attr('src', 'http://www.youtube.com/embed/' + videoId);
+          }
+        }else{
+          _this.element.find('.media iframe').remove();
+        }
       }
 
       return _this;
