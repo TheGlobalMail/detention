@@ -25,8 +25,9 @@ define([
 
   var vent = _.extend({}, Backbone.Events);
 
-  function GridController() {
+  function GridController(options) {
     var _this = this;
+    _this.$el = options.$el;
 
     function constructor() {
       _this.cells = [];

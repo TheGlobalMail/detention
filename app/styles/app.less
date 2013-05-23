@@ -227,6 +227,13 @@ body {
   background-color: rgba(255, 255, 255, @opacity);
 }
 
+#incident-grid.filtering .cell{
+  .opacity(45);
+  &:hover {
+    .opacity(100);
+  }
+}
+
 .cell {
   width: @gridCellSize;
   height: @gridCellSize;
@@ -244,12 +251,6 @@ body {
       height: @gridCellSize;
       margin: 2px;
       .cellRGBA(1) !important;
-    }
-  }
-  &.filtered {
-    .opacity(45);
-    &:hover {
-      .opacity(100);
     }
   }
   &:hover, &:active, &:focus {
