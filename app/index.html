@@ -66,7 +66,7 @@
         <section class="title">
           <h1>Behind The Wire</h1>
           <h2>The Government's Guide to Life In Detention</h2>
-          <button class="arrow" data-next="#intro"></button>
+          <button class="arrow"></button>
         </section>
         <section id="intro" class="intro">
           <p>
@@ -78,7 +78,7 @@
           <p>
             Here are those records.
           </p>
-          <button class="arrow loading-icon" data-next="#incidents"></button>
+          <button class="arrow loading-icon"></button>
         </section>
       </div>
     </div>
@@ -401,6 +401,11 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
   </script>
+
+  <!-- build:js /js/preload.js -->
+  <script src="/js/utils/classList.js"></script>
+  <script src="/js/preload.js"></script>
+  <!-- endbuild -->
 
   <!-- build:js /js/main.js -->
   <script src="/components/requirejs/require.js" data-main="/js/main"></script>

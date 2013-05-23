@@ -5,7 +5,6 @@ define([
   './grid',
   './tour',
   // dependencies
-  './intro',
   './sharing-panel',
   './router',
   './tracking',
