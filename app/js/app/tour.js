@@ -206,6 +206,9 @@ define([
       }
     }
     if (!nearestMonth) {
+      if (!lastMonthAbove) {
+        return;
+      }
       nearestMonth = lastMonthAbove;
     }
 
@@ -224,7 +227,7 @@ define([
     var tourCell = tourTextElement.find('.cell');
     // Find the positional difference between the nearest cell and tour cell
     var nearestCell = getNearestCell(tourCell);
-    if (nearestCell.length) {
+    if (nearestCell && nearestCell.length) {
       var offsetDifference = getOffsetDifference(tourCell, nearestCell);
       // Suppressing a weird bug
       if (offsetDifference.left >= tourCell.outerWidth(true)) {
