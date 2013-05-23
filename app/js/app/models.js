@@ -18,7 +18,7 @@ define([
 
   var MAX_WORDS_IN_PULLQUOTE = 10;
 
-  var redactedRegex = /(client *)*s. 47F\(1\)|REDACTED_CLIENT/gi;
+  var redactedRegex = /(client *|clien |1_|1-)*s. *I*47F *\(1\)*|REDACTED_CLIENT/gi;
   var redactedStaffRegex = /REDACTED_STAFF/gi;
 
   var vent = _.extend({}, Backbone.Events);
