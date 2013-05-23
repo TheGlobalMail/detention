@@ -19,6 +19,7 @@ define(['lodash'], function(_){
     'Code Purple': 'Minor disturbance or scuffle between clients',
     'CI': 'Christmas Island',
     'CIIDC': 'Christmas Island Immigration Detention Centre',
+    'CI DC': 'Christmas Island Immigration Detention Centre',
     'CSO': '(Serco) Client Services Officer',
     'CSM': '(Serco) Client Services Manager',
     'DALAPOD': 'Darwin Airport Lodge Alternative Place of Detention',
@@ -71,7 +72,7 @@ define(['lodash'], function(_){
       }
     });
     // Second, find all the <sup> tags and correctly apply the reference
-    // numbers in the order that they appear in the text 
+    // numbers in the order that they appear in the text
     var referenceNumbers = {};
     var currentNumber = 0;
     html = html.replace(/(<sup data-abbrev=")(\w*)(">)(<\/sup>)/gm, function(sup, p1, abbrev, p2, p3){
