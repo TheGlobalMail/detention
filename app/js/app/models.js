@@ -266,7 +266,10 @@ define([
         if (words.length > MAX_WORDS_IN_PULLQUOTE){
           summary = words.slice(0, MAX_WORDS_IN_PULLQUOTE).join(' ') + ' ' + '...';
         }
-        _this.$pullQuote.find('blockquote').text('"' + summary + '"');
+        if (cell.data.event_type === 'incident'){
+          summary = '"' + summary + '"';
+        }
+        _this.$pullQuote.find('blockquote').text(summary);
         _this.$pullQuote.find('em.pullquote-date').text(cell.formattedOccurredOn());
         _this.$pullQuote.find('em.pullquote-facility').text(cell.formattedLocation());
         var width = _this.$pullQuote.width();
@@ -482,13 +485,21 @@ define([
           if (field === 'occurred_on'){
             _this[field].text(cell.formattedOccurredOn());
           }else if (field === 'description'){
-            text = cell.data[field] || '';
-            text = text.replace(/\[(http.*)\]/, '<a href="$1" class="ext-link" target="_BLANK">$1</a>');
-            _this[field].html(text);
+            _this[field].text(cell.data[field] || '');
           } else{
             _this[field].text(cell.data[field] || '-');
           }
         });
+
+        var $relatedLink = _this.element.find('.related-link');
+        if (cell.data.related_link){
+          $relatedLink
+            .attr('href', cell.data.related_link)
+            .text(cell.data.related_link)
+            .show();
+        }else{
+          $relatedLink.hide();
+        }
 
         incidentDetails.hide();
         eventDetails.show();
@@ -498,19 +509,18 @@ define([
           .addClass(eventModalClass + '-' + cell.data.type);
 
         // add video if available
+        var $media = _this.element.find('.media');
+        $media.empty();
         if (cell.data.multimedia && cell.data.multimedia.match(/youtube/)){
-          var $media = _this.element.find('.media');
-          var $youtube = $media.find('iframe');
           var videoId = cell.data.multimedia.match(/v=(.*)/)[1];
-          if (!$youtube.length){
-            $media.html(
-              '<iframe id="event-video" width="560" height="315" src="http://www.youtube.com/embed/'+videoId+'" frameborder="0"></iframe>'
-            );
-          }else{
-            $youtube.attr('src', 'http://www.youtube.com/embed/' + videoId);
-          }
+          $media.html(
+            '<iframe id="event-video" width="560" height="315" src="http://www.youtube.com/embed/'+videoId+'" frameborder="0"></iframe>'
+          );
+          $media.show();
+        }else if (cell.data.image_name){
+          $media.show();
         }else{
-          _this.element.find('.media iframe').remove();
+          $media.hide();
         }
       }
 

@@ -30,10 +30,8 @@ define([
 
   function setBindings() {
     titleArrow.on('click', function(){
-      $.scrollTo(
-        titleArrow.data('next'),
-        scrollAnimation
-      );
+      var top = $(titleArrow.data('next')).offset().top;
+      $.scrollTo(top, scrollAnimation);
     });
 
     introArrow.on('click', function(){
@@ -42,10 +40,8 @@ define([
         return;
       }
 
-      $.scrollTo(
-        introArrow.data('next'),
-        scrollAnimation
-      );
+      var top = $(introArrow.data('next')).offset().top;
+      $.scrollTo(top, scrollAnimation);
     });
   }
 

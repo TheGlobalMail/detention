@@ -8,7 +8,10 @@ define([
 ], function($, _, grid, events, incidents, getScrollY) {
   "use strict";
 
-  var defaultScrollDuration = 1000;
+  var defaultAnimation = {
+    duration: 1000
+  };
+
   var inTour = false;
   var scrollCallbackIndex = 0;
   var scrollCallbacks = [];
@@ -60,7 +63,7 @@ define([
     inTour = false;
     body.removeClass('in-tour');
     tourContainer.removeClass('show');
-    $.scrollTo(originalScrollPosition, defaultScrollDuration);
+    $.scrollTo(originalScrollPosition, defaultAnimation);
   }
 
   function positionElements() {
@@ -244,34 +247,34 @@ define([
 
   var scrollToIntro = _.throttle(function() {
     scrollCallbackIndex = 0;
-    var scrollDuration = defaultScrollDuration;
+    var scrollDuration = defaultAnimation.duration;
     var scrollY = getScrollY();
     // Make the starting animation's duration a fraction
     // of the distance from the starting point
     var offsetFromScrollStart = Math.abs(scrollY - introScrollTo);
     if (offsetFromScrollStart <= window.innerHeight) {
-      scrollDuration = (offsetFromScrollStart / window.innerHeight) * defaultScrollDuration;
+      scrollDuration = (offsetFromScrollStart / window.innerHeight) * defaultAnimation.duration;
     }
-    $.scrollTo(introScrollTo, scrollDuration);
-  }, defaultScrollDuration);
+    $.scrollTo(introScrollTo, {'duration': scrollDuration});
+  }, defaultAnimation.duration);
   scrollCallbacks.push(scrollToIntro);
 
   var scrollToFirstExample = _.throttle(function() {
     scrollCallbackIndex = 1;
-    $.scrollTo(firstExampleScrollTo, defaultScrollDuration);
-  }, defaultScrollDuration);
+    $.scrollTo(firstExampleScrollTo, defaultAnimation);
+  }, defaultAnimation.duration);
   scrollCallbacks.push(scrollToFirstExample);
 
   var scrollToSecondExample = _.throttle(function() {
     scrollCallbackIndex = 2;
-    $.scrollTo(secondExampleScrollTo, defaultScrollDuration);
-  }, defaultScrollDuration);
+    $.scrollTo(secondExampleScrollTo, defaultAnimation);
+  }, defaultAnimation.duration);
   scrollCallbacks.push(scrollToSecondExample);
 
   var scrollToFlagIntro = _.throttle(function() {
     scrollCallbackIndex = 3;
-    $.scrollTo(flagIntroScrollTo, defaultScrollDuration);
-  }, defaultScrollDuration);
+    $.scrollTo(flagIntroScrollTo, defaultAnimation.duration);
+  }, defaultAnimation.duration);
   scrollCallbacks.push(scrollToFlagIntro);
 
   var onResize = _.debounce(function() {
