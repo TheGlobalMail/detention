@@ -6,7 +6,7 @@ define([
 
   $.scrollTo = function(selector, options) {
 
-    var elementToScroll = $('html,body');
+    var elementToScroll = $('html, body');
     var offsetTop;
 
     if (typeof selector === 'string') {

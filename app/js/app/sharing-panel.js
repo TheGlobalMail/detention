@@ -99,11 +99,11 @@ define([
       currentFlagCell,
       {
         duration: 500,
-      offset: -140,
-      easing: 'easeInOutQuad',
-      onAfter: function(){
-        currentFlagCell.trigger('mouseover');
-      }
+        offset: -140,
+        easing: 'easeInOutQuad',
+        complete: function() {
+          currentFlagCell.trigger('mouseover');
+        }
       }
     );
     currentFlagIndex++;
