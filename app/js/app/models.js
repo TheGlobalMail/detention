@@ -17,6 +17,8 @@ define([
   var rootModal = $('.modal');
 
   var MAX_WORDS_IN_PULLQUOTE = 14;
+  var PULL_QUOTE_FADE_OUT_DELAY = 1500;
+  var PULL_QUOTE_FADE_OUT_DURATION = 2500;
 
   var redactedRegex = /(client *|clien |1_|1-)*s. *I*47F *\(1\)*|REDACTED_CLIENT/gi;
   var redactedStaffRegex = /REDACTED_STAFF/gi;
@@ -297,7 +299,7 @@ define([
           position.push('right');
         }
         _this.$pullQuote.attr('data-position', position.join('-'));
-        _this.hidePullQuote(1000);
+        _this.hidePullQuote(PULL_QUOTE_FADE_OUT_DELAY);
         _this.$pullQuote.stop();
         _this.$pullQuote.css({
           'top': offset.top,
@@ -325,7 +327,7 @@ define([
       _this.$pullQuote.stop();
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
       _this.pullQuoteLeaveTimer = setTimeout(function(){
-        _this.$pullQuote.fadeOut(3000);
+        _this.$pullQuote.fadeOut(PULL_QUOTE_FADE_OUT_DURATION);
       }, delay);
     };
 
