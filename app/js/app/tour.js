@@ -238,7 +238,7 @@ define([
       tourCell
         .add(pullQuote)
         .css(offsetDifference);
-      tourTextElement.find('p')
+      tourTextElement.find('p').first()
         .css({
           'margin-top': offsetDifference.top
         });
