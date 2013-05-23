@@ -402,10 +402,20 @@
   })();
   </script>
 
+  <!--[if lte IE 9]><!-->
   <!-- build:js /js/preload.js -->
+  <script src="/js/utils/jquery-1.9.1.js"></script>
   <script src="/js/utils/classList.js"></script>
   <script src="/js/preload.js"></script>
   <!-- endbuild -->
+  <!--<![endif]-->
+  <!--[if gt IE 9]><!-->
+  <!-- build:js /js/preload-ie.js -->
+  <script src="/components/jquery/jquery.js"></script>
+  <script src="/js/utils/classList.js"></script>
+  <script src="/js/preload.js"></script>
+  <!-- endbuild -->
+  <!--<![endif]-->
 
   <!-- build:js /js/main.js -->
   <script src="/components/requirejs/require.js" data-main="/js/main"></script>

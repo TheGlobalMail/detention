@@ -1,6 +1,6 @@
 requirejs.config({
   paths: {
-    jquery: '../components/jquery/jquery',
+    jquery: './utils/jquery',
     scrollto: '../components/jquery.scrollTo/jquery.scrollTo',
     easing: '../components/jquery-easing/jquery.easing',
     touch: '../components/jqueryui-touch-punch/jquery.ui.touch-punch',
