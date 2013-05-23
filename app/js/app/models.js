@@ -494,9 +494,10 @@ define([
         var $relatedLink = _this.element.find('.related-link');
         if (cell.data.related_link){
           $relatedLink
+            .show()
+            .find('a')
             .attr('href', cell.data.related_link)
             .text(cell.data.related_link)
-            .show();
         }else{
           $relatedLink.hide();
         }
@@ -510,6 +511,7 @@ define([
 
         // add video if available
         var $media = _this.element.find('.media');
+        var $credit = _this.element.find('.credit');
         $media.empty();
         if (cell.data.multimedia && cell.data.multimedia.match(/youtube/)){
           var videoId = cell.data.multimedia.match(/v=(.*)/)[1];
@@ -517,10 +519,14 @@ define([
             '<iframe id="event-video" width="560" height="315" src="http://www.youtube.com/embed/'+videoId+'" frameborder="0"></iframe>'
           );
           $media.show();
+          $credit.text('').hide();
         }else if (cell.data.image_name){
+          $media.append('<img src="/images/event-photos/' + cell.data.image_name + '" />');
+          $credit.text(cell.data.photo_credits).show();
           $media.show();
         }else{
           $media.hide();
+          $credit.text('').hide();
         }
       }
 
