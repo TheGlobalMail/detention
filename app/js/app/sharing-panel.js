@@ -3,7 +3,7 @@ define([
   'lodash',
   './flags',
   './router',
-  './models',
+  './models'
 ], function($, _, flags, router, models) {
   "use strict";
 

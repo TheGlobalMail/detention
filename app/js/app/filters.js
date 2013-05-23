@@ -1,7 +1,7 @@
-define([ 'jquery',
+define([
+  'jquery',
   'lodash',
-  'incidents',
-  'scrollto'
+  'incidents'
 ], function($, _, incidents){
 
   var locations = [
@@ -211,7 +211,7 @@ define([ 'jquery',
       this.state.category = 'all';
       this.state.facility = 'all';
       this.filter();
-      $.scrollTo($('.cell:first'), { duration: 500, offset: -140, easing: 'easeInOutQuad'});
+      $.scrollTo($('#incidents'), { duration: 500, easing: 'easeInOutQuad'});
     },
 
     // Add `filtered` class to cells where data-facility doesn't match facility
@@ -227,7 +227,7 @@ define([ 'jquery',
     resetCells: function(){
       $('.cell').removeClass('filtered');
       $('.cell').removeClass('filter-selected');
-      $.scrollTo($('.cell:first'), { duration: 500, offset: -140, easing: 'easeInOutQuad'});
+      $.scrollTo($('#incidents'), { duration: 500, easing: 'easeInOutQuad'});
       this.$filters.removeClass('active');
     },
 
@@ -257,7 +257,7 @@ define([ 'jquery',
       // Scroll to the first matching element so that it is in the centre of
       // the page
       if (selected.length){
-        $.scrollTo(selected, { duration: 500, offset: -140, easing: 'easeInOutQuad'});
+        $.scrollTo(selected, {duration: 500, easing: 'easeInOutQuad'});
       }
       this.$filters.addClass('active');
     }

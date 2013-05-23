@@ -1,19 +1,20 @@
 define([
-  './intro',
   './flags',
-  './sharing-panel',
-  './router',
-  './tracking',
   './events',
   './handlers',
   './grid',
   './tour',
   // dependencies
+  './intro',
+  './sharing-panel',
+  './router',
+  './tracking',
   './filters',
   './footer',
   'dropdown',
-  'easing'
-], function(intro, flags, sharingPanel, router, tracking, events, handlers, grid, tour) {
+  'easing',
+  './../utils/vertScrollTo'
+], function(flags, events, handlers, grid, tour) {
   'use strict';
 
   function setBindings() {
