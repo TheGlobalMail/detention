@@ -27,6 +27,11 @@ define([
       };
     }
 
+    if (options.offset) {
+      offsetTop += options.offset;
+      options.offset = void(0);
+    }
+
     elementToScroll.animate(
       {scrollTop: offsetTop},
       _.extend(defaultOptions, options)

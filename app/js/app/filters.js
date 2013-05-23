@@ -211,7 +211,7 @@ define([
       this.state.category = 'all';
       this.state.facility = 'all';
       this.filter();
-      $.scrollTo($('#incidents'), { duration: 500, easing: 'easeInOutQuad'});
+      $.scrollTo($('#incidents'), {duration: 500, easing: 'easeInOutQuad'});
     },
 
     // Add `filtered` class to cells where data-facility doesn't match facility
@@ -227,7 +227,7 @@ define([
     resetCells: function(){
       $('.cell').removeClass('filtered');
       $('.cell').removeClass('filter-selected');
-      $.scrollTo($('#incidents'), { duration: 500, easing: 'easeInOutQuad'});
+      $.scrollTo($('#incidents'), {duration: 500, easing: 'easeInOutQuad'});
       this.$filters.removeClass('active');
     },
 
@@ -257,7 +257,8 @@ define([
       // Scroll to the first matching element so that it is in the centre of
       // the page
       if (selected.length){
-        $.scrollTo(selected, {duration: 500, easing: 'easeInOutQuad'});
+        // TODO: replace the offset with the fixed menu's height
+        $.scrollTo(selected, {duration: 500, offset: -140, easing: 'easeInOutQuad'});
       }
       this.$filters.addClass('active');
     }
