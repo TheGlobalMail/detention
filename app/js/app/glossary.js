@@ -62,17 +62,34 @@ define(['lodash'], function(_){
   var applyToHtml = function(html){
     var glossaryHtml = '';
     var usedGlossary = [];
-    _.each(glossary, function(defn, abbrev){
-      var regex = new RegExp('(^| )(' + abbrev + ')($| )', 'gm');
+    // First, find all the references to known abbreviations
+    _.each(_.keys(glossary), function(abbrev){
+      var regex = new RegExp('(^|[^\w>"])(' + abbrev + ')($|[^\w<"])', 'gm');
       if (html.match(regex)){
-        usedGlossary.push(defn);
         html = html
-          .replace(regex, '$1$2<sup>' + usedGlossary.length + '</sup>$3');
+          .replace(regex, '$1$2<sup data-abbrev="'+abbrev+'"></sup>$3');
       }
     });
+    // Second, find all the <sup> tags and correctly apply the reference
+    // numbers in the order that they appear in the text 
+    var referenceNumbers = {};
+    var currentNumber = 0;
+    html = html.replace(/(<sup data-abbrev=")(\w*)(">)(<\/sup>)/gm, function(sup, p1, abbrev, p2, p3){
+      var number;
+      if (referenceNumbers[abbrev]){
+        number = referenceNumbers[abbrev];
+      }else{
+        currentNumber += 1;
+        number = currentNumber;
+        referenceNumbers[abbrev] = number;
+        usedGlossary.push(glossary[abbrev]);
+      }
+      return p1 + abbrev + p2 + number + p3;
+    });
+    // Third, build the glossary definitions list
     if (usedGlossary.length){
-      glossaryHtml += _.map(usedGlossary, function(glossary){
-        return '<li>' + glossary + '</li>';
+      glossaryHtml += _.map(usedGlossary, function(defn){
+        return '<li>' + defn + '</li>';
       }).join('');
     }
     return {html: html, glossary: glossaryHtml};
