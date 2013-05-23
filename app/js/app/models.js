@@ -648,6 +648,8 @@ define([
 
       if (flags.loaded && data.event_type !== 'incident') {
         classes += data['type'] + '-event event';
+      }else{
+        classes += ' incident';
       }
       element.className = classes;
 
