@@ -54,6 +54,7 @@ define([
     inTour = true;
     originalScrollPosition = getScrollY();
     body.addClass('in-tour');
+    grid.grid.hideModals();
     tourContainer.addClass('show');
     positionElements();
     scrollToIntro();
