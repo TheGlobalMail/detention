@@ -300,6 +300,11 @@ define([
           position.push('right');
         }
         _this.$pullQuote.attr('data-position', position.join('-'));
+        if (cell.data.event_type === 'event'){
+          _this.$pullQuote.attr('data-event-type', cell.data.type);
+        }else{
+          _this.$pullQuote.removeAttr('data-event-type');
+        }
         _this.hidePullQuote(PULL_QUOTE_FADE_OUT_DELAY);
         _this.$pullQuote.stop();
         _this.$pullQuote.css({
