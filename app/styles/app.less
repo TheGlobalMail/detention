@@ -227,12 +227,12 @@ body {
 }
 
 #incident-grid.filtering .incident:not(.filter-selected){
-  .cellRGBA(0.05) !important;
+  .cellRGBA(0.02) !important;
   &:hover {
     .cellRGBA(1);
   }
 }
-#incident-grid.filtering .event:not(.filter-selected){
+#incident-grid.filtering .event:not(.filter-selected) {
   .opacity(45);
   &:hover{
     .opacity(100);
@@ -331,7 +331,28 @@ body {
   }
 
 }
-
+#related {
+  border-top: 1px solid rgba(255,255,255,.1);
+  .box-shadow(0 -1px 0 rgba(0,0,0,0.5));
+  text-shadow: 0 -1px 0 black;
+  text-align: center;
+  padding: 3% 0 3%;
+  h2 {
+    .font-size(24);
+  }
+  .btn {
+    margin-left: 20px;
+    .font-size(14);
+    padding: 7px 15px 7px;
+    background-color: @blue;
+    &:hover, &:active, &:focus {
+      background-color: #084975;
+    }
+  }
+  .loading & {
+    display: none;
+  }
+}
 
 #links {
   border-top: 1px solid rgba(255,255,255,.1);
@@ -736,7 +757,8 @@ footer {
         .border-radius(4px);
         min-width: 138px;
         max-height: 315px;
-        overflow:scroll;
+        overflow:hidden;
+        overflow-y:scroll;
         li {
           position: relative;
           .font-size(12);
@@ -1467,6 +1489,12 @@ footer {
         position: relative;
         margin-top: 15px;
         margin-bottom: 3em;
+        a {
+          // Overrides ios auto-linking date styles
+          color:@grayLight;
+          .font-size(14);
+          font-weight: normal;
+        }
       }
       p {
         .font-size(18);

@@ -146,6 +146,12 @@
     }
   }
 
+  #related {
+    h2 {
+      .font-size(18);
+    }
+  }
+
   #modal-container {
     .modal-slideshow {
       .modal {
@@ -304,6 +310,9 @@
               background-position: center 8px;
             }
           }
+          &.filter-selected {
+            margin: 1px;
+          }
           &.event {
             .border-radius(50%);
             width:@gridCellSize + 4px;
@@ -345,6 +354,15 @@
           }
         }
       }
+    }
+  }
+  #related {
+    h2 {
+      .font-size(16);
+    }
+    .btn {
+      margin-left: 10px;
+      .font-size(12);
     }
   }
   .filter-menu {
@@ -485,6 +503,17 @@
           margin-bottom: 6px;
         }
       }
+    }
+  }
+  #related {
+    h2 {
+      display:block;
+    }
+    .btn {
+      margin: 10px auto 0;
+      display:block;
+      .font-size(12);
+      width:240px;
     }
   }
   #links {
@@ -642,10 +671,7 @@
         float:none;
         margin: 0 auto;
         a {
-          // Overrides ios auto-linking date styles
-          color:@grayLight;
           .font-size(11);
-          font-weight: normal;
         }
       }
       .text-container {
