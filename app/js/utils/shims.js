@@ -1,10 +1,11 @@
 define([
   './requestAnimationFrame',
   './classList'
-], function(requestAnimationFrame) {
+], function(requestAnimationFrame, classList) {
   "use strict";
 
   return function() {
     requestAnimationFrame();
+    classList();
   }
 });

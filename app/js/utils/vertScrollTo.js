@@ -1,7 +1,4 @@
-define([
-  'jquery',
-  'lodash'
-], function($, _) {
+(function($) {
   "use strict";
 
   $.scrollTo = function(selector, options) {
@@ -34,9 +31,9 @@ define([
 
     elementToScroll.animate(
       {scrollTop: offsetTop},
-      _.extend(defaultOptions, options)
+      $.extend(defaultOptions, options)
     );
 
     return this;
   };
-});
+})(jQuery);
