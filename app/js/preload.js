@@ -1,65 +1,41 @@
-(function(window, document){
+(function(window, document, $){
   'use strict';
 
-  var body = document.body;
+  var body = $('body');
 
-  var navBar = body.getElementsByClassName('navbar')[0];
-  var introContainer = document.getElementById('intro-container');
+  var navBar = $('.navbar');
+  var introContainer = $('#intro-container');
 
-  var title = introContainer.getElementsByClassName('title')[0];
-  var titleArrow = title.getElementsByClassName('arrow')[0];
-  var titleH1 = title.getElementsByTagName('h1')[0];
-  var titleH2 = title.getElementsByTagName('h2')[0];
+  var title = introContainer.find('.title');
+  var titleArrow = title.find('.arrow');
+  var titleH1 = title.find('h1');
+  var titleH2 = title.find('h2');
 
-  var intro = introContainer.getElementsByClassName('intro')[0];
-  var introArrow = intro.getElementsByClassName('arrow')[0];
-  var introPara = intro.getElementsByTagName('p');
+  var intro = introContainer.find('.intro');
+  var introArrow = intro.find('.arrow');
+  var introPara = intro.find('p');
 
-  var incidents = document.getElementById('incidents');
+  var incidents = $('#incidents');
 
   var scrollAnimationDuration = 500;
 
   var inPreLoad = true;
 
-  function scrollTo(element, to, duration) {
-    var start = element.scrollTop;
-    var change = to - start;
-    var currentTime = 0;
-    var increment = 20;
-
-    var easeInOutQuad = function(t, b, c, d) {
-      t /= d/2;
-      if (t < 1) return c/2*t*t + b;
-      t--;
-      return -c/2 * (t*(t-2) - 1) + b;
-    };
-
-    var animateScroll = function(){
-      currentTime += increment;
-      element.scrollTop = easeInOutQuad(currentTime, start, change, duration);
-      if (currentTime < duration) {
-        setTimeout(animateScroll, increment);
-      }
-    };
-
-    animateScroll();
-  }
-
   function setBindings() {
-    titleArrow.addEventListener('click', function(){
-      var top = intro.offsetTop + navBar.clientHeight;
-      scrollTo(body, top, scrollAnimationDuration);
+    titleArrow.on('click', function(){
+      var top = intro.offset().top;
+      $.scrollTo(top, scrollAnimationDuration);
     });
 
-    introArrow.addEventListener('click', function(){
+    introArrow.on('click', function(){
 
       // Don't do anything unless we've left the loading state
-      if (body.classList.contains('loading')) {
+      if (body.hasClass('loading')) {
         return;
       }
 
-      var top = incidents.offsetTop - 10;
-      scrollTo(body, top, scrollAnimationDuration);
+      var top = incidents.offset().top - 10;
+      $.scrollTo(top, scrollAnimationDuration);
     });
   }
 
@@ -67,28 +43,24 @@
     // Increase the height of the header and intro sections such that
     // they fill the viewport, then vertically center their children.
 
-    var titleHeight = window.innerHeight - navBar.clientHeight - 1;
-    title.style.minHeight = titleHeight + 'px';
+    var titleHeight = window.innerHeight - navBar.outerHeight() - 1;
+    title.css('min-height', titleHeight + 'px');
 
-    var headerHeight = titleH1.clientHeight +
-      titleH2.clientHeight +
-      parseInt(getComputedStyle(titleH2)['margin-top']);
+    var headerHeight = titleH1.height() + titleH2.outerHeight(true);
     var headerOffset = -30;
-    titleH1.style.paddingTop = ((titleHeight - headerHeight) / 2) + headerOffset + 'px';
+    titleH1.css('padding-top', ((titleHeight - headerHeight) / 2) + headerOffset + 'px');
 
     var introHeight = window.innerHeight;
-    intro.style.minHeight = introHeight + 'px';
+    intro.css('min-height', introHeight + 'px');
 
     var childHeight = 0;
     for (var i=0; i < introPara.length; i++) {
-      var para = introPara[i];
-      childHeight += para.clientHeight;
-      childHeight += parseInt(getComputedStyle(para)['margin-bottom']);
+      childHeight += $(introPara[i]).outerHeight(true);
     }
-    childHeight += introArrow.clientHeight;
-    childHeight += parseInt(getComputedStyle(introArrow)['margin-top']);
+    childHeight += introArrow.outerHeight(true);
 
-    introPara[0].style.paddingTop = (introHeight - childHeight) / 2 + 'px';
+    introPara.first()
+      .css('padding-top', (introHeight - childHeight) / 2 + 'px');
 
     if (inPreLoad) {
       setTimeout(endPreLoad, 0);
@@ -98,9 +70,10 @@
   function endPreLoad() {
     // Let the initial content display
     inPreLoad = false;
-    body.classList.remove('pre-load');
+    body.removeClass('pre-load');
   }
 
   setBindings();
   scaleContainers();
-})(window, document);
+
+})(window, document, jQuery);

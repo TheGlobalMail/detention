@@ -11,8 +11,7 @@ define([
   './filters',
   './footer',
   'dropdown',
-  'easing',
-  './../utils/vertScrollTo'
+  'easing'
 ], function(flags, events, handlers, grid, tour) {
   'use strict';
 
