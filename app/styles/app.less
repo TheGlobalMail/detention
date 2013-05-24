@@ -550,6 +550,7 @@ footer {
     border: 1px solid rgba(255,255,255,0.2);
     blockquote {
       color:@grayDarker;
+      margin: 0 0 10px;
     }
     em {
       color:rgba(0,0,0,0.6);
@@ -603,6 +604,11 @@ footer {
     }
     &[data-position=bottom-left]:after {
       background-position: 0 -546px;
+    }
+  }
+  &[data-event-type="opening"] {
+    blockquote {
+      margin-top: 10px;
     }
   }
 }
