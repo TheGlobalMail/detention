@@ -170,14 +170,29 @@ define([
     flagIntroNext.css('top', offsetDifference.top);
   }
 
-  function getOffsetDifference(originElement, toElement) {
-    // Find the positional difference between the nearest cell and the image
-    var toElementOffset = toElement.offset();
+  function getOffsetDifference(originElement, nearestCell) {
+    // Find the positional difference between a cell and the nearest cell
+    var nearestCellHeight = nearestCell.outerHeight(true);
+    var nearestCellWidth = nearestCell.outerWidth(true);
+    var toElementOffset = nearestCell.offset();
     var originElementOffset = originElement.offset();
-    return {
+    var difference = {
       top: toElementOffset.top - originElementOffset.top,
       left: toElementOffset.left - originElementOffset.left
     };
+    if (
+      difference.top > nearestCellHeight ||
+      difference.top < -nearestCellHeight
+    ) {
+      difference.top = 0;
+    }
+    if (
+      difference.left > nearestCellWidth ||
+      difference.left < -nearestCellWidth
+    ) {
+      difference.left = 0;
+    }
+    return difference;
   }
 
   function getNearestCell(element) {
