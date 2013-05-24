@@ -284,9 +284,9 @@ define([
           position.push('top');
         }else{
           if (window.innerWidth <= 670){
-            offset.top = pos.top - height - 45;
+            offset.top = pos.top - height - 50;
           }else{
-            offset.top = pos.top - height - 75;
+            offset.top = pos.top - height - 80;
           }
           position.push('bottom');
         }
