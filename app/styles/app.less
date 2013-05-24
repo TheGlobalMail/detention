@@ -331,7 +331,28 @@ body {
   }
 
 }
-
+#related {
+  border-top: 1px solid rgba(255,255,255,.1);
+  .box-shadow(0 -1px 0 rgba(0,0,0,0.5));
+  text-shadow: 0 -1px 0 black;
+  text-align: center;
+  padding: 3% 0 3%;
+  h2 {
+    .font-size(24);
+  }
+  .btn {
+    margin-left: 20px;
+    .font-size(14);
+    padding: 7px 15px 7px;
+    background-color: @blue;
+    &:hover, &:active, &:focus {
+      background-color: #084975;
+    }
+  }
+  .loading & {
+    display: none;
+  }
+}
 
 #links {
   border-top: 1px solid rgba(255,255,255,.1);
