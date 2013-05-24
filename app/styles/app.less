@@ -227,9 +227,15 @@ body {
   background-color: rgba(255, 255, 255, @opacity);
 }
 
-#incident-grid.filtering .cell{
-  .opacity(45);
+#incident-grid.filtering .incident:not(.filter-selected){
+  .cellRGBA(0.05) !important;
   &:hover {
+    .cellRGBA(1);
+  }
+}
+#incident-grid.filtering .event:not(.filter-selected){
+  .opacity(45);
+  &:hover{
     .opacity(100);
   }
 }
@@ -241,7 +247,6 @@ body {
   float: left;
   .cellRGBA(0.05);
   &.filter-selected{
-    .opacity(100) !important;
     border: 2px solid white;
     margin: 2px;
     .border-radius(4px);

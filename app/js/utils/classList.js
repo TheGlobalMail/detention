@@ -11,7 +11,7 @@
 
 /*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js*/
 
-define(function() {
+(function() {
   return function() {
     if (typeof document !== "undefined" && !("classList" in document.createElement("a"))) {
 
@@ -177,4 +177,4 @@ define(function() {
 
     }
   }
-});
+})();
