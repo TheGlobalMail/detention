@@ -91326,7 +91326,7 @@ define({
       "location": null,
       "occurred_on": "2009-10-15",
       "summary": "78 asylum seekers rescued and apprehended by the crew of Oceanic Viking ",
-      "description": "Australian Customs vessel the Oceanic Viking rescues 78 Sri Lankan asylum seekers in the Indonesia Pacific search and rescue zone and tow them to safety. A stand-off ensues when the asylum seekers refuse to disembark.They finally do so one month later with the Australian promise of speedy processing and settlement. Starting in 2009 the number of boat arrivals rose dramatically following several years of low arrival numbers.\n\n",
+      "description": "Australian Customs vessel Oceanic Viking rescues 78 Sri Lankan asylum seekers in the Indonesia Pacific search and rescue zone and tows them to safety. A stand-off ensues when the asylum seekers refuse to disembark. They finally do so one month later with the Australian promise of speedy processing and settlement. Starting in 2009 the number of boat arrivals begins to rise dramatically, following several years of few boats with asylum seekers reaching Australian waters.\n\n",
       "related_link": null,
       "image_name": "oceanic-viking.jpg",
       "photo_credits": "AP Photo/Binsar Bakkara",
@@ -91383,7 +91383,7 @@ define({
       "location": null,
       "occurred_on": "2010-04-09",
       "summary": " Processing suspended",
-      "description": "Processing of asylum applications from Sri Lanka and Afghanistan is suspended, for three and six month respectively. A backlog of applications is created.  \n\n",
+      "description": "Processing of asylum applications from Sri Lanka and Afghanistan is suspended, for three and six months respectively. A backlog of applications is created.  \n\n",
       "related_link": null,
       "image_name": null,
       "photo_credits": null,
@@ -91509,7 +91509,7 @@ define({
     },
     "3080": {
       "id": "3080",
-      "type": "incident",
+      "type": "media",
       "incident": "1-52C88P",
       "multimedia": null,
       "incident_category": null,
@@ -91547,7 +91547,7 @@ define({
     },
     "3270": {
       "id": "3270",
-      "type": "NEEDS_A_CATEGORY",
+      "type": "media",
       "incident": null,
       "multimedia": null,
       "incident_category": null,
@@ -91585,7 +91585,7 @@ define({
     },
     "176839": {
       "id": "176839",
-      "type": "incident",
+      "type": "media",
       "incident": "1-6E6N4T/1-6CWZNJ",
       "multimedia": null,
       "incident_category": null,
@@ -91604,7 +91604,7 @@ define({
     },
     "28462": {
       "id": "28462",
-      "type": "incident",
+      "type": "media",
       "incident": "1-6UCGL4",
       "multimedia": null,
       "incident_category": null,
@@ -91623,7 +91623,7 @@ define({
     },
     "105868": {
       "id": "105868",
-      "type": "incident",
+      "type": "media",
       "incident": "INCIDENT 1-6VW2KI",
       "multimedia": null,
       "incident_category": null,
@@ -91642,7 +91642,7 @@ define({
     },
     "1191": {
       "id": "1191",
-      "type": "incident",
+      "type": "media",
       "incident": null,
       "multimedia": null,
       "incident_category": null,
