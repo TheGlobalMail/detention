@@ -71,8 +71,12 @@ define([
       modalContainer.removeClass("show");
 
       _this.currentModal.element.hide();
-      _this.nextModal.element.hide();
-      _this.prevModal.element.hide();
+      if (_this.nextModal) {
+        _this.nextModal.element.hide();
+      }
+      if (_this.prevModal) {
+        _this.prevModal.element.hide();
+      }
 
       _this.displayingModal = false;
     }
@@ -338,7 +342,9 @@ define([
     };
 
     _this.hideModals = function() {
-      _this.currentModal.element.trigger("hide");
+      if (_this.currentModal) {
+        _this.currentModal.element.trigger('hide');
+      }
     };
 
     // Setup a listener on the vent to hide the modal.
