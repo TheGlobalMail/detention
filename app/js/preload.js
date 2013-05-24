@@ -47,7 +47,8 @@
     title.css('min-height', titleHeight + 'px');
 
     var headerHeight = titleH1.height() + titleH2.outerHeight(true);
-    titleH1.css('padding-top', ((titleHeight - headerHeight) / 2) + 'px');
+    var headerOffset = -30;
+    titleH1.css('padding-top', ((titleHeight - headerHeight) / 2) + headerOffset + 'px');
 
     var introHeight = window.innerHeight;
     intro.css('min-height', introHeight + 'px');
