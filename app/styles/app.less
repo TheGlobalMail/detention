@@ -464,6 +464,7 @@ footer {
   width:400px;
   line-height: 1.2;
   .box-shadow(0 2px 3px black);
+  z-index: 12;
   &#main-pullquote {
     display: none;
   }
@@ -505,6 +506,9 @@ footer {
     border-left: 1px solid @gray;
     margin: 0 0 0 10px;
     padding: 0 0 0 10px;
+    &.event {
+      display:none;
+    }
   }
   &:after {
     content: '';
@@ -538,6 +542,68 @@ footer {
     left: initial;
     margin-left: 0;
     right: 20px;
+  }
+  &[data-event-type="media"],
+  &[data-event-type="opening"],
+  &[data-event-type="boat"] {
+    background: @event-yellow;
+    border: 1px solid rgba(255,255,255,0.2);
+    blockquote {
+      color:@grayDarker;
+    }
+    em {
+      color:rgba(0,0,0,0.6);
+    }
+    span {
+      color:@grayDarker;
+      &.event {
+        display:inline;
+      }
+      &.incident {
+        display:none;
+      }
+    }
+    &[data-position=top-right]:after {
+      background-position: 0 -1389px;
+      left: 23px;
+    }
+    &[data-position=top-left]:after {
+      background-position: 0 -1389px;
+      right: 17px;
+    }
+    &[data-position=bottom-right]:after {
+      background-position: 0 -1146px;
+      left: 23px;
+    }
+    &[data-position=bottom-left]:after {
+      background-position: 0 -1146px;
+      right: 17px;
+    }
+  }
+  &[data-event-type="boat"] {
+    background: @blue;
+    blockquote {
+      color:white;
+    }
+    em {
+      color:rgba(255,255,255,0.8);
+    }
+    span {
+      color:white;
+      border-color: white;
+    }
+    &[data-position=top-right]:after {
+      background-position: 0 -789px;
+    }
+    &[data-position=top-left]:after {
+      background-position: 0 -789px;
+    }
+    &[data-position=bottom-right]:after {
+      background-position: 0 -546px;
+    }
+    &[data-position=bottom-left]:after {
+      background-position: 0 -546px;
+    }
   }
 }
 
