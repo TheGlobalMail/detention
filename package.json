@@ -29,7 +29,8 @@
     "async": "~0.1.22",
     "tap": "~0.4.0",
     "node-promise": "~0.5.6",
-    "node-xlsx": "git://github.com/mgcrea/node-xlsx.git"
+    "node-xlsx": "git://github.com/mgcrea/node-xlsx.git",
+    "grunt-devcode": "0.0.4b"
   },
   "scripts": {
     "start": "grunt build:dev && node server.js",
@@ -41,6 +42,6 @@
   },
   "engines": {
     "node": "0.8.x",
-    "npm":  "1.1.x"
+    "npm": "1.1.x"
   }
 }

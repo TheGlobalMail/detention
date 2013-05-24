@@ -78,7 +78,37 @@ module.exports = function(grunt) {
           '{.tmp,<%= project.app %>}/js/{,/*,**/,*/}*.js',
           '<%= project.app %>/images/{,*/}*.{png,jpg,jpeg,svg,webp}'
         ],
-        tasks: ['livereload']
+        tasks: ['devcode:server', 'livereload']
+      }
+    },
+
+    devcode :
+    {
+      options :
+      {
+        html: true,        // html files parsing?
+        js: false,          // javascript files parsing?
+        css: false,         // css files parsing?
+        clean: true,       // removes devcode comments even if code was not removed
+        block: {
+          open: 'devcode', // with this string we open a block of code
+          close: 'endcode' // with this string we close a block of code
+        },
+        dest: 'dist'       // default destination which overwrittes environment variable
+      },
+      server : {           // settings for task used with 'devcode:server'
+        options: {
+          source: '<%= project.app %>/',
+          dest: '.tmp/',
+          env: 'development'
+        },
+      },
+      dist : {             // settings for task used with 'devcode:dist'
+        options: {
+          source: '<%= project.dist %>/',
+          dest: '<%= project.dist %>/',
+          env: 'production'
+        }
       }
     },
 
@@ -317,6 +347,7 @@ module.exports = function(grunt) {
 
     grunt.task.run([
       'clean:server',
+      'devcode:server',
       'jshint:with_overrides',
       'less:server',
       'livereload-start',
@@ -340,7 +371,8 @@ module.exports = function(grunt) {
       'copy:dist',
       'uglify',
       'rev',
-      'usemin'
+      'usemin',
+      'devcode:dist'
     ];
 
     // allow building with different CDN URLs
