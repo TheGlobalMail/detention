@@ -309,6 +309,7 @@
             width:@gridCellSize + 4px;
             height:@gridCellSize + 4px;
             margin: 1px;
+            background-size: 24px auto;
             &:hover {
               .border-radius(50%);
               width:@gridCellSize + 6px;
@@ -325,13 +326,13 @@
           &.media-event {
             background-position: center -16px;
             &:hover {
-              background-position: center -18px;
+              background-position: center -15px;
             }
           }
           &.opening-event {
             background-position: center -47px;
             &:hover {
-              background-position: center -51px;
+              background-position: center -47px;
             }
           }
           &[data-being-shown]{
@@ -486,6 +487,17 @@
       }
     }
   }
+  #links {
+    .errata {
+      width:auto;
+    }
+    h4 {
+      .font-size(12);
+    }
+    p {
+      .font-size(12);
+    }
+  }
   footer {
     padding: 20px 20px 30px;
     .top a {
@@ -499,6 +511,11 @@
       li {
         float: none;
       }
+    }
+    &:before {
+      height:70px;
+      background-size: auto 70px;
+      top: -70px;
     }
   }
   .pinned {

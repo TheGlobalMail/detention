@@ -481,6 +481,9 @@ define([
           .attr('href', _this.cell.uri())
           .toggle(_this.cell.hasDetailedReport());
 
+        _this.element.find('a.canonical')
+          .attr('href', 'http://detentionlogs.com.au/data/incidents/incident_number/' + _this.cell.data.id);
+
         incidentDetails.show();
         eventDetails.hide();
 
