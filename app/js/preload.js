@@ -54,9 +54,9 @@
     intro.css('min-height', introHeight + 'px');
 
     var childHeight = 0;
-    for (var i=0; i < introPara.length; i++) {
-      childHeight += $(introPara[i]).outerHeight(true);
-    }
+    introPara.each(function() {
+      childHeight += $(this).outerHeight(true);
+    });
     childHeight += introArrow.outerHeight(true);
 
     introPara.first()
