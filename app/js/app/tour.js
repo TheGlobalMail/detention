@@ -71,8 +71,6 @@ define([
 
   function bindEscapeKey() {
     $(document).on('keyup.escape-modal', function(e) {
-      // TODO: remove this
-      console && console.log && console.log(e, e.keycode);
       if (e.keyCode === 27) {
         endTour();
       }
