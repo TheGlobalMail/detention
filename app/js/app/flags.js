@@ -32,7 +32,7 @@ define([
 
   // Load flags data from API. Returns Deferred object
   Flags.load = function(){
-    return $.ajax(api + '/api/flagged')
+    return $.getJSON(api + '/api/flagged?callback=?')
       .done(function(data){
         Flags.loaded = true;
         unnormalisedData = data.flags;
@@ -98,7 +98,7 @@ define([
     Flags.trigger('change', _.keys(Flags.flagged).length, notMadeByUser);
     Flags.trigger('flag', id);
     if (!notMadeByUser){
-      return $.post(api + '/api/flag', {id: id})
+      return $.getJSON(api + '/api/flag?callback=?', {id: id})
         .done(function(data){
           Flags.flaggedByUser[id] = data.flag;
           Flags.flagged[id] = data.flag;
@@ -116,7 +116,7 @@ define([
     if (Flags.flaggedByUser[id] && Flags.flaggedByUser[id] !== 'pending'){
       unnormalisedData[id] = unnormalisedData[id] - 1;
       delete Flags.flaggedByUser[id];
-      defer = $.post(api + '/api/unflag', {id: id, flag: flag})
+      defer = $.getJSON(api + '/api/unflag?callback=?', {id: id, flag: flag})
         .done(function(data){
           Flags.data[id] = data.flagged;
           Flags.recalculateData();
@@ -151,7 +151,7 @@ define([
       Flags.flag(id, 'shared');
     });
   };
-  
+
   // Flag incidents that were shared
   Flags.numberOfTimesFlagged = function(id){
     return unnormalisedData[id] || 0;
