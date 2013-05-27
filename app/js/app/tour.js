@@ -56,6 +56,7 @@ define([
     body.addClass('in-tour');
     grid.grid.hideModals();
     tourContainer.addClass('show');
+    bindEscapeKey();
     positionElements();
     scrollToIntro();
   }
@@ -65,6 +66,15 @@ define([
     body.removeClass('in-tour');
     tourContainer.removeClass('show');
     $.scrollTo(originalScrollPosition, defaultAnimation);
+    $(document).unbind('keyup.escape-modal');
+  }
+
+  function bindEscapeKey() {
+    $(document).on('keyup.escape-modal', function(e) {
+      if (e.keyCode === 27) {
+        endTour();
+      }
+    });
   }
 
   function positionElements() {
