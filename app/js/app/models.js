@@ -353,13 +353,23 @@ define([
       }
     });
 
+    _this.onKeyUp = function(event) {
+      if (_this.displayingModal) {
+        if (event.keyCode === 39 && _this.hasNextCell()) {
+          _this.displayNextModal();
+        } else if (event.keyCode === 37 && _this.hasPrevCell()) {
+          _this.displayPrevModal();
+        }
+      }
+    };
+
     _this.setBindings = function() {
       $(window).resize(_this.windowOnResize);
 
       var incidents = $('#incidents');
-      if (Modernizr.touch){
+      if (Modernizr.touch) {
         incidents.on('click', '.cell', _this.onCellTouch);
-      }else{
+      } else {
         incidents.on('click', '.cell', _this.cellOnClick);
         incidents.on('mouseover', '.cell', _this.showPullQuote);
         incidents.on('mouseout', '.cell', _this.hidePullQuote);
@@ -372,6 +382,8 @@ define([
       }
 
       modalBackdrop.click(_this.hideModals);
+
+      $(document).on('keyup', _this.onKeyUp);
 
       flags.on('reload change', function() {
         _.each(_this.cells, function(cell) {
