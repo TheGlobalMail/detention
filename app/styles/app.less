@@ -6,6 +6,30 @@ body {
   clear: both;
 }
 
+// Reused Mixins
+.animation (...) {
+  -webkit-animation: @arguments;
+  -moz-animation: @arguments;
+  -o-animation: @arguments;
+  animation: @arguments;
+}
+
+.transform(@string){
+  -webkit-transform: @string;
+  -moz-transform:    @string;
+  -ms-transform:     @string;
+  -o-transform:      @string;
+}
+
+.rotation-frames() {
+  0% {
+    .transform(rotate(0deg));
+  }
+  100% {
+    .transform(rotate(-360deg));
+  }
+}
+
 @event-yellow:#fff8b7;
 
 // Overwrite TGM Bootstrap nav styles
@@ -111,15 +135,12 @@ body {
     margin-left: -22px;
     background: url(../images/loader.svg) center center no-repeat transparent;
     background-size: 100% auto;
-    -webkit-animation: spin 2s infinite linear;
-    @-webkit-keyframes spin {
-      0% {
-        -webkit-transform: rotate(0deg);
-      }
-      100% {
-        -webkit-transform: rotate(-360deg);
-      };
-    }
+    .animation(spin 2s infinite linear);
+    @-webkit-keyframes spin {.rotation-frames;}
+    @-moz-keyframes spin {.rotation-frames}
+    @-ms-keyframes spin {.rotation-frames}
+    @-o-keyframes spin {.rotation-frames}
+    @keyframes spin {.rotation-frames}
   }
 }
 
@@ -1641,15 +1662,12 @@ footer {
   height: 100%;
   background: url(../images/loader.svg) center center no-repeat transparent;
   background-size: 60px auto;
-  -webkit-animation: spin 2s infinite linear;
-  @-webkit-keyframes spin {
-    0% {
-      -webkit-transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(-360deg);
-    };
-  }
+  .animation(spin 2s infinite linear);
+  @-webkit-keyframes spin {.rotation-frames;}
+  @-moz-keyframes spin {.rotation-frames}
+  @-ms-keyframes spin {.rotation-frames}
+  @-o-keyframes spin {.rotation-frames}
+  @keyframes spin {.rotation-frames}
   .pre-load & {
     display: block;
   }
