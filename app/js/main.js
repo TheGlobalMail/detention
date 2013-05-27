@@ -3,7 +3,6 @@ requirejs.config({
     jquery: './utils/jquery',
     scrollto: '../components/jquery.scrollTo/jquery.scrollTo',
     easing: '../components/jquery-easing/jquery.easing',
-    touch: '../components/jqueryui-touch-punch/jquery.ui.touch-punch',
     xdr: './utils/xdr',
     lodash: '../components/lodash/lodash',
     backbone: '../components/backbone/backbone',
@@ -14,7 +13,6 @@ requirejs.config({
   shim: {
     backbone: { deps: ['jquery', 'lodash'] },
     xdr: { deps: ['jquery'] },
-    touch: { deps: ['jquery'] },
     tooltips: { deps: ['jquery'] },
     easing: { deps: ['jquery'] },
     scrollto: { deps: ['jquery'] }

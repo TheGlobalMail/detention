@@ -5,7 +5,6 @@ define([
   './glossary',
   'moment',
   // dependencies
-  'touch',
   'backbone',
   './../../components/tgm-bootstrap/js/bootstrap-modal'
 ], function($, _, flags, glossary, moment) {
