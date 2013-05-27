@@ -44,9 +44,12 @@ define([
     }else{
       text = flaggedTweet.replace(/x/, flagged);
     }
-    var textWithLink = text + ' ' + window.location;
     var twitterHref = $twitterShare.attr('href');
-    $twitterShare.attr('href', twitterHref.replace(/&text=.*$/, '') + '&text=' + encodeURIComponent(textWithLink));
+    var textWithLink = text + ' ' + window.location;
+    twitterHref = twitterHref.replace(/&text=.*$/, '');
+    twitterHref += '&text=' + encodeURIComponent(text);
+    twitterHref += '&url=' + encodeURIComponent(window.location);
+    $twitterShare.attr('href', twitterHref);
     var facebookHref = $facebookShare.attr('href');
     facebookHref = facebookHref.replace(/p\[summary\]=.*&/i, 'p[summary]=' + encodeURIComponent(text) + '&');
     facebookHref = facebookHref.replace(/p\[url\]=.*$/i, 'p[url]=' + encodeURIComponent(window.location));
