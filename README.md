@@ -35,19 +35,6 @@ Notes:
 * You can purge a file via CyberDuck or via the Rackspace interface. File
 purging is not instant.
 
-## Setting up Fast.ly
-
-Fastly is only required if you need support for push-state urls. If not, skip
-this step.
-
-This process is difficult to describe. Use the `talkingheads` project as an
-example. The push-state relevant part is in the `Content` section and the
-`catch all` request configuration.
-
-The backend url should be the `-assets` domain pointing to the CDN.
-
-Create a CNAME entry in AWS Route53 for the site pointing to `prod.a.fastly.com`.
-
 ## Development server and building
 
 The build system is made on Grunt v0.4+
