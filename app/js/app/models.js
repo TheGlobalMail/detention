@@ -17,7 +17,7 @@ define([
   var rootModal = $('.modal');
 
   var MAX_WORDS_IN_PULLQUOTE = 14;
-  var PULL_QUOTE_FADE_OUT_DELAY = 1500;
+  var PULL_QUOTE_FADE_OUT_DELAY = 8000;
   var PULL_QUOTE_FADE_OUT_DURATION = 2500;
 
   var redactedRegex = /(client *|clien |1_|1-)*s. *I*47F *\(1\)*|REDACTED_CLIENT/gi;
