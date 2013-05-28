@@ -50,9 +50,9 @@ define([
   var flagIntroImage = flagIntroText.find('img');
   var flagIntroScrollTo;
 
-  function startTour() {
+  function startTour(scrollPositionOverride) {
     inTour = true;
-    originalScrollPosition = getScrollY();
+    originalScrollPosition = scrollPositionOverride || getScrollY();
     body.addClass('in-tour');
     grid.grid.hideModals();
     tourContainer.addClass('show');
@@ -318,6 +318,11 @@ define([
   }, 100);
 
   function setBindings() {
+    if (window.location.href.indexOf('?tour') !== -1) {
+      $('#intro-container .intro .arrow').on('click', function() {
+        startTour(incidentContainer.offset().top)
+      });
+    }
     startTourElement.on('click', startTour);
     exit.on('click', endTour);
     introNext.on('click', scrollToFirstExample);
