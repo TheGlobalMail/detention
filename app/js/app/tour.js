@@ -21,6 +21,7 @@ define([
   var incidentContainer = $('#incidents');
   var months;
   var startTourElement = $('.start-tour');
+  var introArrow = $('.intro .arrow');
 
   var tourContainer = $('.tour-container');
   var backdrop = tourContainer.find('.backdrop');
@@ -330,8 +331,9 @@ define([
   }, 100);
 
   function setBindings() {
-    if (window.location.href.indexOf('?tour') !== -1) {
-      $('#intro-container .intro .arrow').on('click', function() {
+    if (!localStorage.getItem('initialTourRun')) {
+      introArrow.one('click', function() {
+        localStorage.setItem('initialTourRun', 'passed');
         startTour(incidentContainer.offset().top)
       });
     }

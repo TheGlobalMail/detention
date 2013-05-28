@@ -27,18 +27,19 @@
       $.scrollTo(top, scrollAnimationDuration);
     });
 
-    if (window.location.href.indexOf('?tour') === -1) {
-      introArrow.on('click', function(){
+    introArrow.on('click', function(){
+      if (!localStorage.getItem('initialTourRun')) {
+        return;
+      }
 
-        // Don't do anything unless we've left the loading state
-        if (body.hasClass('loading')) {
-          return;
-        }
+      // Don't do anything unless we've left the loading state
+      if (body.hasClass('loading')) {
+        return;
+      }
 
-        var top = incidents.offset().top - 10;
-        $.scrollTo(top, scrollAnimationDuration);
-      });
-    }
+      var top = incidents.offset().top - 10;
+      $.scrollTo(top, scrollAnimationDuration);
+    });
   }
 
   function scaleContainers() {
