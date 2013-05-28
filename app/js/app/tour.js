@@ -52,10 +52,17 @@ define([
 
   function startTour(scrollPositionOverride) {
     inTour = true;
-    originalScrollPosition = scrollPositionOverride || getScrollY();
+    if (typeof scrollPositionOverride === 'number') {
+      originalScrollPosition = scrollPositionOverride;
+    } else {
+      originalScrollPosition = getScrollY();
+    }
     body.addClass('in-tour');
     grid.grid.hideModals();
-    tourContainer.addClass('show');
+    tourContainer.addClass('display');
+    _.defer(function() {
+      tourContainer.addClass('show');
+    });
     bindEscapeKey();
     positionElements();
     scrollToIntro();
@@ -64,7 +71,12 @@ define([
   function endTour() {
     inTour = false;
     body.removeClass('in-tour');
-    tourContainer.removeClass('show');
+    tourContainer.addClass('hide');
+    _.defer(function() {
+      _.delay(function() {
+        tourContainer.removeClass('display show hide');
+      }, 750);
+    });
     $.scrollTo(originalScrollPosition, defaultAnimation);
     unbindEscapeKey();
   }

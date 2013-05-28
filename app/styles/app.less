@@ -152,9 +152,6 @@ body {
   background-attachment: fixed;
   overflow: hidden;
   text-shadow: 0 -1px 0 black;
-  .in-tour & {
-    visibility: hidden;
-  }
   &:after {
     content:'';
     display: block;
@@ -1485,11 +1482,16 @@ footer {
   width: 100%;
   height: 100%;
   z-index: 500;
-  &.show {
+  opacity: 0;
+  .transition(opacity 0.75s ease-in);
+  &.display {
     display: block;
-    .backdrop {
-      .opacity(80);
-    }
+  }
+  &.show {
+    opacity: 1;
+  }
+  &.hide {
+    opacity: 0;
   }
   a {
     .font-size(12);
@@ -1632,9 +1634,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #121414;
-    .opacity(0);
-    .transition(opacity 0.75s ease-in-out);
+    background: rgba(18, 20, 20, 0.8);
     z-index: 2;
   }
   .close {
