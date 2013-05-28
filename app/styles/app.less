@@ -1015,8 +1015,9 @@ footer {
         text-transform: uppercase;
         font-weight: bold;
         .border-radius(4px);
-        background-color: #3c3f3f;
+        background-color: @blue;
         .box-shadow(0 1px 0 black);
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
         margin: 4px 0 0;
         .font-size(12);
         padding: 5px 12px;
@@ -1174,13 +1175,6 @@ footer {
             border-top: 1px solid rgba(0,0,0,0.05);
             border-bottom: 1px solid rgba(255,255,255,0.3);
             clear:both;
-          }
-          &.adopt {
-            display:none;
-            background-color:#747368;
-            border: none;
-            color:#d5d3bf;
-            text-shadow:0 -1px 0 #1f2222;
           }
         }
       }
