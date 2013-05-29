@@ -23,6 +23,7 @@ define([
   var startTourElement = $('.start-tour');
   var introArrow = $('.intro .arrow');
   var sharingPanel = $('#sharing-panel');
+  var pullQuote = $('#main-pullquote');
 
   var tourContainer = $('.tour-container');
   var backdrop = tourContainer.find('.backdrop');
@@ -60,6 +61,7 @@ define([
       originalScrollPosition = getScrollY();
     }
     body.addClass('in-tour');
+    pullQuote.hide();
     grid.grid.hideModals();
     tourContainer.addClass('display');
     _.defer(function() {
