@@ -177,7 +177,13 @@ define([
       top: flagIntroTextTop,
       left: (window.innerWidth - flagIntroText.width()) / 2
     });
-    var offsetDifference = getOffsetDifference(flagIntroImage, getNearestCell(flagIntroImage));
+    var nearestCell = getNearestCell(flagIntroImage)
+    var offsetDifference;
+    if (nearestCell) {
+      offsetDifference = getOffsetDifference(flagIntroImage, nearestCell);
+    } else {
+      offsetDifference = {top: 0, left: 0};
+    }
     flagIntroScrollTo += offsetDifference.top;
     var flagIntroBackTop = flagIntroScrollTo + flagIntroBack.outerHeight();
     var flagIntroBackBottom = flagIntroBackTop + flagIntroBack.outerHeight();
