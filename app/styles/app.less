@@ -780,14 +780,14 @@ footer {
         .border-radius(4px);
         min-width: 138px;
         max-height: 315px;
-        overflow:hidden;
-        overflow-y:scroll;
+        overflow: hidden;
+        overflow-y: auto;
         li {
           position: relative;
           .font-size(12);
           text-transform: uppercase;
           line-height: 1;
-          padding: 8px 12px;
+          padding: 0;
           border-bottom:1px solid #232626;
           .transition(background 200ms ease-in);
           &.location {
@@ -804,7 +804,7 @@ footer {
             }
           }
           a {
-            padding:0;
+            padding: 8px 12px;
             color:white;
             .filter-count {
               font-style: italic;
