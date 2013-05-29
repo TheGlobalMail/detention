@@ -40,6 +40,31 @@
       var top = incidents.offset().top - 10;
       $.scrollTo(top, scrollAnimationDuration);
     });
+
+    $(window).resize(
+      debouncer(scaleContainers, 100)
+    );
+  }
+
+  function debouncer(func, timeout) {
+	  // Delays calling `func` until `timeout` has expired,
+		// successive calls reset timeout and enforce the wait
+
+    timeout = timeout || 200;
+    var timeoutID = null;
+
+    return function() {
+      var scope = this;
+      var args = arguments;
+
+      clearTimeout(timeoutID);
+      timeoutID = setTimeout(function() {
+        func.apply(
+          scope,
+          Array.prototype.slice.call(args)
+        );
+      }, timeout);
+    };
   }
 
   function scaleContainers() {
