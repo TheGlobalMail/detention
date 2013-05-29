@@ -24,7 +24,8 @@ requirejs([
   'jquery',
   'xdr',
   './utils/shims',
-  './app/main'
+  './app/main',
+  'touchSwipe'
 ],
 function ($, xdr, shims, app) {
   window.XDR_DEBUG = true;

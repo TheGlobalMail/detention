@@ -6,8 +6,7 @@ define([
   'moment',
   // dependencies
   'backbone',
-  './../../components/tgm-bootstrap/js/bootstrap-modal',
-  'touchSwipe'
+  './../../components/tgm-bootstrap/js/bootstrap-modal'
 ], function($, _, flags, glossary, moment) {
   "use strict";
 
@@ -393,9 +392,11 @@ define([
       // Modal key, mouse and touch events
       modalBackdrop.click(_this.hideModals);
       $(document).on('keyup', _this.onKeyUp);
-      modalContainer.swipe({
-        swipe: _this.onSwipe
-      });
+      if ($('body').hasClass('touch')) {
+        modalContainer.swipe({
+          swipe: _this.onSwipe
+        });
+      }
 
       flags.on('reload change', function() {
         _.each(_this.cells, function(cell) {
