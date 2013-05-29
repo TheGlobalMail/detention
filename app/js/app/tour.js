@@ -22,6 +22,7 @@ define([
   var months;
   var startTourElement = $('.start-tour');
   var introArrow = $('.intro .arrow');
+  var sharingPanel = $('#sharing-panel');
 
   var tourContainer = $('.tour-container');
   var backdrop = tourContainer.find('.backdrop');
@@ -67,6 +68,7 @@ define([
     bindEscapeKey();
     positionElements();
     scrollToIntro();
+    sharingPanel.attr('data-info-dismissed', 'true');
   }
 
   function endTour() {
