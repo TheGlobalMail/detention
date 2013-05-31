@@ -390,7 +390,7 @@ define([
       }
 
       // Modal key, mouse and touch events
-      modalBackdrop.click(_this.hideModals);
+      modalBackdrop.on('click', _this.hideModals);
       $(document).on('keyup', _this.onKeyUp);
       if ($('html').hasClass('touch')) {
         modalContainer.swipe({
