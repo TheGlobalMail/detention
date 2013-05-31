@@ -9,7 +9,8 @@ define([
   var Flags = _.extend({}, Backbone.Events);
 
   // API url
-  var api = 'http://detention-api.herokuapp.com';
+  var api = window.location.href.match(/behindthewire/i) ?
+    'http://detention-api.herokuapp.com' : 'http://dev-detention-api.herokuapp.com';
   //var api = 'http://localhost:8080';
 
   // The current unnormalised flagged data

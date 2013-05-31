@@ -511,7 +511,7 @@ define([
           .attr('href', _this.cell.uri())
           .toggle(_this.cell.hasDetailedReport());
         _this.element.find('.adopt')
-          .attr('href', _this.cell.uri())
+          .attr('href', _this.cell.uri() + '/adopt')
           .toggle(!_this.cell.hasDetailedReport());
 
         _this.element.find('a.canonical')
