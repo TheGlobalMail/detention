@@ -28,34 +28,53 @@ define([
   $('#clear-all-btn').on('click', flags.clearAll);
 
   // Update the text and urls for the tweet and facebook buttons on change
-  var defaultTweet = 'Incidents in Australian detention centres that people should know about';
-  var flaggedTweet = 'View these x incidents in Australian detention centres that I think people should know about';
+  // View these 2 incidents in Australian detention centres, and explore more LINK #detentionlogs via @TheGlobalMail
+  var defaultTweet = 'View incidents in Australian detention centres, and explore more';
+  var flaggedTweet = 'View these x incidents in Australian detention centres, and explore more';
+  var facebookShares = {
+    default:
+      'Incidents in Australian detention centres, ' +
+      'from a dump of detention logs obtained under FOI. ' +
+      'Explore the logs at http://behindthewire.theglobalmail.org',
+    singular:
+      'This incident in an Australian detention centre is worth flagging, ' +
+      'from a dump of detention logs obtained under FOI.' +
+      'Explore the logs at http://behindthewire.theglobalmail.org',
+    plural:
+      'Here are __count__ incidents in Australian detention centres worth flagging, ' +
+      'from a dump of detention logs obtained under FOI. ' +
+      'Explore the logs at http://behindthewire.theglobalmail.org'
+  };
   var $twitterShare = $('#sharing-panel li.twitter a');
   var $facebookShare = $('#sharing-panel li.facebook a');
   var $emailShare = $('#sharing-panel li.email a');
 
   router.on('change', function(){
-    var text;
+    var twitterText;
+    var facebookText;
     var flagged = flags.flaggedIds().length;
     if (!flagged){
-      text = defaultTweet;
+      twitterText = defaultTweet;
+      facebookText = facebookShares.default;
     }else if (flagged === 1){
-      text = flaggedTweet.replace(/these x incidents/, 'an incident');
+      twitterText = flaggedTweet.replace(/these x incidents/, 'an incident');
+      facebookText = facebookShares.singular;
     }else{
-      text = flaggedTweet.replace(/x/, flagged);
+      twitterText = flaggedTweet.replace(/x/, flagged);
+      facebookText = facebookShares.plural.replace(/__count__/, flagged);
     }
     var twitterHref = $twitterShare.attr('href');
-    var textWithLink = text + ' ' + window.location;
+    var emailText = facebookText + ' ' + window.location;
     twitterHref = twitterHref.replace(/&text=.*$/, '');
-    twitterHref += '&text=' + encodeURIComponent(text);
+    twitterHref += '&text=' + encodeURIComponent(twitterText);
     twitterHref += '&url=' + encodeURIComponent(window.location);
     $twitterShare.attr('href', twitterHref);
     var facebookHref = $facebookShare.attr('href');
-    facebookHref = facebookHref.replace(/p\[summary\]=.*&/i, 'p[summary]=' + encodeURIComponent(text) + '&');
+    facebookHref = facebookHref.replace(/p\[summary\]=.*&/i, 'p[summary]=' + encodeURIComponent(facebookText) + '&');
     facebookHref = facebookHref.replace(/p\[url\]=.*$/i, 'p[url]=' + encodeURIComponent(window.location));
     $facebookShare.attr('href', facebookHref);
     var emailHref = 'mailto:info@theglobalmail.org?subject=' + encodeURIComponent($('title').text());
-    emailHref += '&body=' + encodeURIComponent(textWithLink);
+    emailHref += '&body=' + encodeURIComponent(emailText);
     $emailShare.attr('href', emailHref);
   });
 
@@ -63,7 +82,6 @@ define([
   // been flagged, and if so, was it by the user
   var $explanation = $('#flagging-explanation');
   router.on('change', function(){
-    var flaggings = flags.flaggedIds().length;
     var text, css;
     if (!flags.anyFlags()){
       text = "Each square in the grid represents a single 'incident report'. The brightest incidents have been flagged by readers as being of concern. ";
