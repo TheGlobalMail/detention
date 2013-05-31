@@ -45,9 +45,10 @@ define([
       'from a dump of detention logs obtained under FOI. ' +
       'Explore the logs at http://behindthewire.theglobalmail.org'
   };
-  var $twitterShare = $('#sharing-panel li.twitter a');
-  var $facebookShare = $('#sharing-panel li.facebook a');
-  var $emailShare = $('#sharing-panel li.email a');
+
+  var $twitterShare = $sharingPanel.find('li.twitter a');
+  var $facebookShare = $sharingPanel.find('li.facebook a');
+  var $emailShare = $sharingPanel.find('li.email a');
 
   router.on('change', function(){
     var twitterText;

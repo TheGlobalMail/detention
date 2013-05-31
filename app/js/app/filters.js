@@ -30,7 +30,7 @@ define([
         'Berrimah Accommodation Facility',
         'Darwin Airport Lodge',
         'Northern IDC'
-      ],
+      ]
     },
     {
       location: "Queensland",

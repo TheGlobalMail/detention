@@ -560,7 +560,9 @@ define([
         if (cell.data.multimedia && cell.data.multimedia.match(/youtube/)){
           var videoId = cell.data.multimedia.match(/v=(.*)/)[1];
           $media.html(
-            '<iframe id="event-video" width="560" height="315" src="http://www.youtube.com/embed/'+videoId+'" frameborder="0"></iframe>'
+            '<iframe id="event-video" width="560" height="315" ' +
+              'src="http://www.youtube.com/embed/'+videoId+'" frameborder="0">' +
+            '</iframe>'
           );
           $media.show();
           $credit.text('').hide();

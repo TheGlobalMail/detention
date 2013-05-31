@@ -1,7 +1,7 @@
 define([
   'jquery',
   './flags',
-  './models',
+  './models'
 ], function($, flags, models){
 
   flags.on('flag', function(id){
