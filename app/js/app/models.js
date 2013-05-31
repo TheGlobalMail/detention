@@ -264,6 +264,7 @@ define([
       var pos = $cell.offset();
       if (_this.pullQuoteTimer) clearTimeout(_this.pullQuoteTimer);
       if (_this.pullQuoteLeaveTimer) clearTimeout(_this.pullQuoteLeaveTimer);
+      var touchEventName = 'click.touchPullQuote';
       _this.pullQuoteTimer = setTimeout(function(){
         var summary  = cell.getSummary()
           .replace(redactedRegex, 'REDACTED')
@@ -278,6 +279,15 @@ define([
         _this.$pullQuote.find('blockquote').text(summary);
         _this.$pullQuote.find('em.pullquote-date').text(cell.formattedOccurredOn());
         _this.$pullQuote.find('em.pullquote-facility').text(cell.formattedLocation());
+        if (Modernizr.touch) {
+          _this.$pullQuote
+            .off(touchEventName)
+            .on(touchEventName, function() {
+              _this.showCellModal(cell);
+              _this.$pullQuote.hide();
+              _this.firstCellTouch = undefined;
+            });
+        }
         var width = _this.$pullQuote.width();
         var height = _this.$pullQuote.height();
         var offset = {};
@@ -320,12 +330,12 @@ define([
     };
 
     // First touch events opens the pullquote. The second opens the modal
-    _this.onCellTouch = function(e) {
+    _this.onCellTouch = function() {
       var id = $(this).data('incident-number');
-      if (_this.firstCellTouch !== id){
+      if (_this.firstCellTouch !== id) {
         _this.firstCellTouch = id;
         _this.showPullQuote.call(this);
-      }else{
+      } else {
         _this.firstCellTouch = null;
         _this.cellOnClick.call(this);
       }
@@ -392,7 +402,7 @@ define([
       // Modal key, mouse and touch events
       modalBackdrop.on('click', _this.hideModals);
       $(document).on('keyup', _this.onKeyUp);
-      if ($('html').hasClass('touch')) {
+      if (Modernizr.touch) {
         modalContainer.swipe({
           swipe: _this.onSwipe
         });
@@ -524,7 +534,6 @@ define([
         _this.setFlagText();
       } else { // Events
         _.each(['occurred_on', 'type', 'facility', 'summary', 'description'], function(field){
-          var text;
           _this[field] = _this.element.find('.' + field);
           if (field === 'occurred_on'){
             _this[field].text(cell.formattedOccurredOn());
