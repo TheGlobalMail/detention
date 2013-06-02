@@ -403,9 +403,12 @@ define([
       modalBackdrop.on('click', _this.hideModals);
       $(document).on('keyup', _this.onKeyUp);
       if (Modernizr.touch) {
+        // Disabled till we can refine it
+        /*
         modalContainer.swipe({
           swipe: _this.onSwipe
         });
+        */
       }
 
       flags.on('reload change', function() {
