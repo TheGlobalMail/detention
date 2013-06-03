@@ -1498,6 +1498,7 @@ footer {
   .intro,
   .first-example,
   .second-example,
+  .event-intro,
   .flag-intro {
     color: white;
     position: absolute;
@@ -1560,6 +1561,43 @@ footer {
     }
     .pullquote {
       float: left;
+    }
+  }
+  .event-intro {
+    .cell {
+      float: none;
+      display: inline-block;
+      cursor: auto;
+      // Strip all the hover state changes
+      &:hover {
+        width: 36px;
+        height: 36px;
+        margin: 1px;
+        &.opening-event {
+          background-position: center -55px;
+        }
+        &.boat-event {
+          background-position: center 13px;
+        }
+        &.media-event {
+          background-position: center -19px;
+        }
+      }
+    }
+    .description {
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      top: 9px;
+      left: 6px;
+      .font-size(14);
+    }
+    ul {
+      list-style: none;
+      margin-top: 18px;
+      li {
+        margin-top: 8px;
+      }
     }
   }
   .flag-intro {

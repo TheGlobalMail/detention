@@ -46,6 +46,12 @@ define([
   var secondExampleNext = secondExample.find('.next');
   var secondExampleScrollTo;
 
+  var eventIntro = tourContainer.find('.event-intro');
+  var eventIntroText = eventIntro.find('.text-container');
+  var eventIntroBack = eventIntro.find('.back');
+  var eventIntroNext = eventIntro.find('.next');
+  var eventIntroScrollTo;
+
   var flagIntro = tourContainer.find('.flag-intro');
   var flagIntroText = flagIntro.find('.text-container');
   var flagIntroBack = flagIntro.find('.back');
@@ -173,8 +179,36 @@ define([
       left: (window.innerWidth - secondExampleNext.width()) / 2
     });
 
+    // Event introduction
+    eventIntroScrollTo = secondExampleScrollTo + (window.innerHeight * 2);
+    var eventIntroTextTop = eventIntroScrollTo + (window.innerHeight - eventIntroText.height()) / 2;
+    var eventIntroTextBottom = eventIntroTextTop + eventIntroText.outerHeight();
+    eventIntroText.css({
+      top: eventIntroTextTop,
+      left: (window.innerWidth - eventIntroText.width()) / 2
+    });
+    var eventIntroBackHeight = eventIntroBack.outerHeight();
+    var eventIntroBackTop = eventIntroScrollTo + eventIntroBackHeight;
+    var eventIntroBackBottom = eventIntroBackTop + eventIntroBackHeight;
+    if (eventIntroBackBottom >= eventIntroTextTop) {
+      eventIntroBackTop -= eventIntroBackBottom - eventIntroTextTop;
+      eventIntroScrollTo -= eventIntroBackBottom - eventIntroTextTop;
+    }
+    eventIntroBack.css({
+      top: eventIntroBackTop,
+      left: (window.innerWidth - eventIntroBack.width()) / 2
+    });
+    var eventIntroNextTop = eventIntroScrollTo + window.innerHeight - eventIntroNext.height() - 100;
+    if (eventIntroNextTop < eventIntroTextBottom) {
+      eventIntroNextTop += eventIntroTextBottom - eventIntroNextTop;
+    }
+    eventIntroNext.css({
+      top: eventIntroNextTop,
+      left: (window.innerWidth - eventIntroNext.width()) / 2
+    });
+
     // Flagging introduction
-    flagIntroScrollTo = secondExampleNextTop + secondExampleNext.outerHeight() + window.innerHeight;
+    flagIntroScrollTo = eventIntroNextTop + eventIntroNext.outerHeight() + window.innerHeight;
     var flagIntroTextHeight = flagIntroText.outerHeight();
     var flagIntroTextTop = flagIntroScrollTo + (window.innerHeight - flagIntroTextHeight) / 2;
     flagIntroText.css({
@@ -327,9 +361,15 @@ define([
   }, defaultAnimation.duration);
   scrollCallbacks.push(scrollToSecondExample);
 
-  var scrollToFlagIntro = _.throttle(function() {
+  var scrollToEventIntro = _.throttle(function() {
     scrollCallbackIndex = 3;
-    $.scrollTo(flagIntroScrollTo, defaultAnimation.duration);
+    $.scrollTo(eventIntroScrollTo, defaultAnimation);
+  }, defaultAnimation.duration);
+  scrollCallbacks.push(scrollToEventIntro);
+
+  var scrollToFlagIntro = _.throttle(function() {
+    scrollCallbackIndex = 4;
+    $.scrollTo(flagIntroScrollTo, defaultAnimation);
   }, defaultAnimation.duration);
   scrollCallbacks.push(scrollToFlagIntro);
 
@@ -353,8 +393,10 @@ define([
     firstExampleBack.on('click', scrollToIntro);
     firstExampleNext.on('click', scrollToSecondExample);
     secondExampleBack.on('click', scrollToFirstExample);
-    secondExampleNext.on('click', scrollToFlagIntro);
-    flagIntroBack.on('click', scrollToSecondExample);
+    secondExampleNext.on('click', scrollToEventIntro);
+    eventIntroBack.on('click', scrollToSecondExample);
+    eventIntroNext.on('click', scrollToFlagIntro);
+    flagIntroBack.on('click', scrollToEventIntro);
     flagIntroNext.on('click', endTour);
 
     $(window).on('resize', onResize);
