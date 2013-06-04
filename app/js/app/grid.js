@@ -15,6 +15,12 @@ define([
       gridContainer.children().remove();
     }
 
+    if (window.embedded){
+      // XXX hack hack hack
+      incidents.months = [incidents.months[0]];
+      incidents.months[0].incidents.splice(1, 2);
+    }
+
     _(incidents.months)
       // Build the grid in rows of months
       .map(function(obj) {
