@@ -1,24 +1,17 @@
 define([
   'jquery',
   'lodash',
-  'incidents',
   './models',
   './events'
-], function($, _, incidents, models, events) {
+], function($, _, models, events) {
   "use strict";
 
   var gridContainer = $('#incident-grid');
   var grid = new models.GridController({$el: gridContainer});
 
-  function buildIncidentMonthGrid() {
+  function buildIncidentMonthGrid(incidents) {
     if (gridContainer.children().length) {
       gridContainer.children().remove();
-    }
-
-    if (window.embedded){
-      // XXX hack hack hack
-      incidents.months = [incidents.months[0]];
-      incidents.months[0].incidents.splice(1, 2);
     }
 
     _(incidents.months)
