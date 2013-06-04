@@ -254,6 +254,8 @@ define([
     };
 
     _this.cellOnClick = function() {
+      // do nothing if this is embedded
+      if (window.embedded) return
       var cell = _this.getCellbyElement(this);
       _this.showCellModal(cell);
     };
