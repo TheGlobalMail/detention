@@ -223,7 +223,7 @@ module.exports = function(grunt) {
     // useminPrepare scans files for <!-- build:(js|css) --> blocks
     // and injects config into the grunt-contrib-concat task
     useminPrepare: {
-      html: '<%= project.app %>/index.html',
+      html: '<%= project.app %>/{,*/}*.html',
       options: {
         dest: '<%= project.dist %>'
       }
@@ -258,7 +258,8 @@ module.exports = function(grunt) {
           removeRedundantAttributes: true
         },
         files: {
-          '<%= project.dist %>/index.html': '<%= project.dist %>/index.html'
+          '<%= project.dist %>/index.html': '<%= project.dist %>/index.html',
+          '<%= project.dist %>/embed.html': '<%= project.dist %>/embed.html'
         }
       }
     },
@@ -285,6 +286,7 @@ module.exports = function(grunt) {
           dest: '<%= project.dist %>',
           src: [
             'index.html',
+            'embed.html',
             'images/*.svg',
             '*.{ico,txt}',
             '.htaccess'
@@ -311,6 +313,11 @@ module.exports = function(grunt) {
       staging: {
         src: ['<%= cdn.dist.src %>'],
         cdn: 'http://detention-incidents-staging-assets.theglobalmail.org'
+      },
+
+      embed: {
+        src: ['<%= cdn.dist.src %>'],
+        cdn: 'http://detention-incidents-embed.herokuapp.com'
       }
     },
 
@@ -379,6 +386,8 @@ module.exports = function(grunt) {
     // allow building with different CDN URLs
     if (target === 'staging') {
       targets.push('cdn:staging');
+    } else if (target === 'embed') {
+      targets.push('cdn:embed');
     } else if (target !== 'dev') {
       targets.push('cdn:dist');
     }
