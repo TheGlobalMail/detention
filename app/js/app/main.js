@@ -4,6 +4,7 @@ define([
   './handlers',
   './grid',
   './tour',
+  './embed',
   // dependencies
   './sharing-panel',
   './router',
