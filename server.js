@@ -4,15 +4,15 @@ var express = require("express");
 var site = express();
 
 // Serve static files
-site.use("/", express.static(__dirname + '/dist'));
+site.use("/", express.static(__dirname + '/app'));
 
 site.get("/embed/*", function(req, res) {
-  fs.createReadStream(__dirname + "/dist/embed.html").pipe(res);
+  fs.createReadStream(__dirname + "/app/embed.html").pipe(res);
 });
 
 // Ensure all routes go home, client side app..
 site.get("*", function(req, res) {
-  fs.createReadStream(__dirname + "/dist/index.html").pipe(res);
+  fs.createReadStream(__dirname + "/app/index.html").pipe(res);
 });
 
 // Actually listen
