@@ -725,7 +725,8 @@ define([
       var flagWeights = flags.data;
       // Scale the score as a percentage
       var score = Math.round((flagWeights[_this.data.id] || 0) * 100);
-      var isFlagged = flags.isFlagged(_this.data.id);
+      // only display as flagging if not in embedded
+      var isFlagged =  !window.embedded && flags.isFlagged(_this.data.id);
 
       var classes = _this.element.classList;
       if (_this.data.flagScore !== score) {
@@ -742,7 +743,7 @@ define([
         if (_this.element.style.backgroundColor) {
           _this.element.style.backgroundColor = '';
         }
-        if (!classes.contains('flagged') && !window.embedded) {
+        if (!classes.contains('flagged')) {
           classes.add('flagged');
         }
       } else if (classes.contains('flagged')) {
