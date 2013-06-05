@@ -1,18 +1,11 @@
 define([
   './flags',
   './events',
-  './handlers',
   './grid',
-  './tour',
   // dependencies
-  './sharing-panel',
-  './router',
   './tracking',
-  './filters',
-  './footer',
-  'dropdown',
   'easing'
-], function(flags, events, handlers, grid, tour) {
+], function(flags, events, grid) {
   'use strict';
 
   function setBindings() {
@@ -23,12 +16,8 @@ define([
   }
 
   function init() {
-    flags
-      .load()
+    $.when(embed.load(), flags.load())
       .always(grid.build);
-
-    handlers.setBindings();
-    tour.init();
 
     setBindings();
   }

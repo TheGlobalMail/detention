@@ -254,6 +254,8 @@ define([
     };
 
     _this.cellOnClick = function() {
+      // do nothing if this is embedded
+      if (window.embedded) return
       var cell = _this.getCellbyElement(this);
       _this.showCellModal(cell);
     };
@@ -740,7 +742,7 @@ define([
         if (_this.element.style.backgroundColor) {
           _this.element.style.backgroundColor = '';
         }
-        if (!classes.contains('flagged')) {
+        if (!classes.contains('flagged') && !window.embedded) {
           classes.add('flagged');
         }
       } else if (classes.contains('flagged')) {

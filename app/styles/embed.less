@@ -1,0 +1,40 @@
+body.embedded{
+
+  .arrow{
+    display: none;
+  }
+
+  .filter-menu, #related, #links, footer, #sharing-panel, .tour-container{
+    display: none;
+  } 
+
+  // Sit this behind the pullquotes
+  #intro-container .intro, #intro-container .title{
+    z-index: 11;
+    border-bottom: none;
+    box-shadow: none;
+  }
+
+  #intro-container .title{
+    padding-top: 20px;
+  }
+  #intro-container .intro{
+    padding-bottom: 0;
+  }
+
+  #incidents .month{
+    display: none;
+  }
+
+  #main-pullquote{
+    
+    .event, .incident{
+      display: none;
+    }
+  }
+}
+
+body.loading .loading-icon{
+  bottom: 10px;
+  display: block;
+}

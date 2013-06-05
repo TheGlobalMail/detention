@@ -1,0 +1,472 @@
+<!doctype html>
+<!--[if lt IE 9]> <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gte IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Behind The Wire | The Global Mail</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,800,700" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css" media="all">
+
+  <meta property="og:title" content="Behind The Wire">
+  <meta property="og:description" content="A Graphic Portrait Of Life In Detention">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://behindthewire.theglobalmail.org">
+  <meta property="fb:admins" content="1196962639">
+  <meta property="fb:admins" content="100004512551022">
+  <meta property="og:image" content="http://detention-incidents-assets.theglobalmail.org/images/facebook.jpg">
+  <meta property="og:site_name" content="Behind The Wire">
+
+  <script> window.embedded = true; </script>
+
+  <!-- build:js /js/head.js -->
+  <script src="/js/libs/modernizr.js"></script>
+  <!-- endbuild -->
+</head>
+<body class="embedded pre-load loading">
+
+  <div class="pre-load-background"></div>
+
+  <!-- FB stuff -->
+  <div id="fb-root"></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <div id="main" role="main">
+    <div id="intro-container">
+      <div class="container">
+        <section class="title">
+          <h1>Behind The Wire</h1>
+          <h2>A Graphic Portrait Of Life In Detention</h2>
+        </section>
+        <section id="intro" class="intro">
+          <p>
+            Hover over the squares below to view a selection of the incidents.
+          </p>
+          <p>
+          <a href="" target="_BLANK">Click here to view these incidents in context</a>
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <button class="arrow loading-icon"></button>
+
+    <div id="incidents" class="container">
+        <div class="filter-menu pinned">
+        <div class="container">
+          <div class="month"></div>
+          <div id="filters" class="filters hidden-phone">
+            <h4>Highlight: </h4>
+            <div class="btn-group incidents dropdown">
+              <a id="categories-label" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                All incidents
+                <span class="caret"></span>
+              </a>
+              <ul id="categories" role="menu" class="dropdown-menu">
+              </ul>
+            </div>
+            <div class="btn-group facilities dropdown">
+              <a id="facilities-label" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                All Facilities
+                <span class="caret"></span>
+              </a>
+              <ul id="facilities" role="menu" class="dropdown-menu">
+              </ul>
+            </div>
+            <a id='reset-filter' href="/" class="btn reset">Reset</a>
+          </div>
+        </div>
+      </div>
+      <section id="incident-grid" class="incident-grid"></section>
+    </div>
+    <section id="related" class="container">
+      <h2>This is part of our series on asylum seekers in detention <a class="btn" href="http://www.theglobalmail.org/features/in/detention-logs/" target="_blank">View all related stories</a></h2>
+    </section>
+    <section id="links" class="container">
+        <div class="errata">
+            <h4>ADOPT AN INCIDENT</h4>
+            <p>There is a bigger story behind each of these squares. The government has detailed reports for each of the incidents summarised here. The reports hold much more detail about the event — including who was involved and what happened to the person being detained.</p>
+
+            <p>To get the government to release these reports, we need your help.</p>
+
+            <p>We’re calling on our audience to “adopt an incident”, using the Freedom of Information Act. So if you see an incident that you think needs further investigation, or that should be made public, we are asking you to request it.</p>
+
+            <p>Lodging a request for a detailed incident report is easy and free. Click on a square and find the “adopt an incident” link. This will take you to the Detention Logs site, where you will be led through a simple two-step process to file an FoI request.</p>
+          </div>
+    </section>
+
+    <footer>
+    <div class="container">
+      <div class="top"><a data-return-to-main="true" href="#main">Back to top</a></div>
+      <p>A collaboration between</p>
+        <ul class="credit">
+          <li>
+            <ul>
+              <li><a href="http://www.theglobalmail.org" class="tgm" target="_blank">The Global Mail</a></li>
+              <li>Jamie Ferguson</li>
+              <li>B.J. Rossiter</li>
+              <li>Mark Finger</li>
+            </ul>
+          </li>
+          <li>
+            <ul>
+              <li><a href="http://www.detentionlogs.com.au" target="_blank">detentionlogs.com.au</a></li>
+              <li>Paul Farrell</li>
+              <li>Lawrence Bull</li>
+              <li>Luke Bacon</li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="photo-credit">
+          <li>Title photo: AAP Image/Dean Lewins</li>
+        </ul>
+      </div>
+    </footer>
+
+
+    <div id="sharing-panel" class="share noflags hide">
+      <div class="container">
+        <div class="flags">
+          <div class="flag-icon"></div>
+          <h3 id="flagged-count">No incidents have been flagged</h3>
+          <button id="show-next-flag" class="btn">Show</button>
+          <a id="clear-all-btn" class="btn">Clear</a>
+          <a class="btn tour start-tour">Take a Tour</a>
+          <p><span id="flagging-explanation"></span>&nbsp;</p>
+
+          <button type="button" class="close" aria-hidden="true">
+            <span>×</span>
+          </button>
+        </div>
+        <div class="share-tools">
+          <h4><strong>Help Spread the word.</strong> Share these incidents:</h4>
+          <ul>
+            <li class="icon twitter"><a href="https://twitter.com/intent/tweet?via=TheGlobalMail&hashtags=detentionlogs&text=" target="_blank">Share on twitter</a></li>
+            <li class="icon facebook"><a href="http://www.facebook.com/sharer.php?s=100&p[title]=Behind%20the%20Wire&p[summary]=Incidents%20in%20Australian%20detention%20centres%20that%20people%20should%20know%20about&p[url]=" target="_blank">Share on Facebook</a></li>
+            <li class="icon email"><a href="">Share via email</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+
+    <div id="modal-container">
+      <div class="modal-backdrop fade in"></div>
+      <div class="modal-slideshow">
+        <div class="modal hide fade offset3" tabindex="-1">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              <h5>Back to all incidents</h5>
+              <span>×</span>
+            </button>
+            <h3 class='incident-details'>
+              Incident
+              <span class="incident-number"></span>
+            </h3>
+            <h3 class='event-details'>
+              Related Event
+            </h3>
+          </div>
+          <div class="modal-body">
+            <div class="incident-details">
+              <ul>
+                <li>
+                  <span class="subtitle">Date</span>
+                  <span class="date"></span>
+                </li>
+                <li>
+                  <span class="subtitle">Facility</span>
+                  <span class="facility"></span>
+                </li>
+                <li>
+                  <span class="subtitle">Incident type</span>
+                  <span class="incident-type"></span>
+                </li>
+                <li class="summary-li">
+                  <span class="subtitle">Summary</span>
+                  <p class="summary"></p>
+                  <ol class="glossary"></ol>
+                  <span class="disclaimer">
+                    Client (asylum seeker) names redacted in transcripts;
+                    Other names redacted by The Global Mail.
+                  </span>
+                  <a class="ext-link detailed-incident" target="_BLANK" href="/">View related documents at detentionlogs.com.au</a>
+                  <a class="ext-link adopt" target="_BLANK" href="/">You can "adopt" this incident. Find out more at detentionlogs.com.au</a>
+                </li>
+
+              </ul>
+              <a class="prev">Prev Incident</a>
+              <a class="next">Next Incident</a>
+              <div class="flag">
+                <div class="container">
+                  <h4>Should others see this?</h4>
+                  <div class="flag-group">
+                    <div class="btn flag-btn">Flag this incident</div>
+                    <div class="btn unflag unflag-btn">Unflag this incident</div>
+                    <span class="flagged-by-others">Be the first to flag this incident</span>
+                  </div>
+                </div>
+                <p>
+                  <strong>
+                    Flagging an incident increases its brightness in the grid. Incidents that
+                    are flagged by the most readers will appear the brightest.
+                  </strong>
+                  The incidents you flag can also be shared with others.
+                </p>
+                <a href="http://detentionlogs.com.au" target="_BLANK" class="canonical">View original version of this incident at detentionlogs.com.au</a>
+              </div>
+            </div>
+            <div class="event-details">
+              <div class="media">
+              </div>
+              <div class="credit"></div>
+              <ul>
+                <li>
+                  <span class="occurred_on"></span>
+                </li>
+                <li>
+                  <p class="description"></p>
+                </li>
+                <li class="related-link">
+                  <a class="ext-link" href="" target="_BLANK"></a>
+                </li>
+              </ul>
+              <a class="prev">Prev Incident</a>
+              <a class="next">Next Incident</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tour-container">
+    <div class="backdrop"></div>
+    <a class="close">
+      <h5>
+        Exit
+        <br>
+        tour
+      </h5>
+      <span>×</span>
+    </a>
+    <div class="intro">
+      <div class="text-container">
+        <p>
+          <strong>
+            Each square represents a single ‘incident report’ logged by Serco, the company that manages detention centres in Australia.
+          </strong>
+        </p>
+        <p>
+          These reports, gathered via numerous Freedom of Information requests by the journalists from <a href="http://detentionlogs.com.au" target="_blank">detentionlogs.com.au</a>, present a stark view from inside these centres.
+        </p>
+        <p>
+          While not a full picture of the life of a detainee, viewed together these incident logs (reproduced here exactly as they appear in the reports, including spelling errors) help show the extremes of what goes on in Australia’s detention centres.
+        </p>
+      </div>
+      <a class="next">
+        <div class="arrow"></div>
+        <span>Next</span>
+      </a>
+    </div>
+    <div class="first-example">
+      <a class="back">
+        <span>Previous</span>
+        <div class="arrow"></div>
+      </a>
+      <div class="text-container">
+        <div class="cell"></div>
+        <div class="clear"></div>
+        <div class="pullquote right" data-position="top-left">
+          <em class="pullquote-facility">Perth IDC</em>
+          <blockquote>Intercom system down</blockquote>
+          <em class="pullquote-date">1/11/2010 6:30 pm</em>
+        </div>
+        <div class="clear"></div>
+        <p>
+          <strong>
+            Each event summary is logged in the same dry, bureaucratic language, but the incidents range from the banal...
+          </strong>
+        </p>
+      </div>
+      <a class="next">
+        <div class="arrow"></div>
+        <span>Next</span>
+      </a>
+    </div>
+    <div class="second-example">
+      <a class="back">
+        <span>Previous</span>
+        <div class="arrow"></div>
+      </a>
+      <div class="text-container">
+        <div class="cell"></div>
+        <div class="clear"></div>
+        <div class="pullquote right" data-position="top-right">
+          <em class="pullquote-facility">Northern IDC</em>
+          <blockquote>Client self harmed by suturing his lips.</blockquote>
+          <em class="pullquote-date">22/4/2011 10:55 am</em>
+        </div>
+        <div class="clear"></div>
+        <p>
+          <strong>
+            ...to the disturbing, providing a glimpse into the extremes of daily life in detention.
+          </strong>
+        </p>
+        <p>
+          Rather than cherry-pick incidents we’ve chosen to include them all to highlight this contrast.
+        </p>
+      </div>
+      <a class="next">
+        <div class="arrow"></div>
+        <span>Next</span>
+      </a>
+    </div>
+    <div class="event-intro">
+      <a class="back">
+        <span>Previous</span>
+        <div class="arrow"></div>
+      </a>
+      <div class="text-container">
+        <p>
+          This interactive highlights significant
+        </p>
+        <ul>
+          <li>
+            <div class="cell opening-event event"></div>
+            <span class="description">
+              detention-centre openings
+            </span>
+          </li>
+          <li>
+            <div class="cell boat-event event"></div>
+            <span class="description">
+              boat-related incidents
+            </span>
+          </li>
+          <li>
+            <div class="cell media-event event"></div>
+            <span class="description">
+              policy announcements
+            </span>
+          </li>
+        </ul>
+      </div>
+      <a class="next">
+        <div class="arrow"></div>
+        <span>Next</span>
+      </a>
+    </div>
+    <div class="flag-intro">
+      <a class="back">
+        <span>Previous</span>
+        <div class="arrow"></div>
+      </a>
+      <div class="text-container">
+        <p>
+          <strong>
+            We’re also asking our audience to highlight, or ‘flag’, those incidents which they feel others need to see.
+          </strong>
+        </p>
+        <p>
+          The more often an incident is ‘flagged’ the brighter its square appears. Flagged incidents can also be shared with others.
+        </p>
+        <p>
+          We hope that this audience-driven highlighting will aid others in discovering the most disturbing incidents for themselves.
+        </p>
+        <a class="next exit">
+          <div class="arrow"></div>
+          <span>Explore for yourself</span>
+        </a>
+        <img src="/images/tour-cells.png">
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="main-pullquote" class="pullquote right">
+    <em class="pullquote-facility"></em>
+    <blockquote></blockquote>
+    <em class="pullquote-date"></em>
+    <span class="incident">Press square for details</span>
+    <span class="event">Press icon for details</span>
+  </div>
+
+  <!--[if lt IE 9]>
+  <div id="ie">
+    <div class="container">
+      <div class="text-container">
+        <h3>
+          <strong>
+            This feature does not work in your current browser.
+          </strong>
+          If you are able, <a href="http://browsehappy.com/" target="_blank">download a more recent browser</a>
+          to view this feature, and have a better web experience in general.
+        </h3>
+        <a href="http://www.theglobalmail.org" class="close">Return to The Global Mail</a>
+      </div>
+    </div>
+  </div>
+  <style>
+    #main {
+      display: none;
+    }
+  </style>
+  <![endif]-->
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-27879276-14']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+  <!--[if lte IE 9]>
+  <!-- devcode: production -->
+  <!-- build:js /js/preload-ie.js -->
+  <!-- endcode -->
+  <script src="/js/utils/jquery-1.9.1.js"></script>
+  <script src="/js/utils/vertScrollTo.js"></script>
+  <script src="/js/preload.js"></script>
+  <!-- devcode: production -->
+  <!-- endbuild -->
+  <!-- endcode -->
+  <![endif]-->
+
+  <!--[if gt IE 9]><!-->
+  <!-- devcode: production -->
+  <!-- build:js /js/preload.js -->
+  <!-- endcode -->
+  <script src="/components/jquery/jquery.js"></script>
+  <script src="/js/utils/vertScrollTo.js"></script>
+  <script src="/js/preload.js"></script>
+  <!-- devcode: production -->
+  <!-- endbuild -->
+  <!-- endcode -->
+  <!--<![endif]-->
+
+  <!-- build:js /js/embed-main.js -->
+  <script src="/components/requirejs/require.js" data-main="/js/main"></script>
+  <!-- endbuild -->
+
+</body>
+</html>
