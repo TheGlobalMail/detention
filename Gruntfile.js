@@ -307,7 +307,7 @@ module.exports = function(grunt) {
 
     cdn: {
       dist: {
-        src: ['<%= project.dist %>/index.html'],
+        src: ['<%= project.dist %>/{index,embed}.html'],
         cdn: 'http://detention-incidents-assets.theglobalmail.org'
       },
 
@@ -387,8 +387,6 @@ module.exports = function(grunt) {
     // allow building with different CDN URLs
     if (target === 'staging') {
       targets.push('cdn:staging');
-    } else if (target === 'embed') {
-      targets.push('cdn:embed');
     } else if (target !== 'dev') {
       targets.push('cdn:dist');
     }
