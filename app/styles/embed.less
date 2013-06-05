@@ -4,8 +4,13 @@ body.embedded{
     display: none;
   }
 
-  .filter-menu, #related, #links, footer, #sharing-panel, .tour-container{
-  } 
+  #main {
+    background: url('/images/title-bg.png') no-repeat center top transparent;
+    background-size: 100% auto;
+    background-attachment: fixed;
+    z-index: 1;
+    min-height: 320px;
+  }
 
   // Sit this behind the pullquotes
   #intro-container .intro, #intro-container .title{
@@ -13,20 +18,60 @@ body.embedded{
     border-bottom: none;
     box-shadow: none;
   }
-
-  #intro-container .title{
-    padding-top: 20px;
+  #intro-container {
+    background: none;
+    &:after {
+      display: none;
+    }
+    .title{
+      padding: 20px 0;
+      h1 {
+        .font-size(52);
+      }
+      h2 {
+        .font-size(14);
+        letter-spacing: normal;
+      }
+    }
+    .intro{
+      padding-bottom: 0;
+    }
   }
-  #intro-container .intro{
-    padding-bottom: 0;
+  #incidents {
+    text-align: center;
+    padding: 20px 0;
+    .month{
+      display: none;
+    }
+    #incident-grid {
+      display: inline-block;
+      .date {
+        margin-top: 10px;
+      }
+    }
   }
-
-  #incidents .month{
-    display: none;
+  .embed-hdr {
+    text-align: center;
+    h3 {
+      .font-size(16);
+      font-weight: 400;
+    }
   }
-
+  #related {
+    padding: 0;
+    h2 {
+      .font-size(12);
+      font-weight: 400;
+      letter-spacing: normal;
+      text-transform: uppercase;
+    }
+    .btn {
+      display: inline-block;
+      width: auto;
+      margin: 0 0 0 10px;
+    }
+  }
   #main-pullquote{
-    
     .event, .incident{
       display: none;
     }
