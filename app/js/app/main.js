@@ -27,8 +27,10 @@ define([
       .load()
       .always(grid.build);
 
-    handlers.setBindings();
-    tour.init();
+    if (!window.embedded){
+      handlers.setBindings();
+      tour.init();
+    }
 
     setBindings();
   }
