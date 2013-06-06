@@ -1,19 +1,48 @@
 define([
   'jquery',
   'lodash',
-  'incidents',
   './models',
-  './events'
-], function($, _, incidents, models, events) {
+  './events',
+  './flags',
+  'incidents'
+], function($, _, models, events, flags, incidents) {
   "use strict";
 
   var gridContainer = $('#incident-grid');
   var grid = new models.GridController({$el: gridContainer});
 
-  function buildIncidentMonthGrid() {
-    if (gridContainer.children().length) {
-      gridContainer.children().remove();
+  function build(){
+    clearGrid();
+    if (window.embedded){
+      buildFlaggedGrid()
+    }else{
+      buildIncidentMonthGrid()
     }
+  }
+
+  // Render a single row of all flagged elements. This is the render method
+  // used by the embedded widget
+  function buildFlaggedGrid() {
+
+    var rowElement = document.createElement('div');
+    rowElement.className = 'date';
+
+    _.each(flags.flaggedIds(), function(ID) {
+      var cell = new models.Cell(incidents.data[ID]);
+      grid.addCell(cell);
+      rowElement.appendChild(cell.element);
+    });
+
+    var clearingElement = document.createElement('div');
+    clearingElement.className = 'clear';
+    rowElement.appendChild(clearingElement);
+
+    renderRowElements([rowElement]);
+  }
+
+  // Render a row of incidents in each month. This is the view when the grid is
+  // not embedded
+  function buildIncidentMonthGrid() {
 
     _(incidents.months)
       // Build the grid in rows of months
@@ -40,22 +69,30 @@ define([
         clearingElement.className = 'clear';
         rowElement.appendChild(clearingElement);
       })
-      // Combine the rows into a fragment and merge into the container
-      .tap(function(rowElements) {
-        var fragment = document.createDocumentFragment();
-        _.each(rowElements, function(rowElement) {
-          fragment.appendChild(rowElement);
-        });
+      .tap(renderRowElements);
+  }
 
-        requestAnimationFrame(function() {
-          gridContainer[0].appendChild(fragment);
-          events.trigger('grid/complete');
-        });
-      });
+  function clearGrid(){
+    if (gridContainer.children().length) {
+      gridContainer.children().remove();
+    }
+  }
+
+  // Combine the rows into a fragment and merge into the container
+  function renderRowElements(rowElements){
+    var fragment = document.createDocumentFragment();
+    _.each(rowElements, function(rowElement) {
+      fragment.appendChild(rowElement);
+    });
+
+    requestAnimationFrame(function() {
+      gridContainer[0].appendChild(fragment);
+      events.trigger('grid/complete');
+    });
   }
 
   return {
-    build: buildIncidentMonthGrid,
+    build: build,
     grid: grid
   };
 });

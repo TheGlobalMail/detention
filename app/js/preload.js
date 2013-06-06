@@ -41,9 +41,11 @@
       $.scrollTo(top, scrollAnimationDuration);
     });
 
-    $(window).resize(
-      debouncer(scaleContainers, 100)
-    );
+    if (!window.embedded){
+      $(window).resize(
+        debouncer(scaleContainers, 100)
+      );
+    }
   }
 
   function debouncer(func, timeout) {
@@ -102,6 +104,10 @@
   }
 
   setBindings();
-  scaleContainers();
+  if (!window.embedded){
+    scaleContainers();
+  }else{
+    endPreLoad();
+  }
 
 })(window, document, jQuery);

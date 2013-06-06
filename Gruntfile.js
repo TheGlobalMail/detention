@@ -74,6 +74,7 @@ module.exports = function(grunt) {
       livereload: {
         files: [
           '<%= project.app %>/index.html',
+          '<%= project.app %>/embed.html',
           '{.tmp,<%= project.app %>}/styles/{,/*}*.css',
           '{.tmp,<%= project.app %>}/js/{,/*,**/,*/}*.js',
           '<%= project.app %>/images/{,*/}*.{png,jpg,jpeg,svg,webp}'
@@ -222,7 +223,7 @@ module.exports = function(grunt) {
     // useminPrepare scans files for <!-- build:(js|css) --> blocks
     // and injects config into the grunt-contrib-concat task
     useminPrepare: {
-      html: '<%= project.app %>/index.html',
+      html: '<%= project.app %>/{,*/}*.html',
       options: {
         dest: '<%= project.dist %>'
       }
@@ -257,7 +258,8 @@ module.exports = function(grunt) {
           removeRedundantAttributes: true
         },
         files: {
-          '<%= project.dist %>/index.html': '<%= project.dist %>/index.html'
+          '<%= project.dist %>/index.html': '<%= project.dist %>/index.html',
+          '<%= project.dist %>/embed.html': '<%= project.dist %>/embed.html'
         }
       }
     },
@@ -284,6 +286,8 @@ module.exports = function(grunt) {
           dest: '<%= project.dist %>',
           src: [
             'index.html',
+            'embed.html',
+            'sample.html',
             'images/*.svg',
             '*.{ico,txt}',
             '.htaccess'
@@ -303,13 +307,18 @@ module.exports = function(grunt) {
 
     cdn: {
       dist: {
-        src: ['<%= project.dist %>/index.html'],
+        src: ['<%= project.dist %>/{index,embed}.html'],
         cdn: 'http://detention-incidents-assets.theglobalmail.org'
       },
 
       staging: {
         src: ['<%= cdn.dist.src %>'],
         cdn: 'http://detention-incidents-staging-assets.theglobalmail.org'
+      },
+
+      embed: {
+        src: ['<%= cdn.dist.src %>'],
+        cdn: 'http://detention-incidents-embed.herokuapp.com'
       }
     },
 

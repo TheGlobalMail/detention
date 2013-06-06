@@ -1,0 +1,189 @@
+<!doctype html>
+<!--[if lt IE 9]> <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gte IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Behind The Wire | The Global Mail</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,800,700" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css" media="all">
+
+  <meta property="og:title" content="Behind The Wire">
+  <meta property="og:description" content="A Graphic Portrait Of Life In Detention">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://behindthewire.theglobalmail.org">
+  <meta property="fb:admins" content="1196962639">
+  <meta property="fb:admins" content="100004512551022">
+  <meta property="og:image" content="http://detention-incidents-assets.theglobalmail.org/images/facebook.jpg">
+  <meta property="og:site_name" content="Behind The Wire">
+
+  <script> window.embedded = true; </script>
+
+  <!-- build:js /js/head.js -->
+  <script src="/js/libs/modernizr.js"></script>
+  <!-- endbuild -->
+</head>
+<body class="embedded pre-load loading">
+
+  <div class="pre-load-background"></div>
+
+  <!-- FB stuff -->
+  <div id="fb-root"></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+
+  <header class="navbar special-feature" role="banner">
+    <a href="http://www.theglobalmail.org/" class="brand brand-center" title="Go to The Global Mail">The Global Mail</a>
+
+    <div class="special-feature-misc">
+      <!-- <div class="special-feature-links">
+        <a href="#about-modal" data-toggle="modal" data-bypass>About</a>
+      </div> -->
+
+      <div class="share-button twitter">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="detentionlogs" data-via="TheGlobalMail">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </div>
+
+      <div class="share-button facebook">
+        <div class="fb-like" data-send="false" data-layout="button_count" data-width="45" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
+      </div>
+    </div>
+  </header>
+
+  <div id="main" role="main">
+    <div id="intro-container">
+      <div class="container">
+        <section class="title">
+          <h1>Behind The Wire</h1>
+          <h2>A Graphic Portrait Of Life In Detention</h2>
+        </section>
+      </div>
+    </div>
+
+    <button class="arrow loading-icon"></button>
+
+    <div id="incidents" class="container">
+      <section class="embed-hdr"><h3>Hover over the squares below to view a selection of the incidents:</h3></section>
+      <section id="incident-grid" class="incident-grid"></section>
+    </div>
+    <section id="related" class="container">
+      <h2>These are just a few of the incidents <a class="btn" id="view-in-context" href="/" target="_blank">View them all in context</a></h2>
+    </section>
+    
+
+
+    <div id="sharing-panel" class="share noflags hide">
+      <div class="container">
+        <div class="flags">
+          <div class="flag-icon"></div>
+          <h3 id="flagged-count">No incidents have been flagged</h3>
+          <button id="show-next-flag" class="btn">Show</button>
+          <a id="clear-all-btn" class="btn">Clear</a>
+          <a class="btn tour start-tour">Take a Tour</a>
+          <p><span id="flagging-explanation"></span>&nbsp;</p>
+
+          <button type="button" class="close" aria-hidden="true">
+            <span>×</span>
+          </button>
+        </div>
+        <div class="share-tools">
+          <h4><strong>Help Spread the word.</strong> Share these incidents:</h4>
+          <ul>
+            <li class="icon twitter"><a href="https://twitter.com/intent/tweet?via=TheGlobalMail&hashtags=detentionlogs&text=" target="_blank">Share on twitter</a></li>
+            <li class="icon facebook"><a href="http://www.facebook.com/sharer.php?s=100&p[title]=Behind%20the%20Wire&p[summary]=Incidents%20in%20Australian%20detention%20centres%20that%20people%20should%20know%20about&p[url]=" target="_blank">Share on Facebook</a></li>
+            <li class="icon email"><a href="">Share via email</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  
+
+  <div id="main-pullquote" class="pullquote right">
+    <em class="pullquote-facility"></em>
+    <blockquote></blockquote>
+    <em class="pullquote-date"></em>
+    <span class="incident">Press square for details</span>
+    <span class="event">Press icon for details</span>
+  </div>
+
+  <!--[if lt IE 9]>
+  <div id="ie">
+    <div class="container">
+      <div class="text-container">
+        <h3>
+          <strong>
+            This feature does not work in your current browser.
+          </strong>
+          If you are able, <a href="http://browsehappy.com/" target="_blank">download a more recent browser</a>
+          to view this feature, and have a better web experience in general.
+        </h3>
+        <a href="http://www.theglobalmail.org" class="close">Return to The Global Mail</a>
+      </div>
+    </div>
+  </div>
+  <style>
+    #main {
+      display: none;
+    }
+  </style>
+  <![endif]-->
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-27879276-14']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+
+  <!--[if lte IE 9]>
+  <!-- devcode: production -->
+  <!-- build:js /js/preload-ie.js -->
+  <!-- endcode -->
+  <script src="/js/utils/jquery-1.9.1.js"></script>
+  <script src="/js/utils/vertScrollTo.js"></script>
+  <script src="/js/preload.js"></script>
+  <!-- devcode: production -->
+  <!-- endbuild -->
+  <!-- endcode -->
+  <![endif]-->
+
+  <!--[if gt IE 9]><!-->
+  <!-- devcode: production -->
+  <!-- build:js /js/preload.js -->
+  <!-- endcode -->
+  <script src="/components/jquery/jquery.js"></script>
+  <script src="/js/utils/vertScrollTo.js"></script>
+  <script src="/js/preload.js"></script>
+  <!-- devcode: production -->
+  <!-- endbuild -->
+  <!-- endcode -->
+  <!--<![endif]-->
+
+  <!-- build:js /js/main.js -->
+  <script src="/components/requirejs/require.js" data-main="/js/main"></script>
+  <!-- endbuild -->
+
+</body>
+</html>

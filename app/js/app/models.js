@@ -254,6 +254,8 @@ define([
     };
 
     _this.cellOnClick = function() {
+      // do nothing if this is embedded
+      if (window.embedded) return
       var cell = _this.getCellbyElement(this);
       _this.showCellModal(cell);
     };
@@ -303,13 +305,17 @@ define([
           }
           position.push('bottom');
         }
-        if (window.innerWidth <= 670){
+        if (window.innerWidth <= 670 && !window.embedded){
           offset.left = 10;
         }else if (pos.left > window.innerWidth / 2){
-          offset.left = pos.left - width - 15;
+          if (window.embedded){
+            offset.left = pos.left - width + 6;
+          }else{
+            offset.left = pos.left - width - 15;
+          }
           position.push('left');
         }else{
-          offset.left = pos.left + (width / 2) - (width / 2) - 15;
+          offset.left = pos.left - 15;
           position.push('right');
         }
         _this.$pullQuote.attr('data-position', position.join('-'));
@@ -723,7 +729,8 @@ define([
       var flagWeights = flags.data;
       // Scale the score as a percentage
       var score = Math.round((flagWeights[_this.data.id] || 0) * 100);
-      var isFlagged = flags.isFlagged(_this.data.id);
+      // only display as flagging if not in embedded
+      var isFlagged =  !window.embedded && flags.isFlagged(_this.data.id);
 
       var classes = _this.element.classList;
       if (_this.data.flagScore !== score) {
