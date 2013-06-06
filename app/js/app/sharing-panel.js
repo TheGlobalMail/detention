@@ -52,6 +52,10 @@ define([
   var $twitterShare = $sharingPanel.find('li.twitter a');
   var $facebookShare = $sharingPanel.find('li.facebook a');
   var $embedShare = $sharingPanel.find('li.embed a');
+  // hide all other modals when this is clicked
+  $embedShare.click(function(){
+    models.vent.trigger('modals:hide');
+  });
   var $emailShare = $sharingPanel.find('li.email a');
 
   router.on('change', function(){
