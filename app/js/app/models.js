@@ -13,7 +13,7 @@ define([
   var modalContainer = $('#modal-container');
   var modalSlideshow = modalContainer.find('.modal-slideshow');
   var modalBackdrop = modalContainer.find('.modal-backdrop');
-  var rootModal = $('.modal');
+  var rootModal = $('#incident-modal');
 
   var MAX_WORDS_IN_PULLQUOTE = 14;
   var PULL_QUOTE_FADE_OUT_DELAY = 8000;

@@ -7,6 +7,9 @@ define([
 ], function($, _, flags, router, models) {
   "use strict";
 
+  // Disable for embedded
+  if (window.embedded) return;
+
   var $flaggedCount = $('#flagged-count');
   var $sharingPanel = $('#sharing-panel');
 
@@ -38,7 +41,7 @@ define([
       'Explore the logs at http://behindthewire.theglobalmail.org',
     singular:
       'This incident in an Australian detention centre is worth flagging, ' +
-      'from a dump of detention logs obtained under FOI.' +
+      'from a dump of detention logs obtained under FOI. ' +
       'Explore the logs at http://behindthewire.theglobalmail.org',
     plural:
       'Here are __count__ incidents in Australian detention centres worth flagging, ' +
@@ -48,6 +51,7 @@ define([
 
   var $twitterShare = $sharingPanel.find('li.twitter a');
   var $facebookShare = $sharingPanel.find('li.facebook a');
+  var $embedShare = $sharingPanel.find('li.embed a');
   var $emailShare = $sharingPanel.find('li.email a');
 
   router.on('change', function(){
@@ -77,7 +81,22 @@ define([
     var emailHref = 'mailto:info@theglobalmail.org?subject=' + encodeURIComponent($('title').text());
     emailHref += '&body=' + encodeURIComponent(emailText);
     $emailShare.attr('href', emailHref);
+
+    $('#embed-share-link').val(window.location.href);
+    $('#embed-share-message').val(facebookText.replace(/ Explore.*$/, ''));
+    updateEmbedForm();
   });
+
+  function updateEmbedForm(){
+    var iframeLink = window.location.href.replace(/\/flagged\//i, '/embed/flagged/');
+    iframeLink += '?m=' + encodeURIComponent($('#embed-share-message').val());
+    var dimensions = $('#embed-share-dimensions').val().split('x');
+    var iframe = '<iframe width="'+dimensions[0]+'" height="'+dimensions[1]+'" src="'+iframeLink+'"></iframe>';
+    $('#embed-share-html').val(iframe);
+  }
+
+  // Setup embed form to update on change
+  $('#embed-share-message,#embed-share-dimensions').on('change', updateEmbedForm);
 
   // Update the explanation text on the sharing panel if any incidents have
   // been flagged, and if so, was it by the user
