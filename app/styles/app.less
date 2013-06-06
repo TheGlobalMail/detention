@@ -1059,6 +1059,28 @@ footer {
 }
 
 
+.adopt-link {
+  color:#747368;
+  .font-size(14);
+  font-family: @serifFontFamily;
+  &.ext-link {
+    width: auto;
+    display: block;
+    .border-radius(4px);
+    line-height: 1.1;
+    padding: 7px 30px 8px;
+    text-shadow:none;
+    background: url('/images/ext-link.svg') no-repeat 98% 45% rgba(0,0,0,0.05);
+    margin-top: 40px;
+    height:auto;
+    max-width: none;
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    clear:both;
+  }
+}
+
 // Modal styles
 #modal-container {
   position: fixed;
@@ -1157,25 +1179,7 @@ footer {
           margin-bottom: 0;
         }
         a {
-          color:#747368;
-          .font-size(14);
-          font-family: @serifFontFamily;
-          &.ext-link {
-            width: auto;
-            display: block;
-            .border-radius(4px);
-            line-height: 1.1;
-            padding: 7px 30px 8px;
-            text-shadow:none;
-            background: url('/images/ext-link.svg') no-repeat 98% 45% rgba(0,0,0,0.05);
-            margin-top: 40px;
-            height:auto;
-            max-width: none;
-            border: none;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-            clear:both;
-          }
+          .adopt-link
         }
       }
     }
@@ -1499,6 +1503,7 @@ footer {
   .first-example,
   .second-example,
   .event-intro,
+  .adopt-intro,
   .flag-intro {
     color: white;
     position: absolute;
@@ -1597,6 +1602,29 @@ footer {
       margin-top: 18px;
       li {
         margin-top: 8px;
+      }
+    }
+  }
+  .adopt-intro {
+    .link-wrapper {
+      display: block;
+      max-width: 620px;
+      background: #d5d3bf;
+      border-radius: 4px;
+      margin: 20px 0;
+      a {
+        .adopt-link;
+        &.ext-link {
+          margin-top: 0;
+          color: rgb(116, 115, 104) !important;
+          font-size: 14px !important;
+          border: none;
+          text-transform: none;
+          font-weight: normal;
+          &:hover {
+            border: none;
+          }
+        }
       }
     }
   }
