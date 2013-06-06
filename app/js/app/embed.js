@@ -5,10 +5,21 @@ define([
 
   // Only continue if embedded
   if (!window.embedded) return;
-  
+
+  function getParameterByName(name) {
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+    var results = regex.exec(window.location.search);
+    return results && decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+  var message = getParameterByName('m');
+  if (message){
+    $('#message').text(message);
+  }
+
   // When data is loaded, update the share in context url
   flags.on('load', function(){
-    var sharedUrl = location.href.match(/flagged\/(.*)/i);
+    var sharedUrl = window.location.href.match(/flagged\/(.*)/i);
     var viewInContextUrl = '/';
     if (sharedUrl){
       viewInContextUrl += sharedUrl[0];
