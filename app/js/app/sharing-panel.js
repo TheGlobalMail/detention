@@ -53,11 +53,26 @@ define([
   var $facebookShare = $sharingPanel.find('li.facebook a');
   var $embedShare = $sharingPanel.find('li.embed a');
   // hide all other modals when this is clicked
-  $embedShare.click(function(){
+  var $modalContainer = $('#embed-modal-container');
+  var $modal = $('#embed-modal-container .modal');
+  $embedShare.click(function(e){
+    e.preventDefault();
     models.vent.trigger('modals:hide');
+    $modalContainer.addClass('show');
+    $modal.css('left', (window.innerWidth - $modal.outerWidth()) / 2);
+    console.error('Setting left: ' + (window.innerWidth - $modal.outerWidth()) / 2);
+    $modal.modal({
+      backdrop: false
+    });
   });
-  var $emailShare = $sharingPanel.find('li.email a');
+  function hideEmbedModal() {
+    $modalContainer.removeClass("show");
+  }
+  $modalContainer.find('.modal-backdrop').on('click', hideEmbedModal);
+  $modalContainer.find('button.close').on('click', hideEmbedModal);
+  models.vent.on('modals:hide', hideEmbedModal);
 
+  var $emailShare = $sharingPanel.find('li.email a');
   router.on('change', function(){
     var twitterText;
     var facebookText;
