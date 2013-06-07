@@ -462,6 +462,9 @@ define([
       rootModal.on('click.modal', '.prev', _this.grid.displayPrevModal);
       rootModal.on('click.modal', '.flag-btn', _this.grid.flag);
       rootModal.on('click.modal', '.unflag-btn', _this.grid.unflag);
+      rootModal.on('click.modal', 'a.adopt', function(e){
+        vent.trigger('adopt-clicked', $(e.target).data('incident-number'));
+      });
     }
 
     _this.setCell = function(cell) {
@@ -532,6 +535,8 @@ define([
         _this.element.find('.adopt')
           .attr('href', _this.cell.uri() + '/adopt')
           .toggle(!_this.cell.hasDetailedReport());
+        _this.element.find('.adopt')
+          .attr('data-incident-number', _this.cell.data.id);
 
         _this.element.find('a.canonical')
           .attr('href', 'http://detentionlogs.com.au/data/incidents/incident_number/' + _this.cell.data.id);
