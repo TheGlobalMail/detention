@@ -536,7 +536,6 @@ define([
         // Provide a link to adopt the incident
         _this.element.find('.adopt')
             .attr('href', _this.cell.adoptHREF())
-            .text(_this.cell.adoptLinkText())
             .attr('data-incident-number', _this.cell.data.id)
             .toggle(!_this.cell.hasDetailedReport());
 
@@ -786,26 +785,14 @@ define([
     };
 
     _this.adoptHREF = function(){
-      if (location.search.search(/righttoknow/) !== -1) {
-        return 'https://www.righttoknow.org.au/new/diac/?title=FOI%20Request%20for%20Detail%20Incident%20Report%20' +
-          _this.data.id +
-          ';body=To%20the%20Department%20of%20Immigration%20and%20Citizenship%2C%0A%0ADear%20Sir%2FMadam%2C%0A%0AU' +
-          'nder%20the%20Freedom%20of%20Information%20Act%201982%20(Cth)%20I%20request%20the%20following%20document' +
-          '%3A%0A%0AIncident%20Detail%20Report%201-2UMYBH%20from%20the%20Department%27s%20Compliance%2C%20Case%20M' +
-          'anagement%2C%20Detention%20and%20Settlement%20Portal.%20I%20also%20request%20any%20documents%20attached' +
-          '%20to%20the%20detailed%20report.%0A%0AKind%20Regards%2C%0A%0A****ADD%20YOUR%20NAME%20HERE%20BEFORE%20SE' +
-          'NDING%20REQUEST****'
-      } else {
-        return _this.uri + '/adopt';
-      }
-    };
-
-    _this.adoptLinkText = function() {
-      if (location.search.search(/righttoknow/) !== -1) {
-        return 'Adopt this incident.';
-      } else {
-        return 'You can "adopt" this incident. Find out more at detentionlogs.com.au';
-      }
+      return 'https://www.righttoknow.org.au/new/diac/?title=FOI%20Request%20for%20Detail%20Incident%20Report%20' +
+        _this.data.id +
+        ';body=To%20the%20Department%20of%20Immigration%20and%20Citizenship%2C%0A%0ADear%20Sir%2FMadam%2C%0A%0AU' +
+        'nder%20the%20Freedom%20of%20Information%20Act%201982%20(Cth)%20I%20request%20the%20following%20document' +
+        '%3A%0A%0AIncident%20Detail%20Report%201-2UMYBH%20from%20the%20Department%27s%20Compliance%2C%20Case%20M' +
+        'anagement%2C%20Detention%20and%20Settlement%20Portal.%20I%20also%20request%20any%20documents%20attached' +
+        '%20to%20the%20detailed%20report.%0A%0AKind%20Regards%2C%0A%0A****ADD%20YOUR%20NAME%20HERE%20BEFORE%20SE' +
+        'NDING%20REQUEST****';
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));
