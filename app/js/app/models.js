@@ -539,8 +539,10 @@ define([
             .attr('data-incident-number', _this.cell.data.id)
             .toggle(!_this.cell.hasDetailedReport());
 
-        _this.element.find('a.canonical')
-          .attr('href', 'http://detentionlogs.com.au/data/incidents/incident_number/' + _this.cell.data.id);
+        var anchors = _this.element.find('a.canonical');
+        anchors
+          .first().attr('href', _this.cell.uri())
+          .next().attr('href', _this.cell.uri() + '/adopt');
 
         incidentDetails.show();
         eventDetails.hide();
