@@ -3,9 +3,10 @@ define([
   'lodash',
   './grid',
   './events',
+  './models',
   'incidents',
   './../utils/getScrollY'
-], function($, _, grid, events, incidents, getScrollY) {
+], function($, _, grid, events, models, incidents, getScrollY) {
   "use strict";
 
   var defaultAnimation = {
@@ -74,7 +75,7 @@ define([
     }
     body.addClass('in-tour');
     pullQuote.hide();
-    grid.grid.hideModals();
+    models.vent.trigger('modals:hide');
     tourContainer.addClass('display');
     _.defer(function() {
       tourContainer.addClass('show');

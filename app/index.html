@@ -178,7 +178,7 @@
             <li class="icon twitter"><a href="https://twitter.com/intent/tweet?via=TheGlobalMail&hashtags=detentionlogs&text=" target="_blank">Share on twitter</a></li>
             <li class="icon facebook"><a href="http://www.facebook.com/sharer.php?s=100&p[title]=Behind%20the%20Wire&p[summary]=Incidents%20in%20Australian%20detention%20centres%20that%20people%20should%20know%20about&p[url]=" target="_blank">Share on Facebook</a></li>
             <li class="icon email"><a href="">Share via email</a></li>
-            <li class="icon embed"><a data-toggle="modal" href="#embed-modal">Share</a></li>
+            <li class="icon embed"><a href="#embed-modal">Share</a></li>
           </ul>
         </div>
       </div>
@@ -186,33 +186,36 @@
 
     <!-- Modals -->
 
-    <div id="embed-modal" class="modal hide fade">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-          <h5>Back to all incidents</h5>
-          <span>×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <fieldset>
-          <h3>Share a link</h3>
-          <label>Copy and paste this link to share via email or IM:</label>
-          <input id="embed-share-link" type="text" value="">
-          <h3>Share a link</h3>
-          <label>Message to appear above flagged incidents:</label>
-          <input id="embed-share-message" type="text" placeholder="">
-          <label>Size:</label>
-          <select id="embed-share-dimensions">
-            <option seleted="selected" value="300x360">Small (300px x 360px)</option>
-            <option value="620x360">Large (620px x 360px)</option>
-          </select>
-          <label>Copy and paste this html into your site:</label>
-          <input id="embed-share-html" type="text" value="">
-        </fieldset>
+    <div id="embed-modal-container" class="generic-modal-container">
+      <div class="modal-backdrop fade in"></div>
+      <div id="embed-modal" class="modal hide fade offset3" tabindex="-1">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <h5>Back to all incidents</h5>
+            <span>×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <fieldset>
+            <h3>Share a link</h3>
+            <label>Copy and paste this link to share via email or IM:</label>
+            <input id="embed-share-link" type="text" value="">
+            <h3>Share a link</h3>
+            <label>Message to appear above flagged incidents (120 character limit):</label>
+            <input id="embed-share-message" type="text" maxlength="120">
+            <label>Size:</label>
+            <select id="embed-share-dimensions">
+              <option seleted="selected" value="300x360">Small (300px x 360px)</option>
+              <option value="620x360">Large (620px x 360px)</option>
+            </select>
+            <label>Copy and paste this html into your site:</label>
+            <textarea id="embed-share-html"></textarea>
+          </fieldset>
+        </div>
       </div>
     </div>
 
-    <div id="modal-container">
+    <div id="modal-container" class="generic-modal-container">
       <div class="modal-backdrop fade in"></div>
       <div class="modal-slideshow">
         <div id="incident-modal" class="modal hide fade offset3" tabindex="-1">
