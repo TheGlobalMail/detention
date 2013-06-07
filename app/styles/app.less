@@ -232,6 +232,10 @@ body {
   .loading & {
     display: none;
   }
+  // Hack to get around the tour's steps overlapping the footer
+  .in-tour & {
+    margin-bottom: 5000px;
+  }
   .incident-grid {
     margin: 0 auto;
     clear: both;

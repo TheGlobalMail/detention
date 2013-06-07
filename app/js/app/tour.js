@@ -9,7 +9,7 @@ define([
   "use strict";
 
   var defaultAnimation = {
-    duration: 1000
+    duration: 750
   };
 
   var inTour = false;
@@ -128,7 +128,7 @@ define([
     });
 
     // First example
-    firstExampleScrollTo = introNext.offset().top + (window.innerHeight / 2);
+    firstExampleScrollTo = introNext.offset().top + (window.innerHeight / 3);
     var firstExampleTextTop = firstExampleScrollTo + (window.innerHeight - firstExampleText.height()) / 2;
     var firstExampleTextBottom = firstExampleTextTop + firstExampleText.outerHeight();
     firstExampleText.css({
@@ -157,7 +157,7 @@ define([
     });
 
     // Second example
-    secondExampleScrollTo = firstExampleNext.offset().top + (window.innerHeight / 2);
+    secondExampleScrollTo = firstExampleNext.offset().top + (window.innerHeight / 3);
     var secondExampleTextTop = secondExampleScrollTo + (window.innerHeight - secondExampleText.height()) / 2;
     var secondExampleTextBottom = secondExampleTextTop + secondExampleText.outerHeight();
     secondExampleText.css({
@@ -186,7 +186,7 @@ define([
     });
 
     // Event introduction
-    eventIntroScrollTo = secondExampleNext.offset().top + (window.innerHeight / 2);
+    eventIntroScrollTo = secondExampleNext.offset().top + (window.innerHeight / 3);
     var eventIntroTextTop = eventIntroScrollTo + (window.innerHeight - eventIntroText.height()) / 2;
     var eventIntroTextBottom = eventIntroTextTop + eventIntroText.outerHeight();
     eventIntroText.css({
@@ -214,7 +214,7 @@ define([
     });
 
     // Adopt introduction
-    adoptIntroScrollTo = eventIntroNext.offset().top + (window.innerHeight / 2);
+    adoptIntroScrollTo = eventIntroNext.offset().top + (window.innerHeight / 3);
     var adoptIntroTextTop = adoptIntroScrollTo + (window.innerHeight - adoptIntroText.height()) / 2;
     var adoptIntroTextBottom = adoptIntroTextTop + adoptIntroText.outerHeight();
     adoptIntroText.css({
@@ -242,7 +242,7 @@ define([
     });
 
     // Flagging introduction
-    flagIntroScrollTo = adoptIntroNext.offset().top + (window.innerHeight / 2);
+    flagIntroScrollTo = adoptIntroNext.offset().top + (window.innerHeight / 3);
     var flagIntroTextHeight = flagIntroText.outerHeight();
     var flagIntroTextTop = flagIntroScrollTo + (window.innerHeight - flagIntroTextHeight) / 2;
     flagIntroText.css({
@@ -282,12 +282,10 @@ define([
     var nearestCellWidth = nearestCell.outerWidth(true);
     var toElementOffset = nearestCell.offset();
     var originElementOffset = originElement.offset();
-    try {
     var difference = {
       top: toElementOffset.top - originElementOffset.top,
       left: toElementOffset.left - originElementOffset.left
     };
-    } catch(e) { debugger }
     if (
       difference.top > nearestCellHeight ||
       difference.top < -nearestCellHeight
@@ -351,25 +349,28 @@ define([
     var tourCell = tourTextElement.find('.cell');
     // Find the positional difference between the nearest cell and tour cell
     var nearestCell = getNearestCell(tourCell);
-    if (nearestCell && nearestCell.length) {
-      var offsetDifference = getOffsetDifference(tourCell, nearestCell);
-      // Suppressing a weird bug
-      if (offsetDifference.left >= tourCell.outerWidth(true)) {
-        offsetDifference.left = 0;
-      }
-      // Shift the cell and the pull quote inline with the nearest cell
-      var pullQuote = tourTextElement.find('.pullquote');
-      tourCell
-        .add(pullQuote)
-        .css(offsetDifference);
-      tourTextElement.find('p').first()
-        .css({
-          'margin-top': offsetDifference.top
-        });
-      return offsetDifference.top
-    } else {
+
+    if (!nearestCell || !nearestCell.length) {
       return 0;
     }
+
+    var offsetDifference = getOffsetDifference(tourCell, nearestCell);
+    // Suppressing a weird bug
+    if (offsetDifference.left >= tourCell.outerWidth(true)) {
+      offsetDifference.left = 0;
+    }
+
+    // Shift the cell and the pull quote inline with the nearest cell
+    var pullQuote = tourTextElement.find('.pullquote');
+    tourCell
+      .add(pullQuote)
+      .css(offsetDifference);
+    tourTextElement.find('p').first()
+      .css({
+        'margin-top': offsetDifference.top
+      });
+
+    return offsetDifference.top
   }
 
   var scrollToIntro = _.throttle(function() {
