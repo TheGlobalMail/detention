@@ -27,7 +27,10 @@ define([
     var rowElement = document.createElement('div');
     rowElement.className = 'date';
 
-    _.each(flags.flaggedIds(), function(ID) {
+    // limit of 30 flags
+    var flaggedIds = flags.flaggedIds().slice(0, 30);
+
+    _.each(flaggedIds, function(ID) {
       var cell = new models.Cell(incidents.data[ID]);
       grid.addCell(cell);
       rowElement.appendChild(cell.element);

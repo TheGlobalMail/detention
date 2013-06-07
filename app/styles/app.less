@@ -975,6 +975,9 @@ footer {
         &.icon.email a {
           background-position: 0 -176px;
         }
+        &.icon.embed a {
+          background-position: 0 -176px;
+        }
       }
     }
   }
@@ -1062,6 +1065,16 @@ footer {
   }
 }
 
+// Share links and iframe modal
+#embed-modal{
+  input, textarea{
+    width: 90%;
+  }
+  textarea{
+    height: 4.4em;
+  }
+}
+
 
 .adopt-link {
   color:#747368;
@@ -1086,7 +1099,7 @@ footer {
 }
 
 // Modal styles
-#modal-container {
+.generic-modal-container {
   position: fixed;
   top: 0;
   width: 100%;
@@ -1799,3 +1812,4 @@ footer {
     }
   }
 }
+

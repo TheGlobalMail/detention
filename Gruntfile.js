@@ -288,6 +288,8 @@ module.exports = function(grunt) {
             'index.html',
             'embed.html',
             'sample.html',
+            'live-sample.html',
+            'user-embed.html',
             'images/*.svg',
             '*.{ico,txt}',
             '.htaccess'

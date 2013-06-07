@@ -16,4 +16,9 @@ define([
     window._gaq && _gaq.push(['_trackEvent', 'Incident', 'ID', id]);
   });
 
+  models.vent.on('adopt-clicked', function(id){
+    window._gaq && _gaq.push(['_trackEvent', 'Adopt', 'ID', id]);
+  });
+
+
 });

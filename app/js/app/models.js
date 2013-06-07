@@ -13,7 +13,7 @@ define([
   var modalContainer = $('#modal-container');
   var modalSlideshow = modalContainer.find('.modal-slideshow');
   var modalBackdrop = modalContainer.find('.modal-backdrop');
-  var rootModal = $('.modal');
+  var rootModal = $('#incident-modal');
 
   var MAX_WORDS_IN_PULLQUOTE = 14;
   var PULL_QUOTE_FADE_OUT_DELAY = 8000;
@@ -462,6 +462,9 @@ define([
       rootModal.on('click.modal', '.prev', _this.grid.displayPrevModal);
       rootModal.on('click.modal', '.flag-btn', _this.grid.flag);
       rootModal.on('click.modal', '.unflag-btn', _this.grid.unflag);
+      rootModal.on('click.modal', 'a.adopt', function(e){
+        vent.trigger('adopt-clicked', $(e.target).data('incident-number'));
+      });
     }
 
     _this.setCell = function(cell) {
@@ -534,6 +537,7 @@ define([
         _this.element.find('.adopt')
             .attr('href', _this.cell.adoptHREF())
             .text(_this.cell.adoptLinkText())
+            .attr('data-incident-number', _this.cell.data.id)
             .toggle(!_this.cell.hasDetailedReport());
 
         _this.element.find('a.canonical')
