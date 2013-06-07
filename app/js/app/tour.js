@@ -53,18 +53,18 @@ define([
   var eventIntroNext = eventIntro.find('.next');
   var eventIntroScrollTo;
 
+  var flagIntro = tourContainer.find('.flag-intro');
+  var flagIntroText = flagIntro.find('.text-container');
+  var flagIntroBack = flagIntro.find('.back');
+  var flagIntroImage = flagIntroText.find('img');
+  var flagIntroNext = flagIntro.find('.next');
+  var flagIntroScrollTo;
+
   var adoptIntro = tourContainer.find('.adopt-intro');
   var adoptIntroText = adoptIntro.find('.text-container');
   var adoptIntroBack = adoptIntro.find('.back');
   var adoptIntroNext = adoptIntro.find('.next');
   var adoptIntroScrollTo;
-
-  var flagIntro = tourContainer.find('.flag-intro');
-  var flagIntroText = flagIntro.find('.text-container');
-  var flagIntroBack = flagIntro.find('.back');
-  var flagIntroNext = flagIntroText.find('.next');
-  var flagIntroImage = flagIntroText.find('img');
-  var flagIntroScrollTo;
 
   function startTour(scrollPositionOverride) {
     inTour = true;
@@ -214,36 +214,8 @@ define([
       left: (window.innerWidth - eventIntroNext.width()) / 2
     });
 
-    // Adopt introduction
-    adoptIntroScrollTo = eventIntroNext.offset().top + (window.innerHeight / 3);
-    var adoptIntroTextTop = adoptIntroScrollTo + (window.innerHeight - adoptIntroText.height()) / 2;
-    var adoptIntroTextBottom = adoptIntroTextTop + adoptIntroText.outerHeight();
-    adoptIntroText.css({
-      top: adoptIntroTextTop,
-      left: (window.innerWidth - adoptIntroText.width()) / 2
-    });
-    var adoptIntroBackHeight = adoptIntroBack.outerHeight();
-    var adoptIntroBackTop = adoptIntroScrollTo + adoptIntroBackHeight;
-    var adoptIntroBackBottom = adoptIntroBackTop + adoptIntroBackHeight;
-    if (adoptIntroBackBottom >= adoptIntroTextTop) {
-      adoptIntroBackTop -= adoptIntroBackBottom - adoptIntroTextTop;
-      adoptIntroScrollTo -= adoptIntroBackBottom - adoptIntroTextTop;
-    }
-    adoptIntroBack.css({
-      top: adoptIntroBackTop,
-      left: (window.innerWidth - adoptIntroBack.width()) / 2
-    });
-    var adoptIntroNextTop = adoptIntroScrollTo + window.innerHeight - adoptIntroNext.height() - 100;
-    if (adoptIntroNextTop < adoptIntroTextBottom) {
-      adoptIntroNextTop += adoptIntroTextBottom - adoptIntroNextTop;
-    }
-    adoptIntroNext.css({
-      top: adoptIntroNextTop,
-      left: (window.innerWidth - adoptIntroNext.width()) / 2
-    });
-
     // Flagging introduction
-    flagIntroScrollTo = adoptIntroNext.offset().top + (window.innerHeight / 3);
+    flagIntroScrollTo = eventIntroNext.offset().top + (window.innerHeight / 3);
     var flagIntroTextHeight = flagIntroText.outerHeight();
     var flagIntroTextTop = flagIntroScrollTo + (window.innerHeight - flagIntroTextHeight) / 2;
     flagIntroText.css({
@@ -269,7 +241,43 @@ define([
       offsetDifference.top = 0;
     }
     flagIntroImage.css(offsetDifference);
-    flagIntroNext.css('top', offsetDifference.top);
+    var flagIntroTextBottom = flagIntroTextTop + flagIntroTextHeight;
+    var flagIntroNextTop = flagIntroScrollTo + window.innerHeight - flagIntroNext.height() - 100;
+    if (flagIntroNextTop < flagIntroTextBottom) {
+      flagIntroNextTop += flagIntroTextBottom - flagIntroNextTop;
+    }
+    flagIntroNext.css({
+      'top': flagIntroNextTop,
+      left: (window.innerWidth - flagIntroNext.width()) / 2
+    });
+
+    // Adopt introduction
+    adoptIntroScrollTo = flagIntroNext.offset().top + (window.innerHeight / 3);
+    var adoptIntroTextTop = adoptIntroScrollTo + (window.innerHeight - adoptIntroText.height()) / 2;
+    var adoptIntroTextBottom = adoptIntroTextTop + adoptIntroText.outerHeight();
+    adoptIntroText.css({
+      top: adoptIntroTextTop,
+      left: (window.innerWidth - adoptIntroText.width()) / 2
+    });
+    var adoptIntroBackHeight = adoptIntroBack.outerHeight();
+    var adoptIntroBackTop = adoptIntroScrollTo + adoptIntroBackHeight;
+    var adoptIntroBackBottom = adoptIntroBackTop + adoptIntroBackHeight;
+    if (adoptIntroBackBottom >= adoptIntroTextTop) {
+      adoptIntroBackTop -= adoptIntroBackBottom - adoptIntroTextTop;
+      adoptIntroScrollTo -= adoptIntroBackBottom - adoptIntroTextTop;
+    }
+    adoptIntroBack.css({
+      top: adoptIntroBackTop,
+      left: (window.innerWidth - adoptIntroBack.width()) / 2
+    });
+    var adoptIntroNextTop = adoptIntroScrollTo + window.innerHeight - adoptIntroNext.height() - 100;
+    if (adoptIntroNextTop < adoptIntroTextBottom) {
+      adoptIntroNextTop += adoptIntroTextBottom - adoptIntroNextTop;
+    }
+    adoptIntroNext.css({
+      top: adoptIntroNextTop,
+      left: (window.innerWidth - adoptIntroNext.width()) / 2
+    });
   }
 
   function getOffsetDifference(originElement, nearestCell) {
@@ -406,17 +414,17 @@ define([
   }, defaultAnimation.duration);
   scrollCallbacks.push(scrollToEventIntro);
 
-  var scrollToAdoptIntro = _.throttle(function() {
-    scrollCallbackIndex = 4;
-    $.scrollTo(adoptIntroScrollTo, defaultAnimation);
-  }, defaultAnimation.duration);
-  scrollCallbacks.push(scrollToAdoptIntro);
-
   var scrollToFlagIntro = _.throttle(function() {
-    scrollCallbackIndex = 5;
+    scrollCallbackIndex = 4;
     $.scrollTo(flagIntroScrollTo, defaultAnimation);
   }, defaultAnimation.duration);
   scrollCallbacks.push(scrollToFlagIntro);
+
+  var scrollToAdoptIntro = _.throttle(function() {
+    scrollCallbackIndex = 5;
+    $.scrollTo(adoptIntroScrollTo, defaultAnimation);
+  }, defaultAnimation.duration);
+  scrollCallbacks.push(scrollToAdoptIntro);
 
   var onResize = _.debounce(function() {
     if (inTour) {
@@ -441,11 +449,11 @@ define([
     secondExampleBack.on('click', scrollToFirstExample);
     secondExampleNext.on('click', scrollToEventIntro);
     eventIntroBack.on('click', scrollToSecondExample);
-    eventIntroNext.on('click', scrollToAdoptIntro);
-    adoptIntroBack.on('click', scrollToEventIntro);
-    adoptIntroNext.on('click', scrollToFlagIntro);
-    flagIntroBack.on('click', scrollToAdoptIntro);
-    flagIntroNext.on('click', endTour);
+    eventIntroNext.on('click', scrollToFlagIntro);
+    flagIntroBack.on('click', scrollToEventIntro);
+    flagIntroNext.on('click', scrollToAdoptIntro);
+    adoptIntroBack.on('click', scrollToFlagIntro);
+    adoptIntroNext.on('click', endTour);
 
     $(window).on('resize', onResize);
 
