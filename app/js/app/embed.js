@@ -9,13 +9,11 @@ define([
   function getParameterByName(name) {
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
     var results = regex.exec(window.location.search);
-    return results && decodeURIComponent(results[1].replace(/\+/g, " "));
+    return results ? decodeURIComponent(results[1].replace(/\+/g, " ")) : '';
   }
 
   var message = getParameterByName('m');
-  if (message){
-    $('#message').text(message);
-  }
+  $('#message').text(message);
 
   // When data is loaded, update the share in context url
   flags.on('load', function(){
