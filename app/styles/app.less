@@ -342,6 +342,14 @@ body {
       background-position: center -16px;
     }
   }
+  &.policy-event {
+    background-color: @event-yellow;
+    background-position: center -19px;
+    &:hover {
+      background-color: @event-yellow !important;
+      background-position: center -16px;
+    }
+  }
   &.opening-event {
     background-color: @event-yellow;
     background-position: center -55px;
@@ -607,6 +615,7 @@ footer {
     right: 20px;
   }
   &[data-event-type="media"],
+  &[data-event-type="policy"],
   &[data-event-type="opening"],
   &[data-event-type="boat"] {
     background: @event-yellow;
@@ -1274,7 +1283,7 @@ footer {
         border-color: rgba(255,255,255,0.2);
       }
     }
-    &.event-modal-media, &.event-modal-opening {
+    &.event-modal-media, &.event-modal-opening, &.event-modal-policy{
       color:#333;
       background: @event-yellow;
       text-shadow: 0 1px 0 rgba(255,255,255,.6);
@@ -1602,6 +1611,9 @@ footer {
           background-position: center 13px;
         }
         &.media-event {
+          background-position: center -19px;
+        }
+        &.media-policy {
           background-position: center -19px;
         }
       }
