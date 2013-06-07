@@ -55,7 +55,7 @@ define([
 
         var monthElement = document.createElement('div');
         monthElement.className = 'month';
-        monthElement.textContent = moment(Date.parse(obj.month)).format('MMMM YYYY');
+        monthElement.textContent = moment(obj.month).format('MMMM YYYY');
         rowElement.appendChild(monthElement);
 
         _.each(obj.incidents, function(ID) {
