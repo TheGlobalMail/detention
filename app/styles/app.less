@@ -1093,14 +1093,7 @@ footer {
 }
 
 // Share links and iframe modal
-#embed-modal{
-  input, textarea{
-    width: 90%;
-  }
-  textarea{
-    height: 4.4em;
-  }
-}
+
 
 
 .adopt-link {
@@ -1513,6 +1506,52 @@ footer {
     &.has-next .next {
       display: block;
     }
+  }
+}
+
+
+#embed-modal-container {
+  .modal {
+    width: 640px;
+    h3 {
+      padding: 0;
+      display: inline-block;
+      margin: 0 0 12px;
+      .font-size(16);
+    }
+  }
+  .modal-body {
+    padding: 0 25px 25px;
+    hr {
+      border-bottom: none;
+    }
+    .example {
+      position: absolute;
+      right: 25px;
+      top: 125px;
+      h4 {
+        .font-size(11);
+        text-transform: uppercase;
+        font-weight: normal;
+        .opacity(60);
+      }
+    }
+  }
+  fieldset {
+    margin-top: 10px;
+  }
+  input, textarea, select{
+    width: 98%;
+    padding: 4px 1%;
+    .font-size(12);
+  }
+  select {
+    width: 366px;
+  }
+  textarea{
+    height: 120px;
+    width: 350px;
+    .font-size(12);
   }
 }
 
