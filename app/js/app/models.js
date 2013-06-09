@@ -309,13 +309,23 @@ define([
           offset.left = 10;
         }else if (pos.left > window.innerWidth / 2){
           if (window.embedded){
-            offset.left = pos.left - width + 6;
+            if (window.innerWidth <= 320){
+              console.error('got it: ' + window.innerWidth )
+              offset.left = 10;
+            }else{
+              console.error('no it: ' + window.innerWidth )
+              offset.left = pos.left - width + 6;
+            }
           }else{
             offset.left = pos.left - width - 15;
           }
           position.push('left');
         }else{
-          offset.left = pos.left - 15;
+          if (window.innerWidth <= 320){
+            offset.left = 10;
+          }else{
+            offset.left = pos.left - 15;
+          }
           position.push('right');
         }
         _this.$pullQuote.attr('data-position', position.join('-'));
