@@ -1,5 +1,6 @@
 body.embedded{
   .navbar.special-feature {
+    display: none;
     padding: 1px 0 2px;
     height: 24px;
     .brand {
@@ -15,8 +16,7 @@ body.embedded{
     background-size: 100% auto;
     background-attachment: fixed;
     z-index: 1;
-    min-height: 260px;
-    .box-shadow(inset 0 0 120px #1c1f1f;);
+    
   }
 
   // Sit this behind the pullquotes
@@ -25,29 +25,14 @@ body.embedded{
     border-bottom: none;
     box-shadow: none;
   }
-  #intro-container {
-    background: none;
-    &:after {
-      display: none;
-    }
-    .title{
-      padding: 10px 0 15px;
-      h1 {
-        .font-size(38);
-        margin: 0;
-      }
-      h2 {
-        .font-size(14);
-        letter-spacing: .1em;
-      }
-    }
-    .intro{
-      padding-bottom: 0;
-    }
-  }
+
   #incidents {
+    background-color: rgba(28,31,31,0.4);
     text-align: center;
-    padding: 10px 0;
+    padding: 20px 10%;
+    width: 80%;
+    min-height: 260px;
+    .box-shadow(inset 0 0 120px #1c1f1f;);
     .month{
       display: none;
     }
@@ -55,13 +40,19 @@ body.embedded{
       display: inline-block;
       .date {
         margin-top: 10px;
+        @cellWidth: 42px;
+        .cell {
+          width: @cellWidth;
+          height: @cellWidth;
+          margin: 4px;
+        }
       }
     }
   }
   .embed-hdr {
     text-align: center;
     h3 {
-      .font-size(16);
+      .font-size(20);
       padding: 0 5%;
       line-height: 1.2;
       font-weight: 400;
@@ -70,7 +61,7 @@ body.embedded{
   }
   #related {
     color: white;
-    background-color: #2f3333;
+    background-color: rgba(47,51,51,.4);
     text-shadow: 0 -1px 0 #000000;
     display: block;
     width: 100%;
@@ -83,11 +74,27 @@ body.embedded{
     bottom: 0;
     z-index: 99999;
     h2 {
+      color: rgba(255,255,255,.6);
       margin: 0;
+      display: block;
       .font-size(12);
+      line-height: 1;
       font-weight: 400;
       letter-spacing: normal;
       text-transform: uppercase;
+    }
+    a#view-in-context {
+      line-height: 1;
+      .font-size(12);
+      text-transform: uppercase;
+      clear: both;
+      display: inline;
+      color: white;
+      border-bottom: 1px dotted white;
+      padding: 0;
+      &:hover {
+        text-decoration: none;
+      }
     }
     .btn {
       display: inline-block;
@@ -113,42 +120,25 @@ body.embedded{
 
   // SMALL VERSION
   @media only screen and (max-width: 320px) {
-    #intro-container {
-      background: none;
-      &:after {
-        display: none;
-      }
-      .title{
-        padding: 10px 0 15px;
-        h1 {
-          .font-size(27);
-          margin: 0;
-        }
-        h2 {
-          .font-size(12);
-          letter-spacing: normal;
-        }
-      }
-      .intro{
-        padding-bottom: 0;
-      }
-    }
+
     #incidents {
       min-width: auto;
       width: auto;
-      padding: 10px 18px;
+      min-height: 280px;
+      padding: 20px 18px;
     }
 
     .embed-hdr {
       h3 {
-        .font-size(12);
+        .font-size(14);
         padding: 0;
       }
     }
     #related {
       padding: 10px 0 14px;
-      h2 {
+      h2, a#view-in-context  {
         .font-size(11);
+        line-height: 1;
       }
       .btn {
         margin-top: 6px;
@@ -158,12 +148,19 @@ body.embedded{
       &.pullquote { 
         width: auto;
         max-width: 260px;
+        blockquote {
+          .font-size(16);
+          max-height: 58px;
+        }
+        em.pullquote-facility {
+          .font-size(10);
+        }
       }
     }
   }
 }
 
 body.loading .loading-icon{
-  bottom: 10px;
+  top: 40%;
   display: block;
 }
