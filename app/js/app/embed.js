@@ -4,7 +4,7 @@ define([
 ], function($, flags){
 
   // Only continue if embedded
-  if (!window.embedded) return;
+  if (!window.location.href.match(/\/embed/i)) return { embedded: false };
 
   function getParameterByName(name) {
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
@@ -24,5 +24,7 @@ define([
     }
     $('#view-in-context').attr('href', viewInContextUrl);
   });
+
+  return {embedded: true};
 
 });

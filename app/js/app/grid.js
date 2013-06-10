@@ -4,8 +4,9 @@ define([
   './models',
   './events',
   './flags',
-  'incidents'
-], function($, _, models, events, flags, incidents) {
+  'incidents',
+  './embed'
+], function($, _, models, events, flags, incidents, embed) {
   "use strict";
 
   var gridContainer = $('#incident-grid');
@@ -13,7 +14,7 @@ define([
 
   function build(){
     clearGrid();
-    if (window.embedded){
+    if (embed.embedded){
       buildFlaggedGrid()
     }else{
       buildIncidentMonthGrid()

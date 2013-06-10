@@ -3,11 +3,12 @@ define([
   'lodash',
   './flags',
   './glossary',
+  './embed',
   'moment',
   // dependencies
   'backbone',
   './../../components/tgm-bootstrap/js/bootstrap-modal'
-], function($, _, flags, glossary, moment) {
+], function($, _, flags, glossary, embed, moment) {
   "use strict";
 
   var modalContainer = $('#modal-container');
@@ -255,7 +256,7 @@ define([
 
     _this.cellOnClick = function() {
       // do nothing if this is embedded
-      if (window.embedded) return
+      if (embed.embedded) return
       var cell = _this.getCellbyElement(this);
       _this.showCellModal(cell);
     };
@@ -305,10 +306,10 @@ define([
           }
           position.push('bottom');
         }
-        if ((window.innerWidth <= 670 && !window.embedded) || window.innerWidth <= 320){
+        if ((window.innerWidth <= 670 && !embed.embedded) || window.innerWidth <= 320){
           offset.left = 10;
         }else if (pos.left > window.innerWidth / 2){
-          if (window.embedded){
+          if (embed.embedded){
             offset.left = pos.left - width + 6;
           }else{
             offset.left = pos.left - width - 15;
@@ -736,7 +737,7 @@ define([
       // Scale the score as a percentage
       var score = Math.round((flagWeights[_this.data.id] || 0) * 100);
       // only display as flagging if not in embedded
-      var isFlagged =  !window.embedded && flags.isFlagged(_this.data.id);
+      var isFlagged =  !embed.embedded && flags.isFlagged(_this.data.id);
 
       var classes = _this.element.classList;
       if (_this.data.flagScore !== score) {

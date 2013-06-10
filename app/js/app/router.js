@@ -2,14 +2,15 @@ define([
   'jquery',
   'lodash',
   './flags',
-  'backbone'
-], function($, _, flags){
+  './embed',
+  'backbone',
+], function($, _, flags, embed){
 
   // Emit `change` events for any module that uses url e.g. share buttons
   var vent = _.extend({}, Backbone.Events);
 
   $(function(){
-    Backbone.history.start({pushState: true});
+    Backbone.history.start({pushState: Modernizr.history});
   });
 
   // Listen to flag/unflag events and update the url with change
@@ -22,7 +23,9 @@ define([
     if (ids.length){
       url = 'flagged/' + ids.join(',');
     }
-    Backbone.history.navigate(url, {trigger: false, replace: true});
+    if (!embed.embedded){
+      Backbone.history.navigate(url, {trigger: false, replace: true});
+    }
     vent.trigger('change');
   });
 
