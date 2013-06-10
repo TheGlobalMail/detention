@@ -1,16 +1,12 @@
 body.embedded{
-
   .arrow{
     display: none;
   }
-
   #main {
     background: url('/images/title-bg.png') no-repeat center top transparent;
     background-size: 100% auto;
     background-attachment: fixed;
     z-index: 1;
-    min-height: 300px;
-    .box-shadow(inset 0 0 120px #1c1f1f;);
   }
 
   // Sit this behind the pullquotes
@@ -19,71 +15,94 @@ body.embedded{
     border-bottom: none;
     box-shadow: none;
   }
-  #intro-container {
-    background: none;
-    &:after {
-      display: none;
-    }
-    .title{
-      padding: 10px 0 15px;
-      h1 {
-        .font-size(44);
-        margin: 0;
-      }
-      h2 {
-        .font-size(14);
-        letter-spacing: normal;
-      }
-    }
-    .intro{
-      padding-bottom: 0;
-    }
-  }
   #incidents {
+    background-color: rgba(28,31,31,0.4);
     text-align: center;
-    padding: 20px 0;
+    padding: 30px 10%;
+    width: 80%;
+    min-height: 260px;
+    .box-shadow(inset 0 0 120px #1c1f1f;);
     .month{
       display: none;
     }
+    h4 {
+      .font-size(11);
+      text-transform: uppercase;
+      font-weight: normal;
+      margin: 0;
+    }
     #incident-grid {
+      margin-top: 0;
       display: inline-block;
       .date {
         margin-top: 10px;
+        @cellWidth: 42px;
+        .cell {
+          width: @cellWidth;
+          height: @cellWidth;
+          margin: 4px;
+        }
       }
     }
   }
   .embed-hdr {
     text-align: center;
     h3 {
-      .font-size(16);
+      .font-size(20);
+      padding: 0 5%;
+      line-height: 1.3;
       font-weight: 400;
+      margin: 0 0 20px;
     }
   }
   #related {
     color: white;
-    background-color: #2f3333;
+    background-color: rgba(47,51,51,.4);
     text-shadow: 0 -1px 0 #000000;
     display: block;
     width: 100%;
     height: auto;
     left: 0;
-    padding: 10px 0 14px;
+    padding: 7px 0 11px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     .box-shadow(0 0 10px black);
     position: fixed;
     bottom: 0;
     z-index: 99999;
+    .transition(all 50ms ease-in);
+    &:hover {
+      .transition(all 50ms ease-out);
+      background-color: #2f3333;
+    }
     h2 {
+      color: rgba(255,255,255,.6);
       margin: 0;
+      display: block;
       .font-size(12);
+      line-height: 1;
       font-weight: 400;
       letter-spacing: normal;
       text-transform: uppercase;
+    }
+    a#view-in-context {
+      line-height: 1;
+      .font-size(12);
+      text-transform: uppercase;
+      clear: both;
+      display: inline;
+      color: white;
+      border-bottom: 1px dotted white;
+      padding: 0;
+      &:hover {
+        text-decoration: none;
+        border-bottom-style: solid;
+      }
     }
     .btn {
       display: inline-block;
       width: auto;
       margin: 0 0 0 10px;
+      padding: 4px 10px;
     }
   }
   #main-pullquote{
@@ -92,15 +111,61 @@ body.embedded{
     }
     //Overrides the mediaquery for mobile
     &.pullquote { 
-      width: 300px;
+      width: auto;
+      max-width: 320px;
+      padding: 15px;
+      blockquote {
+        .font-size(16);
+        max-height: 58px;
+      }
+      em.pullquote-facility {
+        .font-size(10);
+      }
       &:after {
         display: block;
+      }
+    }
+  }
+
+  // SMALL VERSION
+  @media only screen and (max-width: 320px) {
+    #incidents {
+      min-width: auto;
+      width: auto;
+      min-height: 320px;
+      padding: 20px 18px;
+      h4 {
+        .font-size(10);
+      }
+    }
+    .embed-hdr {
+      h3 {
+        .font-size(14);
+        padding: 0;
+      }
+    }
+    #related {
+      h2, a#view-in-context  {
+        .font-size(11);
+        line-height: 1;
+      }
+      .btn {
+        margin-top: 6px;
+      }
+    }
+    #main-pullquote{
+      &.pullquote { 
+        width: auto;
+        max-width: 250px;
+        &:after {
+          display: none !important;
+        }
       }
     }
   }
 }
 
 body.loading .loading-icon{
-  bottom: 10px;
+  top: 40%;
   display: block;
 }

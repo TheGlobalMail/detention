@@ -3,12 +3,13 @@ define([
   'lodash',
   './flags',
   './router',
-  './models'
-], function($, _, flags, router, models) {
+  './models',
+  './embed'
+], function($, _, flags, router, models, embed) {
   "use strict";
 
   // Disable for embedded
-  if (window.embedded) return;
+  if (embed.embedded) return;
 
   var $flaggedCount = $('#flagged-count');
   var $sharingPanel = $('#sharing-panel');

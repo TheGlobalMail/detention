@@ -4,8 +4,9 @@ define([
   './models',
   './events',
   './flags',
-  'incidents'
-], function($, _, models, events, flags, incidents) {
+  'incidents',
+  './embed'
+], function($, _, models, events, flags, incidents, embed) {
   "use strict";
 
   var gridContainer = $('#incident-grid');
@@ -13,7 +14,7 @@ define([
 
   function build(){
     clearGrid();
-    if (window.embedded){
+    if (embed.embedded){
       buildFlaggedGrid()
     }else{
       buildIncidentMonthGrid()
@@ -55,7 +56,7 @@ define([
 
         var monthElement = document.createElement('div');
         monthElement.className = 'month';
-        monthElement.textContent = moment(Date.parse(obj.month)).format('MMMM YYYY');
+        monthElement.textContent = moment(obj.month).format('MMMM YYYY');
         rowElement.appendChild(monthElement);
 
         _.each(obj.incidents, function(ID) {

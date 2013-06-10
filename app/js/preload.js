@@ -3,6 +3,8 @@
 
   var body = $('body');
 
+  var embedded = window.location.href.match(/\/embed\//i);
+
   var navBar = $('.navbar');
   var introContainer = $('#intro-container');
 
@@ -41,7 +43,7 @@
       $.scrollTo(top, scrollAnimationDuration);
     });
 
-    if (!window.embedded){
+    if (!embedded){
       $(window).resize(
         debouncer(scaleContainers, 100)
       );
@@ -104,7 +106,7 @@
   }
 
   setBindings();
-  if (!window.embedded){
+  if (!embedded){
     scaleContainers();
   }else{
     endPreLoad();

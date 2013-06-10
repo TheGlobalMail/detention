@@ -344,10 +344,10 @@ body {
   }
   &.policy-event {
     background-color: @event-yellow;
-    background-position: center -19px;
+    background-position: center -95px;
     &:hover {
       background-color: @event-yellow !important;
-      background-position: center -16px;
+      background-position: center -92px;
     }
   }
   &.opening-event {
@@ -947,45 +947,63 @@ footer {
   }
   .share-tools {
     float:right;
-    width:260px;
-    padding:8px 14px;
+    padding:4px 0;
     h4 {
       font-weight: normal;
       .font-size(11);
       text-transform: uppercase;
-      width:80px;
-      margin: 0;
+      margin: 0 0 8px;
       color:@grayLight;
-      float:left;
     }
     ul {
       margin: 0;
+      display: table-row;
       li {
-        display:inline-block;
-        margin: 0 0 0 6px;
+        display: table-cell;
+        vertical-align: top;
+        margin: 0 5px 0 0;
         list-style: none;
         text-indent: -9000px;
         &.icon a {
-          background: url('/images/share-icons.svg') no-repeat 0 0 transparent;
-          background-size: 100% auto;
+          background: url('/images/share-icons.svg') no-repeat 0 -2px transparent;
+          background-size: 100%;
           display:block;
-          width:50px;
-          height:46px;
+          padding: 0;
+          width:45px;
+          height:37px;
           .opacity(40);
           .transition(opacity 150ms ease-in);
+          color:#2f3333;
+          text-shadow:none;
           &:hover {
             .transition(opacity 150ms ease-out);
             .opacity(100);
           }
         }
         &.icon.facebook a {
-          background-position: 0 -83px;
+          background-position: 0 -77px;
         }
         &.icon.email a {
-          background-position: 0 -176px;
+          background-position: 0 -161px;
         }
         &.icon.embed a {
-          background-position: 0 -176px;
+          .opacity(100);
+          height: auto;
+          max-height: 37px;
+          background:none;
+          background-color: rgba(255,255,255,.4);
+          text-indent: 0;
+          .border-radius(4px);
+          width: auto;
+          margin-right: 8px;
+          padding: 8px 10px 9px;
+          vertical-align: middle;
+          font-weight: 700;
+          text-transform: uppercase;
+          &:hover {
+            text-decoration: none;
+            background-color: white;
+          }
         }
       }
     }
@@ -1075,14 +1093,7 @@ footer {
 }
 
 // Share links and iframe modal
-#embed-modal{
-  input, textarea{
-    width: 90%;
-  }
-  textarea{
-    height: 4.4em;
-  }
-}
+
 
 
 .adopt-link {
@@ -1094,7 +1105,7 @@ footer {
     display: block;
     .border-radius(4px);
     line-height: 1.1;
-    padding: 7px 30px 8px;
+    padding: 7px 30px 8px 12px;
     text-shadow:none;
     background: url('/images/ext-link.svg') no-repeat 98% 45% rgba(0,0,0,0.05);
     margin-top: 40px;
@@ -1418,7 +1429,7 @@ footer {
       }
       a.canonical {
         display:inline-block;
-        .font-size(11);
+        .font-size(12);
         line-height: 1.2;
         color:white;
         margin-bottom: 5px;
@@ -1495,6 +1506,59 @@ footer {
     &.has-next .next {
       display: block;
     }
+  }
+}
+
+
+#embed-modal-container {
+  .modal {
+    width: 640px;
+    h3 {
+      padding: 0;
+      display: inline-block;
+      margin: 0 0 12px;
+      .font-size(16);
+    }
+  }
+  .modal-body {
+    padding: 0 25px 10px;
+    hr {
+      border-bottom: none;
+    }
+    .example {
+      position: absolute;
+      width: 225px;
+      right: 25px;
+      top: 151px;
+      h4 {
+        .font-size(11);
+        text-transform: uppercase;
+        font-weight: normal;
+        .opacity(60);
+      }
+      img {
+        width: 100%;
+        height: auto;
+        border: 1px solid rgba(255,255,255,.2)
+      }
+    }
+  }
+  fieldset {
+    margin-top: 10px;
+  }
+  input, textarea, select{
+    width: 98%;
+    padding: 4px 1%;
+    .font-size(12);
+    margin-bottom: 20px;
+  }
+  select {
+    width: 336px;
+  }
+  textarea{
+    height: 142px;
+    width: 320px;
+    .font-size(12);
   }
 }
 
@@ -1613,8 +1677,8 @@ footer {
         &.media-event {
           background-position: center -19px;
         }
-        &.media-policy {
-          background-position: center -19px;
+        &.policy-event {
+          background-position: center -95px;
         }
       }
     }
@@ -1646,7 +1710,7 @@ footer {
       border: 1px solid @gray;
       .box-shadow(0 2px 10px black);
       width: 106px;
-      margin: 30px auto 0;
+      margin: 20px auto 0;
       display: block;
       position: relative;
     }
@@ -1655,14 +1719,14 @@ footer {
     .link-wrapper {
       display: block;
       max-width: 620px;
-      background: #d5d3bf;
+      background: rgba(255,255,255,.1);
       border-radius: 4px;
       margin: 20px 0;
       a {
         .adopt-link;
         &.ext-link {
           margin-top: 0;
-          color: rgb(116, 115, 104) !important;
+          color: #afad9a !important;
           font-size: 14px !important;
           border: none;
           text-transform: none;
