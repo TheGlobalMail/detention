@@ -10,6 +10,10 @@ site.get("/embed/*", function(req, res) {
   fs.createReadStream(__dirname + "/dist/embed.html").pipe(res);
 });
 
+site.get("/test-embed/*", function(req, res) {
+  fs.createReadStream(__dirname + "/dist/embed-sizes.html").pipe(res);
+});
+
 // Ensure all routes go home, client side app..
 site.get("*", function(req, res) {
   fs.createReadStream(__dirname + "/dist/index.html").pipe(res);
