@@ -6,12 +6,16 @@ var site = express();
 // Serve static files
 site.use("/", express.static(__dirname + '/dist'));
 
-site.get("/embed/*", function(req, res) {
-  fs.createReadStream(__dirname + "/dist/embed.html").pipe(res);
+site.get("/test-story/*", function(req, res) {
+  fs.createReadStream(__dirname + "/dist/story.html").pipe(res);
 });
 
 site.get("/test-embed/*", function(req, res) {
   fs.createReadStream(__dirname + "/dist/embed-sizes.html").pipe(res);
+});
+
+site.get("/embed/*", function(req, res) {
+  fs.createReadStream(__dirname + "/dist/embed.html").pipe(res);
 });
 
 // Ensure all routes go home, client side app..

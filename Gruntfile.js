@@ -289,6 +289,7 @@ module.exports = function(grunt) {
             'embed.html',
             'sample.html',
             'embed-sizes.html',
+            'story.html',
             'live-sample.html',
             'user-embed.html',
             'images/*.svg',
