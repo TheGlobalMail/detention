@@ -647,14 +647,13 @@
     .intro,
     .first-example,
     .second-example,
-    .flag-intro {
+    .event-intro,
+    .flag-intro,
+    .adopt-intro {
       .back, .next {
         span {
           display:none;
         }
-      }
-      .cell {
-        display:none;
       }
       .pullquote {
         float:none;
@@ -674,6 +673,12 @@
             .font-size(14);
           }
         }
+      }
+    }
+    .first-example,
+    .second-example {
+      .cell {
+        display: none;
       }
     }
     .flag-intro {
