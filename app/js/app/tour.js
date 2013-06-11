@@ -283,7 +283,7 @@ define([
   function getOffsetDifference(originElement, nearestCell) {
     // Find the positional difference between a cell and the nearest cell
 
-    if (!nearestCell.length) {
+    if (!nearestCell || (nearestCell && !nearestCell.length)) {
       return {top: 0, left: 0};
     }
 
