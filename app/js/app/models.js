@@ -534,11 +534,30 @@ define([
           .attr('href', _this.cell.uri())
           .toggle(_this.cell.hasDetailedReport());
 
+        // Display links to FOI requests on Right To Know
+        var displayFOIRequests = _this.cell.hasFOIRequests() && !_this.cell.hasDetailedReport();
+        var $rightToKnowLink = _this.element.find('.right-to-know-requests');
+        var requests = _this.cell.data.requests;
+        var link, text;
+        if (displayFOIRequests){
+          if (requests.length === 1){
+            text = 'View existing FOI Request';
+            link = 'https://www.righttoknow.org.au/request/' + requests[0];
+          }else{
+            text = 'View existing FOI Requests';
+            link = 'https://www.righttoknow.org.au/search/' + _this.cell.data.id;
+          }
+          $rightToKnowLink
+            .text(text)
+            .attr('href', link);
+        }
+        $rightToKnowLink.toggle(!!displayFOIRequests);
+
         // Provide a link to adopt the incident
         _this.element.find('.adopt')
             .attr('href', _this.cell.adoptHREF())
             .attr('data-incident-number', _this.cell.data.id)
-            .toggle(!_this.cell.hasDetailedReport());
+            .toggle(!_this.cell.hasDetailedReport() && !displayFOIRequests);
 
         var anchors = _this.element.find('a.canonical');
         anchors
@@ -783,6 +802,10 @@ define([
       return _this.data.detailed_report;
     };
 
+    _this.hasFOIRequests = function(){
+      return !!_this.data.requests;
+    };
+
     _this.uri = function(){
       return 'http://detentionlogs.com.au/data/incidents/incident_number/' + _this.data.id;
     };
@@ -795,7 +818,7 @@ define([
         '%3A%0A%0AIncident%20Detail%20Report%20' + _this.data.id + '%20from%20the%20Department%27s%20Compliance%2C%20Case%20M' +
         'anagement%2C%20Detention%20and%20Settlement%20Portal.%20I%20also%20request%20any%20documents%20attached' +
         '%20to%20the%20detailed%20report.%0A%0AKind%20Regards%2C%0A%0A****ADD%20YOUR%20NAME%20HERE%20BEFORE%20SE' +
-        'NDING%20REQUEST****';
+        'NDING%20REQUEST****&tags=detentionlogs%20incident-number:' + _this.data.id;
     };
 
     return constructor.apply(_this, Array.prototype.slice.apply(arguments));

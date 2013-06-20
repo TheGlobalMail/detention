@@ -10,6 +10,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2011-05-26T23:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_69"
+      ],
       "month": "2011-05-01"
     },
     "1-7BD423": {
@@ -46,6 +49,10 @@ define({
       "incident_category": "violence",
       "occurred_on": "2011-05-26T20:25:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_80",
+        "foi_request_for_detail_incident_39"
+      ],
       "month": "2011-05-01"
     },
     "1-7BCC0U": {
@@ -82,6 +89,9 @@ define({
       "incident_category": "disturbance or damage",
       "occurred_on": "2011-05-26T19:15:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_4"
+      ],
       "month": "2011-05-01"
     },
     "1-7BTSPH": {
@@ -94,6 +104,9 @@ define({
       "incident_category": "complaint",
       "occurred_on": "2011-05-26T17:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_81"
+      ],
       "month": "2011-05-01"
     },
     "1-7BB4FR": {
@@ -118,6 +131,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-05-26T16:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_77"
+      ],
       "month": "2011-05-01"
     },
     "1-7BBIDK": {
@@ -310,6 +326,10 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-05-26T11:25:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_24",
+        "foi_request_for_detail_incident_22"
+      ],
       "month": "2011-05-01"
     },
     "1-7BB4U4": {
@@ -346,6 +366,9 @@ define({
       "incident_category": "violence",
       "occurred_on": "2011-05-26T09:50:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_6"
+      ],
       "month": "2011-05-01"
     },
     "1-7B1SJI": {
@@ -382,6 +405,9 @@ define({
       "incident_category": "violence",
       "occurred_on": "2011-05-26T05:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_5"
+      ],
       "month": "2011-05-01"
     },
     "1-7AYUJF": {
@@ -430,6 +456,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-05-26T00:45:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_78"
+      ],
       "month": "2011-05-01"
     },
     "1-7AT19R": {
@@ -610,6 +639,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-05-25T14:15:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_35"
+      ],
       "month": "2011-05-01"
     },
     "1-7AQ5JY": {
@@ -1414,6 +1446,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-05-24T03:05:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_79"
+      ],
       "month": "2011-05-01"
     },
     "1-79KJ1S": {
@@ -2026,6 +2061,9 @@ define({
       "incident_category": "complaint",
       "occurred_on": "2011-05-22T13:33:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_3"
+      ],
       "month": "2011-05-01"
     },
     "1-78WH90": {
@@ -2470,6 +2508,9 @@ define({
       "incident_category": "complaint",
       "occurred_on": "2011-05-21T16:34:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_70"
+      ],
       "month": "2011-05-01"
     },
     "1-78MEII": {
@@ -2758,6 +2799,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-05-21T02:20:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_36"
+      ],
       "month": "2011-05-01"
     },
     "1-78JRUS": {
@@ -3250,6 +3294,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-05-20T13:10:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_60"
+      ],
       "month": "2011-05-01"
     },
     "1-789MSX": {
@@ -3598,6 +3645,15 @@ define({
       "incident_category": "injury",
       "occurred_on": "2011-05-19T20:20:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_93",
+        "foi_request_for_detail_incident_33",
+        "foi_request_for_detail_incident_84",
+        "foi_request_for_detail_incident_63",
+        "foi_request_for_detail_incident_56",
+        "foi_request_for_detail_incident_51",
+        "foi_request_for_detail_incident_16"
+      ],
       "month": "2011-05-01"
     },
     "1-77T09U": {
@@ -3825,7 +3881,7 @@ define({
       "location": "darwin airport lodge",
       "incident_category": "self-harm",
       "occurred_on": "2011-05-19T11:20:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-05-01"
     },
     "1-77MAZS": {
@@ -3886,6 +3942,9 @@ define({
       "incident_category": "complaint",
       "occurred_on": "2011-05-19T08:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_61"
+      ],
       "month": "2011-05-01"
     },
     "1-77GA9V": {
@@ -3982,6 +4041,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-05-18T22:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_34"
+      ],
       "month": "2011-05-01"
     },
     "1-77FZVC": {
@@ -5578,6 +5640,9 @@ define({
       "incident_category": "violence",
       "occurred_on": "2011-05-15T16:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_18"
+      ],
       "month": "2011-05-01"
     },
     "1-75K503": {
@@ -5722,6 +5787,9 @@ define({
       "incident_category": "protest",
       "occurred_on": "2011-05-14T22:50:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_71"
+      ],
       "month": "2011-05-01"
     },
     "1-757W4B": {
@@ -7785,7 +7853,7 @@ define({
       "location": "villawood idc",
       "incident_category": "self-harm",
       "occurred_on": "2011-05-10T16:40:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-05-01"
     },
     "1-735V1C": {
@@ -9394,6 +9462,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-05-07T02:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_37"
+      ],
       "month": "2011-05-01"
     },
     "1-71LB3O": {
@@ -11710,6 +11781,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-05-02T14:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_38"
+      ],
       "month": "2011-05-01"
     },
     "1-6YZW70": {
@@ -12658,6 +12732,9 @@ define({
       "incident_category": "protest",
       "occurred_on": "2011-04-29T12:05:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_58"
+      ],
       "month": "2011-04-01"
     },
     "1-6XWNB2": {
@@ -14074,6 +14151,9 @@ define({
       "incident_category": "violence",
       "occurred_on": "2011-04-25T17:50:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_7"
+      ],
       "month": "2011-04-01"
     },
     "1-72K1SM": {
@@ -16149,7 +16229,7 @@ define({
       "location": "northern idc",
       "incident_category": "self-harm",
       "occurred_on": "2011-04-21T15:20:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-04-01"
     },
     "1-6V1BZY": {
@@ -18202,6 +18282,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-04-18T17:04:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_17"
+      ],
       "month": "2011-04-01"
     },
     "1-6TGX5K": {
@@ -19077,7 +19160,7 @@ define({
       "location": "north west point immigration facility",
       "incident_category": "self-harm",
       "occurred_on": "2011-04-16T10:10:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-04-01"
     },
     "1-6SGRSE": {
@@ -20602,6 +20685,9 @@ define({
       "incident_category": "other",
       "occurred_on": "2011-04-11T16:35:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_82"
+      ],
       "month": "2011-04-01"
     },
     "1-6Q9RBF": {
@@ -24849,7 +24935,7 @@ define({
       "location": "villawood idc",
       "incident_category": "disturbance or damage",
       "occurred_on": "2011-03-31T16:30:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-03-01"
     },
     "1-6LBA1G": {
@@ -25198,6 +25284,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-03-31T13:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_76"
+      ],
       "month": "2011-03-01"
     },
     "1-6LBSO4": {
@@ -26049,7 +26138,7 @@ define({
       "location": "northern idc",
       "incident_category": "self-harm",
       "occurred_on": "2011-03-29T02:40:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-03-01"
     },
     "1-6JR6G9": {
@@ -26158,6 +26247,10 @@ define({
       "incident_category": "injury",
       "occurred_on": "2011-03-28T15:20:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_95",
+        "foi_request_for_detail_incident_10"
+      ],
       "month": "2011-03-01"
     },
     "1-6JLQLQ": {
@@ -26373,7 +26466,7 @@ define({
       "location": "curtin idc",
       "incident_category": "self-harm",
       "occurred_on": "2011-03-27T14:20:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-03-01"
     },
     "1-6J6IY0": {
@@ -26733,7 +26826,7 @@ define({
       "location": "maribyrnong idc",
       "incident_category": "protest",
       "occurred_on": "2011-03-25T21:15:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-03-01"
     },
     "1-6IUFV7": {
@@ -27333,7 +27426,7 @@ define({
       "location": "phosphate hill apod",
       "incident_category": "violence",
       "occurred_on": "2011-03-23T15:30:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-03-01"
     },
     "1-6HZ40C": {
@@ -28882,6 +28975,11 @@ define({
       "incident_category": "injury",
       "occurred_on": "2011-03-17T19:40:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_11",
+        "foi_request_for_detail_incident_26",
+        "foi_request_for_detail_incident_94"
+      ],
       "month": "2011-03-01"
     },
     "1-6EMRSX": {
@@ -28978,6 +29076,9 @@ define({
       "incident_category": "disturbance or damage",
       "occurred_on": "2011-03-17T15:05:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_27"
+      ],
       "month": "2011-03-01"
     },
     "1-6EHR82": {
@@ -32133,7 +32234,7 @@ define({
       "location": "northern idc",
       "incident_category": "self-harm",
       "occurred_on": "2011-03-08T15:15:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-03-01"
     },
     "1-6AP5R0": {
@@ -32182,6 +32283,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-03-08T13:55:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_75"
+      ],
       "month": "2011-03-01"
     },
     "1-6AJEV4": {
@@ -32758,6 +32862,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2011-03-07T03:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_100"
+      ],
       "month": "2011-03-01"
     },
     "1-69VI4I": {
@@ -35494,6 +35601,9 @@ define({
       "incident_category": "violence",
       "occurred_on": "2011-03-01T12:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_50"
+      ],
       "month": "2011-03-01"
     },
     "1-67MDNW": {
@@ -36142,6 +36252,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-02-27T23:25:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_74"
+      ],
       "month": "2011-02-01"
     },
     "1-66RWNS": {
@@ -36718,6 +36831,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-02-26T15:45:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_73"
+      ],
       "month": "2011-02-01"
     },
     "1-66H3XE": {
@@ -37030,6 +37146,9 @@ define({
       "incident_category": "protest",
       "occurred_on": "2011-02-25T18:35:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_64"
+      ],
       "month": "2011-02-01"
     },
     "1-66BWS6": {
@@ -37965,7 +38084,7 @@ define({
       "location": "northern idc",
       "incident_category": "self-harm",
       "occurred_on": "2011-02-23T17:55:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-02-01"
     },
     "1-656XO8": {
@@ -38410,6 +38529,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-02-21T18:40:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_54"
+      ],
       "month": "2011-02-01"
     },
     "1-64A36A": {
@@ -40077,7 +40199,7 @@ define({
       "location": "christmas island",
       "incident_category": "protest",
       "occurred_on": "2011-02-15T03:15:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-02-01"
     },
     "1-619B0M": {
@@ -46390,6 +46512,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-01-24T20:35:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_2"
+      ],
       "month": "2011-01-01"
     },
     "1-5SVP4A": {
@@ -46894,6 +47019,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-01-23T04:20:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_72"
+      ],
       "month": "2011-01-01"
     },
     "1-5S7I8K": {
@@ -48009,7 +48137,7 @@ define({
       "location": "villawood idc",
       "incident_category": "injury",
       "occurred_on": "2011-01-18T15:40:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-01-01"
     },
     "1-5QDG3Z": {
@@ -49389,7 +49517,7 @@ define({
       "location": "northern idc",
       "incident_category": "self-harm",
       "occurred_on": "2011-01-13T22:00:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-01-01"
     },
     "1-5OIV30": {
@@ -49689,7 +49817,7 @@ define({
       "location": "northern idc",
       "incident_category": "self-harm",
       "occurred_on": "2011-01-12T19:55:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-01-01"
     },
     "1-5O3711": {
@@ -49713,7 +49841,7 @@ define({
       "location": "northern idc",
       "incident_category": "self-harm",
       "occurred_on": "2011-01-12T19:55:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2011-01-01"
     },
     "1-5O370J": {
@@ -50170,6 +50298,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-01-11T06:20:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_47"
+      ],
       "month": "2011-01-01"
     },
     "1-5NKJR0": {
@@ -52246,6 +52377,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-01-03T05:50:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_98"
+      ],
       "month": "2011-01-01"
     },
     "1-5KJDMA": {
@@ -52522,6 +52656,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2011-01-01T14:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_97"
+      ],
       "month": "2011-01-01"
     },
     "1-5K4LFD": {
@@ -52582,6 +52719,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2011-01-01T10:40:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_96"
+      ],
       "month": "2011-01-01"
     },
     "1-5V0W8H": {
@@ -53397,7 +53537,7 @@ define({
       "location": "northern idc",
       "incident_category": "self-harm",
       "occurred_on": "2010-12-29T04:15:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5IXSW9": {
@@ -54466,6 +54606,9 @@ define({
       "incident_category": "disturbance or damage",
       "occurred_on": "2010-12-22T22:15:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_62"
+      ],
       "month": "2010-12-01"
     },
     "1-5HA3YW": {
@@ -55989,7 +56132,7 @@ define({
       "location": "villawood idc",
       "incident_category": "other",
       "occurred_on": "2010-12-14T21:00:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5E438F": {
@@ -56121,7 +56264,7 @@ define({
       "location": "port augusta irh",
       "incident_category": "injury",
       "occurred_on": "2010-12-14T14:05:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5E11F9": {
@@ -56217,7 +56360,7 @@ define({
       "location": "port augusta irh",
       "incident_category": "injury",
       "occurred_on": "2010-12-14T05:05:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5DWV4O": {
@@ -56565,7 +56708,7 @@ define({
       "location": "northern idc",
       "incident_category": "injury",
       "occurred_on": "2010-12-12T13:50:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5DD079": {
@@ -56589,7 +56732,7 @@ define({
       "location": "north west point immigration facility",
       "incident_category": "self-harm",
       "occurred_on": "2010-12-12T11:05:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5DD828": {
@@ -56601,7 +56744,7 @@ define({
       "location": "north west point immigration facility",
       "incident_category": "self-harm",
       "occurred_on": "2010-12-12T10:55:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5DD06M": {
@@ -56745,7 +56888,7 @@ define({
       "location": "villawood idc",
       "incident_category": "injury",
       "occurred_on": "2010-12-11T14:30:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5D4BKZ": {
@@ -56757,7 +56900,7 @@ define({
       "location": "perth idc",
       "incident_category": "injury",
       "occurred_on": "2010-12-11T11:25:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5D4BQP": {
@@ -56769,7 +56912,10 @@ define({
       "location": "north west point immigration facility",
       "incident_category": "self-harm",
       "occurred_on": "2010-12-11T11:17:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
+      "requests": [
+        "foi_request_for_detail_incident_99"
+      ],
       "month": "2010-12-01"
     },
     "1-5D3JXI": {
@@ -56781,7 +56927,7 @@ define({
       "location": "northern idc",
       "incident_category": "complaint",
       "occurred_on": "2010-12-11T11:00:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5D2MU2": {
@@ -56877,7 +57023,7 @@ define({
       "location": "villawood idc",
       "incident_category": "violence",
       "occurred_on": "2010-12-10T19:50:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5CVYSE": {
@@ -56949,7 +57095,7 @@ define({
       "location": "gwalia lodge",
       "incident_category": "injury",
       "occurred_on": "2010-12-10T15:25:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5CSMNY": {
@@ -57081,7 +57227,7 @@ define({
       "location": "perth idc",
       "incident_category": "other",
       "occurred_on": "2010-12-09T22:15:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5CHPIW": {
@@ -57153,7 +57299,7 @@ define({
       "location": "northern idc",
       "incident_category": "other",
       "occurred_on": "2010-12-09T15:51:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5CGSGW": {
@@ -57285,7 +57431,7 @@ define({
       "location": "villawood idc",
       "incident_category": "injury",
       "occurred_on": "2010-12-08T18:20:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-12-01"
     },
     "1-5C2V5E": {
@@ -57430,6 +57576,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2010-12-08T03:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_12"
+      ],
       "month": "2010-12-01"
     },
     "1-5BOJYQ": {
@@ -58126,6 +58275,9 @@ define({
       "incident_category": "violence",
       "occurred_on": "2010-12-03T14:25:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_85"
+      ],
       "month": "2010-12-01"
     },
     "1-5A6WY2": {
@@ -59074,6 +59226,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2010-11-29T21:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_55"
+      ],
       "month": "2010-11-01"
     },
     "1-58HDJ2": {
@@ -60502,6 +60657,9 @@ define({
       "incident_category": "media or protest",
       "occurred_on": "2010-11-23T09:14:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_49"
+      ],
       "month": "2010-11-01"
     },
     "1-565C20": {
@@ -60862,6 +61020,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2010-11-21T19:25:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_46"
+      ],
       "month": "2010-11-01"
     },
     "1-58GOST": {
@@ -62074,6 +62235,9 @@ define({
       "incident_category": "protest",
       "occurred_on": "2010-11-16T19:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident"
+      ],
       "month": "2010-11-01"
     },
     "1-53U47W": {
@@ -62278,6 +62442,10 @@ define({
       "incident_category": "injury",
       "occurred_on": "2010-11-16T00:20:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_13",
+        "foi_request_for_detail_incident_21"
+      ],
       "month": "2010-11-01"
     },
     "1-531ORE": {
@@ -63394,6 +63562,9 @@ define({
       "incident_category": "disturbance or damage",
       "occurred_on": "2010-11-09T23:05:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_20"
+      ],
       "month": "2010-11-01"
     },
     "1-50KSZR": {
@@ -64126,6 +64297,9 @@ define({
       "incident_category": "other",
       "occurred_on": "2010-11-05T19:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_19"
+      ],
       "month": "2010-11-01"
     },
     "1-4YW4W1": {
@@ -64246,6 +64420,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2010-11-05T07:50:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_48"
+      ],
       "month": "2010-11-01"
     },
     "1-4YQZF2": {
@@ -64882,6 +65059,9 @@ define({
       "incident_category": "violence",
       "occurred_on": "2010-10-31T15:15:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_89"
+      ],
       "month": "2010-10-01"
     },
     "1-4WA22W": {
@@ -65049,7 +65229,7 @@ define({
       "location": "perth idc",
       "incident_category": "injury",
       "occurred_on": "2010-10-30T19:40:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-10-01"
     },
     "1-4W4YJQ": {
@@ -65686,6 +65866,10 @@ define({
       "incident_category": "violence",
       "occurred_on": "2010-10-26T23:33:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_88",
+        "foi_request_for_detail_incident_83"
+      ],
       "month": "2010-10-01"
     },
     "1-4UUARR": {
@@ -65746,6 +65930,9 @@ define({
       "incident_category": "other",
       "occurred_on": "2010-10-26T16:48:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_87"
+      ],
       "month": "2010-10-01"
     },
     "1-4UYLNB": {
@@ -66358,6 +66545,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2010-10-23T14:10:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_86"
+      ],
       "month": "2010-10-01"
     },
     "1-4U2PXO": {
@@ -67330,6 +67520,9 @@ define({
       "incident_category": "protest",
       "occurred_on": "2010-10-15T18:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_57"
+      ],
       "month": "2010-10-01"
     },
     "1-4SDZCZ": {
@@ -67630,6 +67823,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2010-10-14T02:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_66"
+      ],
       "month": "2010-10-01"
     },
     "1-4S2OFB": {
@@ -68026,6 +68222,9 @@ define({
       "incident_category": "violence",
       "occurred_on": "2010-10-11T00:50:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_67"
+      ],
       "month": "2010-10-01"
     },
     "1-4R7NIT": {
@@ -70846,6 +71045,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2010-09-20T09:35:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_14"
+      ],
       "month": "2010-09-01"
     },
     "1-4NAL5P": {
@@ -70917,7 +71119,7 @@ define({
       "location": "melbourne ita",
       "incident_category": "protest",
       "occurred_on": "2010-09-19T14:05:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-09-01"
     },
     "1-4NB8G4": {
@@ -72645,7 +72847,7 @@ define({
       "location": "maribyrnong idc",
       "incident_category": "self-harm",
       "occurred_on": "2010-09-08T02:40:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-09-01"
     },
     "1-4KY6NP": {
@@ -72693,7 +72895,7 @@ define({
       "location": "maribyrnong idc",
       "incident_category": "other",
       "occurred_on": "2010-09-07T16:10:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-09-01"
     },
     "1-4KXKOV": {
@@ -73053,7 +73255,7 @@ define({
       "location": "villawood idc",
       "incident_category": "disturbance or damage",
       "occurred_on": "2010-09-02T18:15:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-09-01"
     },
     "1-4JXEW0": {
@@ -73677,7 +73879,7 @@ define({
       "location": "north west point immigration facility",
       "incident_category": "self-harm",
       "occurred_on": "2010-08-27T14:50:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4ILN3X": {
@@ -74517,7 +74719,7 @@ define({
       "location": "villawood idc",
       "incident_category": "violence",
       "occurred_on": "2010-08-21T06:00:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4H5JC6": {
@@ -75057,7 +75259,7 @@ define({
       "location": "villawood idc",
       "incident_category": "other",
       "occurred_on": "2010-08-16T14:39:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4FRPW4": {
@@ -75693,7 +75895,7 @@ define({
       "location": "villawood idc",
       "incident_category": "self-harm",
       "occurred_on": "2010-08-11T13:15:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4JDQND": {
@@ -75789,7 +75991,7 @@ define({
       "location": "north west point immigration facility",
       "incident_category": "self-harm",
       "occurred_on": "2010-08-11T02:00:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4ES151": {
@@ -76029,7 +76231,7 @@ define({
       "location": "north west point immigration facility",
       "incident_category": "self-harm",
       "occurred_on": "2010-08-09T18:30:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4ECUUR": {
@@ -76113,7 +76315,7 @@ define({
       "location": "villawood idc",
       "incident_category": "other",
       "occurred_on": "2010-08-08T18:30:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4E1117": {
@@ -76209,7 +76411,7 @@ define({
       "location": "gwalia lodge",
       "incident_category": "injury",
       "occurred_on": "2010-08-07T11:45:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4E10JV": {
@@ -76353,7 +76555,7 @@ define({
       "location": "melbourne ita",
       "incident_category": "injury",
       "occurred_on": "2010-08-05T15:00:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4DTVRU": {
@@ -76437,7 +76639,7 @@ define({
       "location": "villawood idc",
       "incident_category": "injury",
       "occurred_on": "2010-08-04T14:45:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4D8G3J": {
@@ -76473,7 +76675,7 @@ define({
       "location": "northern idc",
       "incident_category": "self-harm",
       "occurred_on": "2010-08-03T21:05:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4D1CDM": {
@@ -76497,7 +76699,7 @@ define({
       "location": "maribyrnong idc",
       "incident_category": "self-harm",
       "occurred_on": "2010-08-03T17:20:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4D1CC1": {
@@ -76641,7 +76843,7 @@ define({
       "location": "villawood idc",
       "incident_category": "other",
       "occurred_on": "2010-08-02T12:40:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-08-01"
     },
     "1-4CJ0GN": {
@@ -76857,7 +77059,7 @@ define({
       "location": "villawood idc",
       "incident_category": "injury",
       "occurred_on": "2010-07-31T13:30:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-07-01"
     },
     "1-4CCBFA": {
@@ -76929,7 +77131,7 @@ define({
       "location": "villawood idc",
       "incident_category": "other",
       "occurred_on": "2010-07-30T21:35:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-07-01"
     },
     "1-4IEKDJ": {
@@ -78418,6 +78620,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2010-07-16T05:55:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_92"
+      ],
       "month": "2010-07-01"
     },
     "1-48HLES": {
@@ -79953,7 +80158,7 @@ define({
       "location": "villawood idc",
       "incident_category": "self-harm",
       "occurred_on": "2010-06-29T19:30:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-06-01"
     },
     "1-442WKU": {
@@ -81417,7 +81622,7 @@ define({
       "location": "villawood idc",
       "incident_category": "other",
       "occurred_on": "2010-06-15T21:45:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-06-01"
     },
     "1-409ERM": {
@@ -81441,7 +81646,7 @@ define({
       "location": "villawood idc",
       "incident_category": "self-harm",
       "occurred_on": "2010-06-15T17:45:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-06-01"
     },
     "1-401EGQ": {
@@ -81465,7 +81670,7 @@ define({
       "location": "christmas island",
       "incident_category": "injury",
       "occurred_on": "2010-06-15T16:50:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-06-01"
     },
     "1-40L1QK": {
@@ -82101,7 +82306,7 @@ define({
       "location": "melbourne ita",
       "incident_category": "self-harm",
       "occurred_on": "2010-06-07T16:55:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-06-01"
     },
     "1-3YE9SY": {
@@ -82209,7 +82414,7 @@ define({
       "location": "perth idc",
       "incident_category": "disturbance or damage",
       "occurred_on": "2010-06-06T20:45:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-06-01"
     },
     "1-3XY9M7": {
@@ -82414,6 +82619,9 @@ define({
       "incident_category": "protest",
       "occurred_on": "2010-06-05T12:20:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_90"
+      ],
       "month": "2010-06-01"
     },
     "1-3XUJ0Z": {
@@ -83422,6 +83630,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2010-05-20T16:10:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_32"
+      ],
       "month": "2010-05-01"
     },
     "1-3TX15K": {
@@ -83458,6 +83669,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2010-05-20T09:25:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_59"
+      ],
       "month": "2010-05-01"
     },
     "1-3TV75N": {
@@ -86482,6 +86696,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2010-04-02T21:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_45"
+      ],
       "month": "2010-04-01"
     },
     "1-3JC2A5": {
@@ -86506,6 +86723,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2010-04-02T19:15:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_44"
+      ],
       "month": "2010-04-01"
     },
     "1-3JESDT": {
@@ -87178,6 +87398,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2010-03-16T16:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_43"
+      ],
       "month": "2010-03-01"
     },
     "1-3EQ0E0": {
@@ -87513,7 +87736,7 @@ define({
       "location": "christmas island",
       "incident_category": "self-harm",
       "occurred_on": "2010-03-06T14:45:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2010-03-01"
     },
     "1-3COFCF": {
@@ -87838,6 +88061,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2010-02-26T19:45:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_42"
+      ],
       "month": "2010-02-01"
     },
     "1-3AUQU7": {
@@ -87982,6 +88208,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2010-02-22T14:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_52"
+      ],
       "month": "2010-02-01"
     },
     "1-39R8QN": {
@@ -88318,6 +88547,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2010-02-09T19:30:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_41"
+      ],
       "month": "2010-02-01"
     },
     "1-37E1C1": {
@@ -88688,6 +88920,9 @@ define({
       "incident_category": "violence",
       "occurred_on": "2010-02-01T21:45:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_31"
+      ],
       "month": "2010-02-01"
     },
     "1-357E6D": {
@@ -88772,6 +89007,9 @@ define({
       "incident_category": "protest",
       "occurred_on": "2010-01-29T21:20:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_91"
+      ],
       "month": "2010-01-01"
     },
     "1-350BGB": {
@@ -89168,6 +89406,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2010-01-19T11:25:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_40"
+      ],
       "month": "2010-01-01"
     },
     "1-32WFO7": {
@@ -89612,6 +89853,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2010-01-07T14:15:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_65"
+      ],
       "month": "2010-01-01"
     },
     "1-339FG5": {
@@ -89863,7 +90107,7 @@ define({
       "location": "north west point immigration facility",
       "incident_category": "self-harm",
       "occurred_on": "2009-12-31T08:35:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2009-12-01"
     },
     "1-2YYRDT": {
@@ -89960,6 +90204,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2009-12-27T18:10:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_15"
+      ],
       "month": "2009-12-01"
     },
     "1-2YRVMJ": {
@@ -90151,7 +90398,7 @@ define({
       "location": "north west point immigration facility",
       "incident_category": "self-harm",
       "occurred_on": "2009-12-22T22:08:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2009-12-01"
     },
     "1-2YKPFF": {
@@ -90211,6 +90458,9 @@ define({
       "incident_category": "protest",
       "occurred_on": "2009-12-21T16:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_53"
+      ],
       "month": "2009-12-01"
     },
     "1-2XSH2T": {
@@ -90414,7 +90664,7 @@ define({
       "location": "villawood idc",
       "incident_category": "injury",
       "occurred_on": "2009-12-14T14:06:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2009-12-01"
     },
     "1-2WV8NF": {
@@ -90427,6 +90677,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2009-12-14T01:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_9"
+      ],
       "month": "2009-12-01"
     },
     "1-2WV8U3": {
@@ -90547,6 +90800,9 @@ define({
       "incident_category": "disturbance or damage",
       "occurred_on": "2009-12-07T18:25:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_68"
+      ],
       "month": "2009-12-01"
     },
     "1-2V8E5B": {
@@ -90967,6 +91223,9 @@ define({
       "incident_category": "injury",
       "occurred_on": "2009-11-19T20:20:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_28"
+      ],
       "month": "2009-11-01"
     },
     "1-2S9RNH": {
@@ -90978,7 +91237,7 @@ define({
       "location": "maribyrnong idc",
       "incident_category": "self-harm",
       "occurred_on": "2009-11-19T13:00:00+00:00",
-      "detailed_report": false,
+      "detailed_report": true,
       "month": "2009-11-01"
     },
     "1-2RX4AZ": {
@@ -91051,6 +91310,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2009-11-17T16:40:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_25"
+      ],
       "month": "2009-11-01"
     },
     "1-2RIUCH": {
@@ -91195,6 +91457,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2009-11-06T12:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_23"
+      ],
       "month": "2009-11-01"
     },
     "1-2RG4E3": {
@@ -91207,6 +91472,9 @@ define({
       "incident_category": "violence",
       "occurred_on": "2009-11-03T02:00:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_30"
+      ],
       "month": "2009-11-01"
     },
     "1-2PK97X": {
@@ -91267,6 +91535,9 @@ define({
       "incident_category": "self-harm",
       "occurred_on": "2009-10-30T09:20:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_8"
+      ],
       "month": "2009-10-01"
     },
     "1-2QR9FR": {
@@ -91279,6 +91550,9 @@ define({
       "incident_category": "protest",
       "occurred_on": "2009-10-27T19:10:00+00:00",
       "detailed_report": false,
+      "requests": [
+        "foi_request_for_detail_incident_29"
+      ],
       "month": "2009-10-01"
     },
     "1-2OA433": {

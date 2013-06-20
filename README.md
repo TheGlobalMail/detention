@@ -70,3 +70,5 @@ For staging, use a free Heroku instance so we don't have to worry about caching.
 ## Adding libraries, frameworks, dependencies
 
 Most libraries are available through Bower, check using `bower search`. When doing `bower install` remember to add the `--save` flag so the component gets added to `component.json`. Components are installed into `app/components` which is ignored by Git.
+
+https://www.righttoknow.org.au/feed/search/%22FOI%20Request%20for%20Detail%20Incident%20Report%22.json
